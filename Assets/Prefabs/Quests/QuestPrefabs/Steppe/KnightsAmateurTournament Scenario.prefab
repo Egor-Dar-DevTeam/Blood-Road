@@ -1,0 +1,1248 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8734307116292966931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8734307116292966940}
+  m_Layer: 0
+  m_Name: ScenarioObjects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8734307116292966940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734307116292966931}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7308947949089774785}
+  - {fileID: 2735216967691203120}
+  - {fileID: 2735216968214897083}
+  - {fileID: 2735216967663432445}
+  - {fileID: 2735216968003861250}
+  - {fileID: 8734307116770713242}
+  m_Father: {fileID: 8734307117090263685}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8734307116770713241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8734307116770713242}
+  m_Layer: 0
+  m_Name: Crowd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8734307116770713242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734307116770713241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2735216969304313238}
+  - {fileID: 2735216968679713530}
+  - {fileID: 2735216968389393866}
+  - {fileID: 2735216967679032424}
+  - {fileID: 2735216968646632064}
+  - {fileID: 2735216967260775369}
+  - {fileID: 2735216968786251470}
+  - {fileID: 2735216969092445815}
+  - {fileID: 2735216968717136792}
+  m_Father: {fileID: 8734307116292966940}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8734307117090263684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8734307117090263685}
+  - component: {fileID: 8734307117090263686}
+  m_Layer: 0
+  m_Name: KnightsAmateurTournament Scenario
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8734307117090263685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734307117090263684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8734307116292966940}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8734307117090263686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8734307117090263684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b9142d48269a49ac2159735f60955, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questID: KnightsAmateurTournament
+  dialogueControllers:
+  - {fileID: 7308947949089774788}
+  scenarioObjects: {fileID: 8734307116292966931}
+  lookAtTarget: {fileID: 2735216968214897060}
+  startDialogue: {fileID: 7308947949089774788}
+  rounds:
+  - dialogueID: 0
+    betAmount: 100
+    contestants:
+    - {fileID: 2735216967691203119}
+  - dialogueID: 1
+    betAmount: 200
+    contestants:
+    - {fileID: 2735216968214897060}
+    - {fileID: 2735216967663432418}
+  - dialogueID: 2
+    betAmount: 400
+    contestants:
+    - {fileID: 2735216968003861277}
+--- !u!1001 &8734307115418979612
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Swordsman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Swordsman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 32.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8112824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.58465457
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -71.557
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216967260775369 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307115418979612}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307115553201192
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116292966940}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 18.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40.929996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.15004522
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9886792
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -162.741
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216967663432445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307115553201192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2735216967663432418 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307115553201192}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7e5d19ce7e54e49a826e838b287e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8734307115564195045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116292966940}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Swordsman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Swordsman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.09406248
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9955663
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -190.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216967691203120 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307115564195045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2735216967691203119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307115564195045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7e5d19ce7e54e49a826e838b287e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8734307115568796349
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Swordsman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Swordsman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 36.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.73505956
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.6780026
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -85.376
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216967679032424 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307115568796349}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307116104666990
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116292966940}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40.909996
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.023609925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9997213
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -182.706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216968214897083 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116104666990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2735216968214897060 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116104666990}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7e5d19ce7e54e49a826e838b287e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8734307116161537495
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116292966940}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Commander.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Commander Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 39.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.14309117
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.98970956
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -163.546
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!114 &2735216968003861277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116161537495}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7e5d19ce7e54e49a826e838b287e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2735216968003861250 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116161537495}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307116279157535
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.5680692
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.82298076
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -249.231
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216968389393866 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116279157535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307116552176687
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.5680692
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.82298076
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -249.231
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216968679713530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116552176687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307116606905677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 44.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.023609925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9997213
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -182.706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216968717136792 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116606905677}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307116787534933
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Swordsman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Swordsman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 34.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.8112824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.58465457
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -71.557
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216968646632064 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116787534933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307116944465947
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 42.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.023609925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9997213
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -182.706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216968786251470 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307116944465947}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307117147262029
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116292966940}
+    m_Modifications:
+    - target: {fileID: 2042636850378199176, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_Radius
+      value: 10.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199177, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: lookAt
+      value: 
+      objectReference: {fileID: 2735216968214897083}
+    - target: {fileID: 2042636850378199179, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_Name
+      value: StartDialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 14.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 35.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921273459636440114, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_FollowOffset.x
+      value: 14.549999
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921273459636440114, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_FollowOffset.y
+      value: 12.410001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921273459636440114, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_FollowOffset.z
+      value: -2.420002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283365087036173437, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4283365087036173437, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.46
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+--- !u!4 &7308947949089774785 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2042636850378199180, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+  m_PrefabInstance: {fileID: 8734307117147262029}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7308947949089774788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2042636850378199177, guid: 403c2be635adc0a4e98bed79724b3774, type: 3}
+  m_PrefabInstance: {fileID: 8734307117147262029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa574fdf631de234eb2f12497ee5c9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &8734307117194093379
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 37.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.5680692
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.82298076
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -249.231
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216969304313238 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307117194093379}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8734307117250648226
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8734307116770713242}
+    m_Modifications:
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: prefabPath
+      value: Assets/Prefabs/Entitites/Soldiers/Soldier_Pikeman.prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: comradeship
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720010, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: loadOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720011, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_Name
+      value: Soldier_Pikeman Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 19.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 42.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.023609925
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9997213
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -182.706
+      objectReference: {fileID: 0}
+    - target: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 978941c83ec05d44085638ded665063d, type: 3}
+--- !u!4 &2735216969092445815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6684203162049720021, guid: 978941c83ec05d44085638ded665063d, type: 3}
+  m_PrefabInstance: {fileID: 8734307117250648226}
+  m_PrefabAsset: {fileID: 0}

@@ -1,5 +1,4 @@
-﻿using Characters.Enemy;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Characters
 {
