@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Characters
+namespace Characters.InteractableSystems
 {
     public interface IInit<in T> where T: Delegate
     {

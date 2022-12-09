@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Characters
+namespace Characters.InteractableSystems
 {
     public delegate void SetPoint(List<IInteractable> point);
 
-    public class Eyes : MonoBehaviour, IInit<SetPoint>
+    public class Eyes : MonoBehaviour, Characters.IInit<SetPoint>
     {
         private event SetPoint _setPoint;
         private List<IInteractable> _interactables= new List<IInteractable>();
