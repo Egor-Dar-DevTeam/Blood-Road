@@ -29,6 +29,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9073266123967624904}
   - {fileID: 2465806449358317093}
@@ -111,10 +112,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5110721299992014794}
     m_Modifications:
-    - target: {fileID: -5268465513772596091, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
-      propertyPath: questObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 939667562e56f464e8bcd29ce73790a6, type: 2}
     - target: {fileID: 3139213744901550445, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
       propertyPath: m_Name
       value: ThopiesPanel
@@ -211,7 +208,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
 --- !u!224 &9073266123967624904 stripped
 RectTransform:
@@ -225,10 +223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5110721299992014794}
     m_Modifications:
-    - target: {fileID: -5268465513772596091, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
-      propertyPath: questObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 2a2a74e83b2943f47b13d5ef3b9975b0, type: 2}
     - target: {fileID: 3139213744901550445, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
       propertyPath: m_Name
       value: ThopiesPanel (03)
@@ -325,7 +319,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
 --- !u!224 &4909899303691348273 stripped
 RectTransform:
@@ -339,10 +334,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5110721299992014794}
     m_Modifications:
-    - target: {fileID: -5268465513772596091, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
-      propertyPath: questObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 0349dce6309fd9e48bfe1cf35249e08f, type: 2}
     - target: {fileID: 3139213744901550445, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
       propertyPath: m_Name
       value: ThopiesPanel (01)
@@ -439,7 +430,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
 --- !u!224 &2465806449358317093 stripped
 RectTransform:
@@ -453,10 +445,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5110721299992014794}
     m_Modifications:
-    - target: {fileID: -5268465513772596091, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
-      propertyPath: questObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 687a313540f37c242a05b4d074c18ae7, type: 2}
     - target: {fileID: 3139213744901550445, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
       propertyPath: m_Name
       value: ThopiesPanel (02)
@@ -553,7 +541,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 62e625ae0dea1be4b8326596cf87fef2, type: 3}
 --- !u!224 &362287509944030773 stripped
 RectTransform:

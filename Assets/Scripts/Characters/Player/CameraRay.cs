@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Characters.InteractableSystems;
+using UnityEngine;
 
 namespace Characters.Player
 {
@@ -15,7 +16,10 @@ namespace Characters.Player
             if (!Physics.Raycast(ray, out var hit)) return;
             if (hit.collider.gameObject.TryGetComponent(out IInteractable enemy))
             {
-                _setPoint?.Invoke(enemy);
+                if (!enemy.IsPlayer())
+                {
+                    _setPoint?.Invoke(enemy);
+                }
             }
         }
 

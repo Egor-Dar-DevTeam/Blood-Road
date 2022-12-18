@@ -29,6 +29,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4357595292147133838}
   m_Father: {fileID: 2092202120656764322}
@@ -119,6 +120,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8386033880183620950}
   m_RootOrder: 4
@@ -180,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -209,7 +212,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8000322911554692710}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -248,6 +251,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7068098930635307554}
   - {fileID: 6874294436025827478}
@@ -299,6 +303,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1263840769734289202}
   m_RootOrder: 4
@@ -360,6 +365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -389,7 +395,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7862728036206939790}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -429,6 +435,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7068098930635307554}
   m_RootOrder: 0
@@ -505,6 +512,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1263840769734289202}
   m_RootOrder: 1
@@ -536,6 +544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -565,7 +574,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7862728036206939790}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -636,6 +645,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 253020078413662793}
   m_RootOrder: 1
@@ -667,6 +677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -696,7 +707,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3700679721448104355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -765,6 +776,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9212772857917647650}
   - {fileID: 3531146348061597375}
@@ -816,6 +828,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8386033880183620950}
   m_RootOrder: 1
@@ -847,6 +860,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -876,7 +890,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8000322911554692710}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -946,6 +960,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2092202120656764322}
   m_RootOrder: 3
@@ -1020,6 +1035,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2968088145320251205}
   - {fileID: 3848290961557702574}
@@ -1070,6 +1086,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4579713364097193880}
   m_RootOrder: 0
@@ -1146,6 +1163,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7091451023344096196}
   m_Father: {fileID: 1263840769734289202}
@@ -1236,6 +1254,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2092202120656764322}
   m_RootOrder: 4
@@ -1297,6 +1316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1326,7 +1346,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3702098743856929303}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -1347,7 +1367,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2584502832098453491}
-  - component: {fileID: 3700679721448104355}
   m_Layer: 5
   m_Name: ActionButton 6
   m_TagString: Untagged
@@ -1365,6 +1384,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 253020078413662793}
   m_Father: {fileID: 1964763291153767591}
@@ -1375,25 +1395,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3700679721448104355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4466519314030117834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce486a256afef054e904de141d614a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonID: 5
-  defaultIcon: {fileID: 21300000, guid: 96ea7b9f65ae16e4494fabdb73d27f31, type: 3}
-  abilityIcon: {fileID: 2672645180612221531}
-  cooldownImage: {fileID: 1867899028250458226}
-  notEnoughResourceImage: {fileID: 7106385194637038195}
-  notEnoughResourceFadeAmount: 0.8
-  notEnoughResourceFadeDuration: 0.5
 --- !u!1 &4645619022009586775
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1423,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8386033880183620950}
   m_RootOrder: 3
@@ -1498,6 +1500,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2092202120656764322}
   m_RootOrder: 1
@@ -1529,6 +1532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1558,7 +1562,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3702098743856929303}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -1628,6 +1632,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 253020078413662793}
   m_RootOrder: 3
@@ -1703,6 +1708,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8386033880183620950}
   m_RootOrder: 2
@@ -1777,6 +1783,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4579713364097193880}
   - {fileID: 8404069451679097510}
@@ -1827,6 +1834,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1263840769734289202}
   m_RootOrder: 3
@@ -1902,6 +1910,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9212772857917647650}
   m_RootOrder: 0
@@ -1978,6 +1987,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 253020078413662793}
   m_RootOrder: 4
@@ -2039,6 +2049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2068,7 +2079,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3700679721448104355}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ActionButton, Assembly-CSharp
         m_MethodName: Execute
         m_Mode: 1
@@ -2108,6 +2119,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2968088145320251205}
   m_RootOrder: 0
@@ -2183,6 +2195,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2092202120656764322}
   m_RootOrder: 2
@@ -2239,7 +2252,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4520458792614054235}
-  - component: {fileID: 3702098743856929303}
   m_Layer: 5
   m_Name: ActionButton 8
   m_TagString: Untagged
@@ -2257,6 +2269,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2092202120656764322}
   m_Father: {fileID: 1964763291153767591}
@@ -2267,25 +2280,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3702098743856929303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6851359903929402121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce486a256afef054e904de141d614a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonID: 3
-  defaultIcon: {fileID: 0}
-  abilityIcon: {fileID: 2950668395639778432}
-  cooldownImage: {fileID: 8350029053784323276}
-  notEnoughResourceImage: {fileID: 7154809886824065193}
-  notEnoughResourceFadeAmount: 0.8
-  notEnoughResourceFadeDuration: 0.5
 --- !u!1 &7107822894689964476
 GameObject:
   m_ObjectHideFlags: 0
@@ -2315,6 +2309,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5622851179656428442}
   m_Father: {fileID: 8386033880183620950}
@@ -2404,6 +2399,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 253020078413662793}
   m_RootOrder: 2
@@ -2460,7 +2456,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244027127885401314}
-  - component: {fileID: 7862728036206939790}
   m_Layer: 5
   m_Name: ActionButton 5
   m_TagString: Untagged
@@ -2478,6 +2473,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1263840769734289202}
   m_Father: {fileID: 1964763291153767591}
@@ -2488,25 +2484,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7862728036206939790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7694612835940550567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce486a256afef054e904de141d614a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonID: 4
-  defaultIcon: {fileID: 21300000, guid: 96ea7b9f65ae16e4494fabdb73d27f31, type: 3}
-  abilityIcon: {fileID: 1965258953916112460}
-  cooldownImage: {fileID: 1118560716211461848}
-  notEnoughResourceImage: {fileID: 3886652177385031307}
-  notEnoughResourceFadeAmount: 0.8
-  notEnoughResourceFadeDuration: 0.5
 --- !u!1 &8421992413706343257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2516,7 +2493,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6107912383406252727}
-  - component: {fileID: 8000322911554692710}
   m_Layer: 5
   m_Name: ActionButton 7
   m_TagString: Untagged
@@ -2534,6 +2510,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8386033880183620950}
   m_Father: {fileID: 1964763291153767591}
@@ -2544,25 +2521,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8000322911554692710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8421992413706343257}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce486a256afef054e904de141d614a4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonID: 6
-  defaultIcon: {fileID: 21300000, guid: 96ea7b9f65ae16e4494fabdb73d27f31, type: 3}
-  abilityIcon: {fileID: 1753926436794726718}
-  cooldownImage: {fileID: 9184058696918227943}
-  notEnoughResourceImage: {fileID: 8467263745294293697}
-  notEnoughResourceFadeAmount: 0.8
-  notEnoughResourceFadeDuration: 0.5
 --- !u!1 &8641549860128800696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2591,6 +2549,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.84999996, y: 0.84999996, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1263840769734289202}
   m_RootOrder: 2
@@ -2667,6 +2626,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7300022632055028595}
   m_Father: {fileID: 253020078413662793}
@@ -2755,6 +2715,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 244027127885401314}
   - {fileID: 2584502832098453491}

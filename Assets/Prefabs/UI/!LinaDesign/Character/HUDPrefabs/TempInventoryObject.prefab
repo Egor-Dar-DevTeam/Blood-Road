@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 5895714447616781932}
   - component: {fileID: 3850452416370342712}
   - component: {fileID: 2957261170290799454}
-  - component: {fileID: 1658222708865172852}
   m_Layer: 0
   m_Name: TempInventoryObject
   m_TagString: Untagged
@@ -30,6 +29,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2085392022222781437}
   m_Father: {fileID: 0}
@@ -91,19 +91,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!114 &1658222708865172852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2260103765437939907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33308c5ba194f5429a26f82f5fb60a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  image: {fileID: 4619101254283676083}
 --- !u!1 &8280753251149350379
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +119,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 663123774060372868}
   m_RootOrder: 0

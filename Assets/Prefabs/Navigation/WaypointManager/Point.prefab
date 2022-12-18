@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2821917202540450437}
   - component: {fileID: 2821917202540450439}
-  - component: {fileID: 2821917202540450436}
   m_Layer: 15
   m_Name: Point
   m_TagString: Untagged
@@ -28,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -45,21 +45,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5, y: 5, z: 5}
   m_Center: {x: 0, y: 1.33, z: 0}
---- !u!114 &2821917202540450436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2821917202540450438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e320e3b072eb09e49a9db4374bc3735b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagFilter:
-  - player
-  - invisible
-  color: {r: 0.07470692, g: 0.8679245, b: 0.020469915, a: 1}
-  neighborPoints: []
-  isReached: 0

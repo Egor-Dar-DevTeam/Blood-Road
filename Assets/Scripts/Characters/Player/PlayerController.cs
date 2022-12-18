@@ -1,8 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Characters.Facades;
+using Characters.InteractableSystems;
+using Characters.Player.States;
+using UI;
+using UI.CombatHUD;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.PlayerLoop;
 
 namespace Characters.Player
 {
@@ -12,36 +18,67 @@ namespace Characters.Player
 
     public delegate IInteractable GetCurrentPoint();
 
-    public class PlayerController : MonoBehaviour
+
+    public class PlayerController : MonoBehaviour, IInteractable
     {
+        [SerializeField] private float rotationSpeed;
         [SerializeField] private Material outlineMaterial;
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Animator animator;
         [SerializeField] private Eyes eyesCharacters;
         [SerializeField] private CameraRay cameraRay;
+        [SerializeField] private PlayerData playerData;
+        [SerializeField] private GameCanvasController canvasController;
+
+        private event UpdateEnergyDelegate _updateEnergyEvent;
+
+        #region Intefaces
+
         private IInteractable _currentPoint;
+
+        #endregion
+
+
+        #region Delegates
+
         private GetIsAttack _getIsAttack;
         private SetCurrentPoint _setCurrentPoint;
         private StartRechangeCurrentPoint _startRechangeCurrentPoint;
         private GetCurrentPoint _getCurrentPoint;
 
+        #endregion
+
+        #region ClassesNotSerializables
+
         private EnemyOutlineRechanger _enemyOutlineRechanger;
         private InteractionSystem _interactionSystem;
         private TransitionAndStates _transitionAndStates;
+
+        #endregion
+
         private bool isAttack;
         private bool GetIsAttack() => isAttack;
+        private PlayerData GetPlayerData() => playerData;
         private IInteractable GetCurrentPoint() => _currentPoint;
+        public Transform GetObject() => transform;
+
+        public bool IsPlayer() => true;
 
         private void Start()
         {
+            var updateEnergyDelegate = canvasController.UIDelegates.UpdateEnergyDelegate;
+            _updateEnergyEvent = updateEnergyDelegate;
+            updateEnergyDelegate += _updateEnergyEvent;
+
+
             _enemyOutlineRechanger = new EnemyOutlineRechanger(outlineMaterial);
             _getIsAttack = GetIsAttack;
             _setCurrentPoint = SetCurrentPoint;
             _startRechangeCurrentPoint = StartRCP;
             _getCurrentPoint = GetCurrentPoint;
 
-            _transitionAndStates = new TransitionAndStates();
-            _transitionAndStates.Initialize(animator, _getCurrentPoint, transform, agent, _getIsAttack);
+            _transitionAndStates = new PlayerTransition();
+            _transitionAndStates.Initialize(animator, _getCurrentPoint, transform, agent, _getIsAttack, playerData);
 
             _interactionSystem = new InteractionSystem();
             _interactionSystem.Initialize(cameraRay, eyesCharacters, transform, _setCurrentPoint,
@@ -51,17 +88,14 @@ namespace Characters.Player
         private void Update()
         {
             _transitionAndStates.Update();
-            if (isAttack)
+
+            if (_currentPoint != null)
             {
-                if (_currentPoint == null)
-                    isAttack = false;
-            }
-            else
-            {
-                if (_currentPoint != null)
-                    if (Vector3.Distance(transform.position, _currentPoint.GetObject().position) <=
-                        agent.stoppingDistance)
-                        isAttack = true;
+                var turnTowardNavSteeringTarget = _currentPoint.GetObject().transform.position;
+
+                Vector3 direction = (turnTowardNavSteeringTarget - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
             }
         }
 
@@ -77,33 +111,58 @@ namespace Characters.Player
             IInteractable point = null;
             for (int i = 0; i < points.Count; i++)
             {
-                indx = i;
-                for (int j = 0; j < points.Count; j++)
+                if (!points[i].IsPlayer())
                 {
-                    if (Vector3.Distance(transform.position, points[j].GetObject().position) <
-                        Vector3.Distance(transform.position, points[indx].GetObject().position))
+                    indx = i;
+                    for (int j = 0; j < points.Count; j++)
                     {
-                        indx = j;
+                        if (Vector3.Distance(transform.position, points[j].GetObject().position) <=
+                            Vector3.Distance(transform.position, points[indx].GetObject().position))
+                        {
+                            indx = j;
+                        }
                     }
+
+                    point = points[indx];
                 }
-
-                if (Vector3.Distance(transform.position, points[indx].GetObject().position) ==
-                    Vector3.Distance(transform.position,
-                        points[i].GetObject().position))
-                    continue;
-
-                point = points[indx];
             }
 
-            SetCurrentPoint(point);
+            if (point != null)
+            {
+                _currentPoint = point;
+                _enemyOutlineRechanger.SetEnemy(_currentPoint);
+            }
 
             yield return new WaitForSeconds(0);
         }
 
         private void SetCurrentPoint(IInteractable point)
         {
-            _currentPoint = point;
-            _enemyOutlineRechanger.SetEnemy(_currentPoint);
+            if (point.IsPlayer()) return;
+            if (_currentPoint != point)
+            {
+                _currentPoint = point;
+                _enemyOutlineRechanger.SetEnemy(_currentPoint);
+            }
+
+            if (playerData.Energy > 1)
+            {
+                Attack();
+            }
+        }
+
+        private async Task Attack()
+        {
+            isAttack = true;
+            await Task.Delay(100);
+            playerData.UseEnergy();
+            _updateEnergyEvent?.Invoke(playerData.Energy);
+            await Task.Delay(100);
+            isAttack = false;
+        }
+
+        public void SetOutline(Material outline)
+        {
         }
     }
 }

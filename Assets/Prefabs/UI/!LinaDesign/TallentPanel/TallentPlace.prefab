@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7010547215281756679}
   m_Father: {fileID: 548945630349180771}
@@ -105,6 +106,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7691772987174788242}
   m_Father: {fileID: 471392967259905851}
@@ -194,6 +196,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7010547215281756679}
   m_RootOrder: 0
@@ -253,7 +256,6 @@ GameObject:
   - component: {fileID: 1785622772818829457}
   - component: {fileID: 169630972938158921}
   - component: {fileID: 5372192596970996002}
-  - component: {fileID: 3517643286398169843}
   m_Layer: 5
   m_Name: TallentPlace
   m_TagString: Untagged
@@ -271,6 +273,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 471392967259905851}
   m_Father: {fileID: 0}
@@ -339,21 +342,3 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
---- !u!114 &3517643286398169843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079515056989697072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cae45b9625e0d74cb094e8d0c9052bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tallentActivePanel: {fileID: 627026838186330556}
-  talentIcon: {fileID: 7241246426105386605}
-  slotNumber: 0
-  dragPrefab: {fileID: 6769596323336785739, guid: c71c514dc64104c43b782d72e06bb7e5, type: 3}
-  treeManager: {fileID: 0}
-  abilityID: 

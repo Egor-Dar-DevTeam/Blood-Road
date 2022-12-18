@@ -6,5 +6,6 @@ namespace Characters
     {
         public void SetOutline(Material outline);
         public Transform GetObject();
+        public bool IsPlayer();
     }
 }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6236512712684332684}
   - component: {fileID: 6021154229256285526}
-  - component: {fileID: -8764276424113509732}
   m_Layer: 5
   m_Name: UpgraderRecipeView
   m_TagString: Untagged
@@ -28,6 +27,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1841381180314603201}
   - {fileID: 3852396595996154991}
@@ -48,24 +48,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139966274802881299}
   m_CullTransparentMesh: 0
---- !u!114 &-8764276424113509732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139966274802881299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e1b8e5f978956443a600934b5928009, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: {fileID: 7141028842483812095}
-  icon: {fileID: 749247513381928642}
-  border: {fileID: 3641144878954170575}
-  optional_UpgraderName: {fileID: 0}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  selectedColor: {r: 1, g: 0.37164518, b: 0.015686274, a: 1}
 --- !u!1 &621827971045961894
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,6 +76,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6942270911399180806}
   m_RootOrder: 0
@@ -169,6 +152,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4059525093310441703}
   - {fileID: 8499362801805083299}
@@ -246,6 +230,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6236512712684332684}
   m_RootOrder: 0
@@ -322,6 +307,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6942270911399180806}
   m_RootOrder: 1
@@ -416,6 +402,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6236512712684332684}
   m_RootOrder: 1
