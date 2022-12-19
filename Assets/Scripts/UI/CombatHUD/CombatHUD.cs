@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace UI.CombatHUD
 {
-    public delegate void UpdateEnergyDelegate(int energy);
-    public delegate void UpdateHealthDelegate(int health);
-    public delegate void UpdateShieldDelegate(int shield);
+    public delegate void UpdateEnergyDelegate(float energy);
+    public delegate void UpdateHealthDelegate(float health);
+    public delegate void UpdateShieldDelegate(float shield);
     public class CombatHUD : MonoBehaviour
     {
         [SerializeField] private Slider healthSlider;
@@ -16,19 +16,19 @@ namespace UI.CombatHUD
         [SerializeField] private Slider energySlider;
         
 
-        public void SetHealth(int health)
+        public void SetHealth(float health)
         {
             var t = Mathf.InverseLerp(0, 100, health);
             healthSlider.value = Mathf.Lerp(0, 1, t);
         }
 
-        public void SetShield(int shield)
+        public void SetShield(float shield)
         {
             var t = Mathf.InverseLerp(0, 100, shield);
             shieldSlider.value = Mathf.Lerp(0, 1, t);
         }
 
-        public void SetEnergy(int energy)
+        public void SetEnergy(float energy)
         {
             var t = Mathf.InverseLerp(0, 100, energy);
             energySlider.value = Mathf.Lerp(0, 1, t);

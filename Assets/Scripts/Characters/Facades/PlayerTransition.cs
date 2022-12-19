@@ -1,4 +1,5 @@
 using Characters.Player;
+using Characters.Player.States;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,6 +7,15 @@ namespace Characters.Facades
 {
     public class PlayerTransition : TransitionAndStates
     {
+        public override void Initialize(TASData data)
+        {
+            base.Initialize(data);
+            StatesInit(data.Animator, data.NavMeshAgent);
+            data.CreateAttack(new PlayerAttack(_animation, data.AnimationClip));
+            _attackState = data.Attack;
+            TransitionInit(data.Transform, data.NavMeshAgent);
+
+        }
 
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
@@ -21,7 +31,11 @@ namespace Characters.Facades
             _stateMachine.AddTransition(_shieldState, _idleState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_shieldState, _runState, () => isRuning(transform, agent));
             _stateMachine.AddTransition(_attackState, _runState, () => isRuning(transform, agent));
-            _stateMachine.AddTransition(_shieldState, _attackState, () => IsAttack());
+            _stateMachine.AddTransition(_shieldState, _attackState, () =>
+            {
+                _attackState.SetPoint(GetCurrentPoint());
+                return IsAttack();
+            });
             _stateMachine.AddTransition(_attackState, _shieldState,() => !IsAttack() );
             _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
             _stateMachine.ChangeState(_idleState);

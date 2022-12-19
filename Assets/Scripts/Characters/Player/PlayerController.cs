@@ -29,8 +29,13 @@ namespace Characters.Player
         [SerializeField] private CameraRay cameraRay;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private GameCanvasController canvasController;
+        [SerializeField] private AnimationClip trackClip;
+
+        private TASData _tASData;
 
         private event UpdateEnergyDelegate _updateEnergyEvent;
+        private event UpdateHealthDelegate _updateHealthEvent;
+        private event UpdateShieldDelegate _updateShieldEvent;
 
         #region Intefaces
 
@@ -70,6 +75,14 @@ namespace Characters.Player
             _updateEnergyEvent = updateEnergyDelegate;
             updateEnergyDelegate += _updateEnergyEvent;
 
+            var updateHealthDelegate = canvasController.UIDelegates.UpdateHealthDelegate;
+            _updateHealthEvent = updateHealthDelegate;
+            updateHealthDelegate += _updateHealthEvent;
+
+            var updateShieldDelegate = canvasController.UIDelegates.UpdateShieldDelegate;
+            _updateShieldEvent = updateShieldDelegate;
+            updateShieldDelegate += _updateShieldEvent;
+
 
             _enemyOutlineRechanger = new EnemyOutlineRechanger(outlineMaterial);
             _getIsAttack = GetIsAttack;
@@ -77,8 +90,11 @@ namespace Characters.Player
             _startRechangeCurrentPoint = StartRCP;
             _getCurrentPoint = GetCurrentPoint;
 
+            _tASData = new TASData(animator, _getCurrentPoint, transform,
+                agent, _getIsAttack, playerData,trackClip);
+
             _transitionAndStates = new PlayerTransition();
-            _transitionAndStates.Initialize(animator, _getCurrentPoint, transform, agent, _getIsAttack, playerData);
+            _transitionAndStates.Initialize(_tASData);
 
             _interactionSystem = new InteractionSystem();
             _interactionSystem.Initialize(cameraRay, eyesCharacters, transform, _setCurrentPoint,
@@ -147,7 +163,7 @@ namespace Characters.Player
 
             if (playerData.Energy > 1)
             {
-                Attack();
+              Attack();
             }
         }
 
@@ -159,6 +175,15 @@ namespace Characters.Player
             _updateEnergyEvent?.Invoke(playerData.Energy);
             await Task.Delay(100);
             isAttack = false;
+        }
+
+        public void ReceiveDamage(float value)
+        {
+            playerData.Damage(value);
+            _updateHealthEvent?.Invoke(playerData.Health);
+            _updateShieldEvent?.Invoke(playerData.Shield);
+            if(playerData.Health==0) Debug.LogWarning("PlayerDeath");
+            
         }
 
         public void SetOutline(Material outline)

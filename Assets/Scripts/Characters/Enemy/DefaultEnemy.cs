@@ -14,8 +14,12 @@ namespace Characters.Enemy
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Animator animator;
         [SerializeField] private Eyes eyesCharacters;
+        [SerializeField] private AnimationClip trackClip;
         [SerializeField] private float rotationSpeed=1f;
+        private float _health = 100;
+        
         private IInteractable _currentPoint;
+        
         private SetCurrentPoint _setCurrentPoint;
         private StartRechangeCurrentPoint _startRechangeCurrentPoint;
         private GetCurrentPoint _getCurrentPoint;
@@ -30,8 +34,11 @@ namespace Characters.Enemy
             _startRechangeCurrentPoint = StartRCP;
             _getCurrentPoint = GetCurrentPoint;
 
+            
+
             _transitionAndStates = new EnemyTransition();
-            _transitionAndStates.Initialize(animator, _getCurrentPoint, transform, agent, null, null);
+            _transitionAndStates.Initialize(new TASData(animator, _getCurrentPoint, transform,
+                agent, null, null, trackClip));
 
             _interactionSystem = new InteractionSystem();
             _interactionSystem.Initialize(null, eyesCharacters, transform, _setCurrentPoint,
@@ -62,6 +69,12 @@ namespace Characters.Enemy
         private void SetCurrentPoint(IInteractable point)
         {
             _currentPoint = point;
+        }
+
+        public void ReceiveDamage(float value)
+        {
+            _health = Mathf.Clamp(_health - value, 0, 100);
+            if(_health==0) Destroy(this.gameObject);
         }
 
         public void SetOutline(Material outline)

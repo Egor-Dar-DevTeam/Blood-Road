@@ -11,7 +11,7 @@ namespace Characters.Facades
 {
     public abstract class TransitionAndStates
     {
-        private IRunCommand _animation;
+        protected IRunCommand _animation;
         
         protected Run _runState;
         protected Idle _idleState;
@@ -22,29 +22,29 @@ namespace Characters.Facades
         protected event GetIsAttack GetIsAttack;
         protected event GetCurrentPoint CurrentPoint;
 
-        public void Initialize(Animator animator, GetCurrentPoint currentPointDelegate, Transform transform,
-            NavMeshAgent agent, [CanBeNull] GetIsAttack isAttackDelegate, [CanBeNull] PlayerData playerData)
+        public virtual void Initialize(TASData data)
         {
-            _playerData = playerData;
-            if (isAttackDelegate != null)
+            _playerData = data.PlayerData;
+            if (data.GetIsAttack != null)
             {
-                GetIsAttack = isAttackDelegate;
-                isAttackDelegate += GetIsAttack;
+                var getIsAttack = data.GetIsAttack;
+                GetIsAttack = getIsAttack;
+                getIsAttack += GetIsAttack;
             }
 
+            var currentPointDelegate = data.GetCurrentPoint;
             CurrentPoint = currentPointDelegate;
             currentPointDelegate += CurrentPoint;
+        }
 
-
+        protected virtual void StatesInit(Animator animator, NavMeshAgent agent)
+        {
             _animation = new AnimatorController(animator);
 
             _runState = new Run(_animation, agent);
             _idleState = new Idle(_animation);
-            _attackState = new Attack(_animation);
             _shieldState = new Shield(_animation,agent);
             _stateMachine = new StateMachine<BaseState>();
-
-            TransitionInit(transform, agent);
         }
 
         protected abstract void TransitionInit(Transform transform, NavMeshAgent agent);
