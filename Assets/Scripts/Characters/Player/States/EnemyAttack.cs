@@ -15,17 +15,21 @@ namespace Characters.Player.States
         {
             base.Enter();
             _animation.RunCommand(new BoolAnimation(_parameterName, true));
-            Task.WaitAll(SetDamage());
+           SetDamage();
         }
 
-        private async Task SetDamage()
+        private async void SetDamage()
         {
 
+            do
+            {
+                // await Task.Yield();
+                var milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName)/2);
+                await Task.Delay(milliseconds);
                 _interactable.ReceiveDamage(25);
-                await Task.Yield();
-                // await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)/2f));
+                await Task.Delay(milliseconds);
                 //  if(_animation.LengthAnimation(0)==0) return;
-
+            } while (_setDamage);
 
         }
     }

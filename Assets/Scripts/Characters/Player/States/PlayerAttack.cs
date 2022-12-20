@@ -12,17 +12,18 @@ namespace Characters.Player.States
             _parameterName = "attack";
         }
 
+        // ReSharper disable Unity.PerformanceAnalysis
         public override void Enter()
         {
             base.Enter();
             SetDamage();
         }
 
-        private async Task SetDamage()
+        private async void SetDamage()
         {
-
-                _interactable.ReceiveDamage(25);
-                await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)/2f));
+            var milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 2f);
+            await Task.Delay(milliseconds);
+            _interactable.ReceiveDamage(25);
 
         }
     }

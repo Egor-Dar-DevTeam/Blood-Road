@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace Better.UnityPatterns.Runtime.StateMachine.States
 {
     public abstract class BaseState

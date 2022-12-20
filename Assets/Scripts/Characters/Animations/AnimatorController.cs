@@ -40,8 +40,7 @@ namespace Characters.Animations
         public float LengthAnimation(string nameClip)
         {
          var length= _clips[nameClip].length;
-         var delay = Mathf.RoundToInt(length * 1000);
-          return delay;
+          return length;
         }
 
         public void RunCommand(IAnimate command)
