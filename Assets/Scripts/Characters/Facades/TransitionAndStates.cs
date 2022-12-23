@@ -12,29 +12,37 @@ namespace Characters.Facades
     public abstract class TransitionAndStates
     {
         protected IRunCommand _animation;
-        
+
         protected Run _runState;
         protected Idle _idleState;
         protected Attack _attackState;
         protected Shield _shieldState;
+        protected Die _dieState;
         protected StateMachine<BaseState> _stateMachine;
-        protected PlayerData _playerData;
+        protected CharacterData characterData;
         protected event GetIsAttack GetIsAttack;
         protected event GetCurrentPoint CurrentPoint;
+        private CapsuleCollider _capsuleCollider;
+        private event HasCharacter _hasCharacter;
+        private DieDelegate _dieDelegate;
+        private bool _isDeath;
+
+        public DieDelegate DieDelegate => _dieDelegate;
 
         public virtual void Initialize(TASData data)
         {
-            _playerData = data.PlayerData;
+            _dieDelegate = Death;
+            _capsuleCollider = data.CapsuleCollider;
+            characterData = data.CharacterData;
             if (data.GetIsAttack != null)
             {
-                var getIsAttack = data.GetIsAttack;
-                GetIsAttack = getIsAttack;
-                getIsAttack += GetIsAttack;
+                GetIsAttack += data.GetIsAttack;
             }
 
-            var currentPointDelegate = data.GetCurrentPoint;
-            CurrentPoint = currentPointDelegate;
-            currentPointDelegate += CurrentPoint;
+            _hasCharacter += data.HasCharacter;
+
+
+            CurrentPoint += data.GetCurrentPoint;
         }
 
         protected virtual void StatesInit(Animator animator, NavMeshAgent agent)
@@ -43,11 +51,20 @@ namespace Characters.Facades
 
             _runState = new Run(_animation, agent);
             _idleState = new Idle(_animation);
-            _shieldState = new Shield(_animation,agent);
+            _shieldState = new Shield(_animation, agent);
+            _dieState = new Die(_animation, _capsuleCollider);
             _stateMachine = new StateMachine<BaseState>();
         }
 
-        protected abstract void TransitionInit(Transform transform, NavMeshAgent agent);
+        public void Destroy()
+        {
+            _stateMachine.ChangeState(_idleState);
+        }
+
+        protected virtual void TransitionInit(Transform transform, NavMeshAgent agent)
+        {
+            _stateMachine.AddTransition(_dieState, () => _isDeath);
+        }
 
         protected virtual bool isRuning(Transform transform, NavMeshAgent agent)
         {
@@ -82,6 +99,11 @@ namespace Characters.Facades
         protected bool IsAttack()
         {
             return GetIsAttack.Invoke();
+        }
+
+        private void Death()
+        {
+            _isDeath = true;
         }
     }
 }

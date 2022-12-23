@@ -23,6 +23,7 @@ namespace Characters.InteractableSystems
             {
                 if (!_interactables.Contains(interactable))
                 {
+                    if(interactable.HasCharacter())
                     _interactables.Add(interactable);
                 }
             }
@@ -43,6 +44,12 @@ namespace Characters.InteractableSystems
         {
             for (int i = 0; i < 1;)
             {
+                for (int j = 0; i < _interactables.Count; i++)
+                {
+                    if (!_interactables[j].HasCharacter() && _interactables.Contains(_interactables[j]))
+                        _interactables.Remove(_interactables[j]);
+                }
+
                 yield return new WaitForSeconds(0.1f);
                 _setPoint?.Invoke(_interactables);
             }

@@ -6,40 +6,48 @@ using UnityEngine.AI;
 
 public struct TASData
 {
-    private Animator _animator;
-    private GetCurrentPoint _currentPointDelegate;
-    private Transform _transform;
-    private NavMeshAgent _agent;
-    private AnimationClip _animationClip;
-    private Attack _attack;
-    [CanBeNull] private GetIsAttack _isAttackDelegate;
-    [CanBeNull] private PlayerData _playerData;
+    public Animator Animator { get; }
 
-    public Animator Animator => _animator;
-    public GetCurrentPoint GetCurrentPoint => _currentPointDelegate;
-    public Transform Transform => _transform;
-    public NavMeshAgent NavMeshAgent => _agent;
-    public AnimationClip AnimationClip => _animationClip;
-    public GetIsAttack GetIsAttack => _isAttackDelegate;
-    public PlayerData PlayerData => _playerData;
-    public Attack Attack => _attack;
+    public GetCurrentPoint GetCurrentPoint { get; }
+
+    public Transform Transform { get; }
+
+    public NavMeshAgent NavMeshAgent { get; }
+
+    public AnimationClip AnimationClip { get; }
+    public CapsuleCollider CapsuleCollider { get; }
+
+    [CanBeNull]
+    public GetIsAttack GetIsAttack { get; }
+
+    [CanBeNull]
+    public CharacterData CharacterData { get; }
+
+    public Attack Attack { get; private set; }
+    
+    public HasCharacter HasCharacter { get; }
+
+    public int Damage { get; }
 
     public TASData(Animator animator, GetCurrentPoint getCurrentPoint, Transform transform,
-        NavMeshAgent agent, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] PlayerData playerData,
-        AnimationClip animationClip)
+        NavMeshAgent agent, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
+        AnimationClip animationClip, int damage, HasCharacter hasCharacter, CapsuleCollider capsuleCollider)
     {
-        _animator = animator;
-        _currentPointDelegate = getCurrentPoint;
-        _transform = transform;
-        _agent = agent;
-        _isAttackDelegate = getIsAttack;
-        _playerData = playerData;
-        _animationClip = animationClip;
-        _attack = null;
+        Animator = animator;
+        GetCurrentPoint = getCurrentPoint;
+        Transform = transform;
+        NavMeshAgent = agent;
+        GetIsAttack = getIsAttack;
+        CharacterData = characterData;
+        AnimationClip = animationClip;
+        Attack = null;
+        Damage = damage;
+        HasCharacter = hasCharacter;
+        CapsuleCollider = capsuleCollider;
     }
 
     public void CreateAttack(Attack attack)
     {
-        _attack = attack;
+        Attack = attack;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Characters.Facades;
 using Characters.InteractableSystems;
@@ -15,34 +16,49 @@ namespace Characters.Enemy
         [SerializeField] private Animator animator;
         [SerializeField] private Eyes eyesCharacters;
         [SerializeField] private AnimationClip trackClip;
+        [SerializeField] private EnemyData characterData;
+        [SerializeField] private CapsuleCollider capsuleCollider;
         [SerializeField] private float rotationSpeed=1f;
-        private float _health = 100;
+        private bool _hasCharacter = true;
         
         private IInteractable _currentPoint;
         
         private SetCurrentPoint _setCurrentPoint;
         private StartRechangeCurrentPoint _startRechangeCurrentPoint;
         private GetCurrentPoint _getCurrentPoint;
+        private DieDelegate _characterPointDie;
+        private HasCharacter _hasCharacterDelegate;
+
+
         
         private InteractionSystem _interactionSystem;
         private TransitionAndStates _transitionAndStates;
         private IInteractable GetCurrentPoint() => _currentPoint;
-        
+        public bool HasCharacter() => _hasCharacter;
+        public Transform GetObject() => this.transform;
+        public bool IsPlayer()=>false;
+        public DieDelegate GetDieCharacterDelegate() => _characterPointDie;
+
+
         private void Start()
         {
             _setCurrentPoint = SetCurrentPoint;
             _startRechangeCurrentPoint = StartRCP;
             _getCurrentPoint = GetCurrentPoint;
 
-            
+            _hasCharacterDelegate = HasCharacter;
 
             _transitionAndStates = new EnemyTransition();
             _transitionAndStates.Initialize(new TASData(animator, _getCurrentPoint, transform,
-                agent, null, null, trackClip));
+                agent, null, null, trackClip, characterData.Damage, _hasCharacterDelegate, capsuleCollider));
 
             _interactionSystem = new InteractionSystem();
             _interactionSystem.Initialize(null, eyesCharacters, transform, _setCurrentPoint,
                 _startRechangeCurrentPoint);
+            characterData.DieEvent+= _transitionAndStates.DieDelegate;
+            characterData.DieEvent += () => _hasCharacter = false;
+
+            _characterPointDie = () => _currentPoint = null;
         }
         private void Update()
         {
@@ -68,13 +84,16 @@ namespace Characters.Enemy
 
         private void SetCurrentPoint(IInteractable point)
         {
+            if (_currentPoint != null && _currentPoint == point&& !point.HasCharacter()) return;
             _currentPoint = point;
+            var dieCharacterDelegate = _currentPoint.GetDieCharacterDelegate();
+            characterData.DieEvent += dieCharacterDelegate;
+
         }
 
-        public void ReceiveDamage(float value)
+        public void ReceiveDamage(int value)
         {
-            _health = Mathf.Clamp(_health - value, 0, 100);
-            if(_health==0) Destroy(this.gameObject);
+            characterData.Damaged(value);
         }
 
         public void SetOutline(Material outline)
@@ -82,7 +101,11 @@ namespace Characters.Enemy
             skinnedMeshRenderer.material = outline;
         }
 
-        public Transform GetObject() => this.transform;
-        public bool IsPlayer()=>false;
+
+        private void OnDestroy()
+        {
+            _hasCharacter = false;
+            _transitionAndStates.Destroy();
+        }
     }
 }

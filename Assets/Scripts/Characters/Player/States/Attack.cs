@@ -10,14 +10,17 @@ namespace Characters.Player.States
     {
         protected IRunCommand _animation;
         protected IInteractable _interactable;
+        private AnimationClip _clip;
         protected bool _setDamage;
         protected string _parameterName;
-        private AnimationClip _clip;
-        public Attack(IRunCommand animation, AnimationClip clip)
+        protected int _damage;
+        public Attack(IRunCommand animation, AnimationClip clip, int damage)
         {
             _animation = animation;
             _clip = clip;
+            _damage = damage;
         }
+
         public void SetPoint(IInteractable point)
         {
             _interactable = point;

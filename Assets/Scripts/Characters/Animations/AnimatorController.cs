@@ -34,7 +34,11 @@ namespace Characters.Animations
         public void AddClip(string key, AnimationClip value)
         {
             if(_clips==null) _clips = new Dictionary<string, AnimationClip>();
-           if(!_clips.ContainsKey(key) || !_clips.ContainsValue(value)) _clips.Add(key,value);
+            if (!_clips.ContainsKey(key) || !_clips.ContainsValue(value))
+            {
+                value.events = null;
+                _clips.Add(key,value);
+            }
         }
 
         public float LengthAnimation(string nameClip)

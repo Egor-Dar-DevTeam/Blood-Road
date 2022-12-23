@@ -10,7 +10,7 @@ namespace Characters.Facades
         {
             base.Initialize(data);
             StatesInit(data.Animator, data.NavMeshAgent);
-            data.CreateAttack(new EnemyAttack(_animation,data.AnimationClip));
+            data.CreateAttack(new EnemyAttack(_animation,data.AnimationClip,data.Damage));
             _attackState = data.Attack;
             TransitionInit(data.Transform, data.NavMeshAgent);
 
@@ -18,6 +18,7 @@ namespace Characters.Facades
 
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
+            base.TransitionInit(transform, agent);
             _stateMachine.AddTransition(_idleState, _runState, () =>
             {
                 if (GetCurrentPoint() != null) _runState.SetPoint(GetCurrentPoint().GetObject());

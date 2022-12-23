@@ -7,12 +7,11 @@ namespace Characters.Player.States
 {
     public class PlayerAttack: Attack
     {
-        public PlayerAttack(IRunCommand animation, AnimationClip clip) : base(animation,clip)
+        public PlayerAttack(IRunCommand animation, AnimationClip clip, int damage) : base(animation,clip, damage)
         {
             _parameterName = "attack";
         }
 
-        // ReSharper disable Unity.PerformanceAnalysis
         public override void Enter()
         {
             base.Enter();
@@ -23,7 +22,7 @@ namespace Characters.Player.States
         {
             var milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 2f);
             await Task.Delay(milliseconds);
-            _interactable.ReceiveDamage(25);
+            _interactable.ReceiveDamage(_damage);
 
         }
     }

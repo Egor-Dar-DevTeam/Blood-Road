@@ -7,7 +7,7 @@ namespace Characters.Player.States
 {
     public class EnemyAttack : Attack
     {
-        public EnemyAttack(IRunCommand animation, AnimationClip clip) : base(animation, clip)
+        public EnemyAttack(IRunCommand animation, AnimationClip clip, int damage) : base(animation, clip, damage)
         {
             _parameterName = "attack";
         }
@@ -23,12 +23,10 @@ namespace Characters.Player.States
 
             do
             {
-                // await Task.Yield();
                 var milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName)/2);
                 await Task.Delay(milliseconds);
-                _interactable.ReceiveDamage(25);
+               _interactable.ReceiveDamage(_damage);
                 await Task.Delay(milliseconds);
-                //  if(_animation.LengthAnimation(0)==0) return;
             } while (_setDamage);
 
         }
