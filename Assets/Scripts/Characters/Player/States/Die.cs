@@ -6,10 +6,10 @@ namespace Characters.Player.States
 {
     public class Die: BaseState
     {
-        private IRunCommand _animation;
-        private CapsuleCollider _capsuleCollider;
+        protected IRunCommand _animation;
+        protected CapsuleCollider _capsuleCollider;
 
-        private readonly string _parameterName = "death";
+        protected readonly string _parameterName = "death";
 
         public Die(IRunCommand animation, CapsuleCollider capsuleCollider)
         {

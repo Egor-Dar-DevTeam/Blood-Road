@@ -10,8 +10,10 @@ namespace Characters.Facades
         {
             base.Initialize(data);
             StatesInit(data.Animator, data.NavMeshAgent);
-            data.CreateAttack(new EnemyAttack(_animation,data.AnimationClip,data.Damage));
+            data.CreateAttack(new EnemyAttack(_animation,data.AttackAnimationClip,data.Damage));
+            data.CreateDie(  new DieEnemy(_animation, data.CapsuleCollider, data.DieAnimationClip));
             _attackState = data.Attack;
+            _dieState = data.Die;
             TransitionInit(data.Transform, data.NavMeshAgent);
 
         }

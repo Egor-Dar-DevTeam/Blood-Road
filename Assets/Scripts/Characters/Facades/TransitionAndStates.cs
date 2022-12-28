@@ -52,7 +52,6 @@ namespace Characters.Facades
             _runState = new Run(_animation, agent);
             _idleState = new Idle(_animation);
             _shieldState = new Shield(_animation, agent);
-            _dieState = new Die(_animation, _capsuleCollider);
             _stateMachine = new StateMachine<BaseState>();
         }
 

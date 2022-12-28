@@ -38,6 +38,7 @@ namespace Characters.Player
         private bool _hasCharacter = true;
 
         private TASData _tASData;
+        private List<IInteractable> _interactables;
 
         private event UpdateEnergyDelegate _updateEnergyEvent;
         private event UpdateHealthDelegate _updateHealthEvent;
@@ -73,11 +74,14 @@ namespace Characters.Player
         private IInteractable GetCurrentPoint() => _currentPoint;
         public Transform GetObject() => transform;
         public bool IsPlayer() => true;
-        public DieDelegate GetDieCharacterDelegate() => _characterPointDie;
+        public DieDelegate GetDieCharacterDelegate() => _characterPointDie+characterData.DieEvent;
+        public event DieDelegate GetDieEvent;
         public bool HasCharacter() => _hasCharacter;
 
         private void Start()
         {
+            _interactables = new List<IInteractable>();
+            
             _updateEnergyEvent += canvasController.UIDelegates.UpdateEnergyDelegate;
 
             _updateHealthEvent += canvasController.UIDelegates.UpdateHealthDelegate;
@@ -91,7 +95,7 @@ namespace Characters.Player
             _getCurrentPoint = GetCurrentPoint;
 
             _tASData = new TASData(animator, _getCurrentPoint, transform,
-                agent, _getIsAttack, characterData, trackClip, characterData.Damage, _hasCharacterDelegate,
+                agent, _getIsAttack, characterData, trackClip, null, characterData.Damage, _hasCharacterDelegate,
                 capsuleCollider);
 
             _transitionAndStates = new PlayerTransition();
@@ -105,6 +109,7 @@ namespace Characters.Player
             characterData.DieEvent += () => _hasCharacter = false;
 
             _characterPointDie = ClearPoint;
+            GetDieEvent = characterData.DieEvent;
         }
 
         private void Update()
@@ -122,51 +127,66 @@ namespace Characters.Player
         }
 
 
-        private async void ClearPoint()
+        private  void ClearPoint()
         {
-            await Task.Delay(100);
+            characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
+            _interactables.Remove(_currentPoint);
             _currentPoint = null;
             _enemyOutlineRechanger.SetEnemy(null);
+            StartCoroutine( RechangeCurrentPoint(_interactables));
         }
 
         private void StartRCP(List<IInteractable> points)
         {
-            points.Remove(_currentPoint);
+            AddToListEnemy(points);
+        }
 
-            StartCoroutine(RechangeCurrentPoint(points));
+        private void AddToListEnemy(List<IInteractable> enemies)
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (!_interactables.Contains(enemies[i]))
+                {
+                    characterData.DieEvent += enemies[i].GetDieCharacterDelegate();
+                    _interactables.Add(enemies[i]);
+                }
+            }
+            StartCoroutine(RechangeCurrentPoint(_interactables));
+
         }
 
         private IEnumerator RechangeCurrentPoint(List<IInteractable> points)
         {
-            if (_currentPoint != null) yield break;
-            int indx;
-            IInteractable point = null;
-            for (int i = 0; i < points.Count; i++)
+            if (_currentPoint == null)
             {
-                if (!points[i].IsPlayer())
+                int indx;
+                IInteractable point = null;
+                for (int i = 0; i < points.Count; i++)
                 {
-                    indx = i;
-                    for (int j = 0; j < points.Count; j++)
+                    if (!points[i].IsPlayer())
                     {
-                        if (Vector3.Distance(transform.position, points[j].GetObject().position) <=
-                            Vector3.Distance(transform.position, points[indx].GetObject().position))
+                        indx = i;
+                        for (int j = 0; j < points.Count; j++)
                         {
-                            indx = j;
+                            if (Vector3.Distance(transform.position, points[j].GetObject().position) <=
+                                Vector3.Distance(transform.position, points[indx].GetObject().position))
+                            {
+                                indx = j;
+                            }
                         }
+
+                        point = points[indx];
                     }
-
-                    point = points[indx];
                 }
-            }
 
-            if (point != null)
-            {
-                _currentPoint = point;
-                _enemyOutlineRechanger.SetEnemy(_currentPoint);
-                characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
-            }
+                if (point != null&& point.HasCharacter())
+                {
+                    _currentPoint = point;
+                    _enemyOutlineRechanger.SetEnemy(_currentPoint);
+                }
 
-            yield return new WaitForSeconds(0);
+                yield return new WaitForSeconds(0);
+            }
         }
 
         private void SetCurrentPoint(IInteractable point)
@@ -176,7 +196,6 @@ namespace Characters.Player
             {
                 _currentPoint = point;
                 _enemyOutlineRechanger.SetEnemy(_currentPoint);
-                characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
             }
 
             if (characterData.Energy > 1)

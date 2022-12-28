@@ -44,14 +44,14 @@ namespace Characters.InteractableSystems
         {
             for (int i = 0; i < 1;)
             {
-                for (int j = 0; i < _interactables.Count; i++)
+                for (int j = 0; j < _interactables.Count; j++)
                 {
                     if (!_interactables[j].HasCharacter() && _interactables.Contains(_interactables[j]))
                         _interactables.Remove(_interactables[j]);
                 }
-
+                
                 yield return new WaitForSeconds(0.1f);
-                _setPoint?.Invoke(_interactables);
+               _setPoint?.Invoke(_interactables);
             }
         }
     }

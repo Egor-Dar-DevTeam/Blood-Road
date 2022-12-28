@@ -10,6 +10,7 @@ namespace Characters
         public Transform GetObject();
         public bool IsPlayer();
         public DieDelegate GetDieCharacterDelegate();
+        public event DieDelegate GetDieEvent;
         public bool HasCharacter();
     }
 }

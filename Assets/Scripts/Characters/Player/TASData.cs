@@ -14,7 +14,8 @@ public struct TASData
 
     public NavMeshAgent NavMeshAgent { get; }
 
-    public AnimationClip AnimationClip { get; }
+    public AnimationClip AttackAnimationClip { get; }
+    public AnimationClip DieAnimationClip { get; }
     public CapsuleCollider CapsuleCollider { get; }
 
     [CanBeNull]
@@ -24,6 +25,7 @@ public struct TASData
     public CharacterData CharacterData { get; }
 
     public Attack Attack { get; private set; }
+    public Die Die { get; private set; }
     
     public HasCharacter HasCharacter { get; }
 
@@ -31,7 +33,7 @@ public struct TASData
 
     public TASData(Animator animator, GetCurrentPoint getCurrentPoint, Transform transform,
         NavMeshAgent agent, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
-        AnimationClip animationClip, int damage, HasCharacter hasCharacter, CapsuleCollider capsuleCollider)
+        AnimationClip attackAnimationClip, AnimationClip dieAnimationClip, int damage, HasCharacter hasCharacter, CapsuleCollider capsuleCollider)
     {
         Animator = animator;
         GetCurrentPoint = getCurrentPoint;
@@ -39,8 +41,10 @@ public struct TASData
         NavMeshAgent = agent;
         GetIsAttack = getIsAttack;
         CharacterData = characterData;
-        AnimationClip = animationClip;
+        AttackAnimationClip = attackAnimationClip;
+        DieAnimationClip = dieAnimationClip;
         Attack = null;
+        Die = null;
         Damage = damage;
         HasCharacter = hasCharacter;
         CapsuleCollider = capsuleCollider;
@@ -49,5 +53,10 @@ public struct TASData
     public void CreateAttack(Attack attack)
     {
         Attack = attack;
+    }
+
+    public void CreateDie(Die die)
+    {
+        Die = die;
     }
 }

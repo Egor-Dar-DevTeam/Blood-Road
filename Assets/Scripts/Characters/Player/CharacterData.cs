@@ -1,6 +1,7 @@
 using System;
-using Unity.VisualScripting;
+using Unity.Mathematics;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Characters.Player
 {
@@ -12,6 +13,8 @@ namespace Characters.Player
         [SerializeField] private int shield;
         [SerializeField] private int energy;
         [SerializeField] protected int damage;
+        [SerializeField] private VFXEffect damageEffect;
+        [SerializeField] private Transform transform;
         private bool _isDeath;
 
         private event DieDelegate _dieEvent;
@@ -42,7 +45,9 @@ namespace Characters.Player
         public void Damaged(int value)
         {
             if(_isDeath) return;
-            int dmgToHealt =Mathf.Abs(value-shield);
+            int dmgToHealt=0;
+            Object.Instantiate(damageEffect, transform.position, quaternion.identity);
+            dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
             health = Mathf.Clamp(health - dmgToHealt, 0, 1000);
             Die();
         }
