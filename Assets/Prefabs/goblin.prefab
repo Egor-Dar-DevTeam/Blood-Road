@@ -1093,21 +1093,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d98db29720ef7a44bb5623f6fd0a61b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinnedMeshRenderer: {fileID: 1570931870544690498}
+  _animatorOverrideController: {fileID: 22100000, guid: db0ffb874ce1e3d45aeaef734479d82e, type: 2}
+  animationsCharacterData:
+    idle: {fileID: 1827226128182048838, guid: 9ba2ce7e980f26743b056284bd9373f2, type: 3}
+    run: {fileID: 1827226128182048838, guid: 94508692e9926ba48989e8f97a5fc0cf, type: 3}
+    attack: {fileID: 1827226128182048838, guid: f1926a3b78b57a14ba0861e21ab0682e, type: 3}
+    die: {fileID: 1827226128182048838, guid: 38ca1223c95d5cb498e4b0789a6fdea0, type: 3}
+    shield: {fileID: 2494554854296811881, guid: 7099e69134c996146b36dcd81a8080a5, type: 3}
   agent: {fileID: 259999033}
   animator: {fileID: 259999036}
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
-  trackAttackClip: {fileID: 1827226128182048838, guid: f1926a3b78b57a14ba0861e21ab0682e, type: 3}
-  trackDieClip: {fileID: 1827226128182048838, guid: 38ca1223c95d5cb498e4b0789a6fdea0, type: 3}
   characterData:
     health: 50
     shield: 0
     energy: 0
-    damage: 20
+    damage: 25
     damageEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
     transform: {fileID: 1317209757232209779}
   capsuleCollider: {fileID: 1570931872451756091}
   rotationSpeed: 1
+  skinnedMeshRenderer: {fileID: 1570931870544690498}
 --- !u!95 &259999036
 Animator:
   serializedVersion: 5
@@ -1118,7 +1123,7 @@ Animator:
   m_GameObject: {fileID: 1804953782739617225}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 86c9e85a74df42e498be41e95fa87be2, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4dedf6a8889811747bf3fadc87951356, type: 2}
+  m_Controller: {fileID: 9100000, guid: d90a588e67eb79d43bdfd5da0ffc1532, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

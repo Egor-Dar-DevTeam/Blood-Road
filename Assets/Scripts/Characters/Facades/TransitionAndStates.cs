@@ -1,9 +1,7 @@
 ﻿using Better.UnityPatterns.Runtime.StateMachine;
-using Better.UnityPatterns.Runtime.StateMachine.States;
 using Characters.Animations;
 using Characters.Player;
 using Characters.Player.States;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +9,7 @@ namespace Characters.Facades
 {
     public abstract class TransitionAndStates
     {
+        protected AnimationsCharacterData _animationsCharacterData;
         protected IRunCommand _animation;
 
         protected Run _runState;
@@ -19,10 +18,8 @@ namespace Characters.Facades
         protected Shield _shieldState;
         protected Die _dieState;
         protected StateMachine<BaseState> _stateMachine;
-        protected CharacterData characterData;
         protected event GetIsAttack GetIsAttack;
         protected event GetCurrentPoint CurrentPoint;
-        private CapsuleCollider _capsuleCollider;
         private event HasCharacter _hasCharacter;
         private DieDelegate _dieDelegate;
         private bool _isDeath;
@@ -32,8 +29,6 @@ namespace Characters.Facades
         public virtual void Initialize(TASData data)
         {
             _dieDelegate = Death;
-            _capsuleCollider = data.CapsuleCollider;
-            characterData = data.CharacterData;
             if (data.GetIsAttack != null)
             {
                 GetIsAttack += data.GetIsAttack;
@@ -43,15 +38,17 @@ namespace Characters.Facades
 
 
             CurrentPoint += data.GetCurrentPoint;
+            _animationsCharacterData = data.AnimationsCharacterData;
         }
 
-        protected virtual void StatesInit(Animator animator, NavMeshAgent agent)
+        protected virtual void StatesInit(Animator animator, NavMeshAgent agent, AnimatorOverrideController animatorOverrideController)
         {
             _animation = new AnimatorController(animator);
+            _animation.CreateAnimationChanger(animatorOverrideController);
 
-            _runState = new Run(_animation, agent);
-            _idleState = new Idle(_animation);
-            _shieldState = new Shield(_animation, agent);
+            _runState = new Run(_animation, agent,_animationsCharacterData.Run);
+            _idleState = new Idle(_animation, _animationsCharacterData.Idle);
+            _shieldState = new Shield(_animation, agent, _animationsCharacterData.Shield);
             _stateMachine = new StateMachine<BaseState>();
         }
 

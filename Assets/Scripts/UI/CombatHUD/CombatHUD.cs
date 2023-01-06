@@ -1,6 +1,3 @@
-using System;
-using Characters.InteractableSystems;
-using Characters.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +15,7 @@ namespace UI.CombatHUD
 
         public void SetHealth(float health)
         {
-            var t = Mathf.InverseLerp(0, 100, health);
+            var t = Mathf.InverseLerp(0, 200, health);
             healthSlider.value = Mathf.Lerp(0, 1, t);
         }
 

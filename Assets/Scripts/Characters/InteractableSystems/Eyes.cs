@@ -46,7 +46,7 @@ namespace Characters.InteractableSystems
             {
                 for (int j = 0; j < _interactables.Count; j++)
                 {
-                    if (!_interactables[j].HasCharacter() && _interactables.Contains(_interactables[j]))
+                    if (!_interactables[j].HasCharacter())
                         _interactables.Remove(_interactables[j]);
                 }
                 

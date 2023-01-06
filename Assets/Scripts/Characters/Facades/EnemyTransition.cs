@@ -9,13 +9,12 @@ namespace Characters.Facades
         public override void Initialize(TASData data)
         {
             base.Initialize(data);
-            StatesInit(data.Animator, data.NavMeshAgent);
-            data.CreateAttack(new EnemyAttack(_animation,data.AttackAnimationClip,data.Damage));
-            data.CreateDie(  new DieEnemy(_animation, data.CapsuleCollider, data.DieAnimationClip));
+            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController);
+            data.CreateAttack(new Attack(_animation, data.AnimationsCharacterData.Attack, data.Damage, false, data));
+            data.CreateDie(new DieEnemy(_animation, data.AnimationsCharacterData.Die, data.CapsuleCollider));
             _attackState = data.Attack;
             _dieState = data.Die;
             TransitionInit(data.Transform, data.NavMeshAgent);
-
         }
 
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)

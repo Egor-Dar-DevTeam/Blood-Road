@@ -1,6 +1,3 @@
-using System;
-using Characters.InteractableSystems;
-using Characters.Player;
 using UI.CombatHUD;
 using UnityEngine;
 

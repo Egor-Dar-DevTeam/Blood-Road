@@ -1,4 +1,3 @@
-using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,9 +9,9 @@ namespace Characters.Facades
         public override void Initialize(TASData data)
         {
             base.Initialize(data);
-            StatesInit(data.Animator, data.NavMeshAgent);
-            data.CreateAttack(new PlayerAttack(_animation, data.AttackAnimationClip, data.Damage));
-            data.CreateDie( new Die(_animation, data.CapsuleCollider));
+            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController);
+            data.CreateAttack(new Attack(_animation, data.AnimationsCharacterData.Attack, data.Damage, true, data));
+            data.CreateDie( new Die(_animation,_animationsCharacterData.Die, data.CapsuleCollider));
             _attackState = data.Attack;
             _dieState = data.Die;
 
@@ -34,14 +33,14 @@ namespace Characters.Facades
                 agent.stoppingDistance+.1f);
             _stateMachine.AddTransition(_shieldState, _idleState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_shieldState, _runState, () => isRuning(transform, agent));
-            _stateMachine.AddTransition(_attackState, _runState, () => isRuning(transform, agent));
+            _stateMachine.AddTransition(_attackState, _runState, () => _attackState.CanSkip&&isRuning(transform, agent));
             _stateMachine.AddTransition(_shieldState, _attackState, () =>
             {
                 _attackState.SetPoint(GetCurrentPoint());
                 return IsAttack();
             });
-            _stateMachine.AddTransition(_attackState, _shieldState,() => !IsAttack() );
-            _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
+            _stateMachine.AddTransition(_attackState, _shieldState,() => _attackState.CanSkip&&!IsAttack() );
+            _stateMachine.AddTransition(_attackState, _idleState, (() => _attackState.CanSkip&&GetCurrentPoint() == null));
             _stateMachine.ChangeState(_idleState);
         }
 

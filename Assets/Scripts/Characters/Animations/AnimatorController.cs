@@ -6,6 +6,7 @@ namespace Characters.Animations
     public class AnimatorController : IRunCommand
     {
         private Animator _animator;
+        private AnimationChanger _animationChanger;
         private Dictionary<string, AnimationClip> _clips;
 
         public AnimatorController(Animator animator)
@@ -13,22 +14,7 @@ namespace Characters.Animations
             _animator = animator;
             _clips = new Dictionary<string, AnimationClip>();
         }
-
-
-        public void Trigger(string parameterName)
-        {
-            _animator.SetTrigger(parameterName);
-        }
-
-        public void Bool(string parameterName, bool value)
-        {
-            _animator.SetBool(parameterName, value);
-        }
-
-        public void Float(string parameterName, float value)
-        {
-            _animator.SetFloat(parameterName, value);
-        }
+        
 
         public void AddClip(string key, AnimationClip value)
         {
@@ -46,9 +32,14 @@ namespace Characters.Animations
             return length;
         }
 
-        public void RunCommand(IAnimate command)
+        public void CreateAnimationChanger(AnimatorOverrideController controller)
         {
-            command.Apply(this);
+            _animationChanger = new AnimationChanger(controller);
+        }
+
+        public void SetAnimation(string nameClip)
+        {
+            _animationChanger.SetAnimation(_clips[nameClip], _animator);
         }
     }
 }
