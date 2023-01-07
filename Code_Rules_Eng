@@ -1,0 +1,46 @@
+#Blood Road
+coding rules:
+1. Private variables are written in the following way:
+```C#
+private int_number;
+```
+2. Private serialized ones are written in the following way:
+```C#
+[SerializeField] private int number;
+```
+3. Public variables are ```{get; private set;}``` so-called properties and capitalized
+4. The access modifier, regardless of whether the method, class, interface, structure, variable is always written and must not be empty
+5. If it is possible to specify the value of a variable in the inspector, then make it serialized ```[SerializeField]```
+6. If you want to insert some object into the GameObject reference variable, then think again and give this object the necessary script according to
+  which will determine which script the object should have. For example:
+  ```C#
+[SerializeField] private GameObject obstacle; - you can put anything in this variable, even the player, it's not right
+[SerializeField] private Obstacle obstacle; is the correct use case for a reference variable
+```
+7. Try to use as little as possible (or better not to use at all) ```GetComponent```, ```FindGameObjectWithTag``` (strictly prohibited)
+8. If you pass a lot of parameters to a certain script when creating it, then do not hesitate to create your own unique structure for it
+9. The structure cannot have methods that perform operations with properties, there can only be a method for assigning a value to a specific property
+10. Interfaces are used to communicate between two systems. For example:
+  ```
+  The spawner should spawn enemies as soon as the player enters the spawner area,
+  the player has an IInteractable interface that has a method that determines whether the player is a boolean or not.
+The check goes like this:
+```
+```C#
+if(other.gameObject.TryGetComponent(out [interface name] [variable name])
+```
+11. Delegates are often used to keep track of the state of the desired system. For example, the death of a character or an enemy
+12. It is strictly forbidden to use the `singleton` pattern in a project.
+```
+If a certain system is made with a `singleton` then the task will not be accepted as "Completed"
+```
+13. Buttons in the UI subscribe to events through code. Example:
+```C#
+playButton.OnClick.AddListener(OnPlay)
+```
+14. Methods that are called by events begin with the name `On`
+15. Methods must match the name of what they do in the statement in blocks
+16. Method and class should share the same responsibility. For example: The class responsible for logic cannot work with animations
+and the class responsible for animation cannot work with logic
+17. Try to follow SOLID
+18. It is forbidden to leave comments in the code, the code must be readable
