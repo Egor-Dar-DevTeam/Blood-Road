@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class VFXEffect : MonoBehaviour
 {
-    private  void Awake()
+    public void SetLifeTime(float lifeTime)
     {
-        StartCoroutine(Timer());
+        StartCoroutine(Timer(lifeTime));
     }
 
-    private IEnumerator Timer()
+    private IEnumerator Timer(float tine)
     {
         yield return new WaitForSeconds(10f);
         Destroy(gameObject);

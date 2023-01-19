@@ -6,12 +6,12 @@ namespace Characters.Facades
 {
     public class EnemyTransition : TransitionAndStates
     {
-        public override void Initialize(TASData data)
+        public override void Initialize(TransitionAndStatesData data)
         {
             base.Initialize(data);
-            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController);
-            data.CreateAttack(new Attack(_animation, data.AnimationsCharacterData.Attack, data.Damage, false, data));
-            data.CreateDie(new DieEnemy(_animation, data.AnimationsCharacterData.Die, data.CapsuleCollider));
+            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController, data.VFXTransforms);
+            data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, false, data, data.VFXTransforms));
+            data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState("die"), data.CapsuleCollider,data.VFXTransforms));
             _attackState = data.Attack;
             _dieState = data.Die;
             TransitionInit(data.Transform, data.NavMeshAgent);

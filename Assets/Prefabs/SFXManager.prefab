@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2833615119686840302}
   - component: {fileID: 38098559461550522}
-  - component: {fileID: 7866337814213319357}
   m_Layer: 0
   m_Name: CombatMusic
   m_TagString: Untagged
@@ -28,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1133081415109972541}
   m_RootOrder: 1
@@ -128,20 +128,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7866337814213319357
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2564825416352802308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8228787ef491eb48ac9da1ca25cfdf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: a6b3d06a16685fe4bb8a0bf811ab21e5, type: 3}
 --- !u!1 &4015691316051240922
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 992039531127217803}
   - component: {fileID: 8052868682874749922}
-  - component: {fileID: 3160006674705541700}
   m_Layer: 0
   m_Name: LevelMusic
   m_TagString: Untagged
@@ -170,6 +155,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1133081415109972541}
   m_RootOrder: 0
@@ -270,20 +256,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &3160006674705541700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4015691316051240922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f97c73283214b604791372c73c1ef483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clips:
-  - {fileID: 8300000, guid: 5ea0fa0a7a1e014488292879f06cd52c, type: 3}
 --- !u!1 &5419580402412000508
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,7 +265,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1133081415109972541}
-  - component: {fileID: 4560235649936143359}
   m_Layer: 0
   m_Name: SFXManager
   m_TagString: Untagged
@@ -311,22 +282,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 992039531127217803}
   - {fileID: 2833615119686840302}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4560235649936143359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5419580402412000508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4728355ffe467448877a8536a468949, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mixer: {fileID: 24300002, guid: 096e4771169abe84590382629bc8f68b, type: 2}

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Characters.Animations;
+using Characters.Information.Structs;
 using UnityEngine;
 
 namespace Characters.Player.States
@@ -10,16 +11,18 @@ namespace Characters.Player.States
         protected bool _setDamage;
         private bool _isPlayer;
         protected int _damage;
-        private TASData _tasData;
+        private TransitionAndStatesData transitionAndStatesData;
+        private int _currentMilliseconds;
         public bool CanSkip { get; private set; }
+        public int Milliseconds => _currentMilliseconds;
 
-        public Attack(IRunCommand animation, AnimationClip clip, int damage, bool isPlayer, TASData data) : base(
-            animation, clip)
+        public Attack(IAnimationCommand animation, StateInfo statesInfo, int damage, bool isPlayer, TransitionAndStatesData data, VFXTransforms vfxTransforms) : base(
+            animation, statesInfo,vfxTransforms)
         {
             _damage = damage;
             _isPlayer = isPlayer;
             _parameterName = "attack";
-            _tasData = data;
+            transitionAndStatesData = data;
         }
 
         public void SetPoint(IInteractable point)
@@ -40,10 +43,12 @@ namespace Characters.Player.States
         {
             do
             {
-                var milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 2);
+                int milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 2);
+                _currentMilliseconds = milliseconds*2;
                 await Task.Delay(milliseconds);
-                _tasData.CharacterData.UseEnergy();
-                _tasData.EnergyEvent?.Invoke(_tasData.CharacterData.Energy);
+                _currentMilliseconds = milliseconds;
+                transitionAndStatesData.CharacterData.UseEnergy();
+                transitionAndStatesData.EnergyEvent?.Invoke(transitionAndStatesData.CharacterData.Energy);
                 _interactable.ReceiveDamage(_damage);
                 await Task.Delay(milliseconds);
             } while (_setDamage && !_isPlayer);
@@ -58,7 +63,6 @@ namespace Characters.Player.States
 
         public override void Exit()
         {
-            Debug.Log("Attack finish");
             _setDamage = false;
         }
     }

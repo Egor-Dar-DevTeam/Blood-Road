@@ -11,15 +11,15 @@ namespace UI
 
         
         private UpdateEnergyDelegate _updateEnergyDelegate;
-        private UpdateShieldDelegate _updateShieldDelegate;
+        private UpdateManaDelegate _updateManaDelegate;
         private UpdateHealthDelegate _updateHealthDelegate;
 
         private void Awake()
         {
-            _updateShieldDelegate = combatHUD.SetShield;
+            _updateManaDelegate = combatHUD.SetMana;
             _updateHealthDelegate = combatHUD.SetHealth;
             _updateEnergyDelegate = combatHUD.SetEnergy;
-            _uiDelegates = new UIDelegates(_updateEnergyDelegate, _updateShieldDelegate, _updateHealthDelegate);
+            _uiDelegates = new UIDelegates(_updateEnergyDelegate, _updateManaDelegate, _updateHealthDelegate);
         }
         
     }
@@ -27,13 +27,13 @@ namespace UI
     public struct UIDelegates
     {
         public readonly UpdateEnergyDelegate UpdateEnergyDelegate;
-        public readonly UpdateShieldDelegate UpdateShieldDelegate;
+        public readonly UpdateManaDelegate UpdateManaDelegate;
         public readonly UpdateHealthDelegate UpdateHealthDelegate;
 
-        public UIDelegates(UpdateEnergyDelegate updateEnergyDelegate, UpdateShieldDelegate updateShieldDelegate,
+        public UIDelegates(UpdateEnergyDelegate updateEnergyDelegate, UpdateManaDelegate updateManaDelegate,
             UpdateHealthDelegate updateHealthDelegate)
         {
-            UpdateShieldDelegate = updateShieldDelegate;
+            UpdateManaDelegate = updateManaDelegate;
             UpdateHealthDelegate = updateHealthDelegate;
             UpdateEnergyDelegate = updateEnergyDelegate;
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Characters.Animations
 {
-    public class AnimatorController : IRunCommand
+    public class AnimatorController : IAnimationCommand
     {
         private Animator _animator;
         private AnimationChanger _animationChanger;

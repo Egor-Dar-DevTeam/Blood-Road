@@ -217,6 +217,39 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.uurha.betterattributes": {
+      "version": "1.5.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.uurha.betterextensions": "0.2.8",
+        "com.uurha.bettereditortools": "0.0.3"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.betterdatastructures": {
+      "version": "0.0.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.bettereditortools": {
+      "version": "0.0.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.uurha.betterdatastructures": "0.0.4"
+      },
+      "url": "https://package.openupm.com"
+    },
+    "com.uurha.betterextensions": {
+      "version": "0.2.8",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

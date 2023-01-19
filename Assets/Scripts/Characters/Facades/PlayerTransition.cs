@@ -6,12 +6,12 @@ namespace Characters.Facades
 {
     public class PlayerTransition : TransitionAndStates
     {
-        public override void Initialize(TASData data)
+        public override void Initialize(TransitionAndStatesData data)
         {
             base.Initialize(data);
-            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController);
-            data.CreateAttack(new Attack(_animation, data.AnimationsCharacterData.Attack, data.Damage, true, data));
-            data.CreateDie( new Die(_animation,_animationsCharacterData.Die, data.CapsuleCollider));
+            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController, data.VFXTransforms);
+            data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, true, data, data.VFXTransforms));
+            data.CreateDie( new Die(_animation,_statesInfo.GetState("die"), data.CapsuleCollider, data.VFXTransforms));
             _attackState = data.Attack;
             _dieState = data.Die;
 
@@ -22,10 +22,30 @@ namespace Characters.Facades
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
             base.TransitionInit(transform, agent);
-            _stateMachine.AddTransition(_idleState, _runState, () =>
+            //    _stateMachine.AddTransition( _damagedState, _idleState,()=>true);
+            _stateMachine.AddTransition(_idleState, _runState, () =>isRuning(transform, agent));
+            _stateMachine.AddTransition(_damagedState, _shieldState, () =>
             {
-                if (GetCurrentPoint() != null) _runState.SetPoint(GetCurrentPoint().GetObject());
-                return GetCurrentPoint() != null;
+                return _damagedState.CanSkip&& Vector3.Distance(transform.position, GetCurrentPoint().GetObject().position) <=
+                    agent.stoppingDistance+.3f;
+            } );
+            _stateMachine.AddTransition(_damagedState, _attackState, (() =>
+            {
+                _attackState.SetPoint(GetCurrentPoint());
+                return IsAttack();
+            }));
+
+        _stateMachine.AddTransition(_idleState, _shieldState,
+            () =>
+            {
+                var point = GetCurrentPoint();
+                if (point==null)
+                {
+                    return false;
+                }
+                var objectPoint = point.GetObject();
+              return  Vector3.Distance(transform.position, objectPoint.position) <=
+                    agent.stoppingDistance + .3f;
             });
             _stateMachine.AddTransition(_runState, _idleState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_runState, _shieldState, () =>

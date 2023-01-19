@@ -1,17 +1,21 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.CombatHUD
 {
     public delegate void UpdateEnergyDelegate(float energy);
+
     public delegate void UpdateHealthDelegate(float health);
-    public delegate void UpdateShieldDelegate(float shield);
+
+    public delegate void UpdateManaDelegate(float mana);
+
     public class CombatHUD : MonoBehaviour
     {
         [SerializeField] private Slider healthSlider;
-        [SerializeField] private Slider shieldSlider;
+        [SerializeField] private Slider manaSlider;
         [SerializeField] private Slider energySlider;
-        
+
 
         public void SetHealth(float health)
         {
@@ -19,10 +23,10 @@ namespace UI.CombatHUD
             healthSlider.value = Mathf.Lerp(0, 1, t);
         }
 
-        public void SetShield(float shield)
+        public void SetMana(float mana)
         {
-            var t = Mathf.InverseLerp(0, 100, shield);
-            shieldSlider.value = Mathf.Lerp(0, 1, t);
+            var t = Mathf.InverseLerp(0, 100, mana);
+            manaSlider.value = Mathf.Lerp(0, 1, t);
         }
 
         public void SetEnergy(float energy)
@@ -30,6 +34,5 @@ namespace UI.CombatHUD
             var t = Mathf.InverseLerp(0, 100, energy);
             energySlider.value = Mathf.Lerp(0, 1, t);
         }
-        
     }
 }

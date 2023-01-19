@@ -1,4 +1,5 @@
 ﻿using Characters.Animations;
+using Characters.Information.Structs;
 using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,7 +11,7 @@ namespace Characters.Player.States
         private readonly NavMeshAgent _agent;
         private Transform _point;
         private Vector3 _finalPosition;
-        public Run(IRunCommand animation, NavMeshAgent agent, AnimationClip clip): base(animation,clip)
+        public Run(IAnimationCommand animation, NavMeshAgent agent, StateInfo stateInfo,VFXTransforms vfxTransforms): base(animation,stateInfo,vfxTransforms)
         {
             _agent = agent;
             _parameterName = "run";

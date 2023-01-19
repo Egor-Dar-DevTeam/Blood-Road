@@ -12,9 +12,8 @@ namespace Characters.Player
         [SerializeField] private int health;
         [SerializeField] private int shield;
         [SerializeField] private int energy;
+        [SerializeField] private int mana;
         [SerializeField] protected int damage;
-        [SerializeField] private VFXEffect damageEffect;
-        [SerializeField] private Transform transform;
         private bool _isDeath;
 
         private event DieDelegate _dieEvent;
@@ -22,6 +21,7 @@ namespace Characters.Player
         public int Health => health;
         public int Energy => energy;
         public int Damage => damage;
+        public int Mana => mana;
 
         public DieDelegate DieEvent
         {
@@ -42,11 +42,15 @@ namespace Characters.Player
             if (energy <= 0) energy = 0;
         }
 
+        public void UseMana(int value)
+        {
+            mana = Mathf.Clamp(mana - value, 0, 100);
+        }
+
         public void Damaged(int value)
         {
             if(_isDeath) return;
             int dmgToHealt=0;
-            Object.Instantiate(damageEffect, transform.position, quaternion.identity);
             dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
             health = Mathf.Clamp(health - dmgToHealt, 0, 1000);
             Die();

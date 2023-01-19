@@ -1,14 +1,16 @@
 ﻿using Characters.Animations;
+using Characters.Information.Structs;
 using UnityEngine;
 
 namespace Characters.Player.States
 {
     public class Idle : BaseState
     {
-        public Idle(IRunCommand animation, AnimationClip clip): base(animation,clip)
+        public Idle(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo,vfxTransforms)
         {
-        _parameterName = "idle";
+            _parameterName = "idle";
         }
+
         public override void Enter()
         {
             base.Enter();
@@ -17,7 +19,6 @@ namespace Characters.Player.States
 
         public override void Tick(float tickTime)
         {
-           
         }
 
         public override void Exit()

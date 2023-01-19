@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Characters.AbilitiesSystem;
 using Characters.Facades;
 using UI;
 using UI.CombatHUD;
@@ -18,6 +20,7 @@ namespace Characters.Player
 
         private event UpdateEnergyDelegate _updateEnergyEvent;
         private event UpdateHealthDelegate _updateHealthEvent;
+        private event UpdateManaDelegate _updateManaEvent;
 
 
         #region Delegates
@@ -32,8 +35,8 @@ namespace Characters.Player
 
         #endregion
 
-        private bool isAttack;
-        private bool GetIsAttack() => isAttack;
+        private bool _isAttack;
+        private bool GetIsAttack() => _isAttack;
         public override bool IsPlayer() => true;
 
         protected override void Start()
@@ -43,6 +46,7 @@ namespace Characters.Player
             _updateEnergyEvent += canvasController.UIDelegates.UpdateEnergyDelegate;
 
             _updateHealthEvent += canvasController.UIDelegates.UpdateHealthDelegate;
+            _updateManaEvent += canvasController.UIDelegates.UpdateManaDelegate;
             
             _enemyOutlineRechanger = new EnemyOutlineRechanger(outlineMaterial);
             _getIsAttack = GetIsAttack;
@@ -132,19 +136,27 @@ namespace Characters.Player
 
         private async Task Attack()
         {
-            isAttack = true;
+            _isAttack = true;
             await Task.Delay(200);
-            isAttack = false;
+            _isAttack = false;
         }
 
         public override void ReceiveDamage(int value)
         {
-            characterData.Damaged(value);
+            base.ReceiveDamage(value);
             _updateHealthEvent?.Invoke(characterData.Health);
         }
 
         public override void SetOutline(Material outline)
         {
+        }
+
+        public override void UseAbility(IAbilityCommand abilityCommand, int value)
+        {
+            if(characterData.Mana<=0)return;
+            characterData.UseMana(value);
+            _updateManaEvent?.Invoke(characterData.Mana);
+            base.UseAbility(abilityCommand, value);
         }
     }
 }

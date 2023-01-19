@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Characters.Animations;
+using Characters.Information.Structs;
 using UnityEditor.Media;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Characters.Player.States
 
 
 
-        public Die(IRunCommand animation,AnimationClip clip, CapsuleCollider capsuleCollider): base( animation, clip)
+        public Die(IAnimationCommand animation,StateInfo stateInfo, CapsuleCollider capsuleCollider, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
         {
             _capsuleCollider = capsuleCollider;
             _parameterName = "death";
@@ -29,7 +30,14 @@ namespace Characters.Player.States
 
         private async void WaitAnimation()
         {
+            VFXEffect effect = null;
+            if (_vfxEffect != null)
+            {
+                effect = Object.Instantiate(_vfxEffect, _vfxTransforms.transform.position, Quaternion.identity);
+            }
+
             await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)));
+           if(effect!=null) Object.Destroy(effect.gameObject);
             CanSkip = true;
         }
 
