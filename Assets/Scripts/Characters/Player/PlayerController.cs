@@ -12,43 +12,35 @@ namespace Characters.Player
 {
     public class PlayerController : BaseCharacter, IInteractable
     {
+        public override bool IsPlayer() => true;
+        
         [SerializeField] private Material outlineMaterial;
         [SerializeField] private CameraRay cameraRay;
         [SerializeField] private GameCanvasController canvasController;
 
-        private List<IInteractable> _interactables;
+        private List<IInteractable> _intractable;
 
         private event UpdateEnergyDelegate _updateEnergyEvent;
         private event UpdateHealthDelegate _updateHealthEvent;
         private event UpdateManaDelegate _updateManaEvent;
 
-
-        #region Delegates
-
         private GetIsAttack _getIsAttack;
 
-        #endregion
-
-        #region ClassesNotSerializables
-
-        private EnemyOutlineRechanger _enemyOutlineRechanger;
-
-        #endregion
-
+        private EnemyOutlineChanger _enemyOutlineChanger;
+        
         private bool _isAttack;
         private bool GetIsAttack() => _isAttack;
-        public override bool IsPlayer() => true;
 
         protected override void Start()
         {
-            _interactables = new List<IInteractable>();
+            _intractable = new List<IInteractable>();
 
             _updateEnergyEvent += canvasController.UIDelegates.UpdateEnergyDelegate;
 
             _updateHealthEvent += canvasController.UIDelegates.UpdateHealthDelegate;
             _updateManaEvent += canvasController.UIDelegates.UpdateManaDelegate;
             
-            _enemyOutlineRechanger = new EnemyOutlineRechanger(outlineMaterial);
+            _enemyOutlineChanger = new EnemyOutlineChanger(outlineMaterial);
             _getIsAttack = GetIsAttack;
             base.Start();
             InitializeTransition(new PlayerTransition(), _getIsAttack, _updateEnergyEvent);
@@ -56,14 +48,14 @@ namespace Characters.Player
             SubscribeDeath();
         }
 
-
         protected override void ClearPoint()
         {
             characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
-            _interactables.Remove(_currentPoint);
+            _intractable.Remove(_currentPoint);
             _currentPoint = null;
-            _enemyOutlineRechanger.SetEnemy(null);
-            StartCoroutine(RechangeCurrentPoint());
+            _enemyOutlineChanger.SetEnemy(null);
+            
+            ChangeCurrentPoint();
         }
 
         protected override void StartRCP(List<IInteractable> points)
@@ -76,61 +68,71 @@ namespace Characters.Player
             foreach (var enemy in enemies)
             {
                 if (!enemy.HasCharacter()) continue;
-                if (_interactables.Contains(enemy)) continue;
+                if (_intractable.Contains(enemy)) continue;
                 characterData.DieEvent += enemy.GetDieCharacterDelegate();
-                _interactables.Add(enemy);
+                _intractable.Add(enemy);
             }
 
-            StartCoroutine(RechangeCurrentPoint());
+            ChangeCurrentPoint();
         }
 
-        private IEnumerator RechangeCurrentPoint()
+        private void ChangeCurrentPoint()
         {
-            if (_currentPoint == null)
-            {
-                if (_interactables.Count == 0) yield break;
-                int indx;
-                IInteractable point = null;
-                for (int i = 0; i < _interactables.Count; i++)
+            if (_currentPoint != null)
+                return;
+            if (_intractable.Count == 0)
+                return;
+             
+            IInteractable point = null;
+          
+            for (int i = 0; i < _intractable.Count; i++)   
+            {   
+                if (_intractable[i].IsPlayer())
+                    return; 
+               
+                int currentInteractableIndex = i;
+                
+                for (int j = 0; j < _intractable.Count; j++)
                 {
-                    if (!_interactables[i].IsPlayer())
-                    {
-                        indx = i;
-                        for (int j = 0; j < _interactables.Count; j++)
-                        {
-                            if (Vector3.Distance(transform.position, _interactables[j].GetObject().position) <=
-                                Vector3.Distance(transform.position, _interactables[indx].GetObject().position))
-                            {
-                                indx = j;
-                            }
-                        }
-
-                        point = _interactables[indx];
-                    }
+                    if (IsFirstInteractableDistanceSmallerThanSecond(j, currentInteractableIndex))
+                        currentInteractableIndex = j;
                 }
 
-                if (point != null && point.HasCharacter())
+                bool IsFirstInteractableDistanceSmallerThanSecond(int firstInteractable, int secondInteractable)
                 {
-                    _currentPoint = point;
-                    _enemyOutlineRechanger.SetEnemy(_currentPoint);
+                    return Vector3.Distance(transform.position, _intractable[firstInteractable].GetObject().position) <=
+                           Vector3.Distance(transform.position, _intractable[secondInteractable].GetObject().position);
                 }
 
-                yield return new WaitForSeconds(0);
+                point = _intractable[currentInteractableIndex];
             }
+ 
+             
+            if (point != null && point.HasCharacter())
+                SetEnemyPoint(point);
         }
 
-        protected override void SetCurrentPoint(IInteractable point)
+        private void SetEnemyPoint(IInteractable point)
         {
-            if (point.IsPlayer()) return;
+            _currentPoint = point;
+
+            _enemyOutlineChanger.SetEnemy(_currentPoint);
+        }
+
+        protected override async void SetCurrentPoint(IInteractable point)
+        {
+            if (point.IsPlayer())
+                return; 
+            
             if (_currentPoint != point)
             {
                 _currentPoint = point;
-                _enemyOutlineRechanger.SetEnemy(_currentPoint);
+                _enemyOutlineChanger.SetEnemy(_currentPoint);
             }
 
             if (characterData.Energy > 1)
             {
-                Attack();
+                await Attack();
             }
         }
 
