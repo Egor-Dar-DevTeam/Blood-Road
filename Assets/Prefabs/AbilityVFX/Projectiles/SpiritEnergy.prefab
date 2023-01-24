@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8343997673804800536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 501388353123228860}
+  - component: {fileID: 6279804455139173119}
+  - component: {fileID: -3661528038822737733}
+  m_Layer: 14
+  m_Name: SpiritEnergy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &501388353123228860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343997673804800536}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2414912881789787465}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6279804455139173119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343997673804800536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b055730fcb6d31645b66c95ffd0006af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagFilter: player
+  destroyTime: 3
+  collisionCallback: 0
+  triggerCallback: 1
+  vFXModel: {fileID: 11400000, guid: 4a2f611d5b86ceb4c9a4de5fa2e6b5fd, type: 2}
+--- !u!135 &-3661528038822737733
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343997673804800536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1086826952868999912
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 501388353123228860}
+    m_Modifications:
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3356959780207587238, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+      propertyPath: m_Name
+      value: ogres_spirit_attack_ranged
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+--- !u!4 &2414912881789787465 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3356959780207587233, guid: 05197b868e17d344da6bdf28104d6fc0, type: 3}
+  m_PrefabInstance: {fileID: 1086826952868999912}
+  m_PrefabAsset: {fileID: 0}

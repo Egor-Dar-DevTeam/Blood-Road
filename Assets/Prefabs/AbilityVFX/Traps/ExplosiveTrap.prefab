@@ -1,0 +1,251 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &574817661911108786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8463238829507922484}
+  - component: {fileID: 2185704863337462612}
+  - component: {fileID: 5556455984635265268}
+  - component: {fileID: 3756892314850521621}
+  m_Layer: 17
+  m_Name: ExplosiveTrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8463238829507922484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574817661911108786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3073724404243608950}
+  - {fileID: 7898504021435530634}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2185704863337462612
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574817661911108786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 0.51961637, z: 2}
+  m_Center: {x: 0, y: 0.24019182, z: 0}
+--- !u!114 &5556455984635265268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574817661911108786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7bc2283af0a02d42879b118c2951297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_animator: {fileID: 4259709759888861147}
+  m_collider: {fileID: 2185704863337462612}
+  targetFilter:
+  - player
+  ignoreFriendlyGoblins: 0300000005000000
+  vFXModel: {fileID: 11400000, guid: 9ed3568720f41724f94604e2dae693e5, type: 2}
+  damageEffect:
+    damageType: 4
+    primaryKineticMultiplier: 1
+    primaryMagicMultiplier: 1
+    primaryPhysicalMultiplier: 1
+    primaryPowerMultiplier: 5
+    abilityCritChanceBonus: 0
+  targetsFilter:
+    serializedVersion: 2
+    m_Bits: 256
+  delayBeforeExplosion: 0
+  damageRadius: 3
+--- !u!114 &3756892314850521621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574817661911108786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 846570b935f617f43bae4d1fb454483b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactiveType: 5
+  equipmentTier: 0
+  dropType: 0
+  pointToMove: {fileID: 0}
+  currentWaypoint: {fileID: 0}
+  numberItemDrop: 0
+  numberGoldDrop: 0
+  numberMineralsDrop: 0
+  iterationNumber: 0
+  animator: {fileID: 0}
+  lootBox:
+    numberGoldDrop: 0
+    numberMineralsDrop: 0
+    equipmentTier: 0
+    numberItemDrop: 0
+    itemLevel: 0
+  teleportHandler: {fileID: 0}
+  isTeleport: 0
+  ability: {fileID: 0}
+  dynamicSpeed: 0
+  numberChaoticMove: 0
+  navigationController: {fileID: 0}
+  currentInteraction: {fileID: 0}
+  teleportPosition: {x: 0, y: 0, z: 0}
+--- !u!1 &1871723777702745825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3073724404243608950}
+  - component: {fileID: 4370016024693173407}
+  - component: {fileID: 7664625460938942028}
+  - component: {fileID: 4259709759888861147}
+  m_Layer: 0
+  m_Name: FireTrap
+  m_TagString: VFX_SpecialItemOne
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3073724404243608950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871723777702745825}
+  m_LocalRotation: {x: 0.000000021855694, y: -8.1418805e-17, z: -0.0000000037252903, w: 1}
+  m_LocalPosition: {x: 0, y: 0.067, z: 0}
+  m_LocalScale: {x: 0.749871, y: 0.749871, z: 0.749871}
+  m_Children: []
+  m_Father: {fileID: 8463238829507922484}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4370016024693173407
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871723777702745825}
+  m_Mesh: {fileID: 8740223307356840079, guid: ca4fea8182df681428c0de7256b486e2, type: 3}
+--- !u!23 &7664625460938942028
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871723777702745825}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e5fc7caa76d29c049b6368f2925c640a, type: 2}
+  - {fileID: 2100000, guid: 2c11364bfab97274e904dd2af2636c11, type: 2}
+  - {fileID: 2100000, guid: 6f48bb5871854e2478894b2ae845d2a2, type: 2}
+  - {fileID: 2100000, guid: 232fe6bc6cf76f74b94c93e18c9c66bb, type: 2}
+  - {fileID: 2100000, guid: a4fcf0577b77ddd4aa637a64f3fb4190, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &4259709759888861147
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1871723777702745825}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e5a2f7911dcf9274fa80d8aedfb16934, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &2837753367001694719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7898504021435530634}
+  m_Layer: 0
+  m_Name: Fuse
+  m_TagString: VFX_SpecialItemTwo
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7898504021435530634
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2837753367001694719}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.009, y: 0.059, z: 0.164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8463238829507922484}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
