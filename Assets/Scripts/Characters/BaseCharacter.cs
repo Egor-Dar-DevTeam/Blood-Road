@@ -5,6 +5,7 @@ using Characters.Facades;
 using Characters.Information;
 using Characters.InteractableSystems;
 using Characters.Player;
+using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI.CombatHUD;
 using Unity.VisualScripting;
@@ -21,7 +22,8 @@ namespace Characters
     public delegate IInteractable GetCurrentPoint();
 
     public delegate bool HasCharacter();
-[RequireComponent(typeof(StatesInfo), typeof(AbilitiesInfo))]
+
+    [RequireComponent(typeof(StatesInfo), typeof(AbilitiesInfo))]
     public abstract class BaseCharacter : MonoBehaviour, IInteractable, IInteractableAbility
     {
         [SerializeField] private AnimatorOverrideController _animatorOverrideController;
@@ -66,10 +68,14 @@ namespace Characters
             _getCurrentPoint = GetCurrentPoint;
 
             _hasCharacterDelegate = HasCharacter;
-
-            characterData.DieEvent += () => _hasCharacter = false;
-
+            
             _characterPointDie = ClearPoint;
+        }
+
+        public void SetCharacterData(CharacterData data)
+        {
+            characterData = data.Copy();
+            characterData.DieEvent += () => _hasCharacter = false;
             GetDieEvent = characterData.DieEvent;
         }
 
@@ -79,13 +85,15 @@ namespace Characters
         }
 
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
-            [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null)
+            [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null,
+            [CanBeNull] SplineFollower splineFollower = null, [CanBeNull] SplinePositioner positioner=null)
         {
             _transitionAndStates = transitionAndStates;
             _transitionAndStates.Initialize(new TransitionAndStatesData(animator, _getCurrentPoint, transform,
                 agent, getIsAttack, characterData,
                 statesInfo, characterData.Damage, _hasCharacterDelegate,
-                capsuleCollider, _animatorOverrideController,vfxTransforms, updateEnergyDelegate, abilitiesInfo));
+                capsuleCollider, _animatorOverrideController, vfxTransforms,
+                updateEnergyDelegate, abilitiesInfo, splineFollower, positioner));
         }
 
         protected void InitializeInteractionSystem([CanBeNull] CameraRay cameraRay)
@@ -119,7 +127,7 @@ namespace Characters
             _transitionAndStates.Damaged();
         }
 
-        public abstract void SetOutline(Material outline);
+        public abstract void SetOutline(bool value);
 
 
         private void OnDestroy()
@@ -130,7 +138,6 @@ namespace Characters
 
         public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
         {
-            
             _transitionAndStates.RunAbility.RunAbility(abilityCommand);
         }
     }

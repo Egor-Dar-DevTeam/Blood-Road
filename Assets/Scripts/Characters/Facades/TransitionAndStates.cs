@@ -17,13 +17,13 @@ namespace Characters.Facades
         private IRunAbility runAbility;
         
         protected IAnimationCommand _animation;
+        private VFXTransforms _vfxTransforms;
 
-        protected Run _runState;
+        protected RunToPoint runToPointState;
         protected Idle _idleState;
         protected Attack _attackState;
         protected Shield _shieldState;
         protected Die _dieState;
-       protected DamagedTest _damagedState;
         protected StateMachine<BaseState> _stateMachine;
         protected event GetIsAttack GetIsAttack;
         protected event GetCurrentPoint CurrentPoint;
@@ -51,22 +51,30 @@ namespace Characters.Facades
             _abilitiesInfo = data.AbilitiesInfo;
         }
 
-        protected void StatesInit(Animator animator, NavMeshAgent agent, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
+        protected virtual void StatesInit(Animator animator, NavMeshAgent agent, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
         {
             _animation = new AnimatorController(animator);
             _animation.CreateAnimationChanger(animatorOverrideController);
-
-            _runState = new Run(_animation, agent,_statesInfo.GetState("run"), vfxTransforms);
+            _vfxTransforms = vfxTransforms;
+            runToPointState = new RunToPoint(_animation, agent,_statesInfo.GetState("run"), vfxTransforms);
             _idleState = new Idle(_animation, _statesInfo.GetState("idle"), vfxTransforms);
             _shieldState = new Shield(_animation, agent, _statesInfo.GetState("shield"), vfxTransforms);
-            _damagedState = new DamagedTest(_animation, _statesInfo.GetState("damaged"), vfxTransforms);
             _stateMachine = new StateMachine<BaseState>();
             Ability(vfxTransforms);
         }
 
         public void Damaged()
         {
-            _damaged = true;
+            var vfxEffect = _statesInfo.GetState("damaged").VFXEffect;
+            
+            var effect1 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
+            var effect2 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
+            var effect3 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
+            effect2.transform.rotation = Quaternion.LookRotation(Vector3.right);
+            effect3.transform.rotation = Quaternion.LookRotation(Vector3.left);
+            effect1.SetLifeTime(1f);
+            effect2.SetLifeTime(1f);
+            effect3.SetLifeTime(1f);
         }
 
         private void Ability(VFXTransforms vfxTransforms)
@@ -79,34 +87,13 @@ namespace Characters.Facades
             _stateMachine.ChangeState(_idleState);
         }
 
-        protected virtual void TransitionInit(Transform transform, NavMeshAgent agent)
-        {
-            _stateMachine.AddTransition(_dieState, () => _isDeath);
-            _stateMachine.AddTransition(_attackState, _damagedState,
-                () =>
-                {
-                    if (!_damaged) return false;
-                    _damagedState.SetMilliseconds(_attackState.Milliseconds);
-                    var a = _damaged;
-                    _damaged = false;
-                    return a;
-                });
-            _stateMachine.AddTransition(_shieldState, _damagedState,(() =>
-            {
-                if (!_damaged) return false;
-                _damagedState.SetMilliseconds(_shieldState.Milliseconds);
-                var a = _damaged;
-                _damaged = false;
-                return a;
-            }));
-            _stateMachine.AddTransition(_damagedState, _idleState, () => GetCurrentPoint() == null&&_damagedState.CanSkip);
-        }
+        protected abstract void TransitionInit(Transform transform, NavMeshAgent agent);
 
         protected virtual bool isRuning(Transform transform, NavMeshAgent agent)
         {
             if (CurrentPoint?.Invoke() != null)
             {
-                _runState.SetPoint(CurrentPoint?.Invoke().GetObject());
+                runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
                 var position = CurrentPoint?.Invoke().GetObject().position;
                 if (position != null &&
                     Vector3.Distance(transform.position, (Vector3)position) >= agent.stoppingDistance)
@@ -140,6 +127,7 @@ namespace Characters.Facades
         private void Death()
         {
             _isDeath = true;
+            _stateMachine.ChangeState(_dieState);
         }
     }
 }

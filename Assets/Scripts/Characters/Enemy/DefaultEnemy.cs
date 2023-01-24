@@ -12,7 +12,6 @@ namespace Characters.Enemy
 
         protected override void Start()
         {
-
             base.Start();
             InitializeTransition(new EnemyTransition(), null);
             InitializeInteractionSystem(null);
@@ -40,9 +39,12 @@ namespace Characters.Enemy
             characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
         }
 
-        public override void SetOutline(Material outline)
+        public override void SetOutline(bool value)
         {
-            skinnedMeshRenderer.material = outline;
+            for (int i = 0; i < skinnedMeshRenderer.materials.Length; i++)
+            {
+                skinnedMeshRenderer.materials[i].SetFloat("Vector1_2A6393C8", value ? 0.5f : 2f);
+            }
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Characters
     {
         public IInteractableAbility InteractableAbility { get; }
         public void ReceiveDamage(int value);
-        public void SetOutline(Material outline);
+        public void SetOutline(bool value);
         public Transform GetObject();
         public bool IsPlayer();
         public DieDelegate GetDieCharacterDelegate();

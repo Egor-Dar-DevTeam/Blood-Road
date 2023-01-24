@@ -416,7 +416,11 @@ SkinnedMeshRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials: []
+  m_Materials:
+  - {fileID: 2100000, guid: 9d690b69894bf764187528e9c1d05233, type: 2}
+  - {fileID: 2100000, guid: 9d690b69894bf764187528e9c1d05233, type: 2}
+  - {fileID: 2100000, guid: 9d690b69894bf764187528e9c1d05233, type: 2}
+  - {fileID: 2100000, guid: 9d690b69894bf764187528e9c1d05233, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1107,9 +1111,8 @@ MonoBehaviour:
     health: 50
     shield: 0
     energy: 0
+    mana: 0
     damage: 30
-    damageEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
-    transform: {fileID: 1317209757232209779}
   capsuleCollider: {fileID: 1570931872451756091}
   rotationSpeed: 1
   skinnedMeshRenderer: {fileID: 1570931870544690498}
@@ -1188,6 +1191,10 @@ MonoBehaviour:
     stateInfo:
       clip: {fileID: 1827226128182048838, guid: 38ca1223c95d5cb498e4b0789a6fdea0, type: 3}
       vfxEffect: {fileID: 0}
+  - stateName: damaged
+    stateInfo:
+      clip: {fileID: 0}
+      vfxEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
 --- !u!114 &5280898483927792512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,6 +1209,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStatesInfo:
   - stateName: stun
+    stateInfo:
+      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
+      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
+  - stateName: droneHammer
     stateInfo:
       clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}

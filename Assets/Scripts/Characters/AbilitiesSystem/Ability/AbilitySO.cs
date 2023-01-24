@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Characters.AbilitiesSystem.Ability
 {
-    [CreateAssetMenu(menuName = "ScriptableObjects", fileName = "Ability", order = 0)]
+    [CreateAssetMenu(menuName = "ScriptableObjects/Ability", fileName = "Ability", order = 0)]
     public class AbilitySO : ScriptableObject
     {
         [SelectImplementation(typeof(IAbilityCommand))] [SerializeReference]

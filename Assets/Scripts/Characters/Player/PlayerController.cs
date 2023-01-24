@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
 using Characters.Facades;
+using Dreamteck.Splines;
 using UI;
 using UI.CombatHUD;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace Characters.Player
         [SerializeField] private Material outlineMaterial;
         [SerializeField] private CameraRay cameraRay;
         [SerializeField] private GameCanvasController canvasController;
+        [SerializeField] private SplineFollower splineFollower;
+        [SerializeField] private SplineProjector projector;
 
         private List<IInteractable> _interactables;
 
@@ -51,9 +54,15 @@ namespace Characters.Player
             _enemyOutlineRechanger = new EnemyOutlineRechanger(outlineMaterial);
             _getIsAttack = GetIsAttack;
             base.Start();
-            InitializeTransition(new PlayerTransition(), _getIsAttack, _updateEnergyEvent);
+            SetCharacterData(characterData);
+            InitializeTransition(new PlayerTransition(), _getIsAttack, _updateEnergyEvent, splineFollower);
             InitializeInteractionSystem(cameraRay);
             SubscribeDeath();
+        }
+
+        private void FixedUpdate()
+        { 
+            projector.Project(transform.position, splineFollower.result);
         }
 
 
@@ -77,7 +86,6 @@ namespace Characters.Player
             {
                 if (!enemy.HasCharacter()) continue;
                 if (_interactables.Contains(enemy)) continue;
-                characterData.DieEvent += enemy.GetDieCharacterDelegate();
                 _interactables.Add(enemy);
             }
 
@@ -113,6 +121,7 @@ namespace Characters.Player
                 {
                     _currentPoint = point;
                     _enemyOutlineRechanger.SetEnemy(_currentPoint);
+                    characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
                 }
 
                 yield return new WaitForSeconds(0);
@@ -126,6 +135,8 @@ namespace Characters.Player
             {
                 _currentPoint = point;
                 _enemyOutlineRechanger.SetEnemy(_currentPoint);
+                characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
+
             }
 
             if (characterData.Energy > 1)
@@ -147,7 +158,7 @@ namespace Characters.Player
             _updateHealthEvent?.Invoke(characterData.Health);
         }
 
-        public override void SetOutline(Material outline)
+        public override void SetOutline(bool value)
         {
         }
 

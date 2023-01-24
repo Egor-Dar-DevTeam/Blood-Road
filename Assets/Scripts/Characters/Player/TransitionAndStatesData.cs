@@ -4,6 +4,7 @@ using Characters.Information;
 using Characters.Information.Structs;
 using Characters.Player;
 using Characters.Player.States;
+using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI.CombatHUD;
 using UnityEngine;
@@ -24,6 +25,8 @@ public struct TransitionAndStatesData
     public VFXTransforms VFXTransforms { get; }
     public AnimatorOverrideController AnimatorOverrideController { get; }
     public CapsuleCollider CapsuleCollider { get; }
+    public SplineFollower SplineFollower { get; }
+    public SplinePositioner Positioner { get; }
 
     [CanBeNull] public GetIsAttack GetIsAttack { get; }
 
@@ -42,7 +45,8 @@ public struct TransitionAndStatesData
         NavMeshAgent agent, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
         StatesInfo statesInfo, int damage, HasCharacter hasCharacter,
         CapsuleCollider capsuleCollider, AnimatorOverrideController animatorOverrideController,VFXTransforms vfxTransforms,
-        [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null, [CanBeNull] AbilitiesInfo abilitiesInfo=null)
+        [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null, [CanBeNull] AbilitiesInfo abilitiesInfo=null,
+        [CanBeNull] SplineFollower splineFollower=null, [CanBeNull] SplinePositioner positioner=null)
     {
         Animator = animator;
         GetCurrentPoint = getCurrentPoint;
@@ -60,6 +64,8 @@ public struct TransitionAndStatesData
         EnergyEvent = updateEnergyDelegate;
         AbilitiesInfo = abilitiesInfo;
         VFXTransforms = vfxTransforms;
+        SplineFollower = splineFollower;
+        Positioner = positioner;
     }
 
     public void CreateAttack(Attack attack)

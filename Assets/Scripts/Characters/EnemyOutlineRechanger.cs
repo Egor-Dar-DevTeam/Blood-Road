@@ -13,9 +13,9 @@ namespace Characters
 
         public void SetEnemy(IInteractable newEnemy)
         {
-            _currentEnemyOutline?.SetOutline(null);
+            _currentEnemyOutline?.SetOutline(false);
             _currentEnemyOutline = newEnemy;
-            _currentEnemyOutline?.SetOutline(_outlineMaterial);
+            _currentEnemyOutline?.SetOutline(true);
         }
     }
 }

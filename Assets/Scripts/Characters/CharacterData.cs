@@ -14,11 +14,31 @@ namespace Characters.Player
         [SerializeField] private int energy;
         [SerializeField] private int mana;
         [SerializeField] protected int damage;
-        private bool _isDeath;
+
+        public CharacterData(int health, int shield, int energy, int mana, int damage)
+        {
+            this.health = health;
+            this.shield = shield;
+            this.energy = energy;
+            this.mana = mana;
+            this.damage = damage;
+        }
+
+        public CharacterData Copy()
+        {
+            return new CharacterData(Health, Shield, Energy, Mana, Mana);
+        }
+        
+        private bool _isDeath
+        {
+            get;
+            set;
+        }
 
         private event DieDelegate _dieEvent;
         
         public int Health => health;
+        public int Shield => shield;
         public int Energy => energy;
         public int Damage => damage;
         public int Mana => mana;
@@ -49,7 +69,7 @@ namespace Characters.Player
 
         public void Damaged(int value)
         {
-            if(_isDeath) return;
+          //  if(_isDeath) return;
             int dmgToHealt=0;
             dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
             health = Mathf.Clamp(health - dmgToHealt, 0, 1000);
