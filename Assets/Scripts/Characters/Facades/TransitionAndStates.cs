@@ -1,5 +1,6 @@
 ﻿using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
+using Characters.AbilitiesSystem.Declaration;
 using Characters.Animations;
 using Characters.Information;
 using Characters.Player;
@@ -13,8 +14,10 @@ namespace Characters.Facades
     {
         protected StatesInfo _statesInfo;
         private AbilitiesInfo _abilitiesInfo;
+        private int _currentEffectID;
 
-        private IRunAbility runAbility;
+        private AbilityLibrary _abilityLibrary;
+        private IRunAbility _runAbility;
         
         protected IAnimationCommand _animation;
         private VFXTransforms _vfxTransforms;
@@ -30,10 +33,8 @@ namespace Characters.Facades
         private event HasCharacter _hasCharacter;
         private DieDelegate _dieDelegate;
         private bool _isDeath;
-        protected bool _damaged =false;
 
         public DieDelegate DieDelegate => _dieDelegate;
-        public IRunAbility RunAbility => runAbility;
 
         public virtual void Initialize(TransitionAndStatesData data)
         {
@@ -72,14 +73,20 @@ namespace Characters.Facades
             var effect3 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
             effect2.transform.rotation = Quaternion.LookRotation(Vector3.right);
             effect3.transform.rotation = Quaternion.LookRotation(Vector3.left);
-            effect1.SetLifeTime(1f);
-            effect2.SetLifeTime(1f);
-            effect3.SetLifeTime(1f);
+            effect1.SetLifeTime(5f);
+            effect2.SetLifeTime(5f);
+            effect3.SetLifeTime(5f);
+        }
+
+        public void SetCurrentEffectID(int id)
+        {
+            _currentEffectID = id;
         }
 
         private void Ability(VFXTransforms vfxTransforms)
         {
-            runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms);
+            _abilityLibrary = new AbilityLibrary();
+            _runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms, _abilityLibrary);
         }
 
         public void Destroy()
@@ -87,7 +94,13 @@ namespace Characters.Facades
             _stateMachine.ChangeState(_idleState);
         }
 
-        protected abstract void TransitionInit(Transform transform, NavMeshAgent agent);
+        protected virtual void TransitionInit(Transform transform, NavMeshAgent agent)
+        {
+            // var stun = _abilityLibrary.GetValue(new Stun());
+            // var droneHummer = _abilityLibrary.GetValue(new DroneHammer());
+            // _stateMachine.AddTransition(stun, ()=>_currentEffectID==stun.ID);
+            // _stateMachine.AddTransition(droneHummer, ()=>_currentEffectID==droneHummer.ID);
+        }
 
         protected virtual bool isRuning(Transform transform, NavMeshAgent agent)
         {

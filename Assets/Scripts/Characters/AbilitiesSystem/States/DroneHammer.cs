@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
 {
-    public class DroneHammer : AbilityState
+    public class DroneHammer : AbilityBase
     {
         public DroneHammer(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
             animation, stateInfo, vfxTransforms)

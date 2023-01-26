@@ -6,7 +6,6 @@ namespace Characters
 {
     public interface IInteractable
     {
-        public IInteractableAbility InteractableAbility { get; }
         public void ReceiveDamage(int value);
         public void SetOutline(bool value);
         public Transform GetObject();

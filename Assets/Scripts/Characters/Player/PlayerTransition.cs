@@ -37,7 +37,7 @@ namespace Characters.Facades
 
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
-            //    _stateMachine.AddTransition( _damagedState, _idleState,()=>true);
+           base.TransitionInit(transform, agent);
             _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_folowSplineState, runToPointState, () => isRuning(transform, agent));
             _stateMachine.AddTransition(_idleState, runToPointState, () => isRuning(transform, agent));

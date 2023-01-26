@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Characters.AbilitiesSystem;
 using Characters.AbilitiesSystem.Declaration;
+using Characters.Animations;
 using Characters.Facades;
 using Characters.Information;
 using Characters.InteractableSystems;
@@ -24,7 +25,7 @@ namespace Characters
     public delegate bool HasCharacter();
 
     [RequireComponent(typeof(StatesInfo), typeof(AbilitiesInfo))]
-    public abstract class BaseCharacter : MonoBehaviour, IInteractable, IInteractableAbility
+    public abstract class BaseCharacter : MonoBehaviour, IInteractable, IReceiveAnimator
     {
         [SerializeField] private AnimatorOverrideController _animatorOverrideController;
         [SerializeField] private StatesInfo statesInfo;
@@ -51,7 +52,6 @@ namespace Characters
         private TransitionAndStates _transitionAndStates;
         private IInteractable GetCurrentPoint() => _currentPoint;
         public bool HasCharacter() => _hasCharacter;
-        public IInteractableAbility InteractableAbility => this;
 
 
         public Transform GetObject() => this.transform;
@@ -136,9 +136,9 @@ namespace Characters
             _transitionAndStates.Destroy();
         }
 
-        public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
+        public void SetCurrentEffectID(int id)
         {
-            _transitionAndStates.RunAbility.RunAbility(abilityCommand);
+            throw new System.NotImplementedException();
         }
     }
 }

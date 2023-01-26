@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
 {
-    public class Stun : AbilityState
+    public class Stun : AbilityBase
     {
         private BaseState _idleState;
         private StateMachine<BaseState> _stateMachine;

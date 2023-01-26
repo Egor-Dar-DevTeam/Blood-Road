@@ -18,7 +18,7 @@ namespace UI.CombatHUD
             {
                 abilitySo[i].Initialize();
                 var info = abilitySo[i].AbilityInfo;
-                button[i].Initialize(info.Cooldown, ()=>playerController.UseAbility(info.AbilityCommand, info.Price), info.Sprite);
+             //   button[i].Initialize(info.Cooldown, ()=>playerController.UseAbility(info.AbilityCommand, info.Price), info.Sprite);
             }
         }
     }

@@ -162,12 +162,12 @@ namespace Characters.Player
         {
         }
 
-        public override void UseAbility(IAbilityCommand abilityCommand, int value)
-        {
-            if(characterData.Mana<=0)return;
-            characterData.UseMana(value);
-            _updateManaEvent?.Invoke(characterData.Mana);
-            base.UseAbility(abilityCommand, value);
-        }
+        // public override void UseAbility(IAbilityCommand abilityCommand)
+        // {
+        //     if(characterData.Mana<=0)return;
+        //   //  characterData.UseMana(value);
+        //     _updateManaEvent?.Invoke(characterData.Mana);
+        //     base.UseAbility(abilityCommand);
+        // }
     }
 }
