@@ -1,23 +1,21 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Characters;
-using Characters.AbilitiesSystem;
-using UnityEngine;
+using Characters.Player;
 
-public class Applyer 
+namespace Characters.EffectSystem
 {
-    public void AddHealth(int value)
+    [Serializable]
+    public class Applyer
     {
-        
-    }
+        private CharacterData _characterData;
+        public void RechangeCharacterDataValues(EffectData effectData)
+        {
+            _characterData.Damaged(effectData.HealthDamage);
+        }
 
-    public void StartVFX(float lifeTime, Transform parent, Vector3 position)
-    {
-        
-    }
-
-    public void ReceiveState()
-    {
-        
+        public void Initialize(CharacterData data)
+        {
+            _characterData = data;
+        }
     }
 }

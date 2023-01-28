@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Characters.MapperSystem
 {
-    public class MapperBase<TKey, TValue> : IMapper<TKey, TValue>
+    public abstract class MapperBase<TKey, TValue> : IMapper<TKey, TValue>
     {
         protected Dictionary<TKey, TValue> _dictionary;
         public TValue GetValue(TKey id) => _dictionary[id];
@@ -15,7 +15,7 @@ namespace Characters.MapperSystem
             _dictionary = new Dictionary<TKey, TValue>();
         }
 
-        public void AddValue(TKey key, TValue value)
+        public virtual void AddValue(TKey key, TValue value)
         {
             if (_dictionary.ContainsKey(key) && _dictionary.ContainsValue(value)) return;
             _dictionary.Add(key, value);

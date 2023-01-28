@@ -13,7 +13,6 @@ namespace Characters
         protected VFXTransforms _vfxTransforms;
         protected string _parameterName;
 
-        public int ID { get; }
 
         protected BaseState(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms)
         {

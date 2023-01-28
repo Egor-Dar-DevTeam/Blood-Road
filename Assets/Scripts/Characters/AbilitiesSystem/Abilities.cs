@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem.States;
 using Characters.Animations;
+using Characters.EffectSystem;
+using Characters.Information.Structs;
+using Characters.LibrarySystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,32 +15,34 @@ namespace Characters.AbilitiesSystem
     {
         private StateMachine<BaseState> _stateMachine;
         private AbilitiesInfo _info;
+        private Type _currentEffectType;
 
         private Stun _stunState;
+        private AttackStun _attackStunState;
         private DroneHammer _droneHammerState;
         public Abilities(StateMachine<BaseState> stateMachine, IAnimationCommand animationCommand, AbilitiesInfo info,
-            BaseState idleState, VFXTransforms transforms, AbilityLibrary abilityLibrary)
+            BaseState idleState, VFXTransforms transforms)
         {
             _stateMachine = stateMachine;
             _info = info;
             _stunState = new Stun(animationCommand, _info.GetState("stun"),transforms);
+            _attackStunState = new AttackStun(animationCommand, _info.GetState("attackStun"), transforms);
             _droneHammerState = new DroneHammer(animationCommand, _info.GetState("droneHammer"), transforms);
-            InitializeLibrary();
+            _stateMachine.AddTransition(_stunState, ()=>
+            {
+                var value = _currentEffectType == _attackStunState.GetType();
+                if (value) _currentEffectType = null;
+                return value;
+            });
             _stateMachine.AddTransition(_stunState, idleState, ()=> _stunState.CanSkip);
-            _stateMachine.AddTransition(_droneHammerState, idleState, ()=> _stunState.CanSkip);
+            _stateMachine.AddTransition(_attackStunState, idleState, ()=> _attackStunState.CanSkip);
+            _stateMachine.AddTransition(_droneHammerState, idleState, ()=> _droneHammerState.CanSkip);
         }
 
-        private void InitializeLibrary()
+        
+        public void StunAttack()
         {
-            AbilityLibrary.StaticAddAbility(typeof(Stun), new Declaration.Stun());
-            AbilityLibrary.StaticAddState(typeof(Declaration.Stun),_stunState);
-            
-            AbilityLibrary.StaticAddAbility(typeof(DroneHammer), new Declaration.DroneHammer());
-            AbilityLibrary.StaticAddState(typeof(Declaration.DroneHammer), _droneHammerState);
-        }
-        public void Stun()
-        {
-            _stateMachine.ChangeState(_stunState);
+            _stateMachine.ChangeState(_attackStunState);
         }
 
         public void DroneHammer()
@@ -47,6 +52,11 @@ namespace Characters.AbilitiesSystem
         public void RunAbility(IAbilityCommand command)
         {
             command.Apply(this);
+        }
+
+        public void SetTypeAbility(Type type)
+        {
+            _currentEffectType = type;
         }
     }
 }

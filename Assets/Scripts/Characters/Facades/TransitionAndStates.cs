@@ -1,22 +1,24 @@
-﻿using Better.UnityPatterns.Runtime.StateMachine;
+﻿using System;
+using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
 using Characters.AbilitiesSystem.Declaration;
+using Characters.AbilitiesSystem.States;
 using Characters.Animations;
 using Characters.Information;
+using Characters.LibrarySystem;
 using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
 using UnityEngine.AI;
+using Object = UnityEngine.Object;
 
 namespace Characters.Facades
 {
-    public abstract class TransitionAndStates
+    public abstract class TransitionAndStates : IAnimatableEffect
     {
         protected StatesInfo _statesInfo;
         private AbilitiesInfo _abilitiesInfo;
-        private int _currentEffectID;
 
-        private AbilityLibrary _abilityLibrary;
         private IRunAbility _runAbility;
         
         protected IAnimationCommand _animation;
@@ -35,6 +37,7 @@ namespace Characters.Facades
         private bool _isDeath;
 
         public DieDelegate DieDelegate => _dieDelegate;
+        public IRunAbility RunAbility => _runAbility;
 
         public virtual void Initialize(TransitionAndStatesData data)
         {
@@ -78,15 +81,14 @@ namespace Characters.Facades
             effect3.SetLifeTime(5f);
         }
 
-        public void SetCurrentEffectID(int id)
+        public void SetCurrentEffectID(Type type)
         {
-            _currentEffectID = id;
+            _runAbility.SetTypeAbility(type);
         }
 
         private void Ability(VFXTransforms vfxTransforms)
         {
-            _abilityLibrary = new AbilityLibrary();
-            _runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms, _abilityLibrary);
+            _runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms);
         }
 
         public void Destroy()
@@ -96,10 +98,6 @@ namespace Characters.Facades
 
         protected virtual void TransitionInit(Transform transform, NavMeshAgent agent)
         {
-            // var stun = _abilityLibrary.GetValue(new Stun());
-            // var droneHummer = _abilityLibrary.GetValue(new DroneHammer());
-            // _stateMachine.AddTransition(stun, ()=>_currentEffectID==stun.ID);
-            // _stateMachine.AddTransition(droneHummer, ()=>_currentEffectID==droneHummer.ID);
         }
 
         protected virtual bool isRuning(Transform transform, NavMeshAgent agent)

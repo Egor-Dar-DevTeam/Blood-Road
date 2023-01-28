@@ -657,6 +657,9 @@ GameObject:
   - component: {fileID: 5730713229110124329}
   - component: {fileID: 7372693977451587923}
   - component: {fileID: 5221886842464720026}
+  - component: {fileID: 6326788924267870583}
+  - component: {fileID: 7851632909780355584}
+  - component: {fileID: 2549355745924359057}
   m_Layer: 0
   m_Name: Wolf_gray
   m_TagString: Untagged
@@ -753,9 +756,13 @@ MonoBehaviour:
   currentStatesInfo:
   - stateName: stun
     stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
+      clip: {fileID: -4935709495517241488, guid: efeaa2210c581a042b42dfe3f8d3cd27, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
   - stateName: droneHammer
+    stateInfo:
+      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
+      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
+  - stateName: attackStun
     stateInfo:
       clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
@@ -785,7 +792,9 @@ MonoBehaviour:
     mana: 0
     damage: 0
   capsuleCollider: {fileID: 7372693977451587923}
+  linker: {fileID: 6326788924267870583}
   rotationSpeed: 1
+  weapon: {fileID: 2549355745924359057}
   skinnedMeshRenderer: {fileID: 5063752214509586737}
 --- !u!95 &5730713229110124329
 Animator:
@@ -843,6 +852,44 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6326788924267870583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372862848778254895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d708a3e0de43e6b922a7e00d4093ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7851632909780355584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372862848778254895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ff85c684a1496b887d854dd3772667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 5756280132863523399}
+--- !u!114 &2549355745924359057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372862848778254895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd3367543604f6fb943b22113806318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!1 &5374363682563468153
 GameObject:
   m_ObjectHideFlags: 0

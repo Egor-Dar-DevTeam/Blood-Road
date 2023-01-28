@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
 using Characters.AbilitiesSystem.Declaration;
 using Characters.Animations;
+using Characters.EffectSystem;
 using Characters.Facades;
 using Characters.Information;
 using Characters.InteractableSystems;
+using Characters.LibrarySystem;
 using Characters.Player;
+using Characters.WeaponSystem;
 using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI.CombatHUD;
@@ -25,7 +29,7 @@ namespace Characters
     public delegate bool HasCharacter();
 
     [RequireComponent(typeof(StatesInfo), typeof(AbilitiesInfo))]
-    public abstract class BaseCharacter : MonoBehaviour, IInteractable, IReceiveAnimator
+    public abstract class BaseCharacter : MonoBehaviour, IInteractable
     {
         [SerializeField] private AnimatorOverrideController _animatorOverrideController;
         [SerializeField] private StatesInfo statesInfo;
@@ -36,7 +40,9 @@ namespace Characters
         [SerializeField] protected Eyes eyesCharacters;
         [SerializeField] protected CharacterData characterData;
         [SerializeField] protected CapsuleCollider capsuleCollider;
+        [SerializeField] private Linker linker;
         [SerializeField] private float rotationSpeed = 1f;
+        [SerializeField] protected Weapon weapon;
         private bool _hasCharacter = true;
 
         protected IInteractable _currentPoint;
@@ -46,12 +52,16 @@ namespace Characters
         private GetCurrentPoint _getCurrentPoint;
         private DieDelegate _characterPointDie;
         private HasCharacter _hasCharacterDelegate;
+        public event AttackedAbility AttackAbility;
+        public event AttackedWeapon AttackWeapon;
 
 
         private InteractionSystem _interactionSystem;
         private TransitionAndStates _transitionAndStates;
         private IInteractable GetCurrentPoint() => _currentPoint;
+        public RemoveList GetRemoveList() => RemoveList;
         public bool HasCharacter() => _hasCharacter;
+        public Receiver Receiver => linker.Receiver;
 
 
         public Transform GetObject() => this.transform;
@@ -61,6 +71,7 @@ namespace Characters
         public event DieDelegate GetDieEvent;
 
 
+
         protected virtual void Start()
         {
             _setCurrentPoint = SetCurrentPoint;
@@ -68,9 +79,10 @@ namespace Characters
             _getCurrentPoint = GetCurrentPoint;
 
             _hasCharacterDelegate = HasCharacter;
-            
+
             _characterPointDie = ClearPoint;
         }
+        protected virtual void RemoveList(IInteractable enemy){}
 
         public void SetCharacterData(CharacterData data)
         {
@@ -84,16 +96,22 @@ namespace Characters
             characterData.DieEvent += _transitionAndStates.DieDelegate;
         }
 
+        protected void SubscribeDeathMethod(DieDelegate @delegate)
+        {
+            characterData.DieEvent += @delegate;
+        }
+
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
             [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null,
-            [CanBeNull] SplineFollower splineFollower = null, [CanBeNull] SplinePositioner positioner=null)
+            [CanBeNull] SplineFollower splineFollower = null)
         {
             _transitionAndStates = transitionAndStates;
+            linker.Initialize(_transitionAndStates, characterData);
             _transitionAndStates.Initialize(new TransitionAndStatesData(animator, _getCurrentPoint, transform,
                 agent, getIsAttack, characterData,
                 statesInfo, characterData.Damage, _hasCharacterDelegate,
                 capsuleCollider, _animatorOverrideController, vfxTransforms,
-                updateEnergyDelegate, abilitiesInfo, splineFollower, positioner));
+                updateEnergyDelegate, abilitiesInfo, splineFollower));
         }
 
         protected void InitializeInteractionSystem([CanBeNull] CameraRay cameraRay)
@@ -136,9 +154,16 @@ namespace Characters
             _transitionAndStates.Destroy();
         }
 
-        public void SetCurrentEffectID(int id)
+        protected void WeaponAttack()
         {
-            throw new System.NotImplementedException();
+            AttackWeapon?.Invoke(_currentPoint.Receiver, weapon);
+        }
+        
+
+        public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
+        {
+            _transitionAndStates.RunAbility.RunAbility(abilityCommand);
+            AttackAbility?.Invoke(_currentPoint.Receiver,  abilityCommand);
         }
     }
 }

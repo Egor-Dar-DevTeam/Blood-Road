@@ -1,5 +1,6 @@
 using Characters;
 using Characters.AbilitiesSystem;
+using Characters.EffectSystem;
 using Characters.Information;
 using Characters.Information.Structs;
 using Characters.Player;
@@ -26,7 +27,6 @@ public struct TransitionAndStatesData
     public AnimatorOverrideController AnimatorOverrideController { get; }
     public CapsuleCollider CapsuleCollider { get; }
     public SplineFollower SplineFollower { get; }
-    public SplinePositioner Positioner { get; }
 
     [CanBeNull] public GetIsAttack GetIsAttack { get; }
 
@@ -46,7 +46,7 @@ public struct TransitionAndStatesData
         StatesInfo statesInfo, int damage, HasCharacter hasCharacter,
         CapsuleCollider capsuleCollider, AnimatorOverrideController animatorOverrideController,VFXTransforms vfxTransforms,
         [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null, [CanBeNull] AbilitiesInfo abilitiesInfo=null,
-        [CanBeNull] SplineFollower splineFollower=null, [CanBeNull] SplinePositioner positioner=null)
+        [CanBeNull] SplineFollower splineFollower=null)
     {
         Animator = animator;
         GetCurrentPoint = getCurrentPoint;
@@ -65,7 +65,6 @@ public struct TransitionAndStatesData
         AbilitiesInfo = abilitiesInfo;
         VFXTransforms = vfxTransforms;
         SplineFollower = splineFollower;
-        Positioner = positioner;
     }
 
     public void CreateAttack(Attack attack)

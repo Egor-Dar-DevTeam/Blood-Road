@@ -14,10 +14,10 @@ namespace Characters.Animations
             _animator = animator;
         }
 
-
-        public void AddClip(string key, AnimationClip value)
+        public override void AddValue(string key, AnimationClip value)
         {
-            
+            base.AddValue(key, value);
+            value.events = null;
         }
 
         public float LengthAnimation(string nameClip)

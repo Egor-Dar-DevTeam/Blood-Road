@@ -1,4 +1,5 @@
 ﻿using Characters.AbilitiesSystem;
+using Characters.EffectSystem;
 using Characters.Player;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ namespace Characters
         public bool IsPlayer();
         public DieDelegate GetDieCharacterDelegate();
         public event DieDelegate GetDieEvent;
+        public  RemoveList GetRemoveList();
         public bool HasCharacter();
+        public Receiver Receiver { get; }
     }
 }
