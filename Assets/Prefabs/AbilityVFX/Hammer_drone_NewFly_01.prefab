@@ -256,6 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1450408398619291754}
   - component: {fileID: 3118175097434887706}
+  - component: {fileID: 1666192409856525822}
   m_Layer: 0
   m_Name: hammer_drone
   m_TagString: Untagged
@@ -296,6 +297,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1666192409856525822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894760122253596967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936a8402c1bf225418f77e3f3e63789d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
 --- !u!1 &2630630099767439227
 GameObject:
   m_ObjectHideFlags: 0
@@ -10107,6 +10121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2651168984558491648}
   - component: {fileID: 3282643395870754187}
+  - component: {fileID: 7566873106949737003}
   m_Layer: 0
   m_Name: Hammer_drone_NewFly_01
   m_TagString: Untagged
@@ -10150,6 +10165,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &7566873106949737003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8087299075653219662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7af8cc7adc5a49a2a647ee23bc75a54b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8459626180034023759
 GameObject:
   m_ObjectHideFlags: 0

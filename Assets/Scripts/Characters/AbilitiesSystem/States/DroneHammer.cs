@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
 {
-    public class DroneHammer : AbilityState
+    public class DroneHammer : AbilityBase
     {
         public DroneHammer(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
             animation, stateInfo, vfxTransforms)
@@ -14,8 +15,11 @@ namespace Characters.AbilitiesSystem.States
 
         public override void Enter()
         {
+            CanSkip = false;
             var effect = Object.Instantiate(_vfxEffect, _vfxTransforms.Center);
+            effect.transform.rotation= quaternion.identity;
             effect.SetLifeTime(18);
+            CanSkip = true;
         }
 
 

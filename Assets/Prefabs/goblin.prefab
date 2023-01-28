@@ -1024,6 +1024,9 @@ GameObject:
   - component: {fileID: 259999033}
   - component: {fileID: 2566233248815475959}
   - component: {fileID: 5280898483927792512}
+  - component: {fileID: 3033127734684666047}
+  - component: {fileID: 1107615651075518878}
+  - component: {fileID: -7440802502850181710}
   m_Layer: 0
   m_Name: goblin
   m_TagString: Untagged
@@ -1114,7 +1117,9 @@ MonoBehaviour:
     mana: 0
     damage: 30
   capsuleCollider: {fileID: 1570931872451756091}
+  linker: {fileID: 1107615651075518878}
   rotationSpeed: 1
+  weapon: {fileID: 3033127734684666047}
   skinnedMeshRenderer: {fileID: 1570931870544690498}
 --- !u!95 &259999036
 Animator:
@@ -1216,6 +1221,48 @@ MonoBehaviour:
     stateInfo:
       clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
+  - stateName: attackStun
+    stateInfo:
+      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
+      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
+--- !u!114 &3033127734684666047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804953782739617225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfd3367543604f6fb943b22113806318, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+--- !u!114 &1107615651075518878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804953782739617225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d708a3e0de43e6b922a7e00d4093ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7440802502850181710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804953782739617225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ff85c684a1496b887d854dd3772667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1570931872451756089}
 --- !u!1 &1830605469173092761
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,9 +8,9 @@ public class VFXEffect : MonoBehaviour
         StartCoroutine(Timer(lifeTime));
     }
 
-    private IEnumerator Timer(float tine)
+    private IEnumerator Timer(float time)
     {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
 

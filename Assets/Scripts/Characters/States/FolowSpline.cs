@@ -9,17 +9,13 @@ namespace Characters.Player.States
     public class FolowSpline : BaseState
     {
         private SplineFollower _splineFollower;
-        private SplinePositioner positioner;
-        private NavMeshAgent _agent;
 
         public FolowSpline(IAnimationCommand animation, StateInfo stateInfo,
-            VFXTransforms vfxTransforms, SplineFollower splineFollower, SplinePositioner positioner, NavMeshAgent agent) : base(
+            VFXTransforms vfxTransforms, SplineFollower splineFollower, NavMeshAgent agent) : base(
             animation, stateInfo, vfxTransforms)
         {
             _splineFollower = splineFollower;
-            _agent = agent;
             _parameterName = "run";
-            this.positioner = positioner;
         }
 
         public override void Enter()

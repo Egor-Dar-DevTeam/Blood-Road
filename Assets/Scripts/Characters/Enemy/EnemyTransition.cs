@@ -19,6 +19,7 @@ namespace Characters.Facades
 
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
+            base.TransitionInit(transform,agent);
             _stateMachine.AddTransition(_idleState, runToPointState, () =>
             {
                 if (GetCurrentPoint() != null) runToPointState.SetPoint(GetCurrentPoint().GetObject());

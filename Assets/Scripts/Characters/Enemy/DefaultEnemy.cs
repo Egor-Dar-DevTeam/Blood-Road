@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Characters.Facades;
+using Characters.Player;
 using UnityEngine;
 
 namespace Characters.Enemy
@@ -9,6 +10,7 @@ namespace Characters.Enemy
     {
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         public override bool IsPlayer() => false;
+        private event RemoveList _removeList;
 
         protected override void Start()
         {
@@ -16,6 +18,7 @@ namespace Characters.Enemy
             InitializeTransition(new EnemyTransition(), null);
             InitializeInteractionSystem(null);
             SubscribeDeath();
+            SubscribeDeathMethod(Die);
         }
 
         protected override void ClearPoint()
@@ -37,6 +40,7 @@ namespace Characters.Enemy
             if (_currentPoint != null || _currentPoint == point || !point.HasCharacter()) return;
             _currentPoint = point;
             characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
+            _removeList += _currentPoint.GetRemoveList();
         }
 
         public override void SetOutline(bool value)
@@ -45,6 +49,11 @@ namespace Characters.Enemy
             {
                 skinnedMeshRenderer.materials[i].SetFloat("Vector1_2A6393C8", value ? 0.5f : 2f);
             }
+        }
+
+        private void Die()
+        {
+            _removeList?.Invoke(this);
         }
     }
 }

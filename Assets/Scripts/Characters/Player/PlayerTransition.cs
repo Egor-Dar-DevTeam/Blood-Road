@@ -9,13 +9,11 @@ namespace Characters.Facades
     {
         private FolowSpline _folowSplineState;
         private SplineFollower _splineFollower;
-        private SplinePositioner _positioner;
 
         public override void Initialize(TransitionAndStatesData data)
         {
             base.Initialize(data);
             _splineFollower = data.SplineFollower;
-            _positioner = data.Positioner;
             StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController, data.VFXTransforms);
             data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, true, data,
                 data.VFXTransforms));
@@ -32,12 +30,12 @@ namespace Characters.Facades
         {
             base.StatesInit(animator, agent, animatorOverrideController, vfxTransforms);
             _folowSplineState =
-                new FolowSpline(_animation, _statesInfo.GetState("run"), vfxTransforms, _splineFollower, _positioner, agent);
+                new FolowSpline(_animation, _statesInfo.GetState("run"), vfxTransforms, _splineFollower, agent);
         }
 
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
-            //    _stateMachine.AddTransition( _damagedState, _idleState,()=>true);
+           base.TransitionInit(transform, agent);
             _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_folowSplineState, runToPointState, () => isRuning(transform, agent));
             _stateMachine.AddTransition(_idleState, runToPointState, () => isRuning(transform, agent));

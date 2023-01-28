@@ -3,16 +3,17 @@ using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.Animations;
 using Characters.Information.Structs;
 using Cinemachine;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
 {
-    public class Stun : AbilityState
+    public class Stun : AbilityBase
     {
         private BaseState _idleState;
         private StateMachine<BaseState> _stateMachine;
 
-        public Stun(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms transform) : base(animation, stateInfo, transform)
+        public Stun([CanBeNull] IAnimationCommand animation, StateInfo stateInfo, [CanBeNull] VFXTransforms transform) : base(animation, stateInfo, transform)
         {
             _parameterName = "stun";
         }

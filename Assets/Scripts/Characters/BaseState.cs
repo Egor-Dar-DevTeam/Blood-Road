@@ -12,7 +12,6 @@ namespace Characters
         protected VFXEffect _vfxEffect;
         protected VFXTransforms _vfxTransforms;
         protected string _parameterName;
-        protected EffectBuilder effectEffectBuilder;
 
 
         protected BaseState(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms)
@@ -27,7 +26,7 @@ namespace Characters
         {
             if (_clip != null)
             {
-                _animation.AddClip(_parameterName, _clip);
+                _animation.AddValue(_parameterName, _clip);
             }
         }
         private const int SECONDS = 1000;

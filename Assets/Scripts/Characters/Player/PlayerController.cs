@@ -11,9 +11,9 @@ using UnityEngine;
 
 namespace Characters.Player
 {
+    public delegate void RemoveList(IInteractable interactable);
     public class PlayerController : BaseCharacter, IInteractable
     {
-        [SerializeField] private Material outlineMaterial;
         [SerializeField] private CameraRay cameraRay;
         [SerializeField] private GameCanvasController canvasController;
         [SerializeField] private SplineFollower splineFollower;
@@ -51,7 +51,7 @@ namespace Characters.Player
             _updateHealthEvent += canvasController.UIDelegates.UpdateHealthDelegate;
             _updateManaEvent += canvasController.UIDelegates.UpdateManaDelegate;
             
-            _enemyOutlineRechanger = new EnemyOutlineRechanger(outlineMaterial);
+            _enemyOutlineRechanger = new EnemyOutlineRechanger();
             _getIsAttack = GetIsAttack;
             base.Start();
             SetCharacterData(characterData);
@@ -73,6 +73,11 @@ namespace Characters.Player
             _currentPoint = null;
             _enemyOutlineRechanger.SetEnemy(null);
             StartCoroutine(RechangeCurrentPoint());
+        }
+
+        protected override void RemoveList(IInteractable enemy)
+        {
+           if(_interactables.Contains(enemy)) _interactables.Remove(enemy);
         }
 
         protected override void StartRCP(List<IInteractable> points)
@@ -136,7 +141,6 @@ namespace Characters.Player
                 _currentPoint = point;
                 _enemyOutlineRechanger.SetEnemy(_currentPoint);
                 characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
-
             }
 
             if (characterData.Energy > 1)
@@ -148,7 +152,9 @@ namespace Characters.Player
         private async Task Attack()
         {
             _isAttack = true;
-            await Task.Delay(200);
+            await Task.Delay(100);
+            WeaponAttack();
+            await Task.Delay(100);
             _isAttack = false;
         }
 
@@ -162,12 +168,12 @@ namespace Characters.Player
         {
         }
 
-        public override void UseAbility(IAbilityCommand abilityCommand, int value)
-        {
-            if(characterData.Mana<=0)return;
-            characterData.UseMana(value);
-            _updateManaEvent?.Invoke(characterData.Mana);
-            base.UseAbility(abilityCommand, value);
-        }
+         public override void UseAbility(IAbilityCommand abilityCommand, int value)
+         {
+             if(characterData.Mana<=0|| _currentPoint == null)return;
+             characterData.UseMana(value);
+             _updateManaEvent?.Invoke(characterData.Mana);
+             base.UseAbility(abilityCommand,value);
+         }
     }
 }
