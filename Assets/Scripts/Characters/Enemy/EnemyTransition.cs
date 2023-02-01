@@ -20,19 +20,19 @@ namespace Characters.Facades
         protected override void TransitionInit(Transform transform, NavMeshAgent agent)
         {
             base.TransitionInit(transform,agent);
-            _stateMachine.AddTransition(_idleState, runToPointState, () =>
+            _stateMachine.AddTransition(_idleState, _runToPointState, () =>
             {
-                if (GetCurrentPoint() != null) runToPointState.SetPoint(GetCurrentPoint().GetObject());
+                if (GetCurrentPoint() != null) _runToPointState.SetPoint(GetCurrentPoint().GetObject());
                 return GetCurrentPoint() != null;
             });
-            _stateMachine.AddTransition(runToPointState, _idleState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(runToPointState, _attackState, () =>
+            _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);
+            _stateMachine.AddTransition(_runToPointState, _attackState, () =>
             {
                 _attackState.SetPoint(GetCurrentPoint());
                 return Vector3.Distance(transform.position, GetCurrentPoint().GetObject().position) <=
                        agent.stoppingDistance + .07f;
             });
-            _stateMachine.AddTransition(_attackState, runToPointState, () => isRuning(transform, agent));
+            _stateMachine.AddTransition(_attackState, _runToPointState, () => isRuning(transform, agent));
             _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
             _stateMachine.ChangeState(_idleState);
         }

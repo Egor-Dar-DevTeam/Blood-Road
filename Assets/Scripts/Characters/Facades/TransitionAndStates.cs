@@ -24,7 +24,7 @@ namespace Characters.Facades
         protected IAnimationCommand _animation;
         private VFXTransforms _vfxTransforms;
 
-        protected RunToPoint runToPointState;
+        protected RunToPoint _runToPointState;
         protected Idle _idleState;
         protected Attack _attackState;
         protected Shield _shieldState;
@@ -60,10 +60,15 @@ namespace Characters.Facades
             _animation = new AnimatorController(animator);
             _animation.CreateAnimationChanger(animatorOverrideController);
             _vfxTransforms = vfxTransforms;
-            runToPointState = new RunToPoint(_animation, agent,_statesInfo.GetState("run"), vfxTransforms);
+            _runToPointState = new RunToPoint(_animation, agent,_statesInfo.GetState("run"), vfxTransforms);
             _idleState = new Idle(_animation, _statesInfo.GetState("idle"), vfxTransforms);
             _shieldState = new Shield(_animation, agent, _statesInfo.GetState("shield"), vfxTransforms);
             _stateMachine = new StateMachine<BaseState>();
+        }
+
+        public void SetPoint(Transform point)
+        {
+            _runToPointState.SetPoint(point);
         }
 
         public void Damaged()
@@ -103,7 +108,7 @@ namespace Characters.Facades
         {
             if (CurrentPoint?.Invoke() != null)
             {
-                runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
+                _runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
                 var position = CurrentPoint?.Invoke().GetObject().position;
                 if (position != null &&
                     Vector3.Distance(transform.position, (Vector3)position) >= agent.stoppingDistance)

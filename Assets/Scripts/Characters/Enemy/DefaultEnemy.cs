@@ -41,6 +41,7 @@ namespace Characters.Enemy
             _currentPoint = point;
             characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
             _removeList += _currentPoint.GetRemoveList();
+            base.SetCurrentPoint(point);
         }
 
         public override void SetOutline(bool value)

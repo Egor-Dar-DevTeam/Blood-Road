@@ -137,7 +137,11 @@ namespace Characters
         }
 
         protected abstract void StartRCP(List<IInteractable> points);
-        protected abstract void SetCurrentPoint(IInteractable point);
+
+        protected virtual void SetCurrentPoint(IInteractable point)
+        {
+            _transitionAndStates.SetPoint(point.GetObject());
+        }
 
         public virtual void ReceiveDamage(int value)
         {

@@ -12,6 +12,7 @@ using UnityEngine;
 namespace Characters.Player
 {
     public delegate void RemoveList(IInteractable interactable);
+
     public class PlayerController : BaseCharacter, IInteractable
     {
         [SerializeField] private CameraRay cameraRay;
@@ -50,7 +51,7 @@ namespace Characters.Player
 
             _updateHealthEvent += canvasController.UIDelegates.UpdateHealthDelegate;
             _updateManaEvent += canvasController.UIDelegates.UpdateManaDelegate;
-            
+
             _enemyOutlineRechanger = new EnemyOutlineRechanger();
             _getIsAttack = GetIsAttack;
             base.Start();
@@ -61,7 +62,7 @@ namespace Characters.Player
         }
 
         private void FixedUpdate()
-        { 
+        {
             projector.Project(transform.position, splineFollower.result);
         }
 
@@ -77,7 +78,7 @@ namespace Characters.Player
 
         protected override void RemoveList(IInteractable enemy)
         {
-           if(_interactables.Contains(enemy)) _interactables.Remove(enemy);
+            if (_interactables.Contains(enemy)) _interactables.Remove(enemy);
         }
 
         protected override void StartRCP(List<IInteractable> points)
@@ -125,8 +126,7 @@ namespace Characters.Player
 
                 if (point != null && point.HasCharacter())
                 {
-                    _currentPoint = point;
-                    _enemyOutlineRechanger.SetEnemy(_currentPoint);
+                   SetCurrentPoint(point);
                 }
 
                 yield return new WaitForSeconds(0);
@@ -136,15 +136,16 @@ namespace Characters.Player
         protected override void SetCurrentPoint(IInteractable point)
         {
             if (point.IsPlayer()) return;
+            if (characterData.Energy > 1 && _currentPoint == point)
+            {
+                Attack();
+            }
+
             if (_currentPoint != point)
             {
                 _currentPoint = point;
                 _enemyOutlineRechanger.SetEnemy(_currentPoint);
-            }
-
-            if (characterData.Energy > 1)
-            {
-                Attack();
+                base.SetCurrentPoint(point);
             }
         }
 
@@ -167,12 +168,12 @@ namespace Characters.Player
         {
         }
 
-         public override void UseAbility(IAbilityCommand abilityCommand, int value)
-         {
-             if(characterData.Mana<=0)return;
-             characterData.UseMana(value);
-             _updateManaEvent?.Invoke(characterData.Mana);
-             base.UseAbility(abilityCommand,value);
-         }
+        public override void UseAbility(IAbilityCommand abilityCommand, int value)
+        {
+            if (characterData.Mana <= 0) return;
+            characterData.UseMana(value);
+            _updateManaEvent?.Invoke(characterData.Mana);
+            base.UseAbility(abilityCommand, value);
+        }
     }
 }

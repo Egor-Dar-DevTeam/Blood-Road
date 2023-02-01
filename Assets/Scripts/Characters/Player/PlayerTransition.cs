@@ -38,8 +38,8 @@ namespace Characters.Facades
         {
            base.TransitionInit(transform, agent);
             _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(_folowSplineState, runToPointState, () => isRuning(transform, agent));
-            _stateMachine.AddTransition(_idleState, runToPointState, () => isRuning(transform, agent));
+            _stateMachine.AddTransition(_folowSplineState, _runToPointState, () => isRuning(transform, agent));
+            _stateMachine.AddTransition(_idleState, _runToPointState, () => isRuning(transform, agent));
             _stateMachine.AddTransition(_idleState, _shieldState,
                 () =>
                 {
@@ -53,13 +53,13 @@ namespace Characters.Facades
                     return Vector3.Distance(transform.position, objectPoint.position) <=
                            agent.stoppingDistance + .3f;
                 });
-            _stateMachine.AddTransition(runToPointState, _idleState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(runToPointState, _shieldState, () =>
+            _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);
+            _stateMachine.AddTransition(_runToPointState, _shieldState, () =>
                 Vector3.Distance(transform.position, GetCurrentPoint().GetObject().position) <=
                 agent.stoppingDistance + .1f);
             _stateMachine.AddTransition(_shieldState, _idleState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(_shieldState, runToPointState, () => isRuning(transform, agent));
-            _stateMachine.AddTransition(_attackState, runToPointState,
+            _stateMachine.AddTransition(_shieldState, _runToPointState, () =>  isRuning(transform, agent));
+            _stateMachine.AddTransition(_attackState, _runToPointState,
                 () => _attackState.CanSkip && isRuning(transform, agent));
             _stateMachine.AddTransition(_shieldState, _attackState, () =>
             {
@@ -80,7 +80,6 @@ namespace Characters.Facades
         {
             if (GetCurrentPoint() != null)
             {
-                runToPointState.SetPoint(GetCurrentPoint().GetObject());
                 var position = GetCurrentPoint().GetObject().position;
                 if (position != null &&
                     Vector3.Distance(transform.position, (Vector3)position) >= agent.stoppingDistance + .2f)
@@ -90,10 +89,11 @@ namespace Characters.Facades
 
                 return false;
             }
-            else
+            else 
             {
                 return false;
             }
+
         }
     }
 }

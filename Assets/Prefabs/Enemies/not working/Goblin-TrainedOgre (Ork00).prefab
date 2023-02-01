@@ -1143,7 +1143,9 @@ MonoBehaviour:
     mana: 0
     damage: 0
   capsuleCollider: {fileID: 4316919163325611528}
+  linker: {fileID: 0}
   rotationSpeed: 1
+  weapon: {fileID: 0}
   skinnedMeshRenderer: {fileID: 4316919161969664890}
 --- !u!114 &4316919163325611540
 MonoBehaviour:
@@ -1211,11 +1213,11 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3974900332758377519}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 2
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 21
   m_AngularSpeed: 100
   m_StoppingDistance: 2.25
   m_AutoTraverseOffMeshLink: 1

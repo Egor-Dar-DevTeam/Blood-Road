@@ -11,6 +11,7 @@ namespace Characters.Player.States
         private readonly NavMeshAgent _agent;
         private Transform _point;
         private Vector3 _finalPosition;
+        public Transform Point => _point;
 
         public RunToPoint(IAnimationCommand animation, NavMeshAgent agent, StateInfo stateInfo,
             VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
