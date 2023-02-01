@@ -15,6 +15,7 @@ namespace Characters.Facades
             base.Initialize(data);
             _splineFollower = data.SplineFollower;
             StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController, data.VFXTransforms);
+            Ability(data.VFXTransforms,data.GetCurrentPoint);
             data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, true, data,
                 data.VFXTransforms));
             data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CapsuleCollider, data.VFXTransforms));

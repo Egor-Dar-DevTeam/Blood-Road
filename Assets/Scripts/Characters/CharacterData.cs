@@ -26,7 +26,7 @@ namespace Characters.Player
 
         public CharacterData Copy()
         {
-            return new CharacterData(Health, Shield, Energy, Mana, Mana);
+            return new CharacterData(Health, Shield, Energy, Mana, Damage);
         }
         
         private bool _isDeath

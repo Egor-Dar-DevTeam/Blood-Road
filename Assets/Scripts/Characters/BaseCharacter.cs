@@ -163,7 +163,7 @@ namespace Characters
         public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
         {
             _transitionAndStates.RunAbility.RunAbility(abilityCommand);
-            AttackAbility?.Invoke(_currentPoint.Receiver,  abilityCommand);
+         if(_currentPoint!=null)  AttackAbility?.Invoke(_currentPoint.Receiver,  abilityCommand);
         }
     }
 }

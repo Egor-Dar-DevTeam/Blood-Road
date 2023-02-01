@@ -64,7 +64,6 @@ namespace Characters.Facades
             _idleState = new Idle(_animation, _statesInfo.GetState("idle"), vfxTransforms);
             _shieldState = new Shield(_animation, agent, _statesInfo.GetState("shield"), vfxTransforms);
             _stateMachine = new StateMachine<BaseState>();
-            Ability(vfxTransforms);
         }
 
         public void Damaged()
@@ -83,12 +82,12 @@ namespace Characters.Facades
 
         public void SetCurrentEffectID(Type type)
         {
-            _runAbility.SetTypeAbility(type);
+           if(_runAbility!=null) _runAbility.SetTypeAbility(type);
         }
 
-        private void Ability(VFXTransforms vfxTransforms)
+        protected void Ability(VFXTransforms vfxTransforms, GetCurrentPoint currentPoint)
         {
-            _runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms);
+            _runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms,currentPoint );
         }
 
         public void Destroy()

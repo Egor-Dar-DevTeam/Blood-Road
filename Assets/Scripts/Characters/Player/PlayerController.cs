@@ -91,6 +91,7 @@ namespace Characters.Player
             {
                 if (!enemy.HasCharacter()) continue;
                 if (_interactables.Contains(enemy)) continue;
+                characterData.DieEvent += enemy.GetDieCharacterDelegate();
                 _interactables.Add(enemy);
             }
 
@@ -126,7 +127,6 @@ namespace Characters.Player
                 {
                     _currentPoint = point;
                     _enemyOutlineRechanger.SetEnemy(_currentPoint);
-                    characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
                 }
 
                 yield return new WaitForSeconds(0);
@@ -140,7 +140,6 @@ namespace Characters.Player
             {
                 _currentPoint = point;
                 _enemyOutlineRechanger.SetEnemy(_currentPoint);
-                characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
             }
 
             if (characterData.Energy > 1)
@@ -170,7 +169,7 @@ namespace Characters.Player
 
          public override void UseAbility(IAbilityCommand abilityCommand, int value)
          {
-             if(characterData.Mana<=0|| _currentPoint == null)return;
+             if(characterData.Mana<=0)return;
              characterData.UseMana(value);
              _updateManaEvent?.Invoke(characterData.Mana);
              base.UseAbility(abilityCommand,value);
