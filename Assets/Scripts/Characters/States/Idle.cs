@@ -1,6 +1,5 @@
 ﻿using Characters.Animations;
 using Characters.Information.Structs;
-using UnityEngine;
 
 namespace Characters.Player.States
 {

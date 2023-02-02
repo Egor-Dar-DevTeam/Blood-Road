@@ -1,7 +1,4 @@
 using System.Collections.Generic;
-using Characters.Animations;
-using UnityEditor.SceneManagement;
-using UnityEngine;
 
 namespace Characters.MapperSystem
 {

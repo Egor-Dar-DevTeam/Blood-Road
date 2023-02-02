@@ -1,5 +1,4 @@
 using Characters.EffectSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Characters.WeaponSystem

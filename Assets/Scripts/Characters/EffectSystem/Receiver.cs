@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using Characters.Facades;
-using Characters.Player;
 
 namespace Characters.EffectSystem
 {
@@ -17,15 +15,16 @@ namespace Characters.EffectSystem
             _applyer = applyer;
         }
 
-        public void RegisterAnimator(Type type)
+        private void RegisterAnimator(Type type)
         {
-            _animatable.SetCurrentEffectID(type);
+           if(type != null) _animatable.SetCurrentEffectID(type);
             _applyer.RechangeCharacterDataValues(_effectData);
         }
 
         public void Receive(EffectData data)
         {
             _effectData = data;
+            RegisterAnimator(_effectData.Type);
         }
     }
 }

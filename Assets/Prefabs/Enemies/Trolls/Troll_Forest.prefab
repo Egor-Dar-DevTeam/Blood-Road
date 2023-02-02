@@ -363,7 +363,7 @@ MonoBehaviour:
     damage: 0
   capsuleCollider: {fileID: 1245577777732647497}
   linker: {fileID: 4259116235350675070}
-  rotationSpeed: 1
+  rotationSpeed: 10
   weapon: {fileID: -8442624210833721111}
   skinnedMeshRenderer: {fileID: 8413652176000687159}
 --- !u!114 &1245577777732647493
@@ -382,14 +382,6 @@ MonoBehaviour:
   - stateName: stun
     stateInfo:
       clip: {fileID: -570207278821683197, guid: 505d842c437951b4eb766b7d7a1629bd, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: droneHammer
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: attackStun
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
 --- !u!114 &1245577777732647494
 MonoBehaviour:

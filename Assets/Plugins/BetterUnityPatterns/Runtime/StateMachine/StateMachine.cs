@@ -1,6 +1,5 @@
 using System;
 using Better.UnityPatterns.Runtime.StateMachine.States;
-using UnityEngine;
 
 namespace Better.UnityPatterns.Runtime.StateMachine
 {

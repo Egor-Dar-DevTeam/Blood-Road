@@ -933,7 +933,7 @@ MonoBehaviour:
     damage: 0
   capsuleCollider: {fileID: 2685033556128131695}
   linker: {fileID: -7116619062384842110, guid: 3782be0fe89b72746b0cee95cf54077c, type: 3}
-  rotationSpeed: 1
+  rotationSpeed: 10
   weapon: {fileID: 7258614108469950182, guid: 3782be0fe89b72746b0cee95cf54077c, type: 3}
   skinnedMeshRenderer: {fileID: 2685033555966413335}
 --- !u!114 &2685033556128131688
@@ -952,14 +952,6 @@ MonoBehaviour:
   - stateName: stun
     stateInfo:
       clip: {fileID: -2204044242181518964, guid: 5f02106dd7137bc4f9951c3b06359061, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: droneHammer
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: attackStun
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
 --- !u!114 &2685033556128131691
 MonoBehaviour:
@@ -1012,7 +1004,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 27
   m_AngularSpeed: 120
-  m_StoppingDistance: 2.25
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

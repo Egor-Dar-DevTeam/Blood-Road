@@ -1,11 +1,8 @@
 ﻿using System;
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
-using Characters.AbilitiesSystem.Declaration;
-using Characters.AbilitiesSystem.States;
 using Characters.Animations;
 using Characters.Information;
-using Characters.LibrarySystem;
 using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
@@ -66,9 +63,10 @@ namespace Characters.Facades
             _stateMachine = new StateMachine<BaseState>();
         }
 
-        public void SetPoint(Transform point)
+        public void SetPoint(IInteractable point)
         {
-            _runToPointState.SetPoint(point);
+            _runToPointState.SetPoint(point.GetObject());
+            _attackState.SetPoint(point);
         }
 
         public void Damaged()
@@ -90,9 +88,9 @@ namespace Characters.Facades
            if(_runAbility!=null) _runAbility.SetTypeAbility(type);
         }
 
-        protected void Ability(VFXTransforms vfxTransforms, GetCurrentPoint currentPoint)
+        protected void Ability(Abilities abilities)
         {
-            _runAbility = new Abilities(_stateMachine, _animation, _abilitiesInfo, _idleState, vfxTransforms,currentPoint );
+            _runAbility = abilities;
         }
 
         public void Destroy()
@@ -115,8 +113,11 @@ namespace Characters.Facades
                 {
                     return true;
                 }
+                else
+                {
+                    return false;
+                }
 
-                return false;
             }
             else
             {

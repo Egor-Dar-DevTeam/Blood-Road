@@ -857,14 +857,6 @@ MonoBehaviour:
     stateInfo:
       clip: {fileID: 1827226128182048838, guid: 91a9e62e6a6ad3d4c93e059f7568afc8, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: droneHammer
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: attackStun
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: ae289f1ff4c78f9489ec9d4d8c2aa41c, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
 --- !u!114 &8617717274738040505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,7 +884,7 @@ MonoBehaviour:
     damage: 0
   capsuleCollider: {fileID: 8434395711487053033}
   linker: {fileID: -3233500673563654482}
-  rotationSpeed: 1
+  rotationSpeed: 10
   weapon: {fileID: -7178374114606905594}
   skinnedMeshRenderer: {fileID: 1562451555258833618}
 --- !u!114 &-7178374114606905594
@@ -1210,7 +1202,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3386518190363061997}
-  m_LocalRotation: {x: 0.5598508, y: -0.4319342, z: -0.55985075, w: 0.43193415}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7917462, w: 0.6108502}
   m_LocalPosition: {x: 0.00000005690457, y: 0.8435447, z: -0.21127182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1223,7 +1215,7 @@ Transform:
   - {fileID: 8524780621403380349}
   m_Father: {fileID: 1572287986547646211}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -104.698}
 --- !u!1 &3648238369474180742
 GameObject:
   m_ObjectHideFlags: 0

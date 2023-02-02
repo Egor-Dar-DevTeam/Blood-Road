@@ -1,7 +1,6 @@
 using System;
-using Unity.Mathematics;
+using UI.CombatHUD;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Characters.Player
 {
@@ -14,6 +13,9 @@ namespace Characters.Player
         [SerializeField] private int energy;
         [SerializeField] private int mana;
         [SerializeField] protected int damage;
+        private event UpdateManaDelegate _updateManaEvent;
+        private event UpdateHealthDelegate _updateHealthEvent;
+        private event UpdateEnergyDelegate _updateEnergyEvent;
 
         public CharacterData(int health, int shield, int energy, int mana, int damage)
         {
@@ -28,7 +30,17 @@ namespace Characters.Player
         {
             return new CharacterData(Health, Shield, Energy, Mana, Damage);
         }
-        
+
+        public void EventsInitialize(UpdateManaDelegate updateManaDelegate, UpdateHealthDelegate updateHealthDelegate,
+            UpdateEnergyDelegate updateEnergyDelegate)
+        {
+            _updateEnergyEvent += updateEnergyDelegate;
+            _updateHealthEvent += updateHealthDelegate;
+            _updateManaEvent += updateManaDelegate;
+            _updateManaEvent.Invoke(mana);
+            _updateEnergyEvent.Invoke(energy);
+            _updateHealthEvent.Invoke(health);
+        }
         private bool _isDeath
         {
             get;
@@ -59,12 +71,31 @@ namespace Characters.Player
         {
             if(energy<=0) return;
             energy-=25;
+            _updateEnergyEvent?.Invoke(energy);
             if (energy <= 0) energy = 0;
         }
 
+        public void AddEnergy(int value)
+        {
+            energy += value;
+            _updateEnergyEvent?.Invoke(energy);
+        }
+
+        public void AddHealth(int value)
+        {
+            health += value;
+            _updateHealthEvent?.Invoke(health);
+        }
+
+        public void AddMana(int value)
+        {
+            mana += value;
+            _updateManaEvent?.Invoke(mana);
+        }
         public void UseMana(int value)
         {
             mana = Mathf.Clamp(mana - value, 0, 100);
+            _updateManaEvent?.Invoke(mana);
         }
 
         public void Damaged(int value)
@@ -73,6 +104,7 @@ namespace Characters.Player
             int dmgToHealt=0;
             dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
             health = Mathf.Clamp(health - dmgToHealt, 0, 1000);
+            _updateHealthEvent?.Invoke(health);
             Die();
         }
 

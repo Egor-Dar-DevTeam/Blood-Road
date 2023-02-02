@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
+using Characters.BottlesSystem;
+using Characters.EffectSystem;
 using Characters.Facades;
 using Dreamteck.Splines;
 using UI;
-using UI.CombatHUD;
 using UnityEngine;
 
 namespace Characters.Player
@@ -22,10 +22,8 @@ namespace Characters.Player
 
         private List<IInteractable> _interactables;
 
-        private event UpdateEnergyDelegate _updateEnergyEvent;
-        private event UpdateHealthDelegate _updateHealthEvent;
-        private event UpdateManaDelegate _updateManaEvent;
-
+        public event BottleUse BottleUseEvent;
+        
 
         #region Delegates
 
@@ -47,28 +45,34 @@ namespace Characters.Player
         {
             _interactables = new List<IInteractable>();
 
-            _updateEnergyEvent += canvasController.UIDelegates.UpdateEnergyDelegate;
-
-            _updateHealthEvent += canvasController.UIDelegates.UpdateHealthDelegate;
-            _updateManaEvent += canvasController.UIDelegates.UpdateManaDelegate;
-
             _enemyOutlineRechanger = new EnemyOutlineRechanger();
             _getIsAttack = GetIsAttack;
             base.Start();
             SetCharacterData(characterData);
-            InitializeTransition(new PlayerTransition(), _getIsAttack, _updateEnergyEvent, splineFollower);
+            InitializeTransition(new PlayerTransition(), _getIsAttack,null, splineFollower);
             InitializeInteractionSystem(cameraRay);
             SubscribeDeath();
+            characterData.EventsInitialize(canvasController.UIDelegates.UpdateManaDelegate,
+                canvasController.UIDelegates.UpdateHealthDelegate,
+                canvasController.UIDelegates.UpdateEnergyDelegate);
         }
 
         private void FixedUpdate()
         {
+            if(!_hasCharacter) return;
             projector.Project(transform.position, splineFollower.result);
+        }
+
+        public  void UseBottle(EffectData data)
+        {
+            if(!_hasCharacter) return;
+            BottleUseEvent?.Invoke(Receiver, data);
         }
 
 
         protected override void ClearPoint()
         {
+            if(!_hasCharacter|| _currentPoint==null) return;
             characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
             _interactables.Remove(_currentPoint);
             _currentPoint = null;
@@ -78,16 +82,20 @@ namespace Characters.Player
 
         protected override void RemoveList(IInteractable enemy)
         {
+            if(!_hasCharacter) return;
+
             if (_interactables.Contains(enemy)) _interactables.Remove(enemy);
         }
 
         protected override void StartRCP(List<IInteractable> points)
         {
+            if(!_hasCharacter) return;
             AddToListEnemy(points);
         }
 
         private void AddToListEnemy(List<IInteractable> enemies)
         {
+            if(!_hasCharacter) return;
             foreach (var enemy in enemies)
             {
                 if (!enemy.HasCharacter()) continue;
@@ -101,6 +109,7 @@ namespace Characters.Player
 
         private IEnumerator RechangeCurrentPoint()
         {
+            if(!_hasCharacter)  yield break;
             if (_currentPoint == null)
             {
                 if (_interactables.Count == 0) yield break;
@@ -135,6 +144,7 @@ namespace Characters.Player
 
         protected override void SetCurrentPoint(IInteractable point)
         {
+            if(!_hasCharacter) return;
             if (point.IsPlayer()) return;
             if (characterData.Energy > 1 && _currentPoint == point)
             {
@@ -157,12 +167,7 @@ namespace Characters.Player
             await Task.Delay(100);
             _isAttack = false;
         }
-
-        public override void ReceiveDamage(int value)
-        {
-            base.ReceiveDamage(value);
-            _updateHealthEvent?.Invoke(characterData.Health);
-        }
+        
 
         public override void SetOutline(bool value)
         {
@@ -170,9 +175,9 @@ namespace Characters.Player
 
         public override void UseAbility(IAbilityCommand abilityCommand, int value)
         {
+            if(!_hasCharacter) return;
             if (characterData.Mana <= 0) return;
             characterData.UseMana(value);
-            _updateManaEvent?.Invoke(characterData.Mana);
             base.UseAbility(abilityCommand, value);
         }
     }

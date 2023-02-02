@@ -1,7 +1,6 @@
 using Characters.Animations;
 using Characters.Information.Structs;
 using Dreamteck.Splines;
-using UnityEngine;
 using UnityEngine.AI;
 
 namespace Characters.Player.States

@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
 using Characters;
 using Characters.Player;
-using Unity.Mathematics;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

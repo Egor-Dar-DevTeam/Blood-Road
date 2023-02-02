@@ -1,4 +1,4 @@
-using System;
+using Characters.Player;
 using UnityEngine;
 
 namespace Characters
@@ -8,9 +8,15 @@ namespace Characters
         [SerializeField] private Transform up;
         [SerializeField] private Transform center;
         [SerializeField] private Transform down;
+        public DieDelegate DieDelegate;
         public Transform Up => up;
         public Transform Center => center;
         public Transform Down => down;
+
+        private void Awake()
+        {
+            DieDelegate = OnEnable;
+        }
 
         private void OnEnable()
         {

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1980256518}
   - component: {fileID: 1980256513}
   - component: {fileID: 1980256514}
+  - component: {fileID: 4003567674991960620}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -87,13 +88,13 @@ MonoBehaviour:
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
   characterData:
     health: 200
-    shield: 50
+    shield: 0
     energy: 100
     mana: 100
     damage: 20
   capsuleCollider: {fileID: 1928816314}
   linker: {fileID: 1980256513}
-  rotationSpeed: 1
+  rotationSpeed: 10
   weapon: {fileID: 1775173724}
   cameraRay: {fileID: 3884688243925675931, guid: c8052163c67fa73459b649623441fa29, type: 3}
   canvasController: {fileID: 0}
@@ -186,7 +187,19 @@ MonoBehaviour:
   - stateName: droneHammer
     stateInfo:
       clip: {fileID: 0}
-      vfxEffect: {fileID: 6326990906865807222, guid: c86ec6efba351844d924139d87181891, type: 3}
+      vfxEffect: {fileID: 7566873106949737003, guid: 4be649f4aeef2c24b8f5cef4f45d4e1c, type: 3}
+  - stateName: attackStun
+    stateInfo:
+      clip: {fileID: -2603037185963062845, guid: e02033bf62d3e87419349a5f24f62117, type: 3}
+      vfxEffect: {fileID: 0}
+  - stateName: swordRain
+    stateInfo:
+      clip: {fileID: 0}
+      vfxEffect: {fileID: -3160666713083532792, guid: 694bb9f1536c5e94abd3f9d57c4aeea2, type: 3}
+  - stateName: inductionCoil
+    stateInfo:
+      clip: {fileID: 0}
+      vfxEffect: {fileID: 5767999109912402688, guid: 812652216d0faf342983826e5a2621fb, type: 3}
 --- !u!114 &1980256512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6724,6 +6737,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 380748237757127660}
+--- !u!114 &4003567674991960620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380748237757127661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b643855f40a414fb4e8329a3646a968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 380748237757127660}
 --- !u!1 &2365018969159306928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7075,7 +7101,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 86c9e85a74df42e498be41e95fa87be2, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: dce1c2ff873e71b4583d388df8f7e5e8, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 86c9e85a74df42e498be41e95fa87be2, type: 3}
       propertyPath: m_WarningMessage
       value: 

@@ -23,6 +23,7 @@ namespace Characters.Enemy
 
         protected override void ClearPoint()
         {
+            if(_currentPoint==null) return;
             characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
             _currentPoint = null;
         }

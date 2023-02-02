@@ -1,5 +1,4 @@
 using Characters.Animations;
-using Characters.EffectSystem;
 using Characters.Information.Structs;
 using UnityEngine;
 using baseState=Better.UnityPatterns.Runtime.StateMachine.States.BaseState;

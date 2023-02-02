@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
-using UnityEngine;
 using UnityEngine.AI;
 
 namespace Characters.Player.States

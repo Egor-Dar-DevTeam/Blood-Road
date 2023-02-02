@@ -1,8 +1,6 @@
 using Characters;
 using Characters.AbilitiesSystem;
-using Characters.EffectSystem;
 using Characters.Information;
-using Characters.Information.Structs;
 using Characters.Player;
 using Characters.Player.States;
 using Dreamteck.Splines;

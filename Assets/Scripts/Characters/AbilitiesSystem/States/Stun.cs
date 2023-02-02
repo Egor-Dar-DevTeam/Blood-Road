@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.Animations;
 using Characters.Information.Structs;
-using Cinemachine;
 using JetBrains.Annotations;
 using UnityEngine;
 

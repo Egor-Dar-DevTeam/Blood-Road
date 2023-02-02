@@ -1,6 +1,5 @@
 using System;
 using Better.Attributes.Runtime.Select;
-using Characters.AbilitiesSystem.Declaration;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.Ability

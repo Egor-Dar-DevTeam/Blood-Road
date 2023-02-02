@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Characters
+﻿namespace Characters
 {
     public class EnemyOutlineRechanger
     {

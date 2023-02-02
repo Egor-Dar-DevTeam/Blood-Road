@@ -1,4 +1,3 @@
-using System;
 using Characters.AbilitiesSystem;
 
 namespace Characters.LibrarySystem

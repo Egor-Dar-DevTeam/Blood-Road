@@ -1,22 +1,16 @@
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
-using Characters.AbilitiesSystem.Declaration;
-using Characters.Animations;
 using Characters.EffectSystem;
 using Characters.Facades;
 using Characters.Information;
 using Characters.InteractableSystems;
-using Characters.LibrarySystem;
 using Characters.Player;
 using Characters.WeaponSystem;
 using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI.CombatHUD;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace Characters
 {
@@ -43,7 +37,8 @@ namespace Characters
         [SerializeField] private Linker linker;
         [SerializeField] private float rotationSpeed = 1f;
         [SerializeField] protected Weapon weapon;
-        private bool _hasCharacter = true;
+        [HideInInspector] [SerializeField] public Sender Sender;
+        protected bool _hasCharacter = true;
 
         protected IInteractable _currentPoint;
 
@@ -94,6 +89,7 @@ namespace Characters
         protected void SubscribeDeath()
         {
             characterData.DieEvent += _transitionAndStates.DieDelegate;
+            characterData.DieEvent += vfxTransforms.DieDelegate;
         }
 
         protected void SubscribeDeathMethod(DieDelegate @delegate)
@@ -128,8 +124,8 @@ namespace Characters
         {
             _transitionAndStates.Update();
 
-            if (_currentPoint == null) return;
-            var turnTowardNavSteeringTarget = agent.steeringTarget;
+            if (_currentPoint == null|| !_hasCharacter) return;
+            var turnTowardNavSteeringTarget = _currentPoint.GetObject().position;
 
             var direction = (turnTowardNavSteeringTarget - transform.position).normalized;
             var lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
@@ -140,7 +136,7 @@ namespace Characters
 
         protected virtual void SetCurrentPoint(IInteractable point)
         {
-            _transitionAndStates.SetPoint(point.GetObject());
+            _transitionAndStates.SetPoint(point);
         }
 
         public virtual void ReceiveDamage(int value)

@@ -1,11 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Characters.AbilitiesSystem;
-using Characters.LibrarySystem;
-using Characters.WeaponSystem;
-using Unity.Mathematics;
-using UnityEngine;
-using UnityEngine.Events;
 
 namespace Characters.EffectSystem
 {

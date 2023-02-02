@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Characters.MapperSystem;
 using UnityEngine;
 

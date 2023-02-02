@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.CombatHUD
@@ -19,18 +18,21 @@ namespace UI.CombatHUD
 
         public void SetHealth(float health)
         {
+            if(healthSlider==null) return;
             var t = Mathf.InverseLerp(0, 200, health);
             healthSlider.value = Mathf.Lerp(0, 1, t);
         }
 
         public void SetMana(float mana)
         {
+            if(manaSlider==null) return;
             var t = Mathf.InverseLerp(0, 100, mana);
             manaSlider.value = Mathf.Lerp(0, 1, t);
         }
 
         public void SetEnergy(float energy)
         {
+            if(energySlider==null) return;
             var t = Mathf.InverseLerp(0, 100, energy);
             energySlider.value = Mathf.Lerp(0, 1, t);
         }

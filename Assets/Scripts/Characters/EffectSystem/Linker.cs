@@ -1,6 +1,5 @@
 using Characters.Facades;
 using Characters.Player;
-using Characters.WeaponSystem;
 using UnityEngine;
 
 namespace Characters.EffectSystem

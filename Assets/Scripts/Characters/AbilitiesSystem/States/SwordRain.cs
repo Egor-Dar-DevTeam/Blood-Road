@@ -1,11 +1,7 @@
-using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
 using JetBrains.Annotations;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using Object = System.Object;
 
 namespace Characters.AbilitiesSystem.States
 {
@@ -18,13 +14,7 @@ namespace Characters.AbilitiesSystem.States
             animation, stateInfo, vfxTransforms)
         {
         }
-
-        public void SetEnemy([CanBeNull] GameObject enemy)
-        {
-            if (enemy == null) return;
-
-            _enemy = enemy;
-        }
+        
 
         public override void Enter()
         {
@@ -32,7 +22,7 @@ namespace Characters.AbilitiesSystem.States
             if (_vfxEffect == null ) return;
             var effect = GameObject.Instantiate(_vfxEffect);
             effect.transform.position = _vfxTransforms.Down.position;
-            effect.SetLifeTime(3f);
+            effect.SetLifeTime(3.5f);
             CanSkip = true;
         }
         

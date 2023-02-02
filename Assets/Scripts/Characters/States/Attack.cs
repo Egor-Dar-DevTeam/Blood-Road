@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
-using UnityEngine;
 
 namespace Characters.Player.States
 {
@@ -12,9 +11,7 @@ namespace Characters.Player.States
         private bool _isPlayer;
         protected int _damage;
         private TransitionAndStatesData transitionAndStatesData;
-        private int _currentMilliseconds;
         public bool CanSkip { get; private set; }
-        public int Milliseconds => _currentMilliseconds;
 
         public Attack(IAnimationCommand animation, StateInfo statesInfo, int damage, bool isPlayer, TransitionAndStatesData data, VFXTransforms vfxTransforms) : base(
             animation, statesInfo,vfxTransforms)
@@ -44,9 +41,7 @@ namespace Characters.Player.States
             do
             {
                 int milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 2);
-                _currentMilliseconds = milliseconds*2;
                 await Task.Delay(milliseconds);
-                _currentMilliseconds = milliseconds;
                 transitionAndStatesData.CharacterData.UseEnergy();
                 transitionAndStatesData.EnergyEvent?.Invoke(transitionAndStatesData.CharacterData.Energy);
                 _interactable.ReceiveDamage(_damage);

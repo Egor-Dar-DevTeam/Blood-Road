@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Characters.AbilitiesSystem.States;
-using Characters.EffectSystem;
 using Characters.MapperSystem;
-using UnityEditor.Rendering.LookDev;
 
 namespace Characters.LibrarySystem
 {
@@ -19,7 +17,7 @@ namespace Characters.LibrarySystem
             _baseStates = new Dictionary<Type, AbilityBase>();
         }
         
-        public static Type StaticToEntityID(TEntity entity) => _entityLibraryInstance.ToEntityType(entity.GetType());
+        public static Type StaticToEntityType(TEntity entity) => _entityLibraryInstance.ToEntityType(entity.GetType());
         private Type ToEntityType(Type entityType) => _dictionary[entityType];
 
         private void AddEffectData(Type key, TEntity value)

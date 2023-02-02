@@ -1,4 +1,3 @@
-using System;
 using Characters.AbilitiesSystem;
 using Characters.AbilitiesSystem.States;
 using Characters.Information.Structs;

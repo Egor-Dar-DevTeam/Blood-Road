@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Characters.Player;
 
 namespace Characters.EffectSystem
@@ -11,6 +10,9 @@ namespace Characters.EffectSystem
         public void RechangeCharacterDataValues(EffectData effectData)
         {
             _characterData.Damaged(effectData.HealthDamage);
+            _characterData.AddEnergy(effectData.EnergyAdd);
+            _characterData.AddHealth(effectData.HealthAdd);
+            _characterData.AddMana(effectData.ManaAdd);
         }
 
         public void Initialize(CharacterData data)

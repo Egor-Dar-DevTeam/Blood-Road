@@ -1,4 +1,3 @@
-using System.Threading;
 using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;

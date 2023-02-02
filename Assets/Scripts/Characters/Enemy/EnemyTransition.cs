@@ -14,6 +14,7 @@ namespace Characters.Facades
             data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState("die"), data.CapsuleCollider,data.VFXTransforms));
             _attackState = data.Attack;
             _dieState = data.Die;
+            Ability(new AbilitiesSystem.Enemy(_stateMachine,_animation,data.AbilitiesInfo,_idleState,data.VFXTransforms));
             TransitionInit(data.Transform, data.NavMeshAgent);
         }
 
@@ -28,9 +29,7 @@ namespace Characters.Facades
             _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_runToPointState, _attackState, () =>
             {
-                _attackState.SetPoint(GetCurrentPoint());
-                return Vector3.Distance(transform.position, GetCurrentPoint().GetObject().position) <=
-                       agent.stoppingDistance + .07f;
+                return !isRuning(transform, agent);
             });
             _stateMachine.AddTransition(_attackState, _runToPointState, () => isRuning(transform, agent));
             _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
