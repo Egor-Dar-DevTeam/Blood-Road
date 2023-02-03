@@ -57,6 +57,10 @@ namespace Characters
         public RemoveList GetRemoveList() => RemoveList;
         public bool HasCharacter() => _hasCharacter;
         public Receiver Receiver => linker.Receiver;
+        public virtual void Finish()
+        {
+            
+        }
 
 
         public Transform GetObject() => this.transform;
@@ -86,7 +90,7 @@ namespace Characters
             GetDieEvent = characterData.DieEvent;
         }
 
-        protected void SubscribeDeath()
+        protected virtual void SubscribeDeath()
         {
             characterData.DieEvent += _transitionAndStates.DieDelegate;
             characterData.DieEvent += vfxTransforms.DieDelegate;

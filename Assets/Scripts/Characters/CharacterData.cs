@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UI.CombatHUD;
 using UnityEngine;
 
@@ -8,22 +9,40 @@ namespace Characters.Player
     [Serializable]
     public class CharacterData
     {
-        [SerializeField] private int health;
-        [SerializeField] private int shield;
-        [SerializeField] private int energy;
-        [SerializeField] private int mana;
+        [SerializeField] private float health;
+        [SerializeField] private float shield;
+        [SerializeField] private float energy;
+        [SerializeField] private float mana;
         [SerializeField] protected int damage;
+        private float _healthMax;
+        private float _energyMax;
+        private float _manaMax;
         private event UpdateManaDelegate _updateManaEvent;
         private event UpdateHealthDelegate _updateHealthEvent;
         private event UpdateEnergyDelegate _updateEnergyEvent;
 
-        public CharacterData(int health, int shield, int energy, int mana, int damage)
+        public CharacterData(float health, float shield, float energy, float mana, int damage)
         {
             this.health = health;
             this.shield = shield;
             this.energy = energy;
             this.mana = mana;
             this.damage = damage;
+            _healthMax = health;
+            _energyMax = energy;
+            _manaMax = mana;
+            AddResource();
+        }
+
+        private async void AddResource()
+        {
+            for (int i = 0; !_isDeath;)
+            {
+                await Task.Delay(1000);
+                AddEnergy(1f);
+                AddMana(1f);
+                AddHealth(1f);
+            }
         }
 
         public CharacterData Copy()
@@ -49,11 +68,11 @@ namespace Characters.Player
 
         private event DieDelegate _dieEvent;
         
-        public int Health => health;
-        public int Shield => shield;
-        public int Energy => energy;
+        public float Health => health;
+        public float Shield => shield;
+        public float Energy => energy;
+        public float Mana => mana;
         public int Damage => damage;
-        public int Mana => mana;
 
         public DieDelegate DieEvent
         {
@@ -70,40 +89,40 @@ namespace Characters.Player
         public void UseEnergy()
         {
             if(energy<=0) return;
-            energy-=25;
+            energy= Mathf.Clamp(energy-5,0,_energyMax);
             _updateEnergyEvent?.Invoke(energy);
             if (energy <= 0) energy = 0;
         }
 
-        public void AddEnergy(int value)
+        public void AddEnergy(float value)
         {
-            energy += value;
+            energy = Mathf.Clamp(energy+value,0,_energyMax);
             _updateEnergyEvent?.Invoke(energy);
         }
 
-        public void AddHealth(int value)
+        public void AddHealth(float value)
         {
-            health += value;
+            health = Mathf.Clamp(health+value,0,_healthMax);
             _updateHealthEvent?.Invoke(health);
         }
 
-        public void AddMana(int value)
+        public void AddMana(float value)
         {
-            mana += value;
+            mana = Mathf.Clamp(mana+value,0,_manaMax);
             _updateManaEvent?.Invoke(mana);
         }
-        public void UseMana(int value)
+        public void UseMana(float value)
         {
-            mana = Mathf.Clamp(mana - value, 0, 100);
+            mana = Mathf.Clamp(mana - value, 0, _manaMax);
             _updateManaEvent?.Invoke(mana);
         }
 
         public void Damaged(int value)
         {
           //  if(_isDeath) return;
-            int dmgToHealt=0;
+            float dmgToHealt=0;
             dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
-            health = Mathf.Clamp(health - dmgToHealt, 0, 1000);
+            health = Mathf.Clamp(health - dmgToHealt, 0, _healthMax);
             _updateHealthEvent?.Invoke(health);
             Die();
         }

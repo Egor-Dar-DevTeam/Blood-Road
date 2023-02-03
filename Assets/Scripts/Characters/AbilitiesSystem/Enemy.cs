@@ -31,6 +31,7 @@ namespace Characters.AbilitiesSystem
                 if (value) _currentEffectType = null;
                 return value;
             });
+            _stateMachine.AddTransition(_stunState, idleState, ()=> _stunState.CanSkip);
         }
 
         public override void SetTypeAbility(Type type)

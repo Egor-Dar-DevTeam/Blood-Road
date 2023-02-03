@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Characters.Facades;
 using Characters.Player;
@@ -11,6 +12,12 @@ namespace Characters.Enemy
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         public override bool IsPlayer() => false;
         private event RemoveList _removeList;
+
+        private void Awake()
+        {
+            capsuleCollider.radius *= 2;
+            capsuleCollider.height *= 2;
+        }
 
         protected override void Start()
         {

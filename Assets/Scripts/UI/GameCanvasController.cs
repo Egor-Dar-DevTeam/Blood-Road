@@ -6,6 +6,9 @@ namespace UI
     public class GameCanvasController : MonoBehaviour
     {
         [SerializeField] private CombatHUD.CombatHUD combatHUD;
+        [SerializeField] private CanvasGroup combat;
+        [SerializeField] private CanvasGroup death;
+        private RechangePanel _rechangePanel;
         public UIDelegates UIDelegates => _uiDelegates;
         private UIDelegates _uiDelegates;
 
@@ -20,22 +23,34 @@ namespace UI
             _updateHealthDelegate = combatHUD.SetHealth;
             _updateEnergyDelegate = combatHUD.SetEnergy;
             _uiDelegates = new UIDelegates(_updateEnergyDelegate, _updateManaDelegate, _updateHealthDelegate);
+            _rechangePanel = new RechangePanel();
+            _rechangePanel.SetNewPanel(combat);
+        }
+
+        public void Death()
+        {
+            _rechangePanel.SetNewPanel(death);
         }
         
     }
 
-    public struct UIDelegates
+    public class RechangePanel
     {
-        public readonly UpdateEnergyDelegate UpdateEnergyDelegate;
-        public readonly UpdateManaDelegate UpdateManaDelegate;
-        public readonly UpdateHealthDelegate UpdateHealthDelegate;
+        private CanvasGroup _currentCanvasGroup;
 
-        public UIDelegates(UpdateEnergyDelegate updateEnergyDelegate, UpdateManaDelegate updateManaDelegate,
-            UpdateHealthDelegate updateHealthDelegate)
+        public void SetNewPanel(CanvasGroup newPanel)
         {
-            UpdateManaDelegate = updateManaDelegate;
-            UpdateHealthDelegate = updateHealthDelegate;
-            UpdateEnergyDelegate = updateEnergyDelegate;
+            if (_currentCanvasGroup != null)
+            {
+                _currentCanvasGroup.alpha = 0;
+                _currentCanvasGroup.interactable = false;
+                _currentCanvasGroup.blocksRaycasts = false;
+            }
+
+            _currentCanvasGroup = newPanel;
+            _currentCanvasGroup.alpha = 1;
+            _currentCanvasGroup.interactable = true;
+            _currentCanvasGroup.blocksRaycasts = true;
         }
     }
 }

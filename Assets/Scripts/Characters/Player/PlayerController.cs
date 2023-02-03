@@ -63,6 +63,17 @@ namespace Characters.Player
             projector.Project(transform.position, splineFollower.result);
         }
 
+        protected override void SubscribeDeath()
+        {
+            base.SubscribeDeath();
+            characterData.DieEvent += canvasController.Death;
+        }
+
+        public override void Finish()
+        {
+            canvasController.Death();
+        }
+
         public  void UseBottle(EffectData data)
         {
             if(!_hasCharacter) return;
@@ -157,6 +168,11 @@ namespace Characters.Player
                 _enemyOutlineRechanger.SetEnemy(_currentPoint);
                 base.SetCurrentPoint(point);
             }
+        }
+
+        public void OnButtonAttack()
+        {
+            Attack();
         }
 
         private async Task Attack()

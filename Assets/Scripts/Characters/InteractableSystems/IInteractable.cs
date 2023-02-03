@@ -15,5 +15,6 @@ namespace Characters
         public  RemoveList GetRemoveList();
         public bool HasCharacter();
         public Receiver Receiver { get; }
+        public void Finish();
     }
 }
