@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Characters.Facades;
 using Characters.Player;
@@ -15,7 +14,9 @@ namespace Characters.Enemy
 
         private void Awake()
         {
-            capsuleCollider.radius *= 2;
+            var center = capsuleCollider.center;
+            center = new Vector3(center.x,center.y*2.5f, center.z);
+            capsuleCollider.center = center;
             capsuleCollider.height *= 2;
         }
 

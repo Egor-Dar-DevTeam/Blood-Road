@@ -1,6 +1,7 @@
 using System;
 using Characters;
 using Characters.Player;
+using UI.EnemyesCanvas;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -9,11 +10,13 @@ namespace Spawners
     public class TriggerSpawner : MonoBehaviour
     {
         [SerializeField] private EnemySpawnInfo[] enemySpawnInfo;
+        [SerializeField] private PanelsCreator panelsCreator;
         private bool _continue;
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.gameObject.TryGetComponent(out IInteractable player)) return;
-            if (!player.IsPlayer()|| _continue) return;
+            if (!player.IsPlayer() || _continue) return;
             for (int i = 0; i < enemySpawnInfo.Length; i++)
             {
                 var info = enemySpawnInfo[i];
@@ -26,7 +29,8 @@ namespace Spawners
         private void Instantiate(BaseCharacter prefab, CharacterData data, Vector3 position)
         {
             var enemy = Object.Instantiate(prefab, position, Quaternion.identity);
-            enemy.SetCharacterData(data);
+            enemy.SetCharacterData(data,panelsCreator.AddCharacter(enemy.VFXTransforms.Up));
+             
         }
     }
 

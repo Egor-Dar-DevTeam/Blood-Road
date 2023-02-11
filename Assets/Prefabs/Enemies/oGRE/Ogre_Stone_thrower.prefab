@@ -2020,7 +2020,6 @@ GameObject:
   - component: {fileID: 9081752000496421307}
   - component: {fileID: 8755670777921071536}
   - component: {fileID: 8755670777921071537}
-  - component: {fileID: 8755670777921071543}
   - component: {fileID: 8755670777921071540}
   - component: {fileID: 8755670777921071541}
   - component: {fileID: 8755670777921071546}
@@ -2058,14 +2057,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8449612716313154305}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!136 &8755670777921071537
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2080,28 +2079,6 @@ CapsuleCollider:
   m_Height: 2.86
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!195 &8755670777921071543
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8449612716313154305}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.4
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 25
-  m_AngularSpeed: 120
-  m_StoppingDistance: 2.25
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &8755670777921071540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2172,7 +2149,11 @@ MonoBehaviour:
   statesInfo: {fileID: 8755670777921071540}
   abilitiesInfo: {fileID: 8755670777921071541}
   vfxTransforms: {fileID: 3646478392350804645}
-  agent: {fileID: 8755670777921071543}
+  runToPointData:
+    Rigidbody: {fileID: 8755670777921071536}
+    Speed: 15
+    StopDistance: 2.25
+    ThisCharacter: {fileID: 0}
   animator: {fileID: 1421056341565838694}
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
   characterData:

@@ -1,7 +1,6 @@
 using Characters.Animations;
 using Characters.Information.Structs;
 using Dreamteck.Splines;
-using UnityEngine.AI;
 
 namespace Characters.Player.States
 {
@@ -10,7 +9,7 @@ namespace Characters.Player.States
         private SplineFollower _splineFollower;
 
         public FolowSpline(IAnimationCommand animation, StateInfo stateInfo,
-            VFXTransforms vfxTransforms, SplineFollower splineFollower, NavMeshAgent agent) : base(
+            VFXTransforms vfxTransforms, SplineFollower splineFollower) : base(
             animation, stateInfo, vfxTransforms)
         {
             _splineFollower = splineFollower;

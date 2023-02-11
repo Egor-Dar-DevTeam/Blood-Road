@@ -25,8 +25,7 @@ namespace Characters.Player
 
         public void Initialize(SetCurrentPoint setCurrentPoint)
         {
-            _setPoint = setCurrentPoint;
-            setCurrentPoint += _setPoint;
+            _setPoint += setCurrentPoint;
         }
     }
 }

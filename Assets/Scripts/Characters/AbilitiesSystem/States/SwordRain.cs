@@ -1,6 +1,5 @@
 using Characters.Animations;
 using Characters.Information.Structs;
-using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -21,7 +20,7 @@ namespace Characters.AbilitiesSystem.States
             CanSkip = false;
             if (_vfxEffect == null ) return;
             var effect = GameObject.Instantiate(_vfxEffect);
-            effect.transform.position = _vfxTransforms.Down.position;
+            effect.transform.position = _vfxTransforms.Down.position+Vector3.forward*2;
             effect.SetLifeTime(3.5f);
             CanSkip = true;
         }

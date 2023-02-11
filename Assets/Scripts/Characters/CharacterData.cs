@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using UI;
 using UI.CombatHUD;
 using UnityEngine;
 
@@ -50,15 +51,16 @@ namespace Characters.Player
             return new CharacterData(Health, Shield, Energy, Mana, Damage);
         }
 
-        public void EventsInitialize(UpdateManaDelegate updateManaDelegate, UpdateHealthDelegate updateHealthDelegate,
-            UpdateEnergyDelegate updateEnergyDelegate)
+        public void EventsInitialize(UIDelegates delegates)
         {
-            _updateEnergyEvent += updateEnergyDelegate;
-            _updateHealthEvent += updateHealthDelegate;
-            _updateManaEvent += updateManaDelegate;
-            _updateManaEvent.Invoke(mana);
-            _updateEnergyEvent.Invoke(energy);
-            _updateHealthEvent.Invoke(health);
+            _updateEnergyEvent += delegates.UpdateEnergyDelegate;
+            _updateHealthEvent += delegates.UpdateHealthDelegate;
+            _updateManaEvent += delegates.UpdateManaDelegate;
+            _dieEvent += delegates.DieDelegate;
+            
+            _updateManaEvent?.Invoke(mana, _manaMax);
+            _updateEnergyEvent?.Invoke(energy, _energyMax);
+            _updateHealthEvent?.Invoke(health, _healthMax);
         }
         private bool _isDeath
         {
@@ -90,31 +92,31 @@ namespace Characters.Player
         {
             if(energy<=0) return;
             energy= Mathf.Clamp(energy-5,0,_energyMax);
-            _updateEnergyEvent?.Invoke(energy);
+            _updateEnergyEvent?.Invoke(energy, _energyMax);
             if (energy <= 0) energy = 0;
         }
 
         public void AddEnergy(float value)
         {
             energy = Mathf.Clamp(energy+value,0,_energyMax);
-            _updateEnergyEvent?.Invoke(energy);
+            _updateEnergyEvent?.Invoke(energy, _energyMax);
         }
 
         public void AddHealth(float value)
         {
             health = Mathf.Clamp(health+value,0,_healthMax);
-            _updateHealthEvent?.Invoke(health);
+            _updateHealthEvent?.Invoke(health, _healthMax);
         }
 
         public void AddMana(float value)
         {
             mana = Mathf.Clamp(mana+value,0,_manaMax);
-            _updateManaEvent?.Invoke(mana);
+            _updateManaEvent?.Invoke(mana, _manaMax);
         }
         public void UseMana(float value)
         {
             mana = Mathf.Clamp(mana - value, 0, _manaMax);
-            _updateManaEvent?.Invoke(mana);
+            _updateManaEvent?.Invoke(mana, _manaMax);
         }
 
         public void Damaged(int value)
@@ -123,7 +125,7 @@ namespace Characters.Player
             float dmgToHealt=0;
             dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
             health = Mathf.Clamp(health - dmgToHealt, 0, _healthMax);
-            _updateHealthEvent?.Invoke(health);
+            _updateHealthEvent?.Invoke(health, _healthMax);
             Die();
         }
 

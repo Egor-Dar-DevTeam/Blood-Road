@@ -3,10 +3,11 @@ using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
 using Characters.Animations;
 using Characters.Information;
+using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
-using UnityEngine.AI;
+using Attack = Characters.InteractableSystems.Attack;
 using Object = UnityEngine.Object;
 
 namespace Characters.Facades
@@ -14,27 +15,53 @@ namespace Characters.Facades
     public abstract class TransitionAndStates : IAnimatableEffect
     {
         protected StatesInfo _statesInfo;
-        private AbilitiesInfo _abilitiesInfo;
 
         private IRunAbility _runAbility;
         
         protected IAnimationCommand _animation;
         private VFXTransforms _vfxTransforms;
 
+        #region states
+
         protected RunToPoint _runToPointState;
         protected Idle _idleState;
-        protected Attack _attackState;
+        protected Player.States.Attack _attackState;
         protected Shield _shieldState;
         protected Die _dieState;
         protected StateMachine<BaseState> _stateMachine;
+
+        #endregion
+
+        #region events
+
         protected event GetIsAttack GetIsAttack;
         protected event GetCurrentPoint CurrentPoint;
         private event HasCharacter _hasCharacter;
+
+        #endregion
+
+        #region delegates
+
         private DieDelegate _dieDelegate;
+        protected Attack _attack;
+        protected SetAttackSpeed _setAttackSpeed;
+
+        #endregion
+
+        
         private bool _isDeath;
+        public bool IsFinished;
+
+        #region publicVariables
 
         public DieDelegate DieDelegate => _dieDelegate;
+
+        public Attack Attack => _attack;
+        public SetAttackSpeed SetAttackSpeed => _setAttackSpeed;
         public IRunAbility RunAbility => _runAbility;
+
+        #endregion
+
 
         public virtual void Initialize(TransitionAndStatesData data)
         {
@@ -49,17 +76,17 @@ namespace Characters.Facades
 
             CurrentPoint += data.GetCurrentPoint;
             _statesInfo = data.StatesInfo;
-            _abilitiesInfo = data.AbilitiesInfo;
         }
 
-        protected virtual void StatesInit(Animator animator, NavMeshAgent agent, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
+        protected virtual void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController,
+            VFXTransforms vfxTransforms)
         {
             _animation = new AnimatorController(animator);
             _animation.CreateAnimationChanger(animatorOverrideController);
             _vfxTransforms = vfxTransforms;
-            _runToPointState = new RunToPoint(_animation, agent,_statesInfo.GetState("run"), vfxTransforms);
+            _runToPointState = new RunToPoint(_animation, runToPointData,_statesInfo.GetState("run"), vfxTransforms);
             _idleState = new Idle(_animation, _statesInfo.GetState("idle"), vfxTransforms);
-            _shieldState = new Shield(_animation, agent, _statesInfo.GetState("shield"), vfxTransforms);
+            _shieldState = new Shield(_animation, _statesInfo.GetState("shield"), vfxTransforms);
             _stateMachine = new StateMachine<BaseState>();
         }
 
@@ -98,18 +125,18 @@ namespace Characters.Facades
             _stateMachine.ChangeState(_idleState);
         }
 
-        protected virtual void TransitionInit(Transform transform, NavMeshAgent agent)
+        protected virtual void TransitionInit(Transform transform, RunToPointData runToPointData)
         {
         }
 
-        protected virtual bool isRuning(Transform transform, NavMeshAgent agent)
+        protected virtual bool IsRuning(Transform transform, RunToPointData runToPointData)
         {
             if (CurrentPoint?.Invoke() != null)
             {
                 _runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
                 var position = CurrentPoint?.Invoke().GetObject().position;
                 if (position != null &&
-                    Vector3.Distance(transform.position, (Vector3)position) >= agent.stoppingDistance)
+                    Vector3.Distance(transform.position, (Vector3)position) >= runToPointData.StopDistance)
                 {
                     return true;
                 }

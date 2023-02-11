@@ -1,7 +1,7 @@
+using Characters.Information.Structs;
 using Characters.Player.States;
 using Dreamteck.Splines;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Characters.Facades
 {
@@ -14,32 +14,34 @@ namespace Characters.Facades
         {
             base.Initialize(data);
             _splineFollower = data.SplineFollower;
-            StatesInit(data.Animator, data.NavMeshAgent, data.AnimatorOverrideController, data.VFXTransforms);
+            StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
             Ability(new AbilitiesSystem.Player(_stateMachine,_animation,data.AbilitiesInfo,_idleState,data.VFXTransforms));
-            data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, true, data,
+            data.CreateAttack(new Attack(_animation, new StateInfo(), data.Damage, true, data,
                 data.VFXTransforms));
-            data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CapsuleCollider, data.VFXTransforms));
+            data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CapsuleCollider,data.RunToPointData.Rigidbody, data.VFXTransforms));
             _attackState = data.Attack;
             _dieState = data.Die;
+            _setAttackSpeed = _attackState.SetAnimationSpeed;
+            _attack = _attackState.SetStateInfo;
 
-            TransitionInit(data.Transform, data.NavMeshAgent);
+            TransitionInit(data.Transform, data.RunToPointData);
         }
 
-        protected override void StatesInit(Animator animator, NavMeshAgent agent,
+        protected override void StatesInit(Animator animator, RunToPointData runToPointData,
             AnimatorOverrideController animatorOverrideController,
             VFXTransforms vfxTransforms)
         {
-            base.StatesInit(animator, agent, animatorOverrideController, vfxTransforms);
+            base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
             _folowSplineState =
-                new FolowSpline(_animation, _statesInfo.GetState("run"), vfxTransforms, _splineFollower, agent);
+                new FolowSpline(_animation, _statesInfo.GetState("run"), vfxTransforms, _splineFollower);
         }
 
-        protected override void TransitionInit(Transform transform, NavMeshAgent agent)
+        protected override void TransitionInit(Transform transform, RunToPointData runToPointData)
         {
-           base.TransitionInit(transform, agent);
-            _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(_folowSplineState, _runToPointState, () => isRuning(transform, agent));
-            _stateMachine.AddTransition(_idleState, _runToPointState, () => isRuning(transform, agent));
+           base.TransitionInit(transform, runToPointData);
+            _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null&& !IsFinished);
+            _stateMachine.AddTransition(_folowSplineState, _runToPointState, () => IsRuning(transform, runToPointData));
+            _stateMachine.AddTransition(_idleState, _runToPointState, () => IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_idleState, _shieldState,
                 () =>
                 {
@@ -51,16 +53,16 @@ namespace Characters.Facades
 
                     var objectPoint = point.GetObject();
                     return Vector3.Distance(transform.position, objectPoint.position) <=
-                           agent.stoppingDistance + .3f;
+                           runToPointData.StopDistance + .3f;
                 });
             _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);
             _stateMachine.AddTransition(_runToPointState, _shieldState, () =>
                 Vector3.Distance(transform.position, GetCurrentPoint().GetObject().position) <=
-                agent.stoppingDistance + .1f);
+                runToPointData.StopDistance + .1f);
             _stateMachine.AddTransition(_shieldState, _idleState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(_shieldState, _runToPointState, () =>  isRuning(transform, agent));
+            _stateMachine.AddTransition(_shieldState, _runToPointState, () =>  IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _runToPointState,
-                () => _attackState.CanSkip && isRuning(transform, agent));
+                () => _attackState.CanSkip && IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_shieldState, _attackState, () =>
             {
                 if (IsAttack())
@@ -70,19 +72,20 @@ namespace Characters.Facades
 
                 return IsAttack();
             });
-            _stateMachine.AddTransition(_attackState, _shieldState, () => _attackState.CanSkip && !IsAttack());
+            _stateMachine.AddTransition(_attackState, _shieldState, () => _attackState.CanSkip || !IsAttack());
             _stateMachine.AddTransition(_attackState, _idleState,
                 (() => _attackState.CanSkip && GetCurrentPoint() == null));
+            _stateMachine.AddTransition(_idleState, ()=> IsFinished);
             _stateMachine.ChangeState(_idleState);
         }
 
-        protected override bool isRuning(Transform transform, NavMeshAgent agent)
+        protected override bool IsRuning(Transform transform, RunToPointData runToPointData)
         {
             if (GetCurrentPoint() != null)
             {
                 var position = GetCurrentPoint().GetObject().position;
                 if (position != null &&
-                    Vector3.Distance(transform.position, (Vector3)position) >= agent.stoppingDistance + .2f)
+                    Vector3.Distance(transform.position, (Vector3)position) >= runToPointData.StopDistance + .2f)
                 {
                     return true;
                 }

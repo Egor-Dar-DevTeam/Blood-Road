@@ -150,7 +150,6 @@ GameObject:
   - component: {fileID: 113196902479711108}
   - component: {fileID: 3151344332626612192}
   - component: {fileID: 1372862903418735358}
-  - component: {fileID: 490033019708564505}
   - component: {fileID: 2826259763041148053}
   - component: {fileID: 1645627834324780890}
   - component: {fileID: 114382111470584319}
@@ -188,14 +187,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781927964220199230}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!136 &1372862903418735358
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -210,28 +209,6 @@ CapsuleCollider:
   m_Height: 2.86
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: -1}
---- !u!195 &490033019708564505
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781927964220199230}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.4
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 34
-  m_AngularSpeed: 120
-  m_StoppingDistance: 2.25
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &2826259763041148053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,7 +279,11 @@ MonoBehaviour:
   statesInfo: {fileID: 2826259763041148053}
   abilitiesInfo: {fileID: 1645627834324780890}
   vfxTransforms: {fileID: 7276021090408001229}
-  agent: {fileID: 490033019708564505}
+  runToPointData:
+    Rigidbody: {fileID: 3151344332626612192}
+    Speed: 15
+    StopDistance: 2.25
+    ThisCharacter: {fileID: 0}
   animator: {fileID: 7286220394661830894}
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
   characterData:

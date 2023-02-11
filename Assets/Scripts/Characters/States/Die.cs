@@ -8,19 +8,23 @@ namespace Characters.Player.States
     public class Die: BaseState
     {
         protected CapsuleCollider _capsuleCollider;
+        private Rigidbody _rigidbody;
         public bool CanSkip { get; private set; }
 
 
 
-        public Die(IAnimationCommand animation,StateInfo stateInfo, CapsuleCollider capsuleCollider, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
+        public Die(IAnimationCommand animation,StateInfo stateInfo, CapsuleCollider capsuleCollider, Rigidbody rigidbody, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
         {
             _capsuleCollider = capsuleCollider;
+            _rigidbody = rigidbody;
             _parameterName = "death";
         }
 
         public override void Enter()
         {
             CanSkip = false;
+            _rigidbody.useGravity = false;
+            _rigidbody.isKinematic = true;
             base.Enter();
             _animation.SetAnimation(_parameterName);
             _capsuleCollider.enabled = false;

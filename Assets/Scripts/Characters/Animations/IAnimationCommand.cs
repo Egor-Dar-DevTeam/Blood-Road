@@ -8,5 +8,6 @@ namespace Characters.Animations
         public float LengthAnimation(string nameClip);
         public void CreateAnimationChanger(AnimatorOverrideController controller);
         public void SetAnimation(string nameClip);
+        public void SetSpeedAnimation(float value);
     }
 }

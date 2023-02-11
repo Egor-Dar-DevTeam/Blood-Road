@@ -2873,7 +2873,6 @@ GameObject:
   - component: {fileID: 6223831840846575767}
   - component: {fileID: 406118543354823182}
   - component: {fileID: 8385527573973534394}
-  - component: {fileID: 9208495731750934161}
   - component: {fileID: 4710791537601708849}
   - component: {fileID: 941361719914550471}
   - component: {fileID: -371405681017191416}
@@ -2971,7 +2970,11 @@ MonoBehaviour:
   statesInfo: {fileID: 1062428683576079328}
   abilitiesInfo: {fileID: 6223831840846575767}
   vfxTransforms: {fileID: 997281621212715095}
-  agent: {fileID: 9208495731750934161}
+  runToPointData:
+    Rigidbody: {fileID: 8385527573973534394}
+    Speed: 15
+    StopDistance: 2.25
+    ThisCharacter: {fileID: 0}
   animator: {fileID: 4155656847646383371}
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
   characterData:
@@ -2993,36 +2996,14 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7546991359649957683}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!195 &9208495731750934161
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7546991359649957683}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.4
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 5
-  m_AngularSpeed: 120
-  m_StoppingDistance: 2.25
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_Interpolate: 1
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!136 &4710791537601708849
 CapsuleCollider:
   m_ObjectHideFlags: 0

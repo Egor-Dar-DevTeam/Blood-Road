@@ -5,12 +5,13 @@ using Characters.Facades;
 using Characters.Information;
 using Characters.InteractableSystems;
 using Characters.Player;
+using Characters.Player.States;
 using Characters.WeaponSystem;
 using Dreamteck.Splines;
 using JetBrains.Annotations;
+using UI;
 using UI.CombatHUD;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Characters
 {
@@ -29,7 +30,7 @@ namespace Characters
         [SerializeField] private StatesInfo statesInfo;
         [SerializeField] private AbilitiesInfo abilitiesInfo;
         [SerializeField] private VFXTransforms vfxTransforms;
-        [SerializeField] protected NavMeshAgent agent;
+        [SerializeField] protected RunToPointData runToPointData;
         [SerializeField] protected Animator animator;
         [SerializeField] protected Eyes eyesCharacters;
         [SerializeField] protected CharacterData characterData;
@@ -47,16 +48,18 @@ namespace Characters
         private GetCurrentPoint _getCurrentPoint;
         private DieDelegate _characterPointDie;
         private HasCharacter _hasCharacterDelegate;
+
         public event AttackedAbility AttackAbility;
         public event AttackedWeapon AttackWeapon;
 
 
         private InteractionSystem _interactionSystem;
-        private TransitionAndStates _transitionAndStates;
+        protected TransitionAndStates _transitionAndStates;
         private IInteractable GetCurrentPoint() => _currentPoint;
         public RemoveList GetRemoveList() => RemoveList;
         public bool HasCharacter() => _hasCharacter;
         public Receiver Receiver => linker.Receiver;
+        public VFXTransforms VFXTransforms => vfxTransforms;
         public virtual void Finish()
         {
             
@@ -73,6 +76,7 @@ namespace Characters
 
         protected virtual void Start()
         {
+            runToPointData.ThisCharacter = transform;
             _setCurrentPoint = SetCurrentPoint;
             _startRechangeCurrentPoint = StartRCP;
             _getCurrentPoint = GetCurrentPoint;
@@ -83,9 +87,10 @@ namespace Characters
         }
         protected virtual void RemoveList(IInteractable enemy){}
 
-        public void SetCharacterData(CharacterData data)
+        public void SetCharacterData(CharacterData data, UIDelegates delegates)
         {
             characterData = data.Copy();
+            characterData.EventsInitialize(delegates);
             characterData.DieEvent += () => _hasCharacter = false;
             GetDieEvent = characterData.DieEvent;
         }
@@ -108,7 +113,7 @@ namespace Characters
             _transitionAndStates = transitionAndStates;
             linker.Initialize(_transitionAndStates, characterData);
             _transitionAndStates.Initialize(new TransitionAndStatesData(animator, _getCurrentPoint, transform,
-                agent, getIsAttack, characterData,
+                runToPointData, getIsAttack, characterData,
                 statesInfo, characterData.Damage, _hasCharacterDelegate,
                 capsuleCollider, _animatorOverrideController, vfxTransforms,
                 updateEnergyDelegate, abilitiesInfo, splineFollower));

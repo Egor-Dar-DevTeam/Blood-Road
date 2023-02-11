@@ -1,22 +1,27 @@
-﻿using Characters.Animations;
+﻿using System;
+using Characters.Animations;
 using Characters.Information.Structs;
 using JetBrains.Annotations;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Characters.Player.States
 {
     public class RunToPoint : BaseState
     {
-        private readonly NavMeshAgent _agent;
+        private readonly Transform _transform;
         private Transform _point;
-        private Vector3 _finalPosition;
+        private Rigidbody _rb;
+        private float _speed;
+        private float _stopingDistance;
         public Transform Point => _point;
 
-        public RunToPoint(IAnimationCommand animation, NavMeshAgent agent, StateInfo stateInfo,
+        public RunToPoint(IAnimationCommand animation, RunToPointData data, StateInfo stateInfo,
             VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {
-            _agent = agent;
+            _rb = data.Rigidbody;
+            _transform = data.ThisCharacter;
+            _speed = data.Speed;
+            _stopingDistance = data.StopDistance;
             _parameterName = "run";
         }
 
@@ -29,19 +34,28 @@ namespace Characters.Player.States
         {
             base.Enter();
             _animation.SetAnimation(_parameterName);
-            _finalPosition = _point.position;
-            _agent.SetDestination(_finalPosition);
         }
 
         public override void Tick(float tickTime)
         {
-            if (_finalPosition == _point.position) return;
-            _finalPosition = _point.position;
-            _agent.SetDestination(_finalPosition);
+            if (_point == null) return;
+            if (Vector3.Distance(_point.position, _transform.position) >= _stopingDistance)
+            {
+                _rb.velocity = _transform.forward * _speed;
+            }
         }
 
         public override void Exit()
         {
         }
+    }
+
+    [Serializable]
+    public struct RunToPointData
+    {
+        public Rigidbody Rigidbody;
+        public float Speed;
+        public float StopDistance;
+        [HideInInspector] public Transform ThisCharacter;
     }
 }

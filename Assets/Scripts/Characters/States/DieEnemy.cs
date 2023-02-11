@@ -8,10 +8,10 @@ namespace Characters.Player.States
 {
     public class DieEnemy : Die
     {
-        public DieEnemy(IAnimationCommand animation, StateInfo stateInfo, CapsuleCollider capsuleCollider,VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, capsuleCollider,vfxTransforms)
+        public DieEnemy(IAnimationCommand animation, StateInfo stateInfo, CapsuleCollider capsuleCollider, Rigidbody rigidbody,VFXTransforms vfxTransforms) : base(
+            animation, stateInfo, capsuleCollider, rigidbody,vfxTransforms)
         {
-            _animation = _animation;
+            _animation = animation;
         }
 
         public override void Enter()

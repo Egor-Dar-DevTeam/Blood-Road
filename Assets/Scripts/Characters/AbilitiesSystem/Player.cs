@@ -1,4 +1,3 @@
-using System;
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem.States;
 using Characters.Animations;

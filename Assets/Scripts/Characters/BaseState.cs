@@ -16,9 +16,9 @@ namespace Characters
         protected BaseState(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms)
         {
             _animation = animation;
+            _vfxTransforms = vfxTransforms;
             _clip = stateInfo.Clip;
             _vfxEffect = stateInfo.VFXEffect;
-            _vfxTransforms = vfxTransforms;
         }
 
         public override void Enter()

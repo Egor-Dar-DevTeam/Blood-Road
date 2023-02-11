@@ -7,7 +7,6 @@ using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI.CombatHUD;
 using UnityEngine;
-using UnityEngine.AI;
 
 public struct TransitionAndStatesData
 {
@@ -17,7 +16,7 @@ public struct TransitionAndStatesData
 
     public Transform Transform { get; }
 
-    public NavMeshAgent NavMeshAgent { get; }
+    public RunToPointData RunToPointData { get; }
 
     public StatesInfo StatesInfo { get; }
     public AbilitiesInfo AbilitiesInfo { get; }
@@ -40,7 +39,7 @@ public struct TransitionAndStatesData
     public int Damage { get; }
 
     public TransitionAndStatesData(Animator animator, GetCurrentPoint getCurrentPoint, Transform transform,
-        NavMeshAgent agent, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
+        RunToPointData runToPointData, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
         StatesInfo statesInfo, int damage, HasCharacter hasCharacter,
         CapsuleCollider capsuleCollider, AnimatorOverrideController animatorOverrideController,VFXTransforms vfxTransforms,
         [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null, [CanBeNull] AbilitiesInfo abilitiesInfo=null,
@@ -49,7 +48,7 @@ public struct TransitionAndStatesData
         Animator = animator;
         GetCurrentPoint = getCurrentPoint;
         Transform = transform;
-        NavMeshAgent = agent;
+        RunToPointData = runToPointData;
         GetIsAttack = getIsAttack;
         CharacterData = characterData;
         StatesInfo = statesInfo;

@@ -4,6 +4,6 @@ namespace Characters.InteractableSystems
 {
     public interface IInit<in T> where T: Delegate
     {
-        public void Initialize(T setPointDelegate);
+        public void Initialize(T subscriber);
     }
 }

@@ -5,6 +5,8 @@ using Characters.AbilitiesSystem;
 using Characters.BottlesSystem;
 using Characters.EffectSystem;
 using Characters.Facades;
+using Characters.Information.Structs;
+using Characters.InteractableSystems;
 using Dreamteck.Splines;
 using UI;
 using UnityEngine;
@@ -19,6 +21,9 @@ namespace Characters.Player
         [SerializeField] private GameCanvasController canvasController;
         [SerializeField] private SplineFollower splineFollower;
         [SerializeField] private SplineProjector projector;
+        [SerializeField] private AttackPlayerPointer attackPlayerPointer;
+        private IInit<Attack> _initAttack;
+        private IInit<SetAttackSpeed> _initSetAttackSpeed;
 
         private List<IInteractable> _interactables;
 
@@ -44,17 +49,23 @@ namespace Characters.Player
         protected override void Start()
         {
             _interactables = new List<IInteractable>();
-
             _enemyOutlineRechanger = new EnemyOutlineRechanger();
             _getIsAttack = GetIsAttack;
             base.Start();
-            SetCharacterData(characterData);
+            SetCharacterData(characterData,canvasController.UIDelegates);
             InitializeTransition(new PlayerTransition(), _getIsAttack,null, splineFollower);
             InitializeInteractionSystem(cameraRay);
             SubscribeDeath();
-            characterData.EventsInitialize(canvasController.UIDelegates.UpdateManaDelegate,
-                canvasController.UIDelegates.UpdateHealthDelegate,
-                canvasController.UIDelegates.UpdateEnergyDelegate);
+            InitializeAttackDelegates();
+        }
+
+        private void InitializeAttackDelegates()
+        {
+            _initAttack = attackPlayerPointer;
+            _initSetAttackSpeed = attackPlayerPointer;
+            _initAttack.Initialize(Attack);
+            _initAttack.Initialize(_transitionAndStates.Attack);
+            _initSetAttackSpeed.Initialize(_transitionAndStates.SetAttackSpeed);
         }
 
         private void FixedUpdate()
@@ -72,6 +83,7 @@ namespace Characters.Player
         public override void Finish()
         {
             canvasController.Death();
+            _transitionAndStates.IsFinished = true;
         }
 
         public  void UseBottle(EffectData data)
@@ -157,34 +169,21 @@ namespace Characters.Player
         {
             if(!_hasCharacter) return;
             if (point.IsPlayer()) return;
-            if (characterData.Energy > 1 && _currentPoint == point)
-            {
-                Attack();
-            }
 
-            if (_currentPoint != point)
-            {
-                _currentPoint = point;
-                _enemyOutlineRechanger.SetEnemy(_currentPoint);
-                base.SetCurrentPoint(point);
-            }
+            if (_currentPoint == point) return;
+            _currentPoint = point;
+            _enemyOutlineRechanger.SetEnemy(_currentPoint);
+            base.SetCurrentPoint(point);
         }
 
-        public void OnButtonAttack()
+        private async void Attack(StateInfo info)
         {
-            Attack();
-        }
-
-        private async Task Attack()
-        {
+            if(characterData.Energy<15)return;
             _isAttack = true;
-            await Task.Delay(100);
-            WeaponAttack();
             await Task.Delay(100);
             _isAttack = false;
         }
         
-
         public override void SetOutline(bool value)
         {
         }

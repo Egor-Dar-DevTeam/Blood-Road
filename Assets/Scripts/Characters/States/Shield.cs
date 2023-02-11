@@ -1,19 +1,16 @@
 ﻿using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
-using UnityEngine.AI;
 
 namespace Characters.Player.States
 {
     public class Shield : BaseState
     {
-        private NavMeshAgent _agent;
         private int _currentMilliseconds;
         public int Milliseconds => _currentMilliseconds;
 
-        public Shield(IAnimationCommand animation, NavMeshAgent agent, StateInfo stateInfo, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
+        public Shield(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
         {
-            _agent = agent;
             _parameterName = "shield";
         }
         public override void Enter()
