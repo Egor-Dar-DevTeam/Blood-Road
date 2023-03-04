@@ -20,16 +20,20 @@ namespace UI.CombatHUD
 
         private async void InteractableButton(float cooldown, UnityAction action)
         {
-            action.Invoke();
-            button.interactable = false;
-            var scale = button.transform.localScale;
-            var runTween = DOTween.Sequence()
-                .Append(cooldownMask.DOFillAmount(1, 0.2f))
-                .Append(cooldownMask.DOFillAmount(0, cooldown))
-                .Append(button.transform.DOScale( new Vector3(scale.x + 0.1f, scale.y+0.1f,scale.z), 0.2f))
-                .Append(button.transform.DOScale(new Vector3(scale.x, scale.y,scale.z), 0.2f));
-            runTween.Play();
-                  await runTween.AsyncWaitForCompletion();
+            action?.Invoke();
+            if (cooldown != 0)
+            {
+                button.interactable = false;
+                var scale = button.transform.localScale;
+                var runTween = DOTween.Sequence()
+                    .Append(cooldownMask.DOFillAmount(1, 0.2f))
+                    .Append(cooldownMask.DOFillAmount(0, cooldown))
+                    .Append(button.transform.DOScale(new Vector3(scale.x + 0.1f, scale.y + 0.1f, scale.z), 0.2f))
+                    .Append(button.transform.DOScale(new Vector3(scale.x, scale.y, scale.z), 0.2f));
+                runTween.Play();
+                await runTween.AsyncWaitForCompletion();
+            }
+
             button.interactable = true;
         }
     }

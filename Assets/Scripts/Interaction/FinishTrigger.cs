@@ -7,9 +7,9 @@ namespace Interaction
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out IInteractable interactable))
+            if (other.TryGetComponent(out ITriggerable triggerable))
             {
-                interactable.Finish();
+                triggerable.Finish();
             }
         }
     }

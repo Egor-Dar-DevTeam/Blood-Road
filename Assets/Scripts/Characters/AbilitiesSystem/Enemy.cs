@@ -11,9 +11,7 @@ namespace Characters.AbilitiesSystem
         private Stun _stunState;
         private AttackStun _attackStunState;
 
-        public Enemy(StateMachine<BaseState> stateMachine, IAnimationCommand animationCommand, AbilitiesInfo info,
-            BaseState idleState, VFXTransforms transforms) : base(stateMachine, animationCommand, info, idleState,
-            transforms)
+        public Enemy(AbilityData abilityData) : base(abilityData)
         {
         }
 

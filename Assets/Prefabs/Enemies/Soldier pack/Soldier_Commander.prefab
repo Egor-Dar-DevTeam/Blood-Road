@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6837574287385718}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -608,7 +608,7 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2.86
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: -2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1342126788274115832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,8 +681,8 @@ MonoBehaviour:
   vfxTransforms: {fileID: 5918216036555234785}
   runToPointData:
     Rigidbody: {fileID: 4791142128642885795}
-    Speed: 15
-    StopDistance: 2.25
+    Speed: 5
+    StopDistance: 4.25
     ThisCharacter: {fileID: 0}
   animator: {fileID: 1861611331894055860}
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
@@ -697,6 +697,7 @@ MonoBehaviour:
   rotationSpeed: 10
   weapon: {fileID: -2723120577739440578, guid: b0931c7323989014fbd30100fb737175, type: 3}
   skinnedMeshRenderer: {fileID: 5606937093609604699}
+  moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
 --- !u!114 &-3662599974560951028
 MonoBehaviour:
   m_ObjectHideFlags: 0

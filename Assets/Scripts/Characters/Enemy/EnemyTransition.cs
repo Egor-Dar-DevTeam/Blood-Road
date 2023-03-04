@@ -12,8 +12,9 @@ namespace Characters.Facades
             data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, false, data, data.VFXTransforms));
             data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState("die"), data.CapsuleCollider,data.RunToPointData.Rigidbody,data.VFXTransforms));
             _attackState = data.Attack;
+            DieEnemy dieState = (DieEnemy)data.Die;
+            dieState.SetMoneyPrefab(data.MoneyPrefab);
             _dieState = data.Die;
-            Ability(new AbilitiesSystem.Enemy(_stateMachine,_animation,data.AbilitiesInfo,_idleState,data.VFXTransforms));
             TransitionInit(data.Transform, data.RunToPointData);
         }
 
@@ -22,7 +23,12 @@ namespace Characters.Facades
             base.TransitionInit(transform,runToPointData);
             _stateMachine.AddTransition(_idleState, _runToPointState, () =>
             {
-                if (GetCurrentPoint() != null) _runToPointState.SetPoint(GetCurrentPoint().GetObject());
+                if (GetCurrentPoint() != null)
+                {
+                    var dieState = (DieEnemy)_dieState;
+                    dieState.SetPlayerTransform(GetCurrentPoint().GetObject());
+                    _runToPointState.SetPoint(GetCurrentPoint().GetObject());
+                }
                 return GetCurrentPoint() != null;
             });
             _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);

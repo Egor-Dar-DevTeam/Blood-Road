@@ -10,13 +10,12 @@ namespace Characters.AbilitiesSystem
         protected AbilitiesInfo _info;
         protected Type _currentEffectType;
 
-        public Abilities(StateMachine<BaseState> stateMachine, IAnimationCommand animationCommand, AbilitiesInfo info,
-            BaseState idleState, VFXTransforms transforms)
+        public Abilities(AbilityData abilityData)
         {
-            _stateMachine = stateMachine;
-            _info = info;
-            CreateStates(animationCommand, transforms);
-            InitializeTransitions(idleState);
+            _stateMachine = abilityData.StateMachine;
+            _info = abilityData.AbilitiesInfo;
+            CreateStates(abilityData.AnimationCommand, abilityData.VFXTransforms);
+            InitializeTransitions(abilityData.IdleState);
         }
 
         protected abstract void CreateStates(IAnimationCommand animationCommand, VFXTransforms transforms);
@@ -40,6 +39,11 @@ namespace Characters.AbilitiesSystem
         {
         }
 
+        public virtual void ManaShield()
+        {
+            
+        }
+
         public void RunAbility(IAbilityCommand command)
         {
             command.Apply(this);
@@ -48,6 +52,11 @@ namespace Characters.AbilitiesSystem
         public virtual void SetTypeAbility(Type type)
         {
             // _currentEffectType = type;
+        }
+
+        public virtual void UnleashingRage()
+        {
+            
         }
     }
 }

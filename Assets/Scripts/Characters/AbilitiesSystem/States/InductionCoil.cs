@@ -9,13 +9,12 @@ namespace Characters.AbilitiesSystem.States
         public override void Enter()
         {
             CanSkip = false;
-            if (_vfxEffect == null ) return;
-            var effect = GameObject.Instantiate(_vfxEffect,_vfxTransforms.Down);
+            if (_vfxEffect == null) return;
+            var effect = GameObject.Instantiate(_vfxEffect, _vfxTransforms.Down);
             effect.SetLifeTime(3f);
             CanSkip = true;
         }
-        
-        
+
 
         public override void Tick(float tickTime)
         {
@@ -25,7 +24,8 @@ namespace Characters.AbilitiesSystem.States
         {
         }
 
-        public InductionCoil(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        public InductionCoil(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
+            animation, stateInfo, vfxTransforms)
         {
         }
     }

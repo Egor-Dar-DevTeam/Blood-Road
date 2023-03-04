@@ -9,13 +9,14 @@ namespace Characters.Enemy
     public class DefaultEnemy : BaseCharacter
     {
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+        [SerializeField] private Money moneyPrefab;
         public override bool IsPlayer() => false;
         private event RemoveList _removeList;
 
         private void Awake()
         {
             var center = capsuleCollider.center;
-            center = new Vector3(center.x,center.y*2.5f, center.z);
+            center = new Vector3(center.x, center.y * 2.5f, center.z);
             capsuleCollider.center = center;
             capsuleCollider.height *= 2;
         }
@@ -23,7 +24,7 @@ namespace Characters.Enemy
         protected override void Start()
         {
             base.Start();
-            InitializeTransition(new EnemyTransition(), null);
+            InitializeTransition(new EnemyTransition(), null, null, moneyPrefab);
             InitializeInteractionSystem(null);
             SubscribeDeath();
             SubscribeDeathMethod(Die);
@@ -31,7 +32,7 @@ namespace Characters.Enemy
 
         protected override void ClearPoint()
         {
-            if(_currentPoint==null) return;
+            if (_currentPoint == null) return;
             characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
             _currentPoint = null;
         }

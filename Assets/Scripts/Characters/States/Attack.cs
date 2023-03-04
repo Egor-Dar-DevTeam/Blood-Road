@@ -12,10 +12,11 @@ namespace Characters.Player.States
         private IInteractable _interactable;
         private TransitionAndStatesData _transitionAndStatesData;
         private int _damage;
-        private float _animationSpeed;
+        private float _animationSpeed = 1;
         private bool _setDamage;
         private bool _isPlayer;
-        public bool CanSkip { get; private set; }
+        private bool _canSkip;
+        public bool CanSkip => _canSkip;
 
         public Attack(IAnimationCommand animation, StateInfo statesInfo, int damage, bool isPlayer,
             TransitionAndStatesData data, VFXTransforms vfxTransforms) : base(
@@ -31,9 +32,7 @@ namespace Characters.Player.States
         {
             _clip = info.Clip;
             _parameterName = _clip.name;
-            _animation.AddValue(_parameterName, _clip);
             _vfxEffect = info.VFXEffect;
-            if (!CanSkip) Damage();
         }
 
         public void SetAnimationSpeed(float value)
@@ -48,12 +47,13 @@ namespace Characters.Player.States
 
         public override void Enter()
         {
-            _animationSpeed = 1;
-            CanSkip = false;
+            // _animationSpeed = 1;
+            _canSkip = false;
             base.Enter();
             _animation.SetAnimation(_parameterName);
             _setDamage = true;
             if (!_isPlayer) SetDamage();
+            else Damage();
         }
 
         private async void SetDamage()
@@ -75,13 +75,14 @@ namespace Characters.Player.States
                 _interactable.ReceiveDamage(_damage);
 
                 await Task.Delay(milliseconds);
-            } while (_setDamage && !_isPlayer);
+            } while (_setDamage);
 
-            CanSkip = true;
+            _canSkip = true;
         }
 
         private void Damage()
         {
+            _canSkip = false;
             _animation.SetAnimation(_parameterName);
             VFXEffect vfx = null;
             if (_vfxEffect != null)
@@ -93,7 +94,7 @@ namespace Characters.Player.States
 
             _transitionAndStatesData.CharacterData.UseEnergy();
             _interactable.ReceiveDamage(_damage);
-            CanSkip = true;
+            _canSkip = true;
         }
 
 

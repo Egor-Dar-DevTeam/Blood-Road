@@ -7,6 +7,8 @@ using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI.CombatHUD;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
+using Attack = Characters.Player.States.Attack;
 
 public struct TransitionAndStatesData
 {
@@ -17,9 +19,9 @@ public struct TransitionAndStatesData
     public Transform Transform { get; }
 
     public RunToPointData RunToPointData { get; }
+    public Money MoneyPrefab { get; }
 
     public StatesInfo StatesInfo { get; }
-    public AbilitiesInfo AbilitiesInfo { get; }
     public VFXTransforms VFXTransforms { get; }
     public AnimatorOverrideController AnimatorOverrideController { get; }
     public CapsuleCollider CapsuleCollider { get; }
@@ -29,7 +31,6 @@ public struct TransitionAndStatesData
 
     [CanBeNull] public CharacterData CharacterData { get; }
 
-    public UpdateEnergyDelegate EnergyEvent;
 
     public Attack Attack { get; private set; }
     public Die Die { get; private set; }
@@ -42,8 +43,7 @@ public struct TransitionAndStatesData
         RunToPointData runToPointData, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
         StatesInfo statesInfo, int damage, HasCharacter hasCharacter,
         CapsuleCollider capsuleCollider, AnimatorOverrideController animatorOverrideController,VFXTransforms vfxTransforms,
-        [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null, [CanBeNull] AbilitiesInfo abilitiesInfo=null,
-        [CanBeNull] SplineFollower splineFollower=null)
+        [CanBeNull] SplineFollower splineFollower=null, [CanBeNull] Money moneyPrefab=null)
     {
         Animator = animator;
         GetCurrentPoint = getCurrentPoint;
@@ -58,10 +58,9 @@ public struct TransitionAndStatesData
         HasCharacter = hasCharacter;
         CapsuleCollider = capsuleCollider;
         AnimatorOverrideController = animatorOverrideController;
-        EnergyEvent = updateEnergyDelegate;
-        AbilitiesInfo = abilitiesInfo;
         VFXTransforms = vfxTransforms;
         SplineFollower = splineFollower;
+        MoneyPrefab = moneyPrefab;
     }
 
     public void CreateAttack(Attack attack)

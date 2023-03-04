@@ -7,7 +7,7 @@ using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
-using Attack = Characters.InteractableSystems.Attack;
+using Attack = Characters.Player.Attack;
 using Object = UnityEngine.Object;
 
 namespace Characters.Facades
@@ -50,7 +50,7 @@ namespace Characters.Facades
 
         
         private bool _isDeath;
-        public bool IsFinished;
+        public bool IsStoped;
 
         #region publicVariables
 
@@ -115,9 +115,17 @@ namespace Characters.Facades
            if(_runAbility!=null) _runAbility.SetTypeAbility(type);
         }
 
-        protected void Ability(Abilities abilities)
+        public void InitializeAbilities(Abilities abilities)
         {
             _runAbility = abilities;
+        }
+
+        public AbilityData ReturnReadyData(AbilityData abilityData)
+        {
+            abilityData.SetAnimationCommand(_animation);
+            abilityData.SetIdleState(_idleState);
+            abilityData.SetStateMachine(_stateMachine);
+            return abilityData;
         }
 
         public void Destroy()

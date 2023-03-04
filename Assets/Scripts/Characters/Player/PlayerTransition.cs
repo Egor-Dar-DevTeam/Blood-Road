@@ -15,7 +15,6 @@ namespace Characters.Facades
             base.Initialize(data);
             _splineFollower = data.SplineFollower;
             StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
-            Ability(new AbilitiesSystem.Player(_stateMachine,_animation,data.AbilitiesInfo,_idleState,data.VFXTransforms));
             data.CreateAttack(new Attack(_animation, new StateInfo(), data.Damage, true, data,
                 data.VFXTransforms));
             data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CapsuleCollider,data.RunToPointData.Rigidbody, data.VFXTransforms));
@@ -39,7 +38,7 @@ namespace Characters.Facades
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)
         {
            base.TransitionInit(transform, runToPointData);
-            _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null&& !IsFinished);
+            _stateMachine.AddTransition(_folowSplineState, () => GetCurrentPoint() == null&& !IsStoped);
             _stateMachine.AddTransition(_folowSplineState, _runToPointState, () => IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_idleState, _runToPointState, () => IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_idleState, _shieldState,
@@ -72,10 +71,10 @@ namespace Characters.Facades
 
                 return IsAttack();
             });
-            _stateMachine.AddTransition(_attackState, _shieldState, () => _attackState.CanSkip || !IsAttack());
+            _stateMachine.AddTransition(_attackState, _shieldState, () => _attackState.CanSkip && !IsAttack());
             _stateMachine.AddTransition(_attackState, _idleState,
                 (() => _attackState.CanSkip && GetCurrentPoint() == null));
-            _stateMachine.AddTransition(_idleState, ()=> IsFinished);
+            _stateMachine.AddTransition(_idleState, ()=> IsStoped);
             _stateMachine.ChangeState(_idleState);
         }
 

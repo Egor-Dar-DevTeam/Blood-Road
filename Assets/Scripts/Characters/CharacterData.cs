@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Characters.Player
 {
     public delegate void DieDelegate();
+    public delegate void Impenetrable(bool value);
     [Serializable]
     public class CharacterData
     {
@@ -18,9 +19,12 @@ namespace Characters.Player
         private float _healthMax;
         private float _energyMax;
         private float _manaMax;
+
+        private bool _isImpenetrable;
         private event UpdateManaDelegate _updateManaEvent;
         private event UpdateHealthDelegate _updateHealthEvent;
         private event UpdateEnergyDelegate _updateEnergyEvent;
+        public Impenetrable ImpenetrableDelegate;
 
         public CharacterData(float health, float shield, float energy, float mana, int damage)
         {
@@ -32,6 +36,7 @@ namespace Characters.Player
             _healthMax = health;
             _energyMax = energy;
             _manaMax = mana;
+            ImpenetrableDelegate = Impenetrable;
             AddResource();
         }
 
@@ -50,6 +55,8 @@ namespace Characters.Player
         {
             return new CharacterData(Health, Shield, Energy, Mana, Damage);
         }
+
+        private void Impenetrable(bool value) => _isImpenetrable = value;
 
         public void EventsInitialize(UIDelegates delegates)
         {
@@ -121,7 +128,7 @@ namespace Characters.Player
 
         public void Damaged(int value)
         {
-          //  if(_isDeath) return;
+            if(_isImpenetrable) return;
             float dmgToHealt=0;
             dmgToHealt = Mathf.Clamp(value - shield, 0 , int.MaxValue);
             health = Mathf.Clamp(health - dmgToHealt, 0, _healthMax);

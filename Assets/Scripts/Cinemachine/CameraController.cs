@@ -5,16 +5,16 @@ namespace Cinemachine
     public class CameraController : MonoBehaviour
     {
         [SerializeField] private TriggerAddPriority[] triggerAddPriorities;
+        [SerializeField] private CinemachineVirtualCamera abilityCamera;
+        private CinemachineVirtualCamera _currentCinemachineVirtualCamera;
 
         private void Start()
         {
-            for (int i = 0; i < triggerAddPriorities.Length; i++)
+            foreach (var trigger in triggerAddPriorities)
             {
-                triggerAddPriorities[i].Initialize(this);
+                trigger.Initialize(this);
             }
         }
-
-        private CinemachineVirtualCamera _currentCinemachineVirtualCamera;
 
         public void SetCamera(CinemachineVirtualCamera newCinemachineVirtualCamera)
         {
@@ -25,6 +25,20 @@ namespace Cinemachine
 
             _currentCinemachineVirtualCamera = newCinemachineVirtualCamera;
             _currentCinemachineVirtualCamera.Priority = 1;
+        }
+
+        public void AbilityCamera(bool value)
+        {
+            if (value)
+            {
+                _currentCinemachineVirtualCamera.Priority = 0;
+                abilityCamera.Priority = 1;
+            }
+            else
+            {
+                _currentCinemachineVirtualCamera.Priority = 1;
+                abilityCamera.Priority = 0;
+            }
         }
     }
 }

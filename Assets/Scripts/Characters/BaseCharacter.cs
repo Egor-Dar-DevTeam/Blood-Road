@@ -28,7 +28,7 @@ namespace Characters
     {
         [SerializeField] private AnimatorOverrideController _animatorOverrideController;
         [SerializeField] private StatesInfo statesInfo;
-        [SerializeField] private AbilitiesInfo abilitiesInfo;
+        [SerializeField] protected AbilitiesInfo abilitiesInfo;
         [SerializeField] private VFXTransforms vfxTransforms;
         [SerializeField] protected RunToPointData runToPointData;
         [SerializeField] protected Animator animator;
@@ -60,9 +60,9 @@ namespace Characters
         public bool HasCharacter() => _hasCharacter;
         public Receiver Receiver => linker.Receiver;
         public VFXTransforms VFXTransforms => vfxTransforms;
+
         public virtual void Finish()
         {
-            
         }
 
 
@@ -71,7 +71,6 @@ namespace Characters
         public DieDelegate GetDieCharacterDelegate() => _characterPointDie;
 
         public event DieDelegate GetDieEvent;
-
 
 
         protected virtual void Start()
@@ -85,7 +84,10 @@ namespace Characters
 
             _characterPointDie = ClearPoint;
         }
-        protected virtual void RemoveList(IInteractable enemy){}
+
+        protected virtual void RemoveList(IInteractable enemy)
+        {
+        }
 
         public void SetCharacterData(CharacterData data, UIDelegates delegates)
         {
@@ -107,8 +109,9 @@ namespace Characters
         }
 
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
-            [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] UpdateEnergyDelegate updateEnergyDelegate = null,
-            [CanBeNull] SplineFollower splineFollower = null)
+            [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] SplineFollower splineFollower = null,
+            [CanBeNull] Money money = null
+        )
         {
             _transitionAndStates = transitionAndStates;
             linker.Initialize(_transitionAndStates, characterData);
@@ -116,7 +119,11 @@ namespace Characters
                 runToPointData, getIsAttack, characterData,
                 statesInfo, characterData.Damage, _hasCharacterDelegate,
                 capsuleCollider, _animatorOverrideController, vfxTransforms,
-                updateEnergyDelegate, abilitiesInfo, splineFollower));
+                splineFollower, money));
+        }
+
+        protected virtual void InitializeAbility(AbilityData abilityData)
+        {
         }
 
         protected void InitializeInteractionSystem([CanBeNull] CameraRay cameraRay)
@@ -133,7 +140,7 @@ namespace Characters
         {
             _transitionAndStates.Update();
 
-            if (_currentPoint == null|| !_hasCharacter) return;
+            if (_currentPoint == null || !_hasCharacter) return;
             var turnTowardNavSteeringTarget = _currentPoint.GetObject().position;
 
             var direction = (turnTowardNavSteeringTarget - transform.position).normalized;
@@ -167,12 +174,12 @@ namespace Characters
         {
             AttackWeapon?.Invoke(_currentPoint.Receiver, weapon);
         }
-        
+
 
         public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
         {
             _transitionAndStates.RunAbility.RunAbility(abilityCommand);
-         if(_currentPoint!=null)  AttackAbility?.Invoke(_currentPoint.Receiver,  abilityCommand);
+            if (_currentPoint != null) AttackAbility?.Invoke(_currentPoint.Receiver, abilityCommand);
         }
     }
 }

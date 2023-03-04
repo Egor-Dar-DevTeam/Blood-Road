@@ -350,7 +350,7 @@ MonoBehaviour:
   vfxTransforms: {fileID: 5039843809897417278}
   runToPointData:
     Rigidbody: {fileID: 5800453974010948621}
-    Speed: 15
+    Speed: 5
     StopDistance: 2.25
     ThisCharacter: {fileID: 0}
   animator: {fileID: 4867068275824993864}
@@ -366,6 +366,7 @@ MonoBehaviour:
   rotationSpeed: 10
   weapon: {fileID: -8088407881170773590, guid: e68bc6a4b387c9e4c85f968e8280b3c4, type: 3}
   skinnedMeshRenderer: {fileID: 1901057608432436290}
+  moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
 --- !u!114 &-43721658688086668
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Characters;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -5,28 +8,48 @@ using UnityEngine;
 public class DamagedTrigger : MonoBehaviour
 {
     [SerializeField] private int damage;
+    [SerializeField] private int waitFromActivated;
+    [SerializeField] private int repeatActivate;
     [CanBeNull] [SerializeField] private ParticleSystem particleSystem;
+    private List<IInteractable> _interactables;
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (other.TryGetComponent(out IInteractable enemy))
+        _interactables = new List<IInteractable>();
+        Active();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out IInteractable interactable))
         {
-            if (!enemy.IsPlayer())
+            if (!_interactables.Contains(interactable))
             {
-                enemy.ReceiveDamage(damage);
+                if(interactable.HasCharacter())
+                    _interactables.Add(interactable);
             }
         }
     }
 
-    private void OnParticleCollision(GameObject other)
+    private async void Active()
     {
-        
-        if (other.TryGetComponent(out IInteractable enemy))
+        for (int i = 0; i < repeatActivate; i++)
         {
-            if (!enemy.IsPlayer())
+            await Task.Delay(waitFromActivated);
+            foreach (var interactable in _interactables)
             {
-                enemy.ReceiveDamage(damage);
+                interactable.ReceiveDamage(damage);
             }
         }
     }
+    // if (particleSystem == null) return;
+    // for (var i = 0; i < particleSystem.trigger.colliderCount; i++)
+    // {
+    //     var obj = particleSystem.trigger.GetCollider(0);
+    //     obj.TryGetComponent(out IInteractable enemy);
+    //     if (enemy != null && !enemy.IsPlayer())
+    //     {
+    //         enemy.ReceiveDamage(damage);
+    //     }
+    // }
 }

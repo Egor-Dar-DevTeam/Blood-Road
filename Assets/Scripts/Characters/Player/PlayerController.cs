@@ -15,20 +15,23 @@ namespace Characters.Player
 {
     public delegate void RemoveList(IInteractable interactable);
 
-    public class PlayerController : BaseCharacter, IInteractable
+    public delegate void AbilityTrigger();
+
+    public class PlayerController : BaseCharacter, IInteractable, ITriggerable, IInit<AbilityTrigger>
     {
         [SerializeField] private CameraRay cameraRay;
         [SerializeField] private GameCanvasController canvasController;
         [SerializeField] private SplineFollower splineFollower;
         [SerializeField] private SplineProjector projector;
-        [SerializeField] private AttackPlayerPointer attackPlayerPointer;
+        [SerializeField] private AttackVariants attackVariants;
         private IInit<Attack> _initAttack;
         private IInit<SetAttackSpeed> _initSetAttackSpeed;
 
         private List<IInteractable> _interactables;
 
         public event BottleUse BottleUseEvent;
-        
+        private event AbilityTrigger _abilityTrigger;
+
 
         #region Delegates
 
@@ -52,8 +55,9 @@ namespace Characters.Player
             _enemyOutlineRechanger = new EnemyOutlineRechanger();
             _getIsAttack = GetIsAttack;
             base.Start();
-            SetCharacterData(characterData,canvasController.UIDelegates);
-            InitializeTransition(new PlayerTransition(), _getIsAttack,null, splineFollower);
+            SetCharacterData(characterData, canvasController.UIDelegates);
+            InitializeTransition(new PlayerTransition(), _getIsAttack, splineFollower);
+            InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate));
             InitializeInteractionSystem(cameraRay);
             SubscribeDeath();
             InitializeAttackDelegates();
@@ -61,16 +65,22 @@ namespace Characters.Player
 
         private void InitializeAttackDelegates()
         {
-            _initAttack = attackPlayerPointer;
-            _initSetAttackSpeed = attackPlayerPointer;
+            _initAttack = attackVariants;
+            _initSetAttackSpeed = attackVariants;
             _initAttack.Initialize(Attack);
             _initAttack.Initialize(_transitionAndStates.Attack);
             _initSetAttackSpeed.Initialize(_transitionAndStates.SetAttackSpeed);
         }
 
+        protected override void InitializeAbility(AbilityData abilityData)
+        {
+            var data = _transitionAndStates.ReturnReadyData(abilityData);
+            _transitionAndStates.InitializeAbilities(new AbilitiesSystem.Player(data));
+        }
+
         private void FixedUpdate()
         {
-            if(!_hasCharacter) return;
+            if (!_hasCharacter) return;
             projector.Project(transform.position, splineFollower.result);
         }
 
@@ -83,19 +93,35 @@ namespace Characters.Player
         public override void Finish()
         {
             canvasController.Death();
-            _transitionAndStates.IsFinished = true;
+            _transitionAndStates.IsStoped = true;
         }
 
-        public  void UseBottle(EffectData data)
+        public void AbilityTrigger()
         {
-            if(!_hasCharacter) return;
+            _abilityTrigger?.Invoke();
+            _transitionAndStates.IsStoped = true;
+        }
+
+        public void AddMoney(int value)
+        {
+            Debug.Log("Add money");
+        }
+
+        public void OnAbilityTrigger()
+        {
+            _transitionAndStates.IsStoped = false;
+        }
+
+        public void UseBottle(EffectData data)
+        {
+            if (!_hasCharacter) return;
             BottleUseEvent?.Invoke(Receiver, data);
         }
 
 
         protected override void ClearPoint()
         {
-            if(!_hasCharacter|| _currentPoint==null) return;
+            if (!_hasCharacter || _currentPoint == null) return;
             characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
             _interactables.Remove(_currentPoint);
             _currentPoint = null;
@@ -105,20 +131,20 @@ namespace Characters.Player
 
         protected override void RemoveList(IInteractable enemy)
         {
-            if(!_hasCharacter) return;
+            if (!_hasCharacter) return;
 
             if (_interactables.Contains(enemy)) _interactables.Remove(enemy);
         }
 
         protected override void StartRCP(List<IInteractable> points)
         {
-            if(!_hasCharacter) return;
+            if (!_hasCharacter) return;
             AddToListEnemy(points);
         }
 
         private void AddToListEnemy(List<IInteractable> enemies)
         {
-            if(!_hasCharacter) return;
+            if (!_hasCharacter) return;
             foreach (var enemy in enemies)
             {
                 if (!enemy.HasCharacter()) continue;
@@ -132,7 +158,7 @@ namespace Characters.Player
 
         private IEnumerator RechangeCurrentPoint()
         {
-            if(!_hasCharacter)  yield break;
+            if (!_hasCharacter) yield break;
             if (_currentPoint == null)
             {
                 if (_interactables.Count == 0) yield break;
@@ -158,7 +184,7 @@ namespace Characters.Player
 
                 if (point != null && point.HasCharacter())
                 {
-                   SetCurrentPoint(point);
+                    SetCurrentPoint(point);
                 }
 
                 yield return new WaitForSeconds(0);
@@ -167,7 +193,7 @@ namespace Characters.Player
 
         protected override void SetCurrentPoint(IInteractable point)
         {
-            if(!_hasCharacter) return;
+            if (!_hasCharacter) return;
             if (point.IsPlayer()) return;
 
             if (_currentPoint == point) return;
@@ -178,22 +204,27 @@ namespace Characters.Player
 
         private async void Attack(StateInfo info)
         {
-            if(characterData.Energy<15)return;
+            if (characterData.Energy < 15) return;
             _isAttack = true;
             await Task.Delay(100);
             _isAttack = false;
         }
-        
+
         public override void SetOutline(bool value)
         {
         }
 
         public override void UseAbility(IAbilityCommand abilityCommand, int value)
         {
-            if(!_hasCharacter) return;
+            if (!_hasCharacter) return;
             if (characterData.Mana <= 0) return;
             characterData.UseMana(value);
             base.UseAbility(abilityCommand, value);
+        }
+
+        public void Initialize(AbilityTrigger subscriber)
+        {
+            _abilityTrigger += subscriber;
         }
     }
 }

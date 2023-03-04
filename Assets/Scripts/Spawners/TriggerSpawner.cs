@@ -1,7 +1,9 @@
 using System;
 using Characters;
 using Characters.Player;
+using Dreamteck.Splines;
 using UI.EnemyesCanvas;
+using UnityEditor.Media;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -12,6 +14,11 @@ namespace Spawners
         [SerializeField] private EnemySpawnInfo[] enemySpawnInfo;
         [SerializeField] private PanelsCreator panelsCreator;
         private bool _continue;
+
+        public void SetPanelsCreator(PanelsCreator panelsCreator)
+        {
+            this.panelsCreator = panelsCreator;
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -29,8 +36,7 @@ namespace Spawners
         private void Instantiate(BaseCharacter prefab, CharacterData data, Vector3 position)
         {
             var enemy = Object.Instantiate(prefab, position, Quaternion.identity);
-            enemy.SetCharacterData(data,panelsCreator.AddCharacter(enemy.VFXTransforms.Up));
-             
+            enemy.SetCharacterData(data, panelsCreator.AddCharacter(enemy.VFXTransforms.Up));
         }
     }
 
@@ -38,9 +44,9 @@ namespace Spawners
     public struct EnemySpawnInfo
     {
         [SerializeField] private EnemyData data;
-        [SerializeField] private Vector3 position;
+        [SerializeField] private Transform point;
         public BaseCharacter EnemyPrefab => data.Character;
         public CharacterData EnemyData => data.Data;
-        public Vector3 Position => position;
+        public Vector3 Position => point.position;
     }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9405f12d7b949b493e10d43713efa78, type: 3}
+  m_Name: ManaShield
+  m_EditorClassIdentifier: 
+  command:
+    rid: 8669080040122089472
+  sprite: {fileID: 21300000, guid: a1bd76a15a2b33c4e8305d96b036f960, type: 3}
+  cooldown: 12
+  price: 15
+  name: 
+  description: 
+  references:
+    version: 2
+    RefIds:
+    - rid: 8669080040122089472
+      type: {class: ManaShield, ns: Characters.AbilitiesSystem.Declaration, asm: Assembly-CSharp}
