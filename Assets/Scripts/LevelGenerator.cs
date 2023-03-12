@@ -1,10 +1,8 @@
 using Characters.AbilitiesSystem;
 using Cinemachine;
-using Dreamteck.Splines;
 using Spawners;
 using UI.EnemyesCanvas;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Scripts
 {

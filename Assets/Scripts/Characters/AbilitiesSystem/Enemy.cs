@@ -1,5 +1,4 @@
 using System;
-using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem.States;
 using Characters.Animations;
 using Characters.Information.Structs;
@@ -13,6 +12,8 @@ namespace Characters.AbilitiesSystem
 
         public Enemy(AbilityData abilityData) : base(abilityData)
         {
+            CreateStates(abilityData.AnimationCommand, abilityData.VFXTransforms);
+            InitializeTransitions(abilityData.IdleState);
         }
 
         protected override void CreateStates(IAnimationCommand animationCommand, VFXTransforms transforms)

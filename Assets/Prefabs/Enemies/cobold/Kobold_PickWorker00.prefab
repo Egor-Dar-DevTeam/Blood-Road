@@ -1117,8 +1117,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4372278029818356167}
-  - component: {fileID: 4262598560927450644}
-  - component: {fileID: 4262598560927450643}
   - component: {fileID: 4262598560927450642}
   - component: {fileID: 4262598560927450670}
   - component: {fileID: 4262598560927450671}
@@ -1126,6 +1124,8 @@ GameObject:
   - component: {fileID: -8262658036320779893}
   - component: {fileID: 2570206713085055309}
   - component: {fileID: -7140201869533187165}
+  - component: {fileID: 1895913796331558622}
+  - component: {fileID: -6531176577579193556}
   m_Layer: 0
   m_Name: Kobold_PickWorker00
   m_TagString: Untagged
@@ -1141,7 +1141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4028086272150027133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3867784, y: 0.000010251999, z: -4.711801}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1153,36 +1153,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &4262598560927450644
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4028086272150027133}
-  serializedVersion: 2
-  m_Mass: 0.2
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 2
---- !u!136 &4262598560927450643
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4028086272150027133}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.86
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &4262598560927450642
 Animator:
   serializedVersion: 5
@@ -1220,8 +1190,8 @@ MonoBehaviour:
   abilitiesInfo: {fileID: 4262598560927450671}
   vfxTransforms: {fileID: 7764851139347461378}
   runToPointData:
-    Rigidbody: {fileID: 4262598560927450644}
-    Speed: 5
+    CharacterController: {fileID: 1895913796331558622}
+    Speed: 10
     StopDistance: 2.25
     ThisCharacter: {fileID: 0}
   animator: {fileID: 4262598560927450642}
@@ -1231,11 +1201,9 @@ MonoBehaviour:
     shield: 0
     energy: 0
     mana: 0
-    damage: 0
-  capsuleCollider: {fileID: 4262598560927450643}
+    weapon: {fileID: 0}
   linker: {fileID: 2570206713085055309}
   rotationSpeed: 10
-  weapon: {fileID: -7140201869533187165}
   skinnedMeshRenderer: {fileID: 2776848632480749197}
   moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
 --- !u!114 &4262598560927450671
@@ -1329,7 +1297,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd3367543604f6fb943b22113806318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  damage: 0
+  weaponVFXTransforms: {fileID: 0}
+--- !u!143 &1895913796331558622
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028086272150027133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.06
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &-6531176577579193556
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028086272150027133}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &4119432623334872516
 GameObject:
   m_ObjectHideFlags: 0

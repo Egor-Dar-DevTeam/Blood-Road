@@ -17,7 +17,7 @@ namespace Characters.Facades
             StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
             data.CreateAttack(new Attack(_animation, new StateInfo(), data.Damage, true, data,
                 data.VFXTransforms));
-            data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CapsuleCollider,data.RunToPointData.Rigidbody, data.VFXTransforms));
+            data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CharacterController, data.VFXTransforms));
             _attackState = data.Attack;
             _dieState = data.Die;
             _setAttackSpeed = _attackState.SetAnimationSpeed;

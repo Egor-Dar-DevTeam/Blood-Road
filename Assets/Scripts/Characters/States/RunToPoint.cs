@@ -10,7 +10,7 @@ namespace Characters.Player.States
     {
         private readonly Transform _transform;
         private Transform _point;
-        private Rigidbody _rb;
+        private CharacterController _characterController;
         private float _speed;
         private float _stopingDistance;
         public Transform Point => _point;
@@ -18,7 +18,7 @@ namespace Characters.Player.States
         public RunToPoint(IAnimationCommand animation, RunToPointData data, StateInfo stateInfo,
             VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {
-            _rb = data.Rigidbody;
+            _characterController = data.CharacterController;
             _transform = data.ThisCharacter;
             _speed = data.Speed;
             _stopingDistance = data.StopDistance;
@@ -41,7 +41,9 @@ namespace Characters.Player.States
             if (_point == null) return;
             if (Vector3.Distance(_point.position, _transform.position) >= _stopingDistance)
             {
-                _rb.velocity = _transform.forward * _speed;
+                var directionMove = _transform.forward;
+                directionMove.y = -0.9f;
+                _characterController.Move(directionMove * (_speed * tickTime));
             }
         }
 
@@ -53,7 +55,7 @@ namespace Characters.Player.States
     [Serializable]
     public struct RunToPointData
     {
-        public Rigidbody Rigidbody;
+        public CharacterController CharacterController;
         public float Speed;
         public float StopDistance;
         [HideInInspector] public Transform ThisCharacter;

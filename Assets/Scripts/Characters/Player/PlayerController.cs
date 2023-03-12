@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
@@ -26,6 +27,11 @@ namespace Characters.Player
         [SerializeField] private AttackVariants attackVariants;
         private IInit<Attack> _initAttack;
         private IInit<SetAttackSpeed> _initSetAttackSpeed;
+
+        private void Reset()
+        {
+            throw new NotImplementedException();
+        }
 
         private List<IInteractable> _interactables;
 
@@ -57,7 +63,8 @@ namespace Characters.Player
             base.Start();
             SetCharacterData(characterData, canvasController.UIDelegates);
             InitializeTransition(new PlayerTransition(), _getIsAttack, splineFollower);
-            InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate));
+            InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
+                characterData));
             InitializeInteractionSystem(cameraRay);
             SubscribeDeath();
             InitializeAttackDelegates();
@@ -119,11 +126,12 @@ namespace Characters.Player
         }
 
 
-        protected override void ClearPoint()
+        protected override void ClearPoint(IInteractable interactable)
         {
             if (!_hasCharacter || _currentPoint == null) return;
-            characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
-            _interactables.Remove(_currentPoint);
+            characterData.DieInteractable -= interactable.GetDieCharacterDelegate;
+            _interactables.Remove(interactable);
+            if(_currentPoint!= interactable) return;
             _currentPoint = null;
             _enemyOutlineRechanger.SetEnemy(null);
             StartCoroutine(RechangeCurrentPoint());
@@ -149,7 +157,8 @@ namespace Characters.Player
             {
                 if (!enemy.HasCharacter()) continue;
                 if (_interactables.Contains(enemy)) continue;
-                characterData.DieEvent += enemy.GetDieCharacterDelegate();
+                if(enemy.IsPlayer()) continue;;
+                characterData.DieInteractable += enemy.GetDieCharacterDelegate;
                 _interactables.Add(enemy);
             }
 

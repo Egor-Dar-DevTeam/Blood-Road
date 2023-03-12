@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
 using Characters.EffectSystem;
 using Characters.Facades;
@@ -6,11 +8,9 @@ using Characters.Information;
 using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
-using Characters.WeaponSystem;
 using Dreamteck.Splines;
 using JetBrains.Annotations;
 using UI;
-using UI.CombatHUD;
 using UnityEngine;
 
 namespace Characters
@@ -34,10 +34,8 @@ namespace Characters
         [SerializeField] protected Animator animator;
         [SerializeField] protected Eyes eyesCharacters;
         [SerializeField] protected CharacterData characterData;
-        [SerializeField] protected CapsuleCollider capsuleCollider;
         [SerializeField] private Linker linker;
         [SerializeField] private float rotationSpeed = 1f;
-        [SerializeField] protected Weapon weapon;
         [HideInInspector] [SerializeField] public Sender Sender;
         protected bool _hasCharacter = true;
 
@@ -46,11 +44,10 @@ namespace Characters
         private SetCurrentPoint _setCurrentPoint;
         private StartRechangeCurrentPoint _startRechangeCurrentPoint;
         private GetCurrentPoint _getCurrentPoint;
-        private DieDelegate _characterPointDie;
+        private DieInteractable _characterPointDie;
         private HasCharacter _hasCharacterDelegate;
 
         public event AttackedAbility AttackAbility;
-        public event AttackedWeapon AttackWeapon;
 
 
         private InteractionSystem _interactionSystem;
@@ -59,6 +56,7 @@ namespace Characters
         public RemoveList GetRemoveList() => RemoveList;
         public bool HasCharacter() => _hasCharacter;
         public Receiver Receiver => linker.Receiver;
+
         public VFXTransforms VFXTransforms => vfxTransforms;
 
         public virtual void Finish()
@@ -68,10 +66,16 @@ namespace Characters
 
         public Transform GetObject() => this.transform;
         public abstract bool IsPlayer();
-        public DieDelegate GetDieCharacterDelegate() => _characterPointDie;
+        public DieInteractable GetDieCharacterDelegate => _characterPointDie;
 
         public event DieDelegate GetDieEvent;
+        
 
+        public void SetCharacterController()
+        {
+            runToPointData.CharacterController = gameObject.GetComponent<CharacterController>();
+
+        }
 
         protected virtual void Start()
         {
@@ -83,6 +87,7 @@ namespace Characters
             _hasCharacterDelegate = HasCharacter;
 
             _characterPointDie = ClearPoint;
+            characterData.SetInteractable(this);
         }
 
         protected virtual void RemoveList(IInteractable enemy)
@@ -100,7 +105,13 @@ namespace Characters
         protected virtual void SubscribeDeath()
         {
             characterData.DieEvent += _transitionAndStates.DieDelegate;
-            characterData.DieEvent += vfxTransforms.DieDelegate;
+            characterData.DieEvent += vfxTransforms.DieDelegate + UnsubscribeDeath;
+        }
+
+        private void UnsubscribeDeath()
+        {
+            _hasCharacter = false;
+            characterData.DieEvent = null;
         }
 
         protected void SubscribeDeathMethod(DieDelegate @delegate)
@@ -118,7 +129,7 @@ namespace Characters
             _transitionAndStates.Initialize(new TransitionAndStatesData(animator, _getCurrentPoint, transform,
                 runToPointData, getIsAttack, characterData,
                 statesInfo, characterData.Damage, _hasCharacterDelegate,
-                capsuleCollider, _animatorOverrideController, vfxTransforms,
+                _animatorOverrideController, vfxTransforms,
                 splineFollower, money));
         }
 
@@ -133,7 +144,7 @@ namespace Characters
                 _startRechangeCurrentPoint);
         }
 
-        protected abstract void ClearPoint();
+        protected abstract void ClearPoint(IInteractable interactable);
 
 
         private void Update()
@@ -162,24 +173,22 @@ namespace Characters
         }
 
         public abstract void SetOutline(bool value);
-
-
-        private void OnDestroy()
-        {
-            _hasCharacter = false;
-            _transitionAndStates.Destroy();
-        }
+        
 
         protected void WeaponAttack()
         {
-            AttackWeapon?.Invoke(_currentPoint.Receiver, weapon);
+            // AttackWeapon?.Invoke(_currentPoint.Receiver, characterData.);
         }
-
-
+        
         public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
         {
             _transitionAndStates.RunAbility.RunAbility(abilityCommand);
             if (_currentPoint != null) AttackAbility?.Invoke(_currentPoint.Receiver, abilityCommand);
+        }
+
+        private void OnDestroy()
+        {
+            _transitionAndStates.Destroy();
         }
     }
 }

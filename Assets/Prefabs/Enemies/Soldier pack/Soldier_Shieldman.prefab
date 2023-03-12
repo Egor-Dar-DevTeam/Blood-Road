@@ -907,14 +907,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3306320651606957136}
-  - component: {fileID: 4105487472286211690}
-  - component: {fileID: 6487503408688418503}
   - component: {fileID: 4091503732404365003}
   - component: {fileID: 4858736583953754109}
   - component: {fileID: 2883758114798883471}
   - component: {fileID: 365479639567981594}
   - component: {fileID: -2723120577739440578}
   - component: {fileID: -2406896210735165370}
+  - component: {fileID: -6814861085883776236}
+  - component: {fileID: -3261053136332471647}
   m_Layer: 0
   m_Name: Soldier_Shieldman
   m_TagString: Untagged
@@ -930,7 +930,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2785962018293827306}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45447016, y: 0.00001001358, z: -1.8089745}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -938,36 +938,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &4105487472286211690
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2785962018293827306}
-  serializedVersion: 2
-  m_Mass: 0.2
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 2
---- !u!136 &6487503408688418503
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2785962018293827306}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.86
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: -1}
 --- !u!114 &4091503732404365003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,8 +1009,8 @@ MonoBehaviour:
   abilitiesInfo: {fileID: 4858736583953754109}
   vfxTransforms: {fileID: 3324829064854531375}
   runToPointData:
-    Rigidbody: {fileID: 4105487472286211690}
-    Speed: 5
+    CharacterController: {fileID: -6814861085883776236}
+    Speed: 10
     StopDistance: 2.25
     ThisCharacter: {fileID: 0}
   animator: {fileID: 8038047261998508576}
@@ -1050,11 +1020,9 @@ MonoBehaviour:
     shield: 0
     energy: 0
     mana: 0
-    damage: 0
-  capsuleCollider: {fileID: 6487503408688418503}
+    weapon: {fileID: 0}
   linker: {fileID: 365479639567981594}
   rotationSpeed: 10
-  weapon: {fileID: -2723120577739440578}
   skinnedMeshRenderer: {fileID: 7812731998113448023}
   moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
 --- !u!114 &365479639567981594
@@ -1081,7 +1049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd3367543604f6fb943b22113806318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  damage: 0
+  weaponVFXTransforms: {fileID: 0}
 --- !u!114 &-2406896210735165370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1095,6 +1064,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 2883758114798883471}
+--- !u!143 &-6814861085883776236
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785962018293827306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.06
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &-3261053136332471647
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785962018293827306}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &3235525400560255643
 GameObject:
   m_ObjectHideFlags: 0

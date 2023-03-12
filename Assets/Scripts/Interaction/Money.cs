@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Characters;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Money : MonoBehaviour
 {

@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using Characters.Information.Structs;
 using Characters.InteractableSystems;
@@ -39,7 +38,7 @@ namespace Characters.Player
         }
         private async void Wait()
         {
-            for (int i = 0;;)
+            for (;;)
             {
                 await Task.Delay(1000);
                 _clickCount = 1;

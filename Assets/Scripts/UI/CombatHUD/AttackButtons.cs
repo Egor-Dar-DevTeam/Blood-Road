@@ -1,7 +1,5 @@
-using System.Diagnostics.Tracing;
 using Characters.Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.CombatHUD
 {

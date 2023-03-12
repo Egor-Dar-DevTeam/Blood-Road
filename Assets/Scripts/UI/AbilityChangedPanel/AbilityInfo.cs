@@ -9,7 +9,7 @@ namespace UI.AbilityChangedPanel
     {
         [SerializeField] private Button button;
         [Space] [SerializeField] private Image image;
-        [SerializeField] private TextMeshProUGUI name;
+        [SerializeField] private new TextMeshProUGUI name;
         [SerializeField] private TextMeshProUGUI description;
 
         public Button Button => button;

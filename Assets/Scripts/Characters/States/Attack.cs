@@ -1,8 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Characters.Player.States
@@ -48,7 +46,6 @@ namespace Characters.Player.States
         public override void Enter()
         {
             // _animationSpeed = 1;
-            _canSkip = false;
             base.Enter();
             _animation.SetAnimation(_parameterName);
             _setDamage = true;
@@ -60,6 +57,7 @@ namespace Characters.Player.States
         {
             do
             {
+                _canSkip = false;
                 var milliseconds = SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 2);
                 await Task.Delay(milliseconds / 2);
                 VFXEffect vfx = null;
@@ -75,9 +73,10 @@ namespace Characters.Player.States
                 _interactable.ReceiveDamage(_damage);
 
                 await Task.Delay(milliseconds);
+                _canSkip = true;
+
             } while (_setDamage);
 
-            _canSkip = true;
         }
 
         private void Damage()

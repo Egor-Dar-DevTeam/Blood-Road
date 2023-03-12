@@ -15,7 +15,7 @@ namespace UI.CombatHUD
         {
             image.sprite = sprite;
             image.color = Color.white;
-            button.onClick.AddListener( async ()=>InteractableButton(cooldown, action));
+            button.onClick.AddListener(  ()=>InteractableButton(cooldown, action));
         }
 
         private async void InteractableButton(float cooldown, UnityAction action)

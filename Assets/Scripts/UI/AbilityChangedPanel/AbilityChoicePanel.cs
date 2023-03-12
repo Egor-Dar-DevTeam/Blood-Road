@@ -1,4 +1,3 @@
-using System;
 using Characters.InteractableSystems;
 using UnityEngine;
 using UnityEngine.Events;

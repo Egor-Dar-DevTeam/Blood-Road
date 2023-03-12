@@ -3,7 +3,6 @@ using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
 using Characters.Animations;
 using Characters.Information;
-using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
@@ -36,7 +35,6 @@ namespace Characters.Facades
 
         protected event GetIsAttack GetIsAttack;
         protected event GetCurrentPoint CurrentPoint;
-        private event HasCharacter _hasCharacter;
 
         #endregion
 
@@ -49,7 +47,6 @@ namespace Characters.Facades
         #endregion
 
         
-        private bool _isDeath;
         public bool IsStoped;
 
         #region publicVariables
@@ -70,9 +67,6 @@ namespace Characters.Facades
             {
                 GetIsAttack += data.GetIsAttack;
             }
-
-            _hasCharacter += data.HasCharacter;
-
 
             CurrentPoint += data.GetCurrentPoint;
             _statesInfo = data.StatesInfo;
@@ -177,7 +171,6 @@ namespace Characters.Facades
 
         private void Death()
         {
-            _isDeath = true;
             _stateMachine.ChangeState(_dieState);
         }
     }

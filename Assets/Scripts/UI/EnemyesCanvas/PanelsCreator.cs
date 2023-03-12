@@ -18,7 +18,7 @@ namespace UI.EnemyesCanvas
             var panel = Instantiate(prefab, transform);
             var delegatesCharactersInfo = new UIDelegatesCharactersInfo();
             delegatesCharactersInfo.SetDelegates(panel.InfoCharacterResourceBar.SetEnergy,
-                panel.InfoCharacterResourceBar.SetMana, panel.InfoCharacterResourceBar.SetHealth, panel.OnDestroy);
+                panel.InfoCharacterResourceBar.SetMana, panel.InfoCharacterResourceBar.SetHealth, panel.Destroy);
             panel.FollowPointPanel.SetPoint(character);
             return delegatesCharactersInfo.Delegates();
         }

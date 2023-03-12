@@ -2,7 +2,6 @@ using Characters.InteractableSystems;
 using Characters.Player;
 using UI.AbilityChangedPanel;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace UI
 {

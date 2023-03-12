@@ -14,8 +14,6 @@ namespace Characters.AbilitiesSystem
         {
             _stateMachine = abilityData.StateMachine;
             _info = abilityData.AbilitiesInfo;
-            CreateStates(abilityData.AnimationCommand, abilityData.VFXTransforms);
-            InitializeTransitions(abilityData.IdleState);
         }
 
         protected abstract void CreateStates(IAnimationCommand animationCommand, VFXTransforms transforms);
@@ -41,7 +39,6 @@ namespace Characters.AbilitiesSystem
 
         public virtual void ManaShield()
         {
-            
         }
 
         public void RunAbility(IAbilityCommand command)
@@ -55,6 +52,22 @@ namespace Characters.AbilitiesSystem
         }
 
         public virtual void UnleashingRage()
+        {
+        }
+
+        public virtual void Armageddon()
+        {
+        }
+
+        public virtual void Fury()
+        {
+        }
+
+        public virtual void UniversalBlow()
+        {
+        }
+
+        public virtual void GhostWolf()
         {
             
         }

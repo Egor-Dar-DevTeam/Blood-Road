@@ -16,7 +16,6 @@ namespace Characters
         private void Awake()
         {
             character.AttackAbility += Attacked;
-            character.AttackWeapon += Attacked;
             _sender = character.Sender;
         }
 

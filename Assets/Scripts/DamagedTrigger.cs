@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Characters;
@@ -10,7 +9,6 @@ public class DamagedTrigger : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private int waitFromActivated;
     [SerializeField] private int repeatActivate;
-    [CanBeNull] [SerializeField] private ParticleSystem particleSystem;
     private List<IInteractable> _interactables;
 
     private void Awake()
@@ -42,14 +40,4 @@ public class DamagedTrigger : MonoBehaviour
             }
         }
     }
-    // if (particleSystem == null) return;
-    // for (var i = 0; i < particleSystem.trigger.colliderCount; i++)
-    // {
-    //     var obj = particleSystem.trigger.GetCollider(0);
-    //     obj.TryGetComponent(out IInteractable enemy);
-    //     if (enemy != null && !enemy.IsPlayer())
-    //     {
-    //         enemy.ReceiveDamage(damage);
-    //     }
-    // }
 }

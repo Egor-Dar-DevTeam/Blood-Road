@@ -1,6 +1,5 @@
 using Characters.Animations;
 using Characters.Information.Structs;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States

@@ -1213,7 +1213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5665842492190338779}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1353,11 +1353,11 @@ GameObject:
   - component: {fileID: 6805689906974082174}
   - component: {fileID: 6805689906974082175}
   - component: {fileID: 6805689906974082160}
-  - component: {fileID: 6805689906974082161}
-  - component: {fileID: 6805689906974082162}
   - component: {fileID: 5556632635577257571}
   - component: {fileID: 8389075590466412412}
   - component: {fileID: 6362895927979820950}
+  - component: {fileID: -4794142607648380447}
+  - component: {fileID: -5657376517385846889}
   m_Layer: 0
   m_Name: Kobold_Overseer00 1
   m_TagString: Untagged
@@ -1373,7 +1373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5959321378982984057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.813632, y: 0.00001001358, z: -10.853917}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1452,9 +1452,9 @@ MonoBehaviour:
   abilitiesInfo: {fileID: 6805689906974082175}
   vfxTransforms: {fileID: 2175731889907602716}
   runToPointData:
-    Rigidbody: {fileID: 6805689906974082161}
-    Speed: 5
-    StopDistance: 2.25
+    CharacterController: {fileID: -4794142607648380447}
+    Speed: 10
+    StopDistance: 4
     ThisCharacter: {fileID: 0}
   animator: {fileID: 2351334542954585277}
   eyesCharacters: {fileID: 6116313798325503490, guid: 998086f9cbd667e4a80c66baf34029e1, type: 3}
@@ -1463,43 +1463,11 @@ MonoBehaviour:
     shield: 0
     energy: 0
     mana: 0
-    damage: 0
-  capsuleCollider: {fileID: 6805689906974082162}
+    weapon: {fileID: 0}
   linker: {fileID: 8389075590466412412}
   rotationSpeed: 10
-  weapon: {fileID: 5556632635577257571}
   skinnedMeshRenderer: {fileID: 6805689907682745314}
   moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
---- !u!54 &6805689906974082161
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5959321378982984057}
-  serializedVersion: 2
-  m_Mass: 0.2
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 112
-  m_CollisionDetection: 2
---- !u!136 &6805689906974082162
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5959321378982984057}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.86
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5556632635577257571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1512,7 +1480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd3367543604f6fb943b22113806318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  damage: 0
+  weaponVFXTransforms: {fileID: 0}
 --- !u!114 &8389075590466412412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1538,6 +1507,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 6805689906974082160}
+--- !u!143 &-4794142607648380447
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5959321378982984057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.9
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &-5657376517385846889
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5959321378982984057}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &5965507435912828188
 GameObject:
   m_ObjectHideFlags: 0

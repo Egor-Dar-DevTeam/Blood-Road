@@ -10,8 +10,10 @@ namespace Characters.Player.States
     {
         private Money _moneyPrefab;
         private Transform _player;
-        public DieEnemy(IAnimationCommand animation, StateInfo stateInfo, CapsuleCollider capsuleCollider, Rigidbody rigidbody,VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, capsuleCollider, rigidbody,vfxTransforms)
+
+        public DieEnemy(IAnimationCommand animation, StateInfo stateInfo, CharacterController characterController,
+             VFXTransforms vfxTransforms) : base(
+            animation, stateInfo, characterController, vfxTransforms)
         {
             _animation = animation;
         }
@@ -25,7 +27,7 @@ namespace Characters.Player.States
         {
             _player = player;
         }
-        
+
         public override void Enter()
         {
             base.Enter();
@@ -34,7 +36,7 @@ namespace Characters.Player.States
 
         private const int SECONDS = 1000;
 
-        public static int SecondToMilliseconds(float second)
+        public new static int SecondToMilliseconds(float second)
         {
             var result = Mathf.RoundToInt(second * SECONDS);
             return result;
@@ -43,14 +45,16 @@ namespace Characters.Player.States
         private async void DieTime()
         {
             await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 3));
-            var money = Object.Instantiate(_moneyPrefab, _vfxTransforms.Center.position,Quaternion.identity);
-            money.SetPlayer(_player);
+            if (_moneyPrefab != null)
+            {
+                var money = Object.Instantiate(_moneyPrefab, _vfxTransforms.Center.position, Quaternion.identity);
+                money.SetPlayer(_player);
+            }
+
             await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)));
-            if(_capsuleCollider!=null) _capsuleCollider.gameObject.transform.DOMoveY(_capsuleCollider.transform.position.y - 2, 10f)
-                .OnComplete((() =>
-                {
-                    Object.Destroy(_capsuleCollider.gameObject);
-                }));
-        }
+            if (characterController != null)
+                characterController.gameObject.transform.DOMoveY(characterController.transform.position.y - 2, 10f)
+                    .OnComplete((() => { Object.Destroy(characterController.gameObject); }));
+        }   
     }
 }

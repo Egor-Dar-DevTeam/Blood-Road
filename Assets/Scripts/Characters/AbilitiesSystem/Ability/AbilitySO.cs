@@ -1,6 +1,5 @@
 using System;
 using Better.Attributes.Runtime.Select;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.Ability
@@ -14,10 +13,9 @@ namespace Characters.AbilitiesSystem.Ability
         [SerializeField] private Sprite sprite;
         [SerializeField] private int cooldown;
         [SerializeField] private int price;
-        [SerializeField] private string name;
+        [SerializeField] private new string name;
         [SerializeField] private string description;
         private bool _isUsed;
-        private bool _initialized;
         private AbilityInfo _info;
         private AbilityUIInfo _UIInfo;
 
@@ -34,11 +32,6 @@ namespace Characters.AbilitiesSystem.Ability
         {
             _info = new AbilityInfo(sprite, cooldown, command, price);
             _UIInfo = new AbilityUIInfo(name, description, sprite);
-        }
-
-        private void OnDestroy()
-        {
-            _initialized = false;
         }
     }
 

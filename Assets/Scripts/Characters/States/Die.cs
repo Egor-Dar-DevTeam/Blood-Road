@@ -7,27 +7,23 @@ namespace Characters.Player.States
 {
     public class Die: BaseState
     {
-        protected CapsuleCollider _capsuleCollider;
-        private Rigidbody _rigidbody;
+        protected CharacterController characterController;
         public bool CanSkip { get; private set; }
 
 
 
-        public Die(IAnimationCommand animation,StateInfo stateInfo, CapsuleCollider capsuleCollider, Rigidbody rigidbody, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
+        public Die(IAnimationCommand animation,StateInfo stateInfo, CharacterController characterController, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
         {
-            _capsuleCollider = capsuleCollider;
-            _rigidbody = rigidbody;
+            this.characterController = characterController;
             _parameterName = "death";
         }
 
         public override void Enter()
         {
             CanSkip = false;
-            _rigidbody.useGravity = false;
-            _rigidbody.isKinematic = true;
             base.Enter();
             _animation.SetAnimation(_parameterName);
-            _capsuleCollider.enabled = false;
+            characterController.enabled = false;
             WaitAnimation();
         }
 
@@ -41,7 +37,6 @@ namespace Characters.Player.States
 
             await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)));
            if(effect!=null) Object.Destroy(effect.gameObject);
-            CanSkip = true;
         }
 
         public override void Tick(float tickTime)

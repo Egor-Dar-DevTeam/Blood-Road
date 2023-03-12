@@ -1,8 +1,11 @@
 using System.Collections;
+using Characters;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class VFXEffect : MonoBehaviour
 {
+    [SerializeField] [CanBeNull] private BaseCharacter character;
     public void SetLifeTime(float lifeTime)
     {
         StartCoroutine(Timer(lifeTime));
@@ -11,7 +14,8 @@ public class VFXEffect : MonoBehaviour
     private IEnumerator Timer(float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(gameObject);
+        if (character != null) character.ReceiveDamage(int.MaxValue);
+        else Destroy(gameObject);
     }
 
     private void OnDestroy()

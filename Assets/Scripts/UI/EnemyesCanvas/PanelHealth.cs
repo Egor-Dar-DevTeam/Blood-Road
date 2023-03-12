@@ -10,7 +10,7 @@ namespace UI.EnemyesCanvas
         public InfoCharactersResourceBars InfoCharacterResourceBar => infoCharacterResourceBar;
         public FollowPointPanel FollowPointPanel => followPointPanel;
 
-        public void OnDestroy()
+        public void Destroy()
         {
             Destroy(gameObject);
         }

@@ -10,7 +10,7 @@ namespace Characters
         public void SetOutline(bool value);
         public Transform GetObject();
         public bool IsPlayer();
-        public DieDelegate GetDieCharacterDelegate();
+        public DieInteractable GetDieCharacterDelegate { get; }
         public  RemoveList GetRemoveList();
         public bool HasCharacter();
         public Receiver Receiver { get; }

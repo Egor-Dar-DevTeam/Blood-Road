@@ -1,24 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Characters.Facades;
+using Characters.InteractableSystems;
 using Characters.Player;
 using UnityEngine;
 
 namespace Characters.Enemy
 {
-    public class DefaultEnemy : BaseCharacter
+    public class DefaultEnemy : BaseCharacter, IInteractable, IInit<DieInteractable>
     {
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         [SerializeField] private Money moneyPrefab;
         public override bool IsPlayer() => false;
-        private event RemoveList _removeList;
+        protected event RemoveList _removeList;
 
         private void Awake()
         {
-            var center = capsuleCollider.center;
+          /*  var center = characterController.center;
             center = new Vector3(center.x, center.y * 2.5f, center.z);
-            capsuleCollider.center = center;
-            capsuleCollider.height *= 2;
+            characterController.center = center;
+            characterController.height *= 2;*/
         }
 
         protected override void Start()
@@ -30,10 +31,10 @@ namespace Characters.Enemy
             SubscribeDeathMethod(Die);
         }
 
-        protected override void ClearPoint()
+        protected override void ClearPoint(IInteractable interactable)
         {
             if (_currentPoint == null) return;
-            characterData.DieEvent -= _currentPoint.GetDieCharacterDelegate();
+            characterData.DieInteractable -= _currentPoint.GetDieCharacterDelegate;
             _currentPoint = null;
         }
 
@@ -49,7 +50,7 @@ namespace Characters.Enemy
         {
             if (_currentPoint != null || _currentPoint == point || !point.HasCharacter()) return;
             _currentPoint = point;
-            characterData.DieEvent += _currentPoint.GetDieCharacterDelegate();
+            characterData.DieInteractable += _currentPoint.GetDieCharacterDelegate;
             _removeList += _currentPoint.GetRemoveList();
             base.SetCurrentPoint(point);
         }
@@ -65,6 +66,11 @@ namespace Characters.Enemy
         private void Die()
         {
             _removeList?.Invoke(this);
+        }
+
+        public void Initialize(DieInteractable subscriber)
+        {
+            characterData.DieInteractable += subscriber;
         }
     }
 }

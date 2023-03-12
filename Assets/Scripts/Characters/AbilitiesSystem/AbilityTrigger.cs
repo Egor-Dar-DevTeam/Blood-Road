@@ -1,6 +1,4 @@
-using System;
 using Cinemachine;
-using Dreamteck.Splines;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem

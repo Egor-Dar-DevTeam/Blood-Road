@@ -1,9 +1,7 @@
 using System;
 using Characters;
 using Characters.Player;
-using Dreamteck.Splines;
 using UI.EnemyesCanvas;
-using UnityEditor.Media;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

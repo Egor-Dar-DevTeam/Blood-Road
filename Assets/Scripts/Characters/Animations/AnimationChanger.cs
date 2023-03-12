@@ -21,6 +21,7 @@ namespace Characters.Animations
 
         public void SetAnimation(AnimationClip clip, Animator animator)
         {
+            if(animator == null)return;
             animator.runtimeAnimatorController = animatorController;
             animator.Rebind();
             _clipOverrides[_nameClipOverrides] = clip;

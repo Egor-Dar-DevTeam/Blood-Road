@@ -21,6 +21,7 @@ namespace Characters.Animations
 
         public float LengthAnimation(string nameClip)
         {
+            if (_animator == null) return 0;
             var length = _dictionary[nameClip].length / _animator.GetFloat("AttackSpeed");
             return length;
         }

@@ -13,9 +13,10 @@ namespace Characters.AbilitiesSystem
         public StateMachine<BaseState> StateMachine { get; private set; }
         public IAnimationCommand AnimationCommand { get; private set; }
         public BaseState IdleState { get; private set; }
+        public CharacterData CharacterData { get; }
 
 
-        public AbilityData(VFXTransforms vfxTransforms, AbilitiesInfo abilitiesInfo, Impenetrable impenetrable)
+        public AbilityData(VFXTransforms vfxTransforms, AbilitiesInfo abilitiesInfo, Impenetrable impenetrable, CharacterData characterData)
         {
             VFXTransforms = vfxTransforms;
             StateMachine = null;
@@ -23,6 +24,7 @@ namespace Characters.AbilitiesSystem
             AbilitiesInfo = abilitiesInfo;
             IdleState = null;
             ImpenetrableDelegate = impenetrable;
+            CharacterData = characterData;
         }
 
         public void SetStateMachine(StateMachine<BaseState> stateMachine)

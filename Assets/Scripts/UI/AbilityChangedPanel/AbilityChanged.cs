@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Characters.InteractableSystems;
 using UI.CombatHUD;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 namespace UI.AbilityChangedPanel
 {
