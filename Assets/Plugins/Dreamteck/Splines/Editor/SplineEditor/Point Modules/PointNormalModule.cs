@@ -125,7 +125,7 @@ namespace Dreamteck.Splines.Editor
             Handles.DrawLine(evalResult.position, pos);
             Vector3 lastPos = pos;
             Vector3 lastLocalPos = matrix.inverse.MultiplyPoint(pos);
-            pos = Handles.FreeMoveHandle(pos, Quaternion.identity, HandleUtility.GetHandleSize(pos) * 0.1f, Vector3.zero, Handles.CircleHandleCap);
+            var fmh_128_47_638141264335833882 = Quaternion.identity; pos = Handles.FreeMoveHandle(pos, HandleUtility.GetHandleSize(pos) * 0.1f, Vector3.zero, Handles.CircleHandleCap);
             if (pos != lastPos)
             {
                 RecordUndo("Edit Point Normals");

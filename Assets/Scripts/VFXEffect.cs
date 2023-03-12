@@ -11,11 +11,11 @@ public class VFXEffect : MonoBehaviour
     private IEnumerator Timer(float time)
     {
         yield return new WaitForSeconds(time);
-        Destroy(gameObject);
+        DestroyImmediate(gameObject);
     }
 
     private void OnDestroy()
     {
-        Destroy(gameObject);
+        DestroyImmediate(gameObject);
     }
 }

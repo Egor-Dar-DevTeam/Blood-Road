@@ -1,6 +1,5 @@
 using Characters.Animations;
 using Characters.Information.Structs;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -16,7 +15,7 @@ namespace Characters.AbilitiesSystem.States
         {
             CanSkip = false;
             var effect = Object.Instantiate(_vfxEffect, _vfxTransforms.Center);
-            effect.transform.rotation= quaternion.identity;
+            effect.transform.rotation= Quaternion.identity;
             effect.SetLifeTime(18);
             CanSkip = true;
         }
