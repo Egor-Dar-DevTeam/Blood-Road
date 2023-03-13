@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace Characters.Player.States
 {
-    public class Die: BaseState
+    public class Die : BaseState
     {
         protected CharacterController characterController;
         public bool CanSkip { get; private set; }
 
 
-
-        public Die(IAnimationCommand animation,StateInfo stateInfo, CharacterController characterController, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
+        public Die(IAnimationCommand animation, StateInfo stateInfo, CharacterController characterController,
+            VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {
             this.characterController = characterController;
             _parameterName = "death";
@@ -27,16 +27,11 @@ namespace Characters.Player.States
             WaitAnimation();
         }
 
-        private async void WaitAnimation()
+        private void WaitAnimation()
         {
-            VFXEffect effect = null;
-            if (_vfxEffect != null)
-            {
-                effect = Object.Instantiate(_vfxEffect, _vfxTransforms.transform.position, Quaternion.identity);
-            }
-
-            await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)));
-           if(effect!=null) Object.Destroy(effect.gameObject);
+            if (_vfxEffect == null) return;
+            var effect = Object.Instantiate(_vfxEffect, _vfxTransforms.transform.position, Quaternion.identity);
+            effect.SetLifeTime(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)));
         }
 
         public override void Tick(float tickTime)

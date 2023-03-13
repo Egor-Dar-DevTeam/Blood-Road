@@ -13,7 +13,6 @@ namespace Characters.Player.States
         private CharacterController _characterController;
         private float _speed;
         private float _stopingDistance;
-        public Transform Point => _point;
 
         public RunToPoint(IAnimationCommand animation, RunToPointData data, StateInfo stateInfo,
             VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
@@ -34,6 +33,7 @@ namespace Characters.Player.States
         {
             base.Enter();
             _animation.SetAnimation(_parameterName);
+            _characterController.enabled = true;
         }
 
         public override void Tick(float tickTime)
@@ -49,6 +49,7 @@ namespace Characters.Player.States
 
         public override void Exit()
         {
+            _characterController.enabled = false;
         }
     }
 

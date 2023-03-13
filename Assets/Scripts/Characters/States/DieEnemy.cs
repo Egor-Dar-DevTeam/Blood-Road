@@ -34,26 +34,18 @@ namespace Characters.Player.States
             DieTime();
         }
 
-        private const int SECONDS = 1000;
-
-        public new static int SecondToMilliseconds(float second)
-        {
-            var result = Mathf.RoundToInt(second * SECONDS);
-            return result;
-        }
-
         private async void DieTime()
         {
+            characterController.GetComponent<CapsuleCollider>().enabled = false;
             await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName) / 3));
             if (_moneyPrefab != null)
             {
                 var money = Object.Instantiate(_moneyPrefab, _vfxTransforms.Center.position, Quaternion.identity);
                 money.SetPlayer(_player);
             }
-
             await Task.Delay(SecondToMilliseconds(_animation.LengthAnimation(_parameterName)));
-            if (characterController != null)
-                characterController.gameObject.transform.DOMoveY(characterController.transform.position.y - 2, 10f)
+                characterController.transform
+                    .DOMoveY(characterController.transform.position.y - 2, 10f)
                     .OnComplete((() => { Object.Destroy(characterController.gameObject); }));
         }   
     }

@@ -23,19 +23,14 @@ namespace Characters.Facades
             base.TransitionInit(transform,runToPointData);
             _stateMachine.AddTransition(_idleState, _runToPointState, () =>
             {
-                if (GetCurrentPoint() != null)
-                {
-                    var dieState = (DieEnemy)_dieState;
-                    dieState.SetPlayerTransform(GetCurrentPoint().GetObject());
-                    _runToPointState.SetPoint(GetCurrentPoint().GetObject());
-                }
+                if (GetCurrentPoint() == null) return GetCurrentPoint() != null;
+                var dieState = (DieEnemy)_dieState;
+                dieState.SetPlayerTransform(GetCurrentPoint().GetObject());
+                _runToPointState.SetPoint(GetCurrentPoint().GetObject());
                 return GetCurrentPoint() != null;
             });
             _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);
-            _stateMachine.AddTransition(_runToPointState, _attackState, () =>
-            {
-                return !IsRuning(transform, runToPointData);
-            });
+            _stateMachine.AddTransition(_runToPointState, _attackState, () => !IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _runToPointState, () => IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
             _stateMachine.ChangeState(_idleState);

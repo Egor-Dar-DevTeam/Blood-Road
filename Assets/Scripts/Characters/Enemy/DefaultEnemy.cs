@@ -14,14 +14,6 @@ namespace Characters.Enemy
         public override bool IsPlayer() => false;
         protected event RemoveList _removeList;
 
-        private void Awake()
-        {
-          /*  var center = characterController.center;
-            center = new Vector3(center.x, center.y * 2.5f, center.z);
-            characterController.center = center;
-            characterController.height *= 2;*/
-        }
-
         protected override void Start()
         {
             base.Start();

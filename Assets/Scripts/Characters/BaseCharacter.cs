@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Characters.AbilitiesSystem;
 using Characters.EffectSystem;
 using Characters.Facades;
@@ -69,12 +67,11 @@ namespace Characters
         public DieInteractable GetDieCharacterDelegate => _characterPointDie;
 
         public event DieDelegate GetDieEvent;
-        
+
 
         public void SetCharacterController()
         {
             runToPointData.CharacterController = gameObject.GetComponent<CharacterController>();
-
         }
 
         protected virtual void Start()
@@ -173,13 +170,13 @@ namespace Characters
         }
 
         public abstract void SetOutline(bool value);
-        
+
 
         protected void WeaponAttack()
         {
             // AttackWeapon?.Invoke(_currentPoint.Receiver, characterData.);
         }
-        
+
         public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
         {
             _transitionAndStates.RunAbility.RunAbility(abilityCommand);

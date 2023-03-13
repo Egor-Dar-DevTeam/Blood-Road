@@ -137,15 +137,8 @@ namespace Characters.Facades
             {
                 _runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
                 var position = CurrentPoint?.Invoke().GetObject().position;
-                if (position != null &&
-                    Vector3.Distance(transform.position, (Vector3)position) >= runToPointData.StopDistance)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return position != null &&
+                       Vector3.Distance(transform.position, (Vector3)position) >= runToPointData.StopDistance;
 
             }
             else
