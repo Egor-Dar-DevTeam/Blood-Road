@@ -20,6 +20,7 @@ namespace UI.CombatHUD
 
         private async void InteractableButton(float cooldown, UnityAction action)
         {
+            if(button==null) return;
             action?.Invoke();
             if (cooldown != 0)
             {

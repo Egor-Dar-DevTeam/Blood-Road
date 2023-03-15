@@ -8,6 +8,6 @@ public class DeathScreen : MonoBehaviour
 
     private void Awake()
     {
-        restart.onClick.AddListener((() => SceneManager.LoadScene(0)));
+        restart.onClick.AddListener(() => SceneManager.LoadScene(1));
     }
 }

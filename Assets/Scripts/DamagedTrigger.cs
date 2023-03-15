@@ -19,14 +19,11 @@ public class DamagedTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out IInteractable interactable))
-        {
-            if (!_interactables.Contains(interactable))
-            {
-                if(interactable.HasCharacter())
-                    _interactables.Add(interactable);
-            }
-        }
+        if (!other.gameObject.TryGetComponent(out IInteractable interactable)) return;
+        if (_interactables.Contains(interactable)) return;
+        if (interactable.IsPlayer()) return;
+        if(interactable.HasCharacter())
+            _interactables.Add(interactable);
     }
 
     private async void Active()

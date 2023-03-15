@@ -9,6 +9,7 @@ namespace Characters.BottlesSystem
         [SerializeField] private Sprite sprite;
         [SerializeField] private int cooldown;
         [SerializeField] private PassiveData data;
+        [SerializeField] private int currentCount;
         private BottleInfo _bottleInfo;
         public BottleInfo BottleInfo => new BottleInfo(_bottleInfo.Sprite, _bottleInfo.Cooldown);
         public EffectData EffectData => EffectData.From(data);

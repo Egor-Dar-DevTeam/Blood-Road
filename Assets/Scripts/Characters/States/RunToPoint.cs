@@ -49,7 +49,6 @@ namespace Characters.Player.States
 
         public override void Exit()
         {
-            _characterController.enabled = false;
         }
     }
 
