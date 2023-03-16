@@ -14,7 +14,7 @@ namespace UI.CombatHUD
             for (int i = 0; i < buttons.Length; i++)
             {
                 var a = i;
-                buttons[i].Initialize(0,()=> attackVariants.Attack(a),attackButtonSprite);
+                buttons[i].Initialize(0,()=> attackVariants.Attack(a),attackButtonSprite, null);
             }
         }
         

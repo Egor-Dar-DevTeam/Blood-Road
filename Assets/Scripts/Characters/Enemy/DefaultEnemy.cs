@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Characters.AbilitiesSystem;
 using Characters.Facades;
 using Characters.InteractableSystems;
 using Characters.Player;
@@ -18,9 +19,17 @@ namespace Characters.Enemy
         {
             base.Start();
             InitializeTransition(new EnemyTransition(), null, null, moneyPrefab);
+            InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
+                characterData));
             InitializeInteractionSystem(null);
             SubscribeDeath();
             SubscribeDeathMethod(Die);
+        }
+
+        protected override void InitializeAbility(AbilityData abilityData)
+        {
+            var data = _transitionAndStates.ReturnReadyData(abilityData);
+            _transitionAndStates.InitializeAbilities(new AbilitiesSystem.Enemy(data));
         }
 
         protected override void ClearPoint(IInteractable interactable)

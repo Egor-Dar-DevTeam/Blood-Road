@@ -22,7 +22,6 @@ namespace Characters.Facades
             _dieState = data.Die;
             _setAttackSpeed = _attackState.SetAnimationSpeed;
             _attack = _attackState.SetStateInfo;
-
             TransitionInit(data.Transform, data.RunToPointData);
         }
 

@@ -16,6 +16,7 @@ namespace Characters.Facades
             dieState.SetMoneyPrefab(data.MoneyPrefab);
             _dieState = data.Die;
             TransitionInit(data.Transform, data.RunToPointData);
+            
         }
 
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)

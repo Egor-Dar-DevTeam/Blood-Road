@@ -17,7 +17,8 @@ namespace UI.CombatHUD
                 bottleSo[i].Initialize();
                 var info = bottleSo[i].BottleInfo;
                 var effectData = bottleSo[i].EffectData;
-                buttons[i].Initialize(info.Cooldown,(() => playerController.UseBottle(effectData)), info.Sprite);
+                var delegates = bottleSo[i].BankDelegates;
+                buttons[i].Initialize(info.Cooldown,(() => playerController.UseBottle(effectData)), info.Sprite,null);
             }
         }
     }

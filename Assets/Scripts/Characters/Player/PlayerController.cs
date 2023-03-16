@@ -28,11 +28,6 @@ namespace Characters.Player
         private IInit<Attack> _initAttack;
         private IInit<SetAttackSpeed> _initSetAttackSpeed;
 
-        private void Reset()
-        {
-            throw new NotImplementedException();
-        }
-
         private List<IInteractable> _interactables;
 
         public event BottleUse BottleUseEvent;
