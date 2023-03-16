@@ -30,7 +30,7 @@ public class Money : MonoBehaviour
         if (!_followToPlayer) return;
         var direction = transform.position - _player.position;
         transform.position -= direction * (_speed * Time.deltaTime);
-        _speed += 0.1f;
+        _speed += 0.2f;
     }
 
     private void OnTriggerEnter(Collider other)
