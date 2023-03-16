@@ -19,7 +19,7 @@ namespace Characters.AbilitiesSystem.States
             if (_vfxEffect == null) return;
             var effect = GameObject.Instantiate(_vfxEffect,_vfxTransforms.Center);
             effect.transform.rotation  = Quaternion.identity;
-            effect.SetLifeTime(SecondToMilliseconds(15f));
+            effect.SetLifeTime(15f);
             Wait();
             CanSkip = true;
         }

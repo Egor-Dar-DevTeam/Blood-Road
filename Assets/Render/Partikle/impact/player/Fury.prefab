@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af8cc7adc5a49a2a647ee23bc75a54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!1001 &415465523536904472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,9 +57,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4924308816041635668}
     m_Modifications:
+    - target: {fileID: 589279072782322190, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1549613380633389586, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
       propertyPath: m_Name
       value: Fury_t5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1735021036491123145, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2939135329936580426, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
       propertyPath: m_RootOrder
@@ -104,6 +113,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3399147317705149572, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933727501810308175, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253595942304730553, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523727293377406407, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d7e7e9973d953845b7847e454de32e2, type: 3}
 --- !u!4 &3246514462332378706 stripped
@@ -118,9 +155,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4924308816041635668}
     m_Modifications:
+    - target: {fileID: 589279072782322190, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1549613380633389586, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
       propertyPath: m_Name
       value: Fury_t2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1735021036491123145, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2939135329936580426, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
       propertyPath: m_RootOrder
@@ -166,6 +211,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253595942304730553, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b6d6c3308b77f46ad62204175abd81, type: 3}
 --- !u!4 &4409783075179034824 stripped
@@ -180,9 +241,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4924308816041635668}
     m_Modifications:
+    - target: {fileID: 589279072782322190, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1549613380633389586, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
       propertyPath: m_Name
       value: Fury_t4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1735021036491123145, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2939135329936580426, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
       propertyPath: m_RootOrder
@@ -228,6 +297,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933727501810308175, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253595942304730553, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523727293377406407, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d9b332dbd0cbff4b818fe1f164f47bc, type: 3}
 --- !u!4 &7811125555635695078 stripped
@@ -242,9 +335,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4924308816041635668}
     m_Modifications:
+    - target: {fileID: 589279072782322190, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1549613380633389586, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
       propertyPath: m_Name
       value: Fury_t3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1735021036491123145, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2939135329936580426, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
       propertyPath: m_RootOrder
@@ -290,6 +391,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253595942304730553, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8523727293377406407, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 586c602e26c8e3f49841a44615827cb3, type: 3}
 --- !u!4 &9160223827091922120 stripped
@@ -304,9 +425,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4924308816041635668}
     m_Modifications:
+    - target: {fileID: 589279072782322190, guid: 8540587dc53fca14fbabfa18b7f008ed, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1549613380633389586, guid: 8540587dc53fca14fbabfa18b7f008ed, type: 3}
       propertyPath: m_Name
       value: Fury_t1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1735021036491123145, guid: 8540587dc53fca14fbabfa18b7f008ed, type: 3}
+      propertyPath: looping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2939135329936580426, guid: 8540587dc53fca14fbabfa18b7f008ed, type: 3}
       propertyPath: m_RootOrder
@@ -350,6 +479,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2939135329936580426, guid: 8540587dc53fca14fbabfa18b7f008ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4043307235613655913, guid: 8540587dc53fca14fbabfa18b7f008ed, type: 3}
+      propertyPath: startDelay.scalar
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
