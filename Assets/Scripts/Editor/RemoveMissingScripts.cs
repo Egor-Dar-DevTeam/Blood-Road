@@ -12,6 +12,17 @@ public class RemoveMissingScripts : UnityEditor.Editor
         int count = objs.Sum(GameObjectUtility.RemoveMonoBehavioursWithMissingScript);
         Debug.Log($"Removed {count} missing scripts");
     }
+    [MenuItem("GameObject/Disabled All Colliders")]
+    public static void RemoveColliders()
+    {
+        var objs = Resources.FindObjectsOfTypeAll<Collider>();
+        var objss = Resources.FindObjectsOfTypeAll<MeshCollider>();
+        for (int i = 0; i >= objs.Length; i++)
+        {
+            objs[i].enabled = false;
+        }
+        Debug.Log($"Disabled {objs.Length} colliders");
+    }
     [MenuItem("GameObject/Find Monobehaviour Scripts")]
 
     public static void FindAssets()
