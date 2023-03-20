@@ -33,7 +33,7 @@ namespace Characters
         [SerializeField] protected Eyes eyesCharacters;
         [SerializeField] protected CharacterData characterData;
         [SerializeField] private Linker linker;
-        [SerializeField] private float rotationSpeed = 1f;
+        [SerializeField] protected float rotationSpeed = 1f;
         [HideInInspector] [SerializeField] public Sender Sender;
         protected bool _hasCharacter = true;
 
@@ -144,7 +144,7 @@ namespace Characters
         protected abstract void ClearPoint(IInteractable interactable);
 
 
-        private void Update()
+        protected virtual void Update()
         {
             _transitionAndStates.Update();
 

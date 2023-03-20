@@ -7,6 +7,11 @@ namespace UI.EnemyesCanvas
         [SerializeField] private PanelHealth prefab;
         [SerializeField] private Canvas current;
 
+        private void Start()
+        {
+            current.planeDistance = 9.82f;
+        }
+
         private void Update()
         {
             if(current.worldCamera==null)

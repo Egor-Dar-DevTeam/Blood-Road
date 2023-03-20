@@ -13,16 +13,61 @@ namespace Characters.NPC
         [SerializeField] private bool isPlayer;
         private List<IInteractable> _interactables;
         protected event RemoveList _removeList;
+        protected IInteractable _main;
+        protected SupporterTransition _supporterTransitionAndStates;
+
+        protected const float MAX_DISTANCE = 7.5f;
+        protected const float ANGLE = 25f;
+
 
         protected override void Start()
         {
+            _main = FindObjectOfType<PlayerController>();
             _interactables = new List<IInteractable>();
             base.Start();
             characterData = characterData.Copy();
-            InitializeTransition(new EnemyTransition(), null);
+            InitializeTransition(_supporterTransitionAndStates = new SupporterTransition(MAX_DISTANCE), null);
             InitializeInteractionSystem(null);
             SubscribeDeath();
             SubscribeDeathMethod(Die);
+            FollowEntity();
+        }
+
+        protected override void Update()
+        {
+            _transitionAndStates.Update();
+
+            if (_currentPoint == null || !_hasCharacter) return;
+
+            var turnTowardNavSteeringTarget = _currentPoint.GetObject().position;
+
+            var direction = (turnTowardNavSteeringTarget - transform.position).normalized;
+            var y = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z)).eulerAngles.y;
+            y = _currentPoint.IsPlayer() ? y + ANGLE * CalculateRatio(_currentPoint.GetObject()) : y;
+            var resRotation = Quaternion.Euler(0f, y, 0f);
+            transform.rotation = Quaternion.Slerp(transform.rotation, resRotation, Time.deltaTime * rotationSpeed);
+        }
+
+        private float CalculateRatio(Transform towardTarget)
+        {
+            var posOnForwardTarget = Vector3.Project(transform.position, towardTarget.forward.normalized);
+            var distance = Mathf.Abs(towardTarget.position.magnitude - posOnForwardTarget.magnitude);
+            if (distance < 0.1f)
+                return 0f;
+            var ratio = MAX_DISTANCE / distance;
+            return ratio > 1f ? 1f : ratio;
+        }
+
+        protected void FollowEntity()
+        {
+            _supporterTransitionAndStates.SetMode(SupporterTransition.FollowMode.Player);
+            SetCurrentPoint(_main);
+        }
+
+        protected void FollowEntity(IInteractable interactable)
+        {
+            _supporterTransitionAndStates.SetMode(SupporterTransition.FollowMode.Enemy);
+            SetCurrentPoint(interactable);
         }
 
         public override void SetOutline(bool value)
@@ -49,8 +94,9 @@ namespace Characters.NPC
         }
 
         protected override void StartRCP(List<IInteractable> points)
-        {
+        {   
             if (!_hasCharacter) return;
+            ClearPoint(_main);
             AddToListEnemy(points);
         }
 
@@ -75,7 +121,11 @@ namespace Characters.NPC
             if (!_hasCharacter) yield break;
             if (_currentPoint == null)
             {
-                if (_interactables.Count == 0) yield break;
+                if (_interactables.Count == 0)
+                {
+                    FollowEntity();
+                    yield break;
+                }
                 int indx;
                 IInteractable point = null;
                 for (int i = 0; i < _interactables.Count; i++)
@@ -102,7 +152,7 @@ namespace Characters.NPC
 
                 if (point != null && point.HasCharacter())
                 {
-                    SetCurrentPoint(point);
+                    FollowEntity(point);
                 }
 
                 yield return new WaitForSeconds(0);

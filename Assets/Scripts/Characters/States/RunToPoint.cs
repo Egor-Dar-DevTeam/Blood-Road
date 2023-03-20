@@ -24,6 +24,12 @@ namespace Characters.Player.States
             _parameterName = "run";
         }
 
+        public void SetParams(float speed, float stoppingDistance)
+        {
+            _speed = speed;
+            _stopingDistance = stoppingDistance;
+        }
+
         public void SetPoint([CanBeNull] Transform point)
         {
             _point = point;
