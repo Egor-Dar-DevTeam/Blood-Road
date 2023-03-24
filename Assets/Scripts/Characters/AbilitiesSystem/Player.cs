@@ -7,6 +7,9 @@ namespace Characters.AbilitiesSystem
 {
     public class Player : Abilities
     {
+        private Attack _attack;
+        private OverrideAttack _overrideAttack;
+        private SetAttackSpeed _setAttackSpeed;
         private CharacterData _characterData;
         private Stun _stunState;
         private AttackStun _attackStunState;
@@ -22,6 +25,9 @@ namespace Characters.AbilitiesSystem
 
         public Player(AbilityData abilityData) : base(abilityData)
         {
+            _attack = abilityData.Attack;
+            _overrideAttack = abilityData.OverrideAttack;
+            _setAttackSpeed = abilityData.SetAttackSpeed;
             _characterData = abilityData.CharacterData;
             CreateStates(abilityData.AnimationCommand, abilityData.VFXTransforms);
             InitializeTransitions(abilityData.IdleState);
@@ -41,7 +47,7 @@ namespace Characters.AbilitiesSystem
             _armageddon = new Armageddon(animationCommand, _info.GetState("Armageddon"), transforms);
             _fury = new Fury(animationCommand, _info.GetState("Fury"), transforms, _characterData);
             _universalBlow = new UniversalBlow(animationCommand, _info.GetState("UniversalBlow"), transforms,
-                _characterData);
+                _characterData, _attack, _overrideAttack, _setAttackSpeed);
             _ghostWolf = new GhostWolf(animationCommand, _info.GetState("Ghost Wolf"), transforms);
         }
 
