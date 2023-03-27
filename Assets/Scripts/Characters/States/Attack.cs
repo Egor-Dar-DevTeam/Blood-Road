@@ -2,6 +2,7 @@
 using Characters.Animations;
 using Characters.Information.Structs;
 using Object = UnityEngine.Object;
+using UnityEngine;
 
 namespace Characters.Player.States
 {
@@ -34,7 +35,10 @@ namespace Characters.Player.States
         private bool _setDamage;
         private bool _isPlayer;
         private bool _canSkip;
+        protected Transform _vfxTransform;
+        private VFXSpawnType _currentVFXSpawnType = VFXSpawnType.Default;
         public bool CanSkip => _canSkip;
+        private int Damage => _isPlayer ? _transitionAndStatesData.CharacterData.Damage : _damage;
 
         public Attack()
         {
@@ -48,13 +52,16 @@ namespace Characters.Player.States
             _isPlayer = isPlayer;
             _parameterName = "attack";
             _transitionAndStatesData = data;
+            _vfxTransform = _vfxTransforms.Center;
         }
 
         public void SetStateInfo(StateInfo info)
         {
-            _clip = info.Clip;
+            _clip = info.Clip != null ? info.Clip : _clip;
             _parameterName = _clip.name;
-            _vfxEffect = info.VFXEffect;
+            _vfxEffect = info.VFXEffect != null ? info.VFXEffect : _vfxEffect;
+            _vfxTransform = info.vfxTransform != null ? info.vfxTransform : _vfxTransform;
+            _currentVFXSpawnType = info.SpawnType;
         }
 
         public void SetAnimationSpeed(float value)
@@ -74,7 +81,7 @@ namespace Characters.Player.States
             _animation.SetAnimation(_parameterName);
             _setDamage = true;
             if (!_isPlayer) SetDamage();
-            else Damage();
+            else InvokeDamage();
         }
 
         private async void SetDamage()
@@ -94,27 +101,35 @@ namespace Characters.Player.States
 
                 await Task.Delay(milliseconds / 2);
                 _transitionAndStatesData.CharacterData.UseEnergy();
-                _interactable.ReceiveDamage(_damage);
+                _interactable.ReceiveDamage(Damage);
 
                 await Task.Delay(milliseconds);
                 _canSkip = true;
             } while (_setDamage);
         }
 
-        private void Damage()
+        private void InvokeDamage()
         {
             _canSkip = false;
             _animation.SetAnimation(_parameterName);
             VFXEffect vfx = null;
             if (_vfxEffect != null)
             {
-                vfx = Object.Instantiate(_vfxEffect);
-                vfx.transform.position = _vfxTransforms.Center.position;
+                switch (_currentVFXSpawnType)
+                {
+                    case VFXSpawnType.UniversalBlow:
+                        vfx = Object.Instantiate(_vfxEffect, _vfxTransform);
+                        break;
+                    default:
+                        vfx = Object.Instantiate(_vfxEffect);
+                        vfx.transform.position = _vfxTransforms.Center.position;
+                        break;
+                }
                 vfx.SetLifeTime(1.5f);
             }
 
             _transitionAndStatesData.CharacterData.UseEnergy();
-            _interactable.ReceiveDamage(_damage);
+            _interactable.ReceiveDamage(Damage);
             _canSkip = true;
         }
 

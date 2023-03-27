@@ -63,7 +63,7 @@ namespace Characters.Player
             SetCharacterData(characterData);
             InitializeTransition(new PlayerTransition(), _getIsAttack, splineFollower);
             InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
-                characterData));
+            characterData, _transitionAndStates.Attack, attackVariants.StartOverridedStateInfo, _transitionAndStates.SetAttackSpeed));
             InitializeInteractionSystem(cameraRay);
             SubscribeDeath();
             InitializeAttackDelegates();
@@ -219,7 +219,7 @@ namespace Characters.Player
         {
             if (characterData.Energy < 15) return;
             _isAttack = true;
-            await Task.Delay(100);
+            await Task.Delay(info.DurationInMileseconds);
             _isAttack = false;
         }
 

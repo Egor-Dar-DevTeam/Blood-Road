@@ -1,6 +1,7 @@
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.Animations;
 using Characters.Player;
+using JetBrains.Annotations;
 
 namespace Characters.AbilitiesSystem
 {
@@ -14,9 +15,12 @@ namespace Characters.AbilitiesSystem
         public IAnimationCommand AnimationCommand { get; private set; }
         public BaseState IdleState { get; private set; }
         public CharacterData CharacterData { get; }
+        public Attack Attack { get; }
+        public OverrideAttack OverrideAttack { get; }
+        public SetAttackSpeed SetAttackSpeed { get; }
 
-
-        public AbilityData(VFXTransforms vfxTransforms, AbilitiesInfo abilitiesInfo, Impenetrable impenetrable, CharacterData characterData)
+        public AbilityData(VFXTransforms vfxTransforms, AbilitiesInfo abilitiesInfo, Impenetrable impenetrable, CharacterData characterData
+            ,[CanBeNull] Attack attack = null, [CanBeNull] OverrideAttack overrideAttack = null, [CanBeNull] SetAttackSpeed setAttackSpeed = null)
         {
             VFXTransforms = vfxTransforms;
             StateMachine = null;
@@ -25,6 +29,9 @@ namespace Characters.AbilitiesSystem
             IdleState = null;
             ImpenetrableDelegate = impenetrable;
             CharacterData = characterData;
+            Attack = attack;
+            OverrideAttack = overrideAttack;
+            SetAttackSpeed = setAttackSpeed;
         }
 
         public void SetStateMachine(StateMachine<BaseState> stateMachine)

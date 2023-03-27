@@ -8,16 +8,26 @@ namespace Characters.Player
     public delegate void Attack(StateInfo info);
 
     public delegate void SetAttackSpeed(float value);
+    public delegate void OverrideAttack(StateInfo stateInfo, bool state);
     public class AttackVariants : MonoBehaviour,IInit<Attack>, IInit<SetAttackSpeed>
     {
         [SerializeField] private StateInfo[] attackVariants;
         private int _clickCount;
         private event Attack _attack;
         private event SetAttackSpeed _setAttackSpeed;
+        protected bool _canOverride;
+        protected StateInfo _overrided;
+
 
         private void Start()
         {
             Wait();
+        }
+
+        public void StartOverridedStateInfo(StateInfo stateInfo, bool start)
+        {
+            _overrided = stateInfo;
+            _canOverride = start;
         }
 
         public void Attack(int index)
@@ -26,23 +36,29 @@ namespace Characters.Player
             switch (_clickCount)
             {
                 case >= 2 and <= 4:
-                    _setAttackSpeed?.Invoke(2);
+                    TrySetAttackSpeed(2f);
                     break;
                 case >= 5 and <= 8:
-                    _setAttackSpeed?.Invoke(3);
+                    TrySetAttackSpeed(3f);
                     break;
             }
             if(attackVariants.Length<=index) return;
-            _attack?.Invoke(attackVariants[index]);
-
+            _attack?.Invoke(_canOverride ? _overrided : attackVariants[index]);
+            if (_canOverride) _setAttackSpeed?.Invoke(_overrided.AnimationSpeed);
         }
+
+        private void TrySetAttackSpeed(float speed)
+        {
+            _setAttackSpeed?.Invoke(_canOverride ? _overrided.AnimationSpeed : speed);
+        }
+
         private async void Wait()
         {
             for (;;)
             {
                 await Task.Delay(1000);
                 _clickCount = 1;
-                _setAttackSpeed?.Invoke(_clickCount);
+                TrySetAttackSpeed(_clickCount);
             }
         }
         public void Subscribe(Attack subscriber)
