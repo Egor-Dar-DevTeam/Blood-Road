@@ -1,12 +1,9 @@
 ﻿//#define RENDER_FEATURE
 
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 #if URP
 using UnityEngine.Rendering.Universal;
 #endif
-using UnityEngine.Serialization;
 
 namespace StylizedWater2
 {

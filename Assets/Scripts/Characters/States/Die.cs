@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Characters.Animations;
 using Characters.Information.Structs;
 using UnityEngine;
@@ -10,7 +9,7 @@ namespace Characters.Player.States
         protected CharacterController characterController;
         public bool CanSkip { get; private set; }
 
-
+        public Die(){}
         public Die(IAnimationCommand animation, StateInfo stateInfo, CharacterController characterController,
             VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {

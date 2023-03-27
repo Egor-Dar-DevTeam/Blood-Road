@@ -39,7 +39,9 @@ namespace Spawners
         private void Instantiate(BaseCharacter prefab, CharacterData data, Vector3 position)
         {
             var enemy = Object.Instantiate(prefab, position, Quaternion.identity);
-            enemy.SetCharacterData(data, panelsCreator.AddCharacter(enemy.VFXTransforms.Up));
+            data.SetInteractable(enemy);
+            enemy.SetCharacterData(data);
+            panelsCreator.AddCharacter(enemy);
         }
     }
 

@@ -45,14 +45,24 @@ namespace Characters.Player
                 _setAttackSpeed?.Invoke(_clickCount);
             }
         }
-        public void Initialize(Attack subscriber)
+        public void Subscribe(Attack subscriber)
         {
             _attack += subscriber;
         }
-        
-        public void Initialize(SetAttackSpeed subscriber)
+
+        public void Unsubscribe(Attack unsubscriber)
+        {
+            _attack -= unsubscriber;
+        }
+
+        public void Subscribe(SetAttackSpeed subscriber)
         {
             _setAttackSpeed += subscriber;
+        }
+
+        public void Unsubscribe(SetAttackSpeed unsubscriber)
+        {
+            _setAttackSpeed -= unsubscriber;
         }
     }
 }

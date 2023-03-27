@@ -1,6 +1,6 @@
 using System;
+using Characters.InteractableSystems;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Banks
 {
@@ -8,16 +8,15 @@ namespace Banks
 
     public delegate void Remove(int value);
 
-    public delegate int GetValue();
+    public delegate void GetValue(int value);
 
-    public abstract class BaseBank
+    [Serializable]
+    public abstract class BaseBank : IInit<GetValue>
     {
         protected string NameBank;
         private int _value;
-        private Add _add;
-        private Remove _remove;
-        private GetValue getValue;
-        public BankDelegates Delegates => new BankDelegates(_add = Add, _remove = Remove, getValue = (() => _value));
+        private event GetValue _getValue;
+        public BankDelegates Delegates => new(Add, Remove, this);
 
         public virtual void Initialize(string name)
         {
@@ -28,33 +27,26 @@ namespace Banks
         private void Add(int count)
         {
             _value = Mathf.Clamp(_value += count, 0, Int32.MaxValue);
+            _getValue?.Invoke(_value);
             PlayerPrefs.SetInt(NameBank, _value);
         }
 
         private void Remove(int count)
         {
             _value = Mathf.Clamp(_value -= count, 0, Int32.MaxValue);
+            _getValue?.Invoke(_value);
             PlayerPrefs.SetInt(NameBank, _value);
         }
-    }
 
-    public struct BankDelegates
-    {
-        public Add Add { get; }
-        public Remove Remove { get; }
-
-        public int Value
+        public void Subscribe(GetValue subscriber)
         {
-            get => _getValue.Invoke();
+            _getValue += subscriber;
+            _getValue?.Invoke(_value);
         }
 
-        private GetValue _getValue;
-
-        public BankDelegates(Add add, Remove remove, GetValue getValue)
+        public void Unsubscribe(GetValue unsubscriber)
         {
-            _getValue = getValue;
-            Add = add;
-            Remove = remove;
+            _getValue -= unsubscriber;
         }
     }
 }

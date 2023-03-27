@@ -30,8 +30,8 @@ namespace Characters.Facades
         {
             base.Initialize(data);
             StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
-            data.CreateAttack(new Attack(_animation, _statesInfo.GetState("attack"), data.Damage, false, data, data.VFXTransforms));
-            data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState("die"), data.CharacterController, data.VFXTransforms));
+            data.CreateAttack(new Attack(_animation, _statesInfo.GetState(typeof(Attack)), data.Damage, false, data, data.VFXTransforms));
+            data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState(typeof(DieEnemy)), data.CharacterController, data.VFXTransforms));
             _attackState = data.Attack;
             DieEnemy dieState = (DieEnemy)data.Die;
             _dieState = data.Die;

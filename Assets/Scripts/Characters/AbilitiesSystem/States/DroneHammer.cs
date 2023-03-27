@@ -7,6 +7,7 @@ namespace Characters.AbilitiesSystem.States
 {
     public class DroneHammer : AbilityBase
     {
+        public DroneHammer(){}
         public DroneHammer(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
             animation, stateInfo, vfxTransforms)
         {

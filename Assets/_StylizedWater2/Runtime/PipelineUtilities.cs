@@ -2,10 +2,6 @@
 //Staggart Creations (http://staggart.xyz)
 //Copyright protected under Unity Asset Store EULA
 
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
 #if URP
 using UnityEngine.Rendering.Universal;
 
@@ -15,7 +11,6 @@ using ForwardRendererData = UnityEngine.Rendering.Universal.UniversalRendererDat
 #endif
 
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 namespace StylizedWater2

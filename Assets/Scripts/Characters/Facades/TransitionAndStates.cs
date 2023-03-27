@@ -3,6 +3,7 @@ using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
 using Characters.Animations;
 using Characters.Information;
+using Characters.Information.Structs;
 using Characters.Player;
 using Characters.Player.States;
 using UnityEngine;
@@ -40,7 +41,7 @@ namespace Characters.Facades
 
         #region delegates
 
-        private DieDelegate _dieDelegate;
+        private Action _dieDelegate;
         protected Attack _attack;
         protected SetAttackSpeed _setAttackSpeed;
 
@@ -51,7 +52,7 @@ namespace Characters.Facades
 
         #region publicVariables
 
-        public DieDelegate DieDelegate => _dieDelegate;
+        public Action DieDelegate => _dieDelegate;
 
         public Attack Attack => _attack;
         public SetAttackSpeed SetAttackSpeed => _setAttackSpeed;
@@ -78,9 +79,9 @@ namespace Characters.Facades
             _animation = new AnimatorController(animator);
             _animation.CreateAnimationChanger(animatorOverrideController);
             _vfxTransforms = vfxTransforms;
-            _runToPointState = new RunToPoint(_animation, runToPointData,_statesInfo.GetState("run"), vfxTransforms);
-            _idleState = new Idle(_animation, _statesInfo.GetState("idle"), vfxTransforms);
-            _shieldState = new Shield(_animation, _statesInfo.GetState("shield"), vfxTransforms);
+            _runToPointState = new RunToPoint(_animation, runToPointData,_statesInfo.GetState(typeof(RunToPoint)), vfxTransforms);
+            _idleState = new Idle(_animation, _statesInfo.GetState(typeof(Idle)), vfxTransforms);
+            _shieldState = new Shield(_animation, _statesInfo.GetState(typeof(Shield)), vfxTransforms);
             _stateMachine = new StateMachine<BaseState>();
         }
 
@@ -92,7 +93,7 @@ namespace Characters.Facades
 
         public void Damaged()
         {
-            var vfxEffect = _statesInfo.GetState("damaged").VFXEffect;
+            var vfxEffect = _statesInfo.GetState(typeof(Damaged)).VFXEffect;
             
             var effect1 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
             var effect2 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);

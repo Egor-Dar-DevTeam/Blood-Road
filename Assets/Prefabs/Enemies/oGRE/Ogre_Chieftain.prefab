@@ -2128,10 +2128,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStatesInfo:
-  - stateName: stun
+  - state:
+      rid: 7345367210705289403
     stateInfo:
       clip: {fileID: 2090084898462240177, guid: f024fa91a6853474c94d5267d7b461fe, type: 3}
       vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7345367210705289403
+      type: {class: Stun, ns: Characters.AbilitiesSystem.States, asm: Assembly-CSharp}
 --- !u!114 &3712959268961789725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2145,30 +2151,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStatesInfo:
-  - stateName: idle
+  - state:
+      rid: 7345367210705289404
     stateInfo:
       clip: {fileID: 7400000, guid: b319e697b5d75f547b8aaafa6a565586, type: 2}
       vfxEffect: {fileID: 0}
-  - stateName: run
+  - state:
+      rid: 7345367210705289405
     stateInfo:
       clip: {fileID: 7400000, guid: 423ac10cf89353f499409e4453518afe, type: 2}
       vfxEffect: {fileID: 0}
-  - stateName: attack
+  - state:
+      rid: 7345367210705289406
     stateInfo:
       clip: {fileID: -2107826184597932312, guid: 9afc4b11da139104ab9a21a2f2683ce2, type: 3}
       vfxEffect: {fileID: 0}
-  - stateName: die
+  - state:
+      rid: 7345367210705289407
     stateInfo:
       clip: {fileID: 8804117217619918161, guid: 52fc019510102964a86b4823f5a79552, type: 3}
       vfxEffect: {fileID: 0}
-  - stateName: shield
+  - state:
+      rid: 7345367210705289408
     stateInfo:
       clip: {fileID: 1827226128182048838, guid: 38ca1223c95d5cb498e4b0789a6fdea0, type: 3}
       vfxEffect: {fileID: 0}
-  - stateName: damaged
+  - state:
+      rid: 7345367210705289409
     stateInfo:
       clip: {fileID: 0}
       vfxEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7345367210705289404
+      type: {class: Idle, ns: Characters.Player.States, asm: Assembly-CSharp}
+    - rid: 7345367210705289405
+      type: {class: RunToPoint, ns: Characters.Player.States, asm: Assembly-CSharp}
+    - rid: 7345367210705289406
+      type: {class: Attack, ns: Characters.Player.States, asm: Assembly-CSharp}
+    - rid: 7345367210705289407
+      type: {class: Shield, ns: Characters.Player.States, asm: Assembly-CSharp}
+    - rid: 7345367210705289408
+      type: {class: DieEnemy, ns: Characters.Player.States, asm: Assembly-CSharp}
+    - rid: 7345367210705289409
+      type: {class: Damaged, ns: Characters.Player.States, asm: Assembly-CSharp}
 --- !u!114 &-3445601179252722018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2811,6 +2838,7 @@ MonoBehaviour:
   up: {fileID: 2562473110058980390}
   center: {fileID: 4639143528490061627}
   down: {fileID: 4103818089024088829}
+  character: {fileID: 0}
 --- !u!1 &7055135993666832017
 GameObject:
   m_ObjectHideFlags: 0

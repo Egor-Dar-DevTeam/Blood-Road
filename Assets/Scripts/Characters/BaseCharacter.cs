@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Characters.AbilitiesSystem;
 using Characters.EffectSystem;
@@ -7,8 +8,8 @@ using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
 using Dreamteck.Splines;
+using Interaction;
 using JetBrains.Annotations;
-using UI;
 using UnityEngine;
 
 namespace Characters
@@ -22,7 +23,7 @@ namespace Characters
     public delegate bool HasCharacter();
 
     [RequireComponent(typeof(StatesInfo), typeof(AbilitiesInfo))]
-    public abstract class BaseCharacter : MonoBehaviour, IInteractable
+    public abstract class BaseCharacter : MonoBehaviour, IInteractable, IInit<DieInteractable>
     {
         [SerializeField] private AnimatorOverrideController _animatorOverrideController;
         [SerializeField] private StatesInfo statesInfo;
@@ -54,8 +55,11 @@ namespace Characters
         public RemoveList GetRemoveList() => RemoveList;
         public bool HasCharacter() => _hasCharacter;
         public Receiver Receiver => linker.Receiver;
+        public IInit<DieInteractable> InitDie() => this;
+        public ICharacterDataSubscriber CharacterDataSubscriber;
 
         public VFXTransforms VFXTransforms => vfxTransforms;
+
 
         public virtual void Finish()
         {
@@ -66,15 +70,12 @@ namespace Characters
         public abstract bool IsPlayer();
         public DieInteractable GetDieCharacterDelegate => _characterPointDie;
 
-        public event DieDelegate GetDieEvent;
-
-
         public void SetCharacterController()
         {
-            runToPointData.CharacterController = gameObject.GetComponent<CharacterController>();
+            runToPointData.CharacterController = GetComponent<CharacterController>();
         }
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             runToPointData.ThisCharacter = transform;
             _setCurrentPoint = SetCurrentPoint;
@@ -85,35 +86,30 @@ namespace Characters
 
             _characterPointDie = ClearPoint;
             characterData.SetInteractable(this);
+            if (CharacterDataSubscriber == null) CharacterDataSubscriber = characterData;
         }
 
         protected virtual void RemoveList(IInteractable enemy)
         {
         }
 
-        public void SetCharacterData(CharacterData data, UIDelegates delegates)
+        public virtual void SetCharacterData(CharacterData data)
         {
             characterData = data.Copy();
-            characterData.EventsInitialize(delegates);
-            characterData.DieEvent += () => _hasCharacter = false;
-            GetDieEvent = characterData.DieEvent;
+            CharacterDataSubscriber = characterData;
+            CharacterDataSubscriber.DieEvent += () => _hasCharacter = false;
         }
 
         protected virtual void SubscribeDeath()
         {
-            characterData.DieEvent += _transitionAndStates.DieDelegate;
-            characterData.DieEvent += vfxTransforms.DieDelegate + UnsubscribeDeath;
+            CharacterDataSubscriber.DieEvent += _transitionAndStates.DieDelegate;
+            CharacterDataSubscriber.DieEvent += vfxTransforms.DieDelegate + UnsubscribeDeath;
         }
 
         private void UnsubscribeDeath()
         {
             _hasCharacter = false;
-            characterData.DieEvent = null;
-        }
-
-        protected void SubscribeDeathMethod(DieDelegate @delegate)
-        {
-            characterData.DieEvent += @delegate;
+            CharacterDataSubscriber.DieEvent -= _transitionAndStates.DieDelegate;
         }
 
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
@@ -161,6 +157,7 @@ namespace Characters
         protected virtual void SetCurrentPoint(IInteractable point)
         {
             _transitionAndStates.SetPoint(point);
+            //            CharacterDataSubscriber.DieEvent += (() => _currentPoint.GetDieCharacterDelegate?.Invoke(this));
         }
 
         public virtual void ReceiveDamage(int value)
@@ -186,6 +183,16 @@ namespace Characters
         private void OnDestroy()
         {
             _transitionAndStates.Destroy();
+        }
+        
+        public void Subscribe(DieInteractable subscriber)
+        {
+            characterData.DieInteractable += subscriber;
+        }
+
+        public void Unsubscribe(DieInteractable unsubscriber)
+        {
+            characterData.DieInteractable -= unsubscriber;
         }
     }
 }

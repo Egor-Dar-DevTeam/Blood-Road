@@ -6,6 +6,7 @@ namespace Characters.AbilitiesSystem.States
 {
     public class UnleashingRage : AbilityBase
     {
+        public UnleashingRage(){}
         public UnleashingRage(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {
         }

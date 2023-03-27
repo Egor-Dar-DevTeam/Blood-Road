@@ -19,6 +19,12 @@ namespace UI.AbilityChangedPanel
             _abilitiesButtons = abilitiesButtons;
         }
 
+        private void RemoveAbility(AbilitySO abilitySo)
+        {
+            _abilitiesButtons.RemoveAbility(abilitySo);
+            _abilityVariants?.Invoke();
+        }
+        
         public void ViewActualAbilities()
         {
             var abilitySOList = _abilitiesButtons.GetCopy();
@@ -31,16 +37,14 @@ namespace UI.AbilityChangedPanel
                 abilitiesInfo[i].Button.onClick.AddListener((() => RemoveAbility(abilitySO)));
             }
         }
-
-        private void RemoveAbility(AbilitySO abilitySo)
-        {
-            _abilitiesButtons.RemoveAbility(abilitySo);
-            _abilityVariants?.Invoke();
-        }
-
-        public void Initialize(UnityAction subscriber)
+        public void Subscribe(UnityAction subscriber)
         {
             _abilityVariants = subscriber;
+        }
+
+        public void Unsubscribe(UnityAction unsubscriber)
+        {
+            _abilityVariants = null;
         }
     }
 }

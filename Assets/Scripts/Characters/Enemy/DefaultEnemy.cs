@@ -2,28 +2,34 @@
 using System.Linq;
 using Characters.AbilitiesSystem;
 using Characters.Facades;
-using Characters.InteractableSystems;
 using Characters.Player;
+using Interaction;
 using UnityEngine;
 
 namespace Characters.Enemy
 {
-    public class DefaultEnemy : BaseCharacter, IInteractable, IInit<DieInteractable>
+    public class DefaultEnemy : BaseCharacter
     {
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
         [SerializeField] private Money moneyPrefab;
         public override bool IsPlayer() => false;
         protected event RemoveList _removeList;
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+
+        }
+
+        public override void SetCharacterData(CharacterData data)
+        {
+            base.SetCharacterData(data);
+            base.Awake();
             InitializeTransition(new EnemyTransition(), null, null, moneyPrefab);
             InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
                 characterData));
             InitializeInteractionSystem(null);
             SubscribeDeath();
-            SubscribeDeathMethod(Die);
+            CharacterDataSubscriber.DieEvent += Die;
         }
 
         protected override void InitializeAbility(AbilityData abilityData)
@@ -66,12 +72,8 @@ namespace Characters.Enemy
 
         private void Die()
         {
+            //   CharacterDataSubscriber.DieEvent -= Die;
             _removeList?.Invoke(this);
-        }
-
-        public void Initialize(DieInteractable subscriber)
-        {
-            characterData.DieInteractable += subscriber;
         }
     }
 }

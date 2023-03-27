@@ -1,12 +1,14 @@
+using System;
 using Banks;
 
-namespace Characters.BottlesSystem
+namespace Bank
 {
-    public sealed class Bottle : BaseBank
+    [Serializable]
+    public sealed class Money : BaseBank
     {
         public override void Initialize(string name)
         {
-            NameBank = "Bottle" + name;
+            NameBank = name;
             base.Initialize(name);
         }
     }

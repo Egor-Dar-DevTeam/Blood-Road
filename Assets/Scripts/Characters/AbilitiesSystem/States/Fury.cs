@@ -9,6 +9,7 @@ namespace Characters.AbilitiesSystem.States
     public class Fury: AbilityBase
     {
         private CharacterData _characterData;
+        public Fury(){}
         public Fury(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms, CharacterData characterData) : base(animation, stateInfo, vfxTransforms)
         {
             _characterData = characterData;

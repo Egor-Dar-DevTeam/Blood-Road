@@ -9,7 +9,7 @@ namespace Characters.AbilitiesSystem.States
     public class UniversalBlow : AbilityBase
     {
         private CharacterData _characterData;
-
+public UniversalBlow(){}
         public UniversalBlow(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms,
             CharacterData characterData) : base(animation, stateInfo, vfxTransforms)
         {

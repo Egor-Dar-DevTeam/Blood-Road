@@ -29,14 +29,25 @@ namespace UI.AbilityChangedPanel
             _removeAbilityPanel?.Invoke();
         }
 
-        public void Initialize(GamePanel subscriber)
+        public void Subscribe(GamePanel subscriber)
         {
             _gamePanel += subscriber;
         }
 
-        public void Initialize(UnityAction subscriber)
+        public void Unsubscribe(GamePanel unsubscriber)
+        {
+            _gamePanel -= unsubscriber;
+
+        }
+
+        public void Subscribe(UnityAction subscriber)
         {
             _removeAbilityPanel += subscriber;
+        }
+
+        public void Unsubscribe(UnityAction unsubscriber)
+        {
+            _removeAbilityPanel -= unsubscriber;
         }
     }
 }

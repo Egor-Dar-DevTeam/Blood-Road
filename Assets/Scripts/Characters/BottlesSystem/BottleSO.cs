@@ -1,3 +1,5 @@
+using System;
+using Bank;
 using Banks;
 using Characters.EffectSystem;
 using UnityEngine;
@@ -22,7 +24,8 @@ namespace Characters.BottlesSystem
             var bottleBank = new Bottle();
             bottleBank.Initialize(name);
             _bankDelegates = bottleBank.Delegates;
-           // _bankDelegates.Add.Invoke(currentCount);
+            _bankDelegates.Remove.Invoke(Int32.MaxValue);
+            _bankDelegates.Add.Invoke(currentCount);
             _bottleInfo = new BottleInfo(sprite, cooldown, currentCount);
         }
     }

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Characters;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class DamagedTrigger : MonoBehaviour

@@ -1,4 +1,5 @@
-using Characters.Player;
+using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace Characters
@@ -8,10 +9,12 @@ namespace Characters
         [SerializeField] private Transform up;
         [SerializeField] private Transform center;
         [SerializeField] private Transform down;
-        public DieDelegate DieDelegate;
+        [SerializeField] [CanBeNull] private BaseCharacter character;
+        public Action DieDelegate;
         public Transform Up => up;
         public Transform Center => center;
         public Transform Down => down;
+        public BaseCharacter Character => character;
 
         private void Awake()
         {

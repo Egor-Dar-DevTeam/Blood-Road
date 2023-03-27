@@ -17,7 +17,7 @@ namespace UI.CombatHUD
             RecheckAbilities();
         }
 
-        public List<AbilitySO> GetCopy() => new List<AbilitySO>(abilitiesSo);
+        public List<AbilitySO> GetCopy() => new(abilitiesSo);
         
 
         public void RemoveAbility(AbilitySO abilitySo)
@@ -32,16 +32,15 @@ namespace UI.CombatHUD
 
         private void RecheckAbilities()
         {
-            for (int i = 0; i < button.Count; i++)
+            for (var i = 0; i < button.Count; i++)
             {
-                var index = i;
                 if (abilitiesSo.Count == 0|| abilitiesSo.Count-1<i) continue;
-                abilitiesSo[index].Initialize();
-                abilitiesSo[index].Used(true);
-                var info = abilitiesSo[index].AbilityInfo;
-                button[index].Initialize(info.Cooldown,
+                abilitiesSo[i].Initialize();
+                abilitiesSo[i].Used(true);
+                var info = abilitiesSo[i].AbilityInfo;
+                button[i].Initialize(info.Cooldown,
                     () => playerController.UseAbility(info.AbilityCommand, info.Price),
-                    info.Sprite, null);
+                    info.Sprite);
             }
         }
     }

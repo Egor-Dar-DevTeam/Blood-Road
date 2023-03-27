@@ -26,23 +26,23 @@ namespace Characters.AbilitiesSystem
             CreateStates(abilityData.AnimationCommand, abilityData.VFXTransforms);
             InitializeTransitions(abilityData.IdleState);
             IInit<Impenetrable> initImpenerable = _manaShield;
-            initImpenerable.Initialize(abilityData.ImpenetrableDelegate);
+            initImpenerable.Subscribe(abilityData.ImpenetrableDelegate);
         }
 
         protected override void CreateStates(IAnimationCommand animationCommand, VFXTransforms transforms)
         {
-            _stunState = new Stun(animationCommand, _info.GetState("stun"), transforms);
-            _attackStunState = new AttackStun(animationCommand, _info.GetState("attackStun"), transforms);
-            _droneHammerState = new DroneHammer(animationCommand, _info.GetState("droneHammer"), transforms);
-            _swordRain = new SwordRain(animationCommand, _info.GetState("swordRain"), transforms);
-            _inductionCoilState = new InductionCoil(animationCommand, _info.GetState("inductionCoil"), transforms);
-            _manaShield = new ManaShield(animationCommand, _info.GetState("manaShield"), transforms);
-            _unleashingRage = new UnleashingRage(animationCommand, _info.GetState("UnleashingRage"), transforms);
-            _armageddon = new Armageddon(animationCommand, _info.GetState("Armageddon"), transforms);
-            _fury = new Fury(animationCommand, _info.GetState("Fury"), transforms, _characterData);
-            _universalBlow = new UniversalBlow(animationCommand, _info.GetState("UniversalBlow"), transforms,
+            _stunState = new Stun(animationCommand, _info.GetState(typeof(Stun)), transforms);
+            _attackStunState = new AttackStun(animationCommand, _info.GetState(typeof(AttackStun)), transforms);
+            _droneHammerState = new DroneHammer(animationCommand, _info.GetState(typeof(DroneHammer)), transforms);
+            _swordRain = new SwordRain(animationCommand, _info.GetState(typeof(SwordRain)), transforms);
+            _inductionCoilState = new InductionCoil(animationCommand, _info.GetState(typeof(InductionCoil)), transforms);
+            _manaShield = new ManaShield(animationCommand, _info.GetState(typeof(ManaShield)), transforms);
+            _unleashingRage = new UnleashingRage(animationCommand, _info.GetState(typeof(UnleashingRage)), transforms);
+            _armageddon = new Armageddon(animationCommand, _info.GetState(typeof(Armageddon)), transforms);
+            _fury = new Fury(animationCommand, _info.GetState(typeof(Fury)), transforms, _characterData);
+            _universalBlow = new UniversalBlow(animationCommand, _info.GetState(typeof(UniversalBlow)), transforms,
                 _characterData);
-            _ghostWolf = new GhostWolf(animationCommand, _info.GetState("Ghost Wolf"), transforms);
+            _ghostWolf = new GhostWolf(animationCommand, _info.GetState(typeof(GhostWolf)), transforms);
         }
 
         protected override void InitializeTransitions(BaseState idleState)

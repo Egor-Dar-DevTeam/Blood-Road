@@ -6,6 +6,7 @@ namespace Characters.AbilitiesSystem.States
 {
     public class InductionCoil : AbilityBase
     {
+        public InductionCoil(){}
         public override void Enter()
         {
             CanSkip = false;

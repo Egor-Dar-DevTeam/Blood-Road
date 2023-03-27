@@ -1,3 +1,4 @@
+using Characters;
 using UnityEngine;
 
 namespace UI.EnemyesCanvas
@@ -9,18 +10,20 @@ namespace UI.EnemyesCanvas
 
         private void Update()
         {
-            if(current.worldCamera==null)
-            current.worldCamera = Camera.main;
+            if (current.worldCamera == null)
+                current.worldCamera = Camera.main;
         }
 
-        public UIDelegates AddCharacter(Transform character)
+        public void AddCharacter(BaseCharacter character)
         {
             var panel = Instantiate(prefab, transform);
-            var delegatesCharactersInfo = new UIDelegatesCharactersInfo();
-            delegatesCharactersInfo.SetDelegates(panel.InfoCharacterResourceBar.SetEnergy,
-                panel.InfoCharacterResourceBar.SetMana, panel.InfoCharacterResourceBar.SetHealth, panel.Destroy);
-            panel.FollowPointPanel.SetPoint(character);
-            return delegatesCharactersInfo.Delegates();
+            character.CharacterDataSubscriber.HealthEvent += panel.Health.SetValue;
+            character.CharacterDataSubscriber.DieEvent += () =>
+            {
+                character.CharacterDataSubscriber.HealthEvent -= panel.Health.SetValue;
+                panel.Destroy();
+            };
+            panel.FollowPointPanel.SetPoint(character.VFXTransforms.Up);
         }
     }
 }

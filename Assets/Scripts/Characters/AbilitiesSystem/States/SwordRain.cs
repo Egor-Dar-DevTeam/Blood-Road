@@ -8,7 +8,7 @@ namespace Characters.AbilitiesSystem.States
     {
         private GameObject _enemy;
         private bool _stopFollow;
-
+public SwordRain(){}
         public SwordRain(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
             animation, stateInfo, vfxTransforms)
         {

@@ -1,3 +1,5 @@
+using System;
+
 namespace Better.UnityPatterns.Runtime.StateMachine.States
 {
     public abstract class BaseState

@@ -9,6 +9,7 @@ namespace Characters.Player.States
         private int _currentMilliseconds;
         public int Milliseconds => _currentMilliseconds;
 
+        public Shield(){}
         public Shield(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms): base( animation, stateInfo,vfxTransforms)
         {
             _parameterName = "shield";

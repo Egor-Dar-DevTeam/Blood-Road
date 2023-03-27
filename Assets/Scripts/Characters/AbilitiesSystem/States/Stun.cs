@@ -12,7 +12,12 @@ namespace Characters.AbilitiesSystem.States
         private BaseState _idleState;
         private StateMachine<BaseState> _stateMachine;
 
-        public Stun([CanBeNull] IAnimationCommand animation, StateInfo stateInfo, [CanBeNull] VFXTransforms transform) : base(animation, stateInfo, transform)
+        public Stun()
+        {
+        }
+
+        public Stun([CanBeNull] IAnimationCommand animation, StateInfo stateInfo, [CanBeNull] VFXTransforms transform) :
+            base(animation, stateInfo, transform)
         {
             _parameterName = "stun";
         }
@@ -33,19 +38,14 @@ namespace Characters.AbilitiesSystem.States
             var milliseconds = SecondToMilliseconds(6);
             await Task.Delay(milliseconds);
             CanSkip = true;
-
         }
 
         public override void Tick(float tickTime)
         {
-            
         }
 
         public override void Exit()
         {
-            
         }
-
-
     }
 }

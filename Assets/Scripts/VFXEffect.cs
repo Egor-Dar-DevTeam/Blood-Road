@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Characters;
 using JetBrains.Annotations;
@@ -14,7 +15,11 @@ public class VFXEffect : MonoBehaviour
     private IEnumerator Timer(float time)
     {
         yield return new WaitForSeconds(time);
-        if (character != null) character.ReceiveDamage(int.MaxValue);
+        if (character != null)
+        {
+            character.ReceiveDamage(Int32.MaxValue);
+            character.ReceiveDamage(Int32.MaxValue);
+        }
         else Destroy(gameObject);
     }
 

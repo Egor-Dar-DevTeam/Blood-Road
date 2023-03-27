@@ -19,9 +19,9 @@ namespace UI.AbilityChangedPanel
         {
             _rechangePanel = new RechangePanel();
             _initUnityAction = abilityChoicePanel;
-            _initUnityAction.Initialize(SetRemovePanel);
+            _initUnityAction.Subscribe(SetRemovePanel);
             _initUnityAction = abilityRemovePanel;
-            _initUnityAction.Initialize(Activate);
+            _initUnityAction.Subscribe(Activate);
             abilityVariantsPanel.SetAbilitiesButtons(abilitiesButtons);
             abilityRemovePanel.SetAbilitiesButtons(abilitiesButtons);
         }
@@ -46,12 +46,20 @@ namespace UI.AbilityChangedPanel
             _rechangePanel.SetNewPanel(abilityRemovePanel.CanvasGroup);
         }
 
-        public void Initialize(GamePanel subscriber)
+        public void Subscribe(GamePanel subscriber)
         {
             _initGamePanel = abilityChoicePanel;
-            _initGamePanel.Initialize(subscriber);
+            _initGamePanel.Subscribe(subscriber);
             _initGamePanel = abilityVariantsPanel;
-            _initGamePanel.Initialize(subscriber);
+            _initGamePanel.Subscribe(subscriber);
+        }
+
+        public void Unsubscribe(GamePanel unsubscriber)
+        {
+            _initGamePanel = abilityChoicePanel;
+            _initGamePanel.Unsubscribe(unsubscriber);
+            _initGamePanel = abilityVariantsPanel;
+            _initGamePanel.Unsubscribe(unsubscriber);
         }
     }
 }

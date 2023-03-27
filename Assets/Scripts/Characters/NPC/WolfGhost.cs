@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Characters.Enemy;
@@ -20,21 +21,26 @@ namespace Characters.NPC
         protected const float ANGLE = 25f;
 
 
-        protected override void Start()
+        protected override void Awake()
         {
             _main = FindObjectOfType<PlayerController>();
             _interactables = new List<IInteractable>();
-            base.Start();
-            characterData = characterData.Copy();
+            base.Awake();
+            SetCharacterData(characterData);
             InitializeTransition(_supporterTransitionAndStates = new SupporterTransition(MAX_DISTANCE), null);
             InitializeInteractionSystem(null);
-            SubscribeDeath();
-            SubscribeDeathMethod(Die);
             FollowEntity();
+        }
+
+        private void Start()
+        {
+            SubscribeDeath();
+            CharacterDataSubscriber.DieEvent += Die;
         }
 
         protected override void Update()
         {
+            if (!_hasCharacter) return;
             _transitionAndStates.Update();
 
             if (_currentPoint == null || !_hasCharacter) return;
@@ -48,6 +54,8 @@ namespace Characters.NPC
             transform.rotation = Quaternion.Slerp(transform.rotation, resRotation, Time.deltaTime * rotationSpeed);
         }
 
+        public void SetMainInteractable(IInteractable interactable) => _main = interactable;
+
         private float CalculateRatio(Transform towardTarget)
         {
             var posOnForwardTarget = Vector3.Project(transform.position, towardTarget.forward.normalized);
@@ -60,12 +68,16 @@ namespace Characters.NPC
 
         protected void FollowEntity()
         {
+            if (!_hasCharacter) return;
+
             _supporterTransitionAndStates.SetMode(SupporterTransition.FollowMode.Player);
             SetCurrentPoint(_main);
         }
 
         protected void FollowEntity(IInteractable interactable)
         {
+            if (!_hasCharacter) return;
+
             _supporterTransitionAndStates.SetMode(SupporterTransition.FollowMode.Enemy);
             SetCurrentPoint(interactable);
         }
@@ -78,6 +90,8 @@ namespace Characters.NPC
 
         protected override void ClearPoint(IInteractable interactable)
         {
+            if (!_hasCharacter) return;
+
             if (_currentPoint == null) return;
             characterData.DieInteractable -= interactable.GetDieCharacterDelegate;
             _interactables.Remove(interactable);
@@ -94,7 +108,7 @@ namespace Characters.NPC
         }
 
         protected override void StartRCP(List<IInteractable> points)
-        {   
+        {
             if (!_hasCharacter) return;
             ClearPoint(_main);
             AddToListEnemy(points);
@@ -109,7 +123,7 @@ namespace Characters.NPC
                 characterData.DieInteractable += enemy.GetDieCharacterDelegate;
                 _removeList += enemy.GetRemoveList();
                 IInit<DieInteractable> initDie = (DefaultEnemy)enemy;
-                initDie.Initialize(GetDieCharacterDelegate);
+                initDie.Subscribe(GetDieCharacterDelegate);
                 _interactables.Add(enemy);
             }
 
@@ -126,6 +140,7 @@ namespace Characters.NPC
                     FollowEntity();
                     yield break;
                 }
+
                 int indx;
                 IInteractable point = null;
                 for (int i = 0; i < _interactables.Count; i++)
@@ -161,6 +176,7 @@ namespace Characters.NPC
 
         protected override void SetCurrentPoint(IInteractable point)
         {
+            if (!_hasCharacter) return;
             if (_currentPoint != null || _currentPoint == point || !point.HasCharacter()) return;
 
             _currentPoint = point;
@@ -169,6 +185,7 @@ namespace Characters.NPC
 
         private void Die()
         {
+            if (!_hasCharacter) return;
             foreach (var interactable in _interactables)
             {
                 characterData.DieInteractable -= interactable.GetDieCharacterDelegate;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Banks;
 using Characters.AbilitiesSystem;
 using Characters.BottlesSystem;
 using Characters.EffectSystem;
@@ -18,13 +19,15 @@ namespace Characters.Player
 
     public delegate void AbilityTrigger();
 
-    public class PlayerController : BaseCharacter, IInteractable, ITriggerable, IInit<AbilityTrigger>
+    [RequireComponent(typeof(Banks))]
+    public class PlayerController : BaseCharacter, ITriggerable, IInit<AbilityTrigger>
     {
         [SerializeField] private CameraRay cameraRay;
         [SerializeField] private GameCanvasController canvasController;
         [SerializeField] private SplineFollower splineFollower;
         [SerializeField] private SplineProjector projector;
         [SerializeField] private AttackVariants attackVariants;
+        [SerializeField] private Banks banks;
         private IInit<Attack> _initAttack;
         private IInit<SetAttackSpeed> _initSetAttackSpeed;
 
@@ -49,14 +52,15 @@ namespace Characters.Player
         private bool _isAttack;
         private bool GetIsAttack() => _isAttack;
         public override bool IsPlayer() => true;
+        public BankDelegates MoneyBankDelegates => banks.MoneyBankDelegates;
 
-        protected override void Start()
+        protected override void Awake()
         {
             _interactables = new List<IInteractable>();
             _enemyOutlineRechanger = new EnemyOutlineRechanger();
             _getIsAttack = GetIsAttack;
-            base.Start();
-            SetCharacterData(characterData, canvasController.UIDelegates);
+            base.Awake();
+            SetCharacterData(characterData);
             InitializeTransition(new PlayerTransition(), _getIsAttack, splineFollower);
             InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
                 characterData));
@@ -69,9 +73,9 @@ namespace Characters.Player
         {
             _initAttack = attackVariants;
             _initSetAttackSpeed = attackVariants;
-            _initAttack.Initialize(Attack);
-            _initAttack.Initialize(_transitionAndStates.Attack);
-            _initSetAttackSpeed.Initialize(_transitionAndStates.SetAttackSpeed);
+            _initAttack.Subscribe(Attack);
+            _initAttack.Subscribe(_transitionAndStates.Attack);
+            _initSetAttackSpeed.Subscribe(_transitionAndStates.SetAttackSpeed);
         }
 
         protected override void InitializeAbility(AbilityData abilityData)
@@ -107,6 +111,7 @@ namespace Characters.Player
         public void AddMoney(int value)
         {
             Debug.Log("Add money");
+            banks.MoneyBankDelegates.Add?.Invoke(value);
         }
 
         public void OnAbilityTrigger()
@@ -126,7 +131,7 @@ namespace Characters.Player
             if (!_hasCharacter || _currentPoint == null) return;
             characterData.DieInteractable -= interactable.GetDieCharacterDelegate;
             _interactables.Remove(interactable);
-            if(_currentPoint!= interactable) return;
+            if (_currentPoint != interactable) return;
             _currentPoint = null;
             _enemyOutlineRechanger.SetEnemy(null);
             StartCoroutine(RechangeCurrentPoint());
@@ -136,7 +141,11 @@ namespace Characters.Player
         {
             if (!_hasCharacter) return;
 
-            if (_interactables.Contains(enemy)) _interactables.Remove(enemy);
+            if (_interactables.Contains(enemy))
+            {
+                _interactables.Remove(enemy);
+                enemy.InitDie().Unsubscribe(characterData.DieInteractable);
+            }
         }
 
         protected override void StartRCP(List<IInteractable> points)
@@ -152,7 +161,7 @@ namespace Characters.Player
             {
                 if (!enemy.HasCharacter()) continue;
                 if (_interactables.Contains(enemy)) continue;
-                if(enemy.IsPlayer()) continue;;
+                if (enemy.IsPlayer()) continue;
                 characterData.DieInteractable += enemy.GetDieCharacterDelegate;
                 _interactables.Add(enemy);
             }
@@ -226,9 +235,14 @@ namespace Characters.Player
             base.UseAbility(abilityCommand, value);
         }
 
-        public void Initialize(AbilityTrigger subscriber)
+        public void Subscribe(AbilityTrigger subscriber)
         {
             _abilityTrigger += subscriber;
+        }
+
+        public void Unsubscribe(AbilityTrigger unsubscriber)
+        {
+            _abilityTrigger -= unsubscriber;
         }
     }
 }

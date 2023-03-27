@@ -7,7 +7,7 @@ namespace Characters.Player.States
     public class FolowSpline : BaseState
     {
         private SplineFollower _splineFollower;
-
+        public FolowSpline(){}
         public FolowSpline(IAnimationCommand animation, StateInfo stateInfo,
             VFXTransforms vfxTransforms, SplineFollower splineFollower) : base(
             animation, stateInfo, vfxTransforms)

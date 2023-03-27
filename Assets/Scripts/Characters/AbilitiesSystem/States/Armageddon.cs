@@ -6,6 +6,7 @@ namespace Characters.AbilitiesSystem.States
 {
     public class Armageddon : AbilityBase
     {
+        public Armageddon(){}
         public Armageddon(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {
         }

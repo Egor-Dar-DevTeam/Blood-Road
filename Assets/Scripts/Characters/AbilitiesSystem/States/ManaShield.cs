@@ -10,6 +10,7 @@ namespace Characters.AbilitiesSystem.States
     public class ManaShield : AbilityBase, IInit<Impenetrable>
     {
         private event Impenetrable _impenetrable;
+        public ManaShield(){}
         public ManaShield(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
             animation, stateInfo, vfxTransforms)
         {
@@ -40,9 +41,14 @@ namespace Characters.AbilitiesSystem.States
         {
         }
 
-        public void Initialize(Impenetrable subscriber)
+        public void Subscribe(Impenetrable subscriber)
         {
             _impenetrable += subscriber;
+        }
+
+        public void Unsubscribe(Impenetrable unsubscriber)
+        {
+            _impenetrable -= unsubscriber;
         }
     }
 }

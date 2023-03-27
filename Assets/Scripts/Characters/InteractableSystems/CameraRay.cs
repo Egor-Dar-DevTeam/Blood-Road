@@ -23,9 +23,14 @@ namespace Characters.Player
             }
         }
 
-        public void Initialize(SetCurrentPoint setCurrentPoint)
+        public void Subscribe(SetCurrentPoint setCurrentPoint)
         {
             _setPoint += setCurrentPoint;
+        }
+
+        public void Unsubscribe(SetCurrentPoint unsubscriber)
+        {
+            _setPoint -= unsubscriber;
         }
     }
 }

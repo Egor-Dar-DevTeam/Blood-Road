@@ -13,7 +13,8 @@ namespace Characters.Player.States
         private CharacterController _characterController;
         private float _speed;
         private float _stopingDistance;
-
+        
+        public RunToPoint(){}
         public RunToPoint(IAnimationCommand animation, RunToPointData data, StateInfo stateInfo,
             VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
         {

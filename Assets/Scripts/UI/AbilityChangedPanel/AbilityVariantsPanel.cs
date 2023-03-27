@@ -46,9 +46,14 @@ namespace UI.AbilityChangedPanel
             _gamePanel?.Invoke();
         }
 
-        public void Initialize(GamePanel subscriber)
+        public void Subscribe(GamePanel subscriber)
         {
             _gamePanel += subscriber;
+        }
+
+        public void Unsubscribe(GamePanel unsubscriber)
+        {
+            _gamePanel -= unsubscriber;
         }
     }
 }

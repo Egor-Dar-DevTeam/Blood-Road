@@ -5,6 +5,26 @@ using Object = UnityEngine.Object;
 
 namespace Characters.Player.States
 {
+    public class Damaged : BaseState
+    {
+        public Damaged() : base(null, new StateInfo(), null)
+        {
+        }
+
+        public Damaged(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation,
+            stateInfo, vfxTransforms)
+        {
+        }
+
+        public override void Tick(float tickTime)
+        {
+        }
+
+        public override void Exit()
+        {
+        }
+    }
+
     public class Attack : BaseState
     {
         private IInteractable _interactable;
@@ -15,6 +35,10 @@ namespace Characters.Player.States
         private bool _isPlayer;
         private bool _canSkip;
         public bool CanSkip => _canSkip;
+
+        public Attack()
+        {
+        }
 
         public Attack(IAnimationCommand animation, StateInfo statesInfo, int damage, bool isPlayer,
             TransitionAndStatesData data, VFXTransforms vfxTransforms) : base(
@@ -74,9 +98,7 @@ namespace Characters.Player.States
 
                 await Task.Delay(milliseconds);
                 _canSkip = true;
-
             } while (_setDamage);
-
         }
 
         private void Damage()

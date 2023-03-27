@@ -33,11 +33,11 @@ namespace Characters.Facades
             {
                 var camera = Object.Instantiate(cameraRay);
                 _instCurrentPointCameraRay = camera;
-                _instCurrentPointCameraRay.Initialize(_setCurrentPoint);
+                _instCurrentPointCameraRay.Subscribe(_setCurrentPoint);
             }
 
             _instEyes = Object.Instantiate(eyesCharacters, transform);
-            _instEyes.Initialize(_setPoint);
+            _instEyes.Subscribe(_setPoint);
         }
 
         private void SetPoint(List<IInteractable> points)

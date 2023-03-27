@@ -9,49 +9,51 @@ namespace Characters.InteractableSystems
     public class Eyes : MonoBehaviour, IInit<SetPoint>
     {
         private event SetPoint _setPoint;
-        private List<IInteractable> _interactables= new List<IInteractable>();
-        public void Initialize(SetPoint setPointDelegate)
+        private List<IInteractable> _interactables = new();
+        private Coroutine _notification;
+
+        public void Subscribe(SetPoint setPointDelegate)
         {
             _setPoint = setPointDelegate;
             setPointDelegate += _setPoint;
             StartCoroutine(Notification());
         }
 
+        public void Unsubscribe(SetPoint unsubscriber)
+        {
+            _setPoint -= unsubscriber;
+            StopCoroutine(_notification);
+        }
+
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out IInteractable interactable))
-            {
-                if (!_interactables.Contains(interactable))
-                {
-                    if(interactable.HasCharacter())
-                    _interactables.Add(interactable);
-                }
-            }
+            if (!other.gameObject.TryGetComponent(out IInteractable interactable)) return;
+            if (_interactables.Contains(interactable)) return;
+            if (interactable.HasCharacter())
+                _interactables.Add(interactable);
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.TryGetComponent(out IInteractable interactable))
+            if (!other.gameObject.TryGetComponent(out IInteractable interactable)) return;
+            if (_interactables.Contains(interactable))
             {
-                if (_interactables.Contains(interactable))
-                {
-                    _interactables.Remove(interactable);
-                }
+                _interactables.Remove(interactable);
             }
         }
 
         private IEnumerator Notification()
         {
-            for (int i = 0; i < 1;)
+            for (;;)
             {
-                for (int j = 0; j < _interactables.Count; j++)
+                for (var j = 0; j < _interactables.Count; j++)
                 {
                     if (!_interactables[j].HasCharacter())
                         _interactables.Remove(_interactables[j]);
                 }
-                
+
                 yield return new WaitForSeconds(0.1f);
-               _setPoint?.Invoke(_interactables);
+                _setPoint?.Invoke(_interactables);
             }
         }
     }

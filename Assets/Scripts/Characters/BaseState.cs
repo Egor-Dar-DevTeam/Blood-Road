@@ -1,10 +1,14 @@
+using System;
 using Characters.Animations;
 using Characters.Information.Structs;
 using UnityEngine;
 using baseState=Better.UnityPatterns.Runtime.StateMachine.States.BaseState;
+
+public interface ISerializableStates{}
 namespace Characters
 {
-    public abstract class BaseState: baseState
+    [Serializable]
+    public abstract class BaseState: baseState, ISerializableStates
     {
         protected IAnimationCommand _animation;
         protected AnimationClip _clip;
@@ -12,7 +16,7 @@ namespace Characters
         protected VFXTransforms _vfxTransforms;
         protected string _parameterName;
 
-
+        protected BaseState(){}
         protected BaseState(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms)
         {
             _animation = animation;

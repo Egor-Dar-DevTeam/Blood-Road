@@ -12,13 +12,24 @@ namespace UI.CombatHUD
 
         private void Awake()
         {
-            for (int i = 0; i < buttons.Length; i++)
+            for (var i = 0; i < buttons.Length; i++)
             {
                 bottleSo[i].Initialize();
                 var info = bottleSo[i].BottleInfo;
                 var effectData = bottleSo[i].EffectData;
                 var delegates = bottleSo[i].BankDelegates;
-                buttons[i].Initialize(info.Cooldown,(() => playerController.UseBottle(effectData)), info.Sprite,null);
+                buttons[i].Initialize(info.Cooldown, (() => playerController.UseBottle(effectData)), info.Sprite,
+                    delegates.Remove);
+                delegates.InitGetValue.Subscribe(buttons[i].SetValue);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            for (var i = 0; i < buttons.Length; i++)
+            {
+                var delegates = bottleSo[i].BankDelegates;
+                delegates.InitGetValue.Unsubscribe(buttons[i].SetValue);
             }
         }
     }

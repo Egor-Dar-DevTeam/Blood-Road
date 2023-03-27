@@ -1,4 +1,5 @@
 ﻿using Characters.EffectSystem;
+using Characters.InteractableSystems;
 using Characters.Player;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace Characters
         public  RemoveList GetRemoveList();
         public bool HasCharacter();
         public Receiver Receiver { get; }
+        public IInit<DieInteractable> InitDie();
 
     }
 

@@ -18,7 +18,7 @@ namespace Characters.AbilitiesSystem
 
         protected override void CreateStates(IAnimationCommand animationCommand, VFXTransforms transforms)
         {
-            _stunState = new Stun(animationCommand, _info.GetState("stun"), transforms);
+            _stunState = new Stun(animationCommand, _info.GetState(typeof(Stun)), transforms);
             _attackStunState = new AttackStun(null, new StateInfo(), null);
         }
 

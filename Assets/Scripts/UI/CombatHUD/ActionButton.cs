@@ -1,7 +1,6 @@
 using Banks;
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -19,29 +18,34 @@ namespace UI.CombatHUD
 
         private int _currentCount;
 
-        public void Initialize(float cooldown, UnityAction action, Sprite sprite, BankDelegates? delegates)
+        public void Initialize(float cooldown, UnityAction action, Sprite sprite)
         {
             image.sprite = sprite;
             image.color = Color.white;
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() => InteractableButton(cooldown, action));
-            if(delegates==null) return;
-            BankDelegates bank = (BankDelegates)delegates;
-            _currentCount = bank.Value;
-            if (currentCountText == null && _currentCount == 0) return;
+        }
+
+        public void Initialize(float cooldown, UnityAction action, Sprite sprite, Remove remove)
+        {
+            Initialize(cooldown, action, sprite);
             currentCountText.text = _currentCount.ToString();
             button.onClick.AddListener((() =>
             {
-                bank.Remove.Invoke(1);
-                _currentCount = bank.Value;
-                currentCountText.text = _currentCount.ToString();
+                remove?.Invoke(1);
             }));
+        }
+
+        public void SetValue(int value)
+        {
+            _currentCount = value;
+            currentCountText.text = _currentCount.ToString();
+            button.interactable = _currentCount > 0;
         }
 
         private async void InteractableButton(float cooldown, UnityAction action)
         {
             if (button == null) return;
-//            if (currentCountText!=null && _currentCount <= 0) return;
             action?.Invoke();
             if (cooldown != 0)
             {

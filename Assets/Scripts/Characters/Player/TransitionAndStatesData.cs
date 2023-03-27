@@ -3,6 +3,7 @@ using Characters.Information;
 using Characters.Player;
 using Characters.Player.States;
 using Dreamteck.Splines;
+using Interaction;
 using JetBrains.Annotations;
 using UnityEngine;
 using Attack = Characters.Player.States.Attack;

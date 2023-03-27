@@ -1,40 +1,46 @@
+using System;
+using Banks;
+using Characters;
 using Characters.InteractableSystems;
 using Characters.Player;
+using TMPro;
 using UI.AbilityChangedPanel;
+using UI.CombatHUD;
 using UnityEngine;
 
 namespace UI
 {
     public delegate void GamePanel();
+
     public class GameCanvasController : MonoBehaviour
     {
-        [SerializeField] private CombatHUD.InfoCharactersResourceBars infoCharactersResourceBars;
         [SerializeField] private CanvasGroup combat;
         [SerializeField] private CanvasGroup death;
         [SerializeField] private CanvasGroup abilityChanged;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private ResourceMediator resourceMediator;
         private IInit<AbilityTrigger> _initAbilityTrigger;
         private IInit<GamePanel> _initGamePanel;
         private AbilityTrigger abilityTrigger;
         private RechangePanel _rechangePanel;
-        public UIDelegates UIDelegates => _uiDelegates;
-        private UIDelegates _uiDelegates;
 
 
         private void Awake()
         {
+            resourceMediator.SetCharacter(playerController);
             abilityTrigger = AbiltyChanged;
             _initAbilityTrigger = playerController;
-            _initAbilityTrigger.Initialize(abilityTrigger);
+            _initAbilityTrigger.Subscribe(abilityTrigger);
             abilityChanged.gameObject.TryGetComponent(out _initGamePanel);
-            _initGamePanel.Initialize(Game);
-            _initGamePanel.Initialize(playerController.OnAbilityTrigger);
-            var delegatesCharactersInfo = new UIDelegatesCharactersInfo();
-            delegatesCharactersInfo.SetDelegates(infoCharactersResourceBars.SetEnergy,
-                infoCharactersResourceBars.SetMana, infoCharactersResourceBars.SetHealth);
-            _uiDelegates = delegatesCharactersInfo.Delegates();
+            _initGamePanel.Subscribe(Game);
+            _initGamePanel.Subscribe(playerController.OnAbilityTrigger);
             _rechangePanel = new RechangePanel();
             Game();
+        }
+
+        private void Start()
+        {
+            resourceMediator.Subscribe();
         }
 
         private void Game()
@@ -53,25 +59,46 @@ namespace UI
             abilityChanged.TryGetComponent(out AbilityChanged changed);
             changed.Activate();
         }
+
+        private void OnDestroy()
+        {
+            resourceMediator.Unsubscribe();
+        }
     }
 
-    public class RechangePanel
+    [Serializable]
+    public class ResourceMediator
     {
-        private CanvasGroup _currentCanvasGroup;
+        [SerializeField] private ResourceSlider health;
+        [SerializeField] private ResourceSlider mana;
+        [SerializeField] private ResourceSlider energy;
+        [SerializeField] private TextMeshProUGUI moneyText;
+        private BaseCharacter _character;
+        private ICharacterDataSubscriber _characterDataSubscriber => _character.CharacterDataSubscriber;
+        private IInit<GetValue> _initGetValue;
 
-        public void SetNewPanel(CanvasGroup newPanel)
+        public void SetCharacter(BaseCharacter character)
         {
-            if (_currentCanvasGroup != null)
-            {
-                _currentCanvasGroup.alpha = 0;
-                _currentCanvasGroup.interactable = false;
-                _currentCanvasGroup.blocksRaycasts = false;
-            }
+            _character = character;
+            var characterPlayer = (PlayerController)_character;
+            _initGetValue = characterPlayer.MoneyBankDelegates.InitGetValue;
+        }
 
-            _currentCanvasGroup = newPanel;
-            _currentCanvasGroup.alpha = 1;
-            _currentCanvasGroup.interactable = true;
-            _currentCanvasGroup.blocksRaycasts = true;
+        public void Subscribe()
+        {
+            _characterDataSubscriber.HealthEvent += health.SetValue;
+            _characterDataSubscriber.ManaEvent += mana.SetValue;
+            _characterDataSubscriber.EnergyEvent += energy.SetValue;
+            _initGetValue.Subscribe((value)=>moneyText.text = value.ToString() );
+
+        }
+
+        public void Unsubscribe()
+        {
+            _characterDataSubscriber.HealthEvent -= health.SetValue;
+            _characterDataSubscriber.ManaEvent -= mana.SetValue;
+            _characterDataSubscriber.EnergyEvent -= energy.SetValue;
+            _initGetValue.Unsubscribe((value)=>moneyText.text = value.ToString() );
         }
     }
 }

@@ -3,10 +3,8 @@
 //Copyright protected under Unity Asset Store EULA
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 namespace StylizedWater2
 {

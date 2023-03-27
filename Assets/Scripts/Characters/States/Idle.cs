@@ -5,6 +5,7 @@ namespace Characters.Player.States
 {
     public class Idle : BaseState
     {
+        public Idle(){}
         public Idle(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo,vfxTransforms)
         {
             _parameterName = "idle";

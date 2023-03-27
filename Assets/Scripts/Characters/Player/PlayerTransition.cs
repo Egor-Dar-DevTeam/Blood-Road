@@ -17,7 +17,7 @@ namespace Characters.Facades
             StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
             data.CreateAttack(new Attack(_animation, new StateInfo(), data.Damage, true, data,
                 data.VFXTransforms));
-            data.CreateDie(new Die(_animation, _statesInfo.GetState("die"), data.CharacterController, data.VFXTransforms));
+            data.CreateDie(new Die(_animation, _statesInfo.GetState(typeof(Die)), data.CharacterController, data.VFXTransforms));
             _attackState = data.Attack;
             _dieState = data.Die;
             _setAttackSpeed = _attackState.SetAnimationSpeed;
@@ -31,7 +31,7 @@ namespace Characters.Facades
         {
             base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
             _folowSplineState =
-                new FolowSpline(_animation, _statesInfo.GetState("run"), vfxTransforms, _splineFollower);
+                new FolowSpline(_animation, _statesInfo.GetState(typeof(RunToPoint)), vfxTransforms, _splineFollower);
         }
 
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)
