@@ -114,13 +114,13 @@ namespace Characters
 
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
             [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] SplineFollower splineFollower = null,
-            [CanBeNull] Money money = null
+            [CanBeNull] Money money = null, [CanBeNull] GetRecoil getRecoil = null
         )
         {
             _transitionAndStates = transitionAndStates;
             linker.Initialize(_transitionAndStates, characterData);
             _transitionAndStates.Initialize(new TransitionAndStatesData(animator, _getCurrentPoint, transform,
-                runToPointData, getIsAttack, characterData,
+                runToPointData, getIsAttack, characterData, getRecoil,
                 statesInfo, characterData.Damage, _hasCharacterDelegate,
                 _animatorOverrideController, vfxTransforms,
                 splineFollower, money));
@@ -164,6 +164,12 @@ namespace Characters
         {
             characterData.Damaged(value);
             _transitionAndStates.Damaged();
+        }
+
+        public virtual void GetRecoil(Vector3 origin, ExplosionParameters parameters)
+        {
+            characterData.DoRecoil();
+            _transitionAndStates.SetRecoilData(origin, parameters);
         }
 
         public abstract void SetOutline(bool value);

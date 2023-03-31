@@ -24,7 +24,7 @@ namespace Characters.Enemy
         {
             base.SetCharacterData(data);
             base.Awake();
-            InitializeTransition(new EnemyTransition(), null, null, moneyPrefab);
+            InitializeTransition(new EnemyTransition(), null, null, moneyPrefab, characterData.GetRecoilDelegate);
             InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
                 characterData));
             InitializeInteractionSystem(null);

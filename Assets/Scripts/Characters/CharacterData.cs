@@ -9,6 +9,8 @@ namespace Characters.Player
 
     public delegate void Impenetrable(bool value);
 
+    public delegate bool GetRecoil();
+
     [Serializable]
     public class CharacterData : ICharacterDataSubscriber
     {
@@ -23,6 +25,7 @@ namespace Characters.Player
         private float _manaMax;
         private int _maxDamage => weapon.EffectData.HealthDamage;
         private float _additionalHealthWithDamage = 0;
+        private bool _recoil;
 
         private bool _isImpenetrable;
         private IInteractable _currentInteractable;
@@ -32,6 +35,7 @@ namespace Characters.Player
         public event Action DieEvent;
 
         public Impenetrable ImpenetrableDelegate;
+        public GetRecoil GetRecoilDelegate;
         public VFXTransforms weaponTransforms => weapon.VFXTransforms;
 
         public CharacterData(float health, float shield, float energy, float mana, Weapon weapon,
@@ -47,6 +51,7 @@ namespace Characters.Player
             _manaMax = mana;
             damage = _maxDamage;
             ImpenetrableDelegate = Impenetrable;
+            GetRecoilDelegate = GetRecoil;
             _currentInteractable = interactable;
             AddResource();
         }
@@ -145,6 +150,22 @@ namespace Characters.Player
             health = Mathf.Clamp(health - dmgToHealt, 0, _healthMax);
             HealthEvent?.Invoke(health, _healthMax);
             Die();
+        }
+
+        public void DoRecoil()
+        {
+            _recoil = true;
+        }
+
+        private bool GetRecoil()
+        {
+            if (_recoil)
+            {
+                _recoil = false;
+                return true;
+            }
+
+            return false;
         }
 
         private void Die()

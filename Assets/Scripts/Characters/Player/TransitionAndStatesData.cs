@@ -28,7 +28,7 @@ public struct TransitionAndStatesData
     [CanBeNull] public GetIsAttack GetIsAttack { get; }
 
     [CanBeNull] public CharacterData CharacterData { get; }
-
+    [CanBeNull] public GetRecoil GetRecoil { get; }
 
     public Attack Attack { get; private set; }
     public Die Die { get; private set; }
@@ -38,7 +38,7 @@ public struct TransitionAndStatesData
     public int Damage { get; }
 
     public TransitionAndStatesData(Animator animator, GetCurrentPoint getCurrentPoint, Transform transform,
-        RunToPointData runToPointData, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData,
+        RunToPointData runToPointData, [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] CharacterData characterData, [CanBeNull] GetRecoil getRecoil,
         StatesInfo statesInfo, int damage, HasCharacter hasCharacter, AnimatorOverrideController animatorOverrideController,VFXTransforms vfxTransforms,
         [CanBeNull] SplineFollower splineFollower=null, [CanBeNull] Money moneyPrefab=null)
     {
@@ -48,6 +48,7 @@ public struct TransitionAndStatesData
         RunToPointData = runToPointData;
         GetIsAttack = getIsAttack;
         CharacterData = characterData;
+        GetRecoil = getRecoil;
         StatesInfo = statesInfo;
         Attack = null;
         Die = null;

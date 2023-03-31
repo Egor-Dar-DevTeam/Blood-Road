@@ -41,6 +41,12 @@ namespace Characters.Facades
             _followEnemyParam = new Parameters { Speed = 12f, StoppingDistance = 2.5f };
         }
 
+        protected override void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
+        {
+            base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
+            _explosiveRecoilState = new ExplosiveRecoil(_animation, _statesInfo.GetState(typeof(DieEnemy)), vfxTransforms, runToPointData.CharacterController);
+        }
+
         public void SetMode(FollowMode mode)
         {
             Parameters parameters;

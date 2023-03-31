@@ -32,6 +32,7 @@ namespace Characters.Facades
             base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
             _folowSplineState =
                 new FolowSpline(_animation, _statesInfo.GetState(typeof(RunToPoint)), vfxTransforms, _splineFollower);
+            _explosiveRecoilState = new ExplosiveRecoil(_animation, _statesInfo.GetState(typeof(Die)), vfxTransforms, runToPointData.CharacterController);
         }
 
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)

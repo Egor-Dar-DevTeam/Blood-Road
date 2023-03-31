@@ -15,7 +15,7 @@ namespace Characters.Facades
     public abstract class TransitionAndStates : IAnimatableEffect
     {
         protected StatesInfo _statesInfo;
-
+        protected Vector3 _origin;
         private IRunAbility _runAbility;
         
         protected IAnimationCommand _animation;
@@ -28,6 +28,7 @@ namespace Characters.Facades
         protected Player.States.Attack _attackState;
         protected Shield _shieldState;
         protected Die _dieState;
+        protected ExplosiveRecoil _explosiveRecoilState;
         protected StateMachine<BaseState> _stateMachine;
 
         #endregion
@@ -44,10 +45,11 @@ namespace Characters.Facades
         private Action _dieDelegate;
         protected Attack _attack;
         protected SetAttackSpeed _setAttackSpeed;
+        protected GetRecoil _getRecoil;
 
         #endregion
 
-        
+
         public bool IsStoped;
 
         #region publicVariables
@@ -71,6 +73,7 @@ namespace Characters.Facades
 
             CurrentPoint += data.GetCurrentPoint;
             _statesInfo = data.StatesInfo;
+            _getRecoil = data.GetRecoil;
         }
 
         protected virtual void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController,
@@ -83,6 +86,13 @@ namespace Characters.Facades
             _idleState = new Idle(_animation, _statesInfo.GetState(typeof(Idle)), vfxTransforms);
             _shieldState = new Shield(_animation, _statesInfo.GetState(typeof(Shield)), vfxTransforms);
             _stateMachine = new StateMachine<BaseState>();
+        }
+
+        public void SetRecoilData(Vector3 origin, ExplosionParameters parameters)
+        {
+            _origin = origin;
+            _explosiveRecoilState.SetOrigin(origin);
+            _explosiveRecoilState.SetParameters(parameters);
         }
 
         public void SetPoint(IInteractable point)
@@ -104,6 +114,7 @@ namespace Characters.Facades
             effect2.SetLifeTime(5f);
             effect3.SetLifeTime(5f);
         }
+
 
         public void SetCurrentEffectID(Type type)
         {
@@ -147,6 +158,13 @@ namespace Characters.Facades
                 return false;
             }
         }
+
+        protected virtual bool IsStoodUp()
+        {
+            return _explosiveRecoilState.IsRecoiled;
+        }
+
+        protected bool CanRecoil() => _getRecoil.Invoke();
 
         public void Update()
         {

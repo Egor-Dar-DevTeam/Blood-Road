@@ -19,6 +19,12 @@ namespace Characters.Facades
             
         }
 
+        protected override void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
+        {
+            base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
+            _explosiveRecoilState = new ExplosiveRecoil(_animation, _statesInfo.GetState(typeof(DieEnemy)), vfxTransforms, runToPointData.CharacterController);
+        }
+
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)
         {
             base.TransitionInit(transform,runToPointData);
@@ -34,6 +40,11 @@ namespace Characters.Facades
             _stateMachine.AddTransition(_runToPointState, _attackState, () => !IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _runToPointState, () => IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
+            _stateMachine.AddTransition(_attackState, _explosiveRecoilState, CanRecoil);
+            _stateMachine.AddTransition(_runToPointState, _explosiveRecoilState, CanRecoil);
+            _stateMachine.AddTransition(_idleState, _explosiveRecoilState, CanRecoil);
+            _stateMachine.AddTransition(_explosiveRecoilState, _runToPointState, IsStoodUp);
+
             _stateMachine.ChangeState(_idleState);
         }
     }
