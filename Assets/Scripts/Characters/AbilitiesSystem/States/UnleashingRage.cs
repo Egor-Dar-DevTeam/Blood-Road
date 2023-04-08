@@ -1,5 +1,5 @@
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -7,7 +7,7 @@ namespace Characters.AbilitiesSystem.States
     public class UnleashingRage : AbilityBase
     {
         public UnleashingRage(){}
-        public UnleashingRage(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        public UnleashingRage(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
         {
         }
 

@@ -15,20 +15,16 @@ namespace Characters.Enemy
         public override bool IsPlayer() => false;
         protected event RemoveList _removeList;
 
-        protected override void Awake()
-        {
-
-        }
-
         public override void SetCharacterData(CharacterData data)
         {
             base.SetCharacterData(data);
             base.Awake();
-            InitializeTransition(new EnemyTransition(), null, null, moneyPrefab, characterData.GetRecoilDelegate);
-            InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
-                characterData));
+            InitializeTransition(new EnemyTransition(), null, null, moneyPrefab);
+            InitializeAbility(new AbilityData(VFXTransforms, characterData.ImpenetrableDelegate,
+                mapStates, iDCharacter));
             InitializeInteractionSystem(null);
             SubscribeDeath();
+            SubscribeCharacterData();
             CharacterDataSubscriber.DieEvent += Die;
         }
 

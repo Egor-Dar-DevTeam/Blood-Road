@@ -28,9 +28,8 @@ public class ObjectMove : MonoBehaviour
 
         transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed * m_scalefactor);
         if(AbleHit)
-        { 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, MaxLength))
+        {
+            if (Physics.Raycast(transform.position, transform.forward, out var hit, MaxLength))
             {
                 if (Time.time > m_time2 + HitDelay)
                 {

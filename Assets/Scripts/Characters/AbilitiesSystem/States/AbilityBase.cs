@@ -1,5 +1,5 @@
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 
 namespace Characters.AbilitiesSystem.States
 {
@@ -8,7 +8,7 @@ namespace Characters.AbilitiesSystem.States
         public bool CanSkip { get; protected set; }
         public AbilityBase(){}
 
-        protected AbilityBase(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        protected AbilityBase(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
         {
         }
     }

@@ -1,6 +1,6 @@
 using Characters.Animations;
-using Characters.Information.Structs;
 using Dreamteck.Splines;
+using MapSystem.Structs;
 
 namespace Characters.Player.States
 {
@@ -8,9 +8,9 @@ namespace Characters.Player.States
     {
         private SplineFollower _splineFollower;
         public FolowSpline(){}
-        public FolowSpline(IAnimationCommand animation, StateInfo stateInfo,
+        public FolowSpline(IAnimationCommand animation, View view,
             VFXTransforms vfxTransforms, SplineFollower splineFollower) : base(
-            animation, stateInfo, vfxTransforms)
+            animation, view, vfxTransforms)
         {
             _splineFollower = splineFollower;
             _parameterName = "run";

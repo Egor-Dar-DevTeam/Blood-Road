@@ -1,24 +1,35 @@
 using System;
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.Animations;
+using MapSystem;
+using MapSystem.Structs;
 
 namespace Characters.AbilitiesSystem
 {
     public abstract class Abilities : IRunAbility
     {
+        protected Placeholder _placeholder;
+        protected StateCharacterKey _stateCharacterKey;
         protected StateMachine<BaseState> _stateMachine;
-        protected AbilitiesInfo _info;
         protected Type _currentEffectType;
 
         public Abilities(AbilityData abilityData)
         {
+            _placeholder = abilityData.Placeholder;
             _stateMachine = abilityData.StateMachine;
-            _info = abilityData.AbilitiesInfo;
+            _stateCharacterKey = new StateCharacterKey();
+            _stateCharacterKey.SetID(0);
         }
 
         protected abstract void CreateStates(IAnimationCommand animationCommand, VFXTransforms transforms);
 
         protected abstract void InitializeTransitions(BaseState idleState);
+        protected bool TryGetView(out View view)
+        {
+            if (_placeholder.TryGetView(_stateCharacterKey, out view))
+                return true;
+            return false;
+        }
 
         public virtual void StunAttack()
         {

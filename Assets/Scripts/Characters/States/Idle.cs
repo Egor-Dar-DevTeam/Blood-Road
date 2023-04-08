@@ -1,12 +1,12 @@
 ﻿using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 
 namespace Characters.Player.States
 {
     public class Idle : BaseState
     {
         public Idle(){}
-        public Idle(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo,vfxTransforms)
+        public Idle(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view,vfxTransforms)
         {
             _parameterName = "idle";
         }

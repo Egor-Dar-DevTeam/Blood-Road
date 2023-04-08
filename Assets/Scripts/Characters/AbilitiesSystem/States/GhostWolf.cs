@@ -1,5 +1,5 @@
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -7,7 +7,7 @@ namespace Characters.AbilitiesSystem.States
     public class GhostWolf : AbilityBase
     {
         public GhostWolf(){}
-        public GhostWolf(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        public GhostWolf(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
         {
         }
 

@@ -2216,8 +2216,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7058462578228116778}
   - component: {fileID: 7385352723466773187}
-  - component: {fileID: 7385352723466773186}
-  - component: {fileID: 7385352723466773185}
   - component: {fileID: 660702960637715567}
   - component: {fileID: -2128156287227556853}
   - component: {fileID: -4917204753745835466}
@@ -2259,9 +2257,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorOverrideController: {fileID: 22100000, guid: db0ffb874ce1e3d45aeaef734479d82e, type: 2}
-  statesInfo: {fileID: 7385352723466773185}
-  abilitiesInfo: {fileID: 7385352723466773186}
   vfxTransforms: {fileID: 5340267483511692082}
+  mapStates: {fileID: 0}
   runToPointData:
     CharacterController: {fileID: -1798107709089815046}
     Speed: 5
@@ -2277,89 +2274,9 @@ MonoBehaviour:
     weapon: {fileID: 0}
   linker: {fileID: -2128156287227556853}
   rotationSpeed: 10
+  iDCharacter: 17
   skinnedMeshRenderer: {fileID: 7385352723294875868}
   moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
---- !u!114 &7385352723466773186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691975530846676880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b1d88a70ea4944981090dd1e3e3bd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStatesInfo:
-  - state:
-      rid: 7345367210705289431
-    stateInfo:
-      clip: {fileID: 2090084898462240177, guid: f024fa91a6853474c94d5267d7b461fe, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 7345367210705289431
-      type: {class: Stun, ns: Characters.AbilitiesSystem.States, asm: Assembly-CSharp}
---- !u!114 &7385352723466773185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7691975530846676880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcf0e210ee34954920b3d7de2ecb9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStatesInfo:
-  - state:
-      rid: 7345367210705289432
-    stateInfo:
-      clip: {fileID: 7400000, guid: 042f7da76b7889e42aec8776a1382ad6, type: 2}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367210705289433
-    stateInfo:
-      clip: {fileID: 7400000, guid: a6f88c9e36414744abc31c04992e6a03, type: 2}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367210705289434
-    stateInfo:
-      clip: {fileID: 8687949049626897626, guid: 48e295891289aad4fae83f36b6da446a, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367210705289435
-    stateInfo:
-      clip: {fileID: 7400000, guid: 5e3e852c225a42f4d84017f63b5f5bac, type: 2}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367210705289436
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: 38ca1223c95d5cb498e4b0789a6fdea0, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367210705289437
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 7345367210705289432
-      type: {class: Idle, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367210705289433
-      type: {class: RunToPoint, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367210705289434
-      type: {class: Attack, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367210705289435
-      type: {class: Shield, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367210705289436
-      type: {class: DieEnemy, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367210705289437
-      type: {class: Damaged, ns: Characters.Player.States, asm: Assembly-CSharp}
 --- !u!114 &660702960637715567
 MonoBehaviour:
   m_ObjectHideFlags: 0

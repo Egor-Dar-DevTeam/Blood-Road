@@ -1,6 +1,6 @@
 using Characters.AbilitiesSystem;
 using Characters.AbilitiesSystem.States;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.LibrarySystem
@@ -15,10 +15,10 @@ namespace Characters.LibrarySystem
 
         private void InitializeLibrary()
         {
-            AddToLibrary(new DroneHammer(null, new StateInfo(), null), new AbilitiesSystem.Declaration.DroneHammer());
-           AddToLibrary(new AttackStun(null, new StateInfo(), null), new AbilitiesSystem.Declaration.StunAttack());
-           AddToLibrary(new SwordRain(null, new StateInfo(), null), new AbilitiesSystem.Declaration.SwordRain());
-           AddToLibrary(new InductionCoil(null, new StateInfo(), null), new AbilitiesSystem.Declaration.InductionCoil());
+            AddToLibrary(new DroneHammer(null, new View(), null), new AbilitiesSystem.Declaration.DroneHammer());
+           AddToLibrary(new AttackStun(null, new View(), null), new AbilitiesSystem.Declaration.StunAttack());
+           AddToLibrary(new SwordRain(null, new View(), null), new AbilitiesSystem.Declaration.SwordRain());
+           AddToLibrary(new InductionCoil(null, new View(), null), new AbilitiesSystem.Declaration.InductionCoil());
         }
         
         private void AddToLibrary(AbilityBase abilityBase, IAbilityCommand abilityCommand)

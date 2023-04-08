@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Banks;
@@ -7,9 +6,9 @@ using Characters.AbilitiesSystem;
 using Characters.BottlesSystem;
 using Characters.EffectSystem;
 using Characters.Facades;
-using Characters.Information.Structs;
 using Characters.InteractableSystems;
 using Dreamteck.Splines;
+using MapSystem;
 using UI;
 using UnityEngine;
 
@@ -61,10 +60,15 @@ namespace Characters.Player
             _getIsAttack = GetIsAttack;
             base.Awake();
             SetCharacterData(characterData);
+        }
+
+        private void Start()
+        {
             InitializeTransition(new PlayerTransition(), _getIsAttack, splineFollower);
-            InitializeAbility(new AbilityData(VFXTransforms, abilitiesInfo, characterData.ImpenetrableDelegate,
-            characterData, _transitionAndStates.Attack, attackVariants.StartOverridedStateInfo, _transitionAndStates.SetAttackSpeed));
             InitializeInteractionSystem(cameraRay);
+            SubscribeCharacterData();
+            InitializeAbility(new AbilityData(VFXTransforms, characterData.ImpenetrableDelegate,
+                mapStates, iDCharacter));
             SubscribeDeath();
             InitializeAttackDelegates();
         }
@@ -203,7 +207,6 @@ namespace Characters.Player
                 yield return new WaitForSeconds(0);
             }
         }
-
         protected override void SetCurrentPoint(IInteractable point)
         {
             if (!_hasCharacter) return;
@@ -215,12 +218,20 @@ namespace Characters.Player
             base.SetCurrentPoint(point);
         }
 
-        private async void Attack(StateInfo info)
+        private async void Attack(Item info)
         {
             if (characterData.Energy < 15) return;
             _isAttack = true;
-            await Task.Delay(info.DurationInMileseconds);
+            await Task.Delay(SecondToMilliseconds(info.View.Animation.length/10));
             _isAttack = false;
+        }
+
+        private const int SECONDS = 1000;
+
+        protected static int SecondToMilliseconds(float second)
+        {
+            var result = Mathf.RoundToInt(second * SECONDS);
+            return result;
         }
 
         public override void SetOutline(bool value)

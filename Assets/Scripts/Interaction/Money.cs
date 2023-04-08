@@ -24,13 +24,15 @@ namespace Interaction
             transform.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.WorldAxisAdd).SetLoops(-1, LoopType.Restart)
                 .SetEase(Ease.InOutSine);
             await Task.Delay(500);
-            _followToPlayer = true;
+            if (_player != null)
+                _followToPlayer = true;
+            else Start();
         }
 
 
         private void Update()
         {
-            if (!_followToPlayer) return;
+            if (!_followToPlayer || _player == null) return;
             var direction = transform.position - _player.position;
             transform.position -= direction * (_speed * Time.deltaTime);
             _speed += 0.2f;
@@ -39,7 +41,7 @@ namespace Interaction
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out ITriggerable triggerable)) return;
-            if(_isUsed) return;
+            if (_isUsed) return;
             _isUsed = true;
             triggerable.AddMoney(money);
             transform.DOScale(0, 0.5f).OnComplete(() => Destroy(gameObject));

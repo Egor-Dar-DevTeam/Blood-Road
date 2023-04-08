@@ -295,8 +295,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3.26
+  m_Center: {x: 0, y: 1.02, z: -3.04}
 --- !u!114 &1666192409856525822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +310,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  waitFromActivated: 0
+  repeatActivate: 0
+  drone: 1
 --- !u!1 &2630630099767439227
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,6 +346,54 @@ Transform:
   m_Father: {fileID: 5301049849352530346}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3443137833769070876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3245935484496558680}
+  - component: {fileID: 8194342290960851551}
+  m_Layer: 0
+  m_Name: Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3245935484496558680
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443137833769070876}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.20470499, z: 5}
+  m_LocalScale: {x: 8.13142, y: 1.45278, z: 7.8455896}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2651168984558491648}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8194342290960851551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443137833769070876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 936a8402c1bf225418f77e3f3e63789d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  waitFromActivated: 1600
+  repeatActivate: 2
+  drone: 0
 --- !u!1 &3669359190983893096
 GameObject:
   m_ObjectHideFlags: 0
@@ -10142,6 +10193,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5301049849352530346}
+  - {fileID: 3245935484496558680}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10177,6 +10229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af8cc7adc5a49a2a647ee23bc75a54b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  character: {fileID: 0}
 --- !u!1 &8459626180034023759
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,8 +32,7 @@ public class ObjectMoveDestroy : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * MoveSpeed * m_scalefactor);
         if (!ishit)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, maxLength))
+            if (Physics.Raycast(transform.position, transform.forward, out var hit, maxLength))
                 HitObj(hit);
         }
 

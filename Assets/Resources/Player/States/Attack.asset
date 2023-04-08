@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c5601270304488aefbb9175b747d1b, type: 3}
+  m_Name: Attack
+  m_EditorClassIdentifier: 
+  one:
+    Ability:
+      <AbilityCommand>k__BackingField:
+        rid: -2
+      <Cost>k__BackingField: 5
+      <EffectData>k__BackingField:
+        <HealthDamage>k__BackingField: 20
+        <MagicDamage>k__BackingField: 0
+        <HealthAdd>k__BackingField: 0
+        <ManaAdd>k__BackingField: 0
+        <EnergyAdd>k__BackingField: 0
+    UIInfo:
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
+      <Sprite>k__BackingField: {fileID: 21300000, guid: 9d7e9dd3a8c16b641a33120834081d2e, type: 3}
+      <Cooldown>k__BackingField: 1
+    View:
+      <ID>k__BackingField: 0
+      <State>k__BackingField:
+        rid: 1209029754967293955
+      <Animation>k__BackingField: {fileID: -2323847442860739381, guid: 5ff76ee3f561f9b4eb03812571cd36dd, type: 3}
+      <Effect>k__BackingField: {fileID: 0}
+  many:
+  - Ability:
+      <AbilityCommand>k__BackingField:
+        rid: -2
+      <Cost>k__BackingField: 15
+      <EffectData>k__BackingField:
+        <HealthDamage>k__BackingField: 60
+        <MagicDamage>k__BackingField: 0
+        <HealthAdd>k__BackingField: 0
+        <ManaAdd>k__BackingField: 0
+        <EnergyAdd>k__BackingField: 0
+    UIInfo:
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
+      <Sprite>k__BackingField: {fileID: 21300000, guid: ac06c16c85462974586f9f7f9f3bf472, type: 3}
+      <Cooldown>k__BackingField: 6
+    View:
+      <ID>k__BackingField: 3242
+      <State>k__BackingField:
+        rid: -2
+      <Animation>k__BackingField: {fileID: -2133986588389899034, guid: 76fea23aa6d240442b9077806bfb52d1, type: 3}
+      <Effect>k__BackingField: {fileID: 0}
+  - Ability:
+      <AbilityCommand>k__BackingField:
+        rid: -2
+      <Cost>k__BackingField: 10
+      <EffectData>k__BackingField:
+        <HealthDamage>k__BackingField: 30
+        <MagicDamage>k__BackingField: 0
+        <HealthAdd>k__BackingField: 0
+        <ManaAdd>k__BackingField: 0
+        <EnergyAdd>k__BackingField: 0
+    UIInfo:
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
+      <Sprite>k__BackingField: {fileID: 21300000, guid: d6ea59cf01da61d42934991d9287c93b, type: 3}
+      <Cooldown>k__BackingField: 4
+    View:
+      <ID>k__BackingField: 2345
+      <State>k__BackingField:
+        rid: -2
+      <Animation>k__BackingField: {fileID: 2992760244250348429, guid: 46c19a8a1dbfcbe4f875422df0281f01, type: 3}
+      <Effect>k__BackingField: {fileID: 0}
+  - Ability:
+      <AbilityCommand>k__BackingField:
+        rid: -2
+      <Cost>k__BackingField: 10
+      <EffectData>k__BackingField:
+        <HealthDamage>k__BackingField: 40
+        <MagicDamage>k__BackingField: 0
+        <HealthAdd>k__BackingField: 0
+        <ManaAdd>k__BackingField: 0
+        <EnergyAdd>k__BackingField: 0
+    UIInfo:
+      <Name>k__BackingField: 
+      <Description>k__BackingField: 
+      <Sprite>k__BackingField: {fileID: 21300000, guid: 341823384da84774783777f9510da2ff, type: 3}
+      <Cooldown>k__BackingField: 2
+    View:
+      <ID>k__BackingField: 13123
+      <State>k__BackingField:
+        rid: -2
+      <Animation>k__BackingField: {fileID: -2603037185963062845, guid: e02033bf62d3e87419349a5f24f62117, type: 3}
+      <Effect>k__BackingField: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1209029754967293955
+      type: {class: Attack, ns: Characters.Player.States, asm: Assembly-CSharp}
+      data:
+        Attacked: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Characters;
+using Characters.EffectSystem;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -17,8 +18,7 @@ public class VFXEffect : MonoBehaviour
         yield return new WaitForSeconds(time);
         if (character != null)
         {
-            character.ReceiveDamage(Int32.MaxValue);
-            character.ReceiveDamage(Int32.MaxValue);
+            character.WeaponAttack(new EffectData(Int32.MaxValue, 0,0,0,0,null));
         }
         else Destroy(gameObject);
     }

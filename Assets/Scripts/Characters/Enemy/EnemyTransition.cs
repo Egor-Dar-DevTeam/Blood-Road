@@ -9,42 +9,44 @@ namespace Characters.Facades
         {
             base.Initialize(data);
             StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
-            data.CreateAttack(new Attack(_animation, _statesInfo.GetState(typeof(Attack)), data.Damage, false, data, data.VFXTransforms));
-            data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState(typeof(DieEnemy)), data.CharacterController,data.VFXTransforms));
+            _stateCharacterKey.SetState(typeof(Attack));
+            if (TryGetView(out var view))
+                data.CreateAttack(new Attack(_animation, view, false, data, data.VFXTransforms));
+
+            _stateCharacterKey.SetState(typeof(DieEnemy));
+            if (TryGetView(out view))
+                data.CreateDie(new DieEnemy(_animation, view, data.CharacterController, data.VFXTransforms));
+
             _attackState = data.Attack;
             DieEnemy dieState = (DieEnemy)data.Die;
             dieState.SetMoneyPrefab(data.MoneyPrefab);
-            _dieState = data.Die;
+            _dieState = dieState;
+            _attackState.SetThisCharacter(data.CharacterData.CurrentInteractable);
             TransitionInit(data.Transform, data.RunToPointData);
-            
         }
 
-        protected override void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
+        protected override void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController,
+            VFXTransforms vfxTransforms)
         {
             base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
-            _explosiveRecoilState = new ExplosiveRecoil(_animation, _statesInfo.GetState(typeof(DieEnemy)), vfxTransforms, runToPointData.CharacterController);
+            
         }
 
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)
         {
-            base.TransitionInit(transform,runToPointData);
+            base.TransitionInit(transform, runToPointData);
             _stateMachine.AddTransition(_idleState, _runToPointState, () =>
             {
-                if (GetCurrentPoint() == null) return GetCurrentPoint() != null;
+                if (GetInteractable() == null) return GetInteractable() != null;
                 var dieState = (DieEnemy)_dieState;
-                dieState.SetPlayerTransform(GetCurrentPoint().GetObject());
-                _runToPointState.SetPoint(GetCurrentPoint().GetObject());
-                return GetCurrentPoint() != null;
+                dieState.SetPlayerTransform(GetInteractable().GetObject());
+                _runToPointState.SetPoint(GetInteractable().GetObject());
+                return GetInteractable() != null;
             });
-            _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null);
+            _stateMachine.AddTransition(_runToPointState, _idleState, () => GetInteractable() == null);
             _stateMachine.AddTransition(_runToPointState, _attackState, () => !IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _runToPointState, () => IsRuning(transform, runToPointData));
-            _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
-            _stateMachine.AddTransition(_attackState, _explosiveRecoilState, CanRecoil);
-            _stateMachine.AddTransition(_runToPointState, _explosiveRecoilState, CanRecoil);
-            _stateMachine.AddTransition(_idleState, _explosiveRecoilState, CanRecoil);
-            _stateMachine.AddTransition(_explosiveRecoilState, _runToPointState, IsStoodUp);
-
+            _stateMachine.AddTransition(_attackState, _idleState, (() => GetInteractable() == null));
             _stateMachine.ChangeState(_idleState);
         }
     }

@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Characters.Animations;
-using Characters.Information.Structs;
 using Characters.Player;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -10,7 +10,11 @@ namespace Characters.AbilitiesSystem.States
     {
         private CharacterData _characterData;
         public Fury(){}
-        public Fury(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms, CharacterData characterData) : base(animation, stateInfo, vfxTransforms)
+        public Fury(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
+        {
+        }
+
+        public void SetCharacterData(CharacterData characterData)
         {
             _characterData = characterData;
         }
@@ -27,9 +31,9 @@ namespace Characters.AbilitiesSystem.States
 
         private async void Wait()
         {
-            _characterData.SetAdditionalHealthAfterDamage(true);
+       //     _characterData.SetAdditionalHealthAfterDamage(true);
             await Task.Delay(SecondToMilliseconds(15f));
-            _characterData.SetAdditionalHealthAfterDamage(false);
+         //   _characterData.SetAdditionalHealthAfterDamage(false);
         }
 
         public override void Tick(float tickTime)

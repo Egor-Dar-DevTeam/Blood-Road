@@ -7,7 +7,7 @@ namespace Characters
 {
     public delegate void AttackedAbility(Receiver receiver, IAbilityCommand data);
 
-    public delegate void AttackedWeapon(Receiver receiver, Weapon data);
+    public delegate void AttackedWeapon(Receiver receiver, EffectData data);
     public class AttackListener : MonoBehaviour
     {
         [SerializeField] private BaseCharacter character;
@@ -16,12 +16,13 @@ namespace Characters
         private void Awake()
         {
             character.AttackAbility += Attacked;
+            character.AttackWeapon += Attacked;
             _sender = character.Sender;
         }
 
-        private void Attacked(Receiver receiver,Weapon weapon)
+        private void Attacked(Receiver receiver,EffectData effectData)
         {
-            _sender.RegisterData(weapon.EffectData);
+            _sender.RegisterData(effectData);
             _sender.RegisterReceiver(receiver);
         }
 

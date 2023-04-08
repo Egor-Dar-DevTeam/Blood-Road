@@ -1,4 +1,4 @@
-using Characters.AbilitiesSystem.Ability;
+using MapSystem.Structs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ namespace UI.AbilityChangedPanel
 
         public Button Button => button;
 
-        public void SetInfo(AbilityUIInfo abilityUIInfo)
+        public void SetInfo(UIInfo abilityUIInfo)
         {
             image.sprite = abilityUIInfo.Sprite;
             name.text = abilityUIInfo.Name;

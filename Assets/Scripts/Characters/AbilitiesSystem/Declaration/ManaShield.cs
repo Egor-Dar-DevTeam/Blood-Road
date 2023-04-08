@@ -6,7 +6,7 @@ namespace Characters.AbilitiesSystem.Declaration
     {
         public EffectData GetEffectData()
         {
-            return new EffectData(0, 0, 0,0,0,0, this.GetType());
+            return new EffectData( 0, 0,0,0,0, this.GetType());
 
         }
 

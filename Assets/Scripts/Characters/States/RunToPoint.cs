@@ -1,7 +1,7 @@
 ﻿using System;
 using Characters.Animations;
-using Characters.Information.Structs;
 using JetBrains.Annotations;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.Player.States
@@ -15,8 +15,8 @@ namespace Characters.Player.States
         private float _stopingDistance;
         
         public RunToPoint(){}
-        public RunToPoint(IAnimationCommand animation, RunToPointData data, StateInfo stateInfo,
-            VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        public RunToPoint(IAnimationCommand animation, RunToPointData data, View view,
+            VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
         {
             _characterController = data.CharacterController;
             _transform = data.ThisCharacter;
@@ -24,6 +24,7 @@ namespace Characters.Player.States
             _stopingDistance = data.StopDistance;
             _parameterName = "run";
         }
+        
 
         public void SetParams(float speed, float stoppingDistance)
         {

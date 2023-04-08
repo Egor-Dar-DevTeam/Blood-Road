@@ -1,37 +1,30 @@
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.Animations;
 using Characters.Player;
-using JetBrains.Annotations;
+using MapSystem;
 
 namespace Characters.AbilitiesSystem
 {
     public struct AbilityData
     {
+        public int ID { get; }
         public VFXTransforms VFXTransforms { get; }
         public Impenetrable ImpenetrableDelegate { get; }
-        public AbilitiesInfo AbilitiesInfo { get; }
 
         public StateMachine<BaseState> StateMachine { get; private set; }
         public IAnimationCommand AnimationCommand { get; private set; }
         public BaseState IdleState { get; private set; }
-        public CharacterData CharacterData { get; }
-        public Attack Attack { get; }
-        public OverrideAttack OverrideAttack { get; }
-        public SetAttackSpeed SetAttackSpeed { get; }
+        public Placeholder Placeholder { get; }
 
-        public AbilityData(VFXTransforms vfxTransforms, AbilitiesInfo abilitiesInfo, Impenetrable impenetrable, CharacterData characterData
-            ,[CanBeNull] Attack attack = null, [CanBeNull] OverrideAttack overrideAttack = null, [CanBeNull] SetAttackSpeed setAttackSpeed = null)
+        public AbilityData(VFXTransforms vfxTransforms, Impenetrable impenetrable, Placeholder placeholder, int id)
         {
             VFXTransforms = vfxTransforms;
             StateMachine = null;
             AnimationCommand = null;
-            AbilitiesInfo = abilitiesInfo;
             IdleState = null;
             ImpenetrableDelegate = impenetrable;
-            CharacterData = characterData;
-            Attack = attack;
-            OverrideAttack = overrideAttack;
-            SetAttackSpeed = setAttackSpeed;
+            Placeholder = placeholder;
+            ID = id;
         }
 
         public void SetStateMachine(StateMachine<BaseState> stateMachine)

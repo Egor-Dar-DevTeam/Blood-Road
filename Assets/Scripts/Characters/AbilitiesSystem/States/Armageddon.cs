@@ -1,5 +1,5 @@
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -7,7 +7,7 @@ namespace Characters.AbilitiesSystem.States
     public class Armageddon : AbilityBase
     {
         public Armageddon(){}
-        public Armageddon(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        public Armageddon(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
         {
         }
 

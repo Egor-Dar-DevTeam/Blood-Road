@@ -7,7 +7,7 @@ namespace Characters.AbilitiesSystem.Declaration
     {
         public EffectData GetEffectData()
         {
-            return new EffectData(0, 0, 0,0,0,0, typeof(AttackStun));
+            return new EffectData( 0, 0,0,0,0, typeof(AttackStun));
         }
         public void Apply(Abilities script){
             script.StunAttack();

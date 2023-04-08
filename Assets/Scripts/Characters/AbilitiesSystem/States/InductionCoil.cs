@@ -1,5 +1,4 @@
 using Characters.Animations;
-using Characters.Information.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -25,8 +24,8 @@ namespace Characters.AbilitiesSystem.States
         {
         }
 
-        public InductionCoil(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, vfxTransforms)
+        public InductionCoil(IAnimationCommand animation, MapSystem.Structs.View view, VFXTransforms vfxTransforms) : base(
+            animation, view, vfxTransforms)
         {
         }
     }

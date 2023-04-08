@@ -188,8 +188,6 @@ GameObject:
   m_Component:
   - component: {fileID: 380748237757127648}
   - component: {fileID: 380748237757127660}
-  - component: {fileID: 9178598396168875454}
-  - component: {fileID: 5871475348135491881}
   - component: {fileID: 1980256512}
   - component: {fileID: 1980256518}
   - component: {fileID: 1980256513}
@@ -197,6 +195,7 @@ GameObject:
   - component: {fileID: 4003567674991960620}
   - component: {fileID: 1980256522}
   - component: {fileID: 1980256531}
+  - component: {fileID: 45687842097437023}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -236,8 +235,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorOverrideController: {fileID: 22100000, guid: 1d122bcfdb1d72741aa91cffbbe7aaf9, type: 2}
-  statesInfo: {fileID: 9178598396168875454}
-  abilitiesInfo: {fileID: 5871475348135491881}
   vfxTransforms: {fileID: 7146404815956691174}
   runToPointData:
     CharacterController: {fileID: 1980256531}
@@ -259,96 +256,7 @@ MonoBehaviour:
   splineFollower: {fileID: 1980256512}
   projector: {fileID: 1980256518}
   attackVariants: {fileID: 1980256522}
---- !u!114 &9178598396168875454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380748237757127661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcf0e210ee34954920b3d7de2ecb9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStatesInfo:
-  - stateName: idle
-    stateInfo:
-      clip: {fileID: -5252816984213320552, guid: afb293659ffeea04187b9bd4493c849b, type: 3}
-      vfxEffect: {fileID: 0}
-  - stateName: run
-    stateInfo:
-      clip: {fileID: 6200578666267062213, guid: a630ffad304329b4a8fbffb6672cb866, type: 3}
-      vfxEffect: {fileID: 0}
-  - stateName: shield
-    stateInfo:
-      clip: {fileID: 27788468071448646, guid: 3e32ed41c4494c34c8356e04c68c88f3, type: 3}
-      vfxEffect: {fileID: 0}
-  - stateName: die
-    stateInfo:
-      clip: {fileID: -6758483313513240000, guid: 492ac71df3cb67d40952867b315b8c70, type: 3}
-      vfxEffect: {fileID: 251230187541707438, guid: 6ffccd42debac484c8d27855640ae265, type: 3}
-  - stateName: damaged
-    stateInfo:
-      clip: {fileID: 27788468071448646, guid: 3e32ed41c4494c34c8356e04c68c88f3, type: 3}
-      vfxEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
---- !u!114 &5871475348135491881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 380748237757127661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b1d88a70ea4944981090dd1e3e3bd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStatesInfo:
-  - stateName: stun
-    stateInfo:
-      clip: {fileID: -5252816984213320552, guid: afb293659ffeea04187b9bd4493c849b, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  - stateName: droneHammer
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 7566873106949737003, guid: 4be649f4aeef2c24b8f5cef4f45d4e1c, type: 3}
-  - stateName: attackStun
-    stateInfo:
-      clip: {fileID: -2603037185963062845, guid: e02033bf62d3e87419349a5f24f62117, type: 3}
-      vfxEffect: {fileID: 0}
-  - stateName: swordRain
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: -3160666713083532792, guid: 694bb9f1536c5e94abd3f9d57c4aeea2, type: 3}
-  - stateName: inductionCoil
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 5767999109912402688, guid: 812652216d0faf342983826e5a2621fb, type: 3}
-  - stateName: manaShield
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 6658642946818864756, guid: 96c8388804514904ebf6ea7d6e7bf3d1, type: 3}
-  - stateName: UnleashingRage
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 4715663965731641297, guid: bc7759a08a0b73443af48ddf359f5c90, type: 3}
-  - stateName: Armageddon
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 8546595984504945830, guid: 01dbd169d52ec4643ad8449427eca728, type: 3}
-  - stateName: Fury
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 2326355777706781186, guid: eaa22e368a2136241a702bd13970a5fa, type: 3}
-  - stateName: UniversalBlow
-    stateInfo:
-      clip: {fileID: 4324581201113770701, guid: 8682d13d6017bac41b13381efb86c215, type: 3}
-      vfxEffect: {fileID: 3166439108334882262, guid: 17345d701491baa4d93afc5b510e9a99, type: 3}
-  - stateName: Ghost Wolf
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 3230140645502558465, guid: 56c3d5c1cc04cb543b25b9ba9f519c51, type: 3}
+  banks: {fileID: 0}
 --- !u!114 &1980256512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6912,12 +6820,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackVariants:
-  - clip: {fileID: 571823642554664800, guid: df0b7aff9b540aa4692b51440b66802c, type: 3}
-    vfxEffect: {fileID: 4614878895002293043, guid: 797c920b63e40884f872c7f6ccf04e46, type: 3}
-  - clip: {fileID: -2323847442860739381, guid: 5ff76ee3f561f9b4eb03812571cd36dd, type: 3}
-    vfxEffect: {fileID: 3466956168403305335, guid: b3f2af121f273414191cb0b70f4e7f2b, type: 3}
-  - clip: {fileID: 4969130516787742782, guid: bed586ffc924aeb459d28f394035c787, type: 3}
-    vfxEffect: {fileID: 1358576688715706069, guid: 2664571781cb2cc438f34e9a40f8ed1e, type: 3}
+  - <State>k__BackingField:
+      rid: -2
+    <Animation>k__BackingField: {fileID: 0}
+    <Effect>k__BackingField: {fileID: 0}
+  - <State>k__BackingField:
+      rid: -2
+    <Animation>k__BackingField: {fileID: 0}
+    <Effect>k__BackingField: {fileID: 0}
+  - <State>k__BackingField:
+      rid: -2
+    <Animation>k__BackingField: {fileID: 0}
+    <Effect>k__BackingField: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!143 &1980256531
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6936,6 +6855,18 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0.22, y: 0, z: 0.15}
+--- !u!114 &45687842097437023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380748237757127661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364adce0569d44dcbd8a9ad409cdf6b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2365018969159306928
 GameObject:
   m_ObjectHideFlags: 0
@@ -7078,6 +7009,7 @@ MonoBehaviour:
   up: {fileID: 2872353068312183887}
   center: {fileID: 4010301295667512865}
   down: {fileID: 5000879036733064381}
+  character: {fileID: 0}
 --- !u!1 &6049630617375865259
 GameObject:
   m_ObjectHideFlags: 0
@@ -7772,6 +7704,7 @@ MonoBehaviour:
   up: {fileID: 1498728270330557152}
   center: {fileID: 5939622729901676947}
   down: {fileID: 7094991569590780081}
+  character: {fileID: 0}
 --- !u!4 &8265564697353161743 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -577129471616992469, guid: 86c9e85a74df42e498be41e95fa87be2, type: 3}

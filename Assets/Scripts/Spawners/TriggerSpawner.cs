@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Characters;
 using Characters.Player;
+using MapSystem;
 using UI.EnemyesCanvas;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -13,6 +14,7 @@ namespace Spawners
         [SerializeField] private List<EnemySpawnInfo> enemySpawnInfo;
         [SerializeField] private PanelsCreator panelsCreator;
         [SerializeField] private EnemiesData enemiesData;
+        [SerializeField] private Placeholder placeholder;
         private bool _continue;
         public EnemiesData EnemiesData => enemiesData;
 
@@ -39,6 +41,7 @@ namespace Spawners
         private void Instantiate(BaseCharacter prefab, CharacterData data, Vector3 position)
         {
             var enemy = Object.Instantiate(prefab, position, Quaternion.identity);
+            enemy.SetPlaceholder(placeholder);
             data.SetInteractable(enemy);
             enemy.SetCharacterData(data);
             panelsCreator.AddCharacter(enemy);

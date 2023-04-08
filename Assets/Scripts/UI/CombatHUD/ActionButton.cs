@@ -1,5 +1,6 @@
 using Banks;
 using DG.Tweening;
+using MapSystem.Structs;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,17 +19,17 @@ namespace UI.CombatHUD
 
         private int _currentCount;
 
-        public void Initialize(float cooldown, UnityAction action, Sprite sprite)
+        public void Initialize(UnityAction action, UIInfo info)
         {
-            image.sprite = sprite;
+            image.sprite = info.Sprite;
             image.color = Color.white;
             button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() => InteractableButton(cooldown, action));
+            button.onClick.AddListener(() => InteractableButton(info.Cooldown, action));
         }
 
-        public void Initialize(float cooldown, UnityAction action, Sprite sprite, Remove remove)
+        public void Initialize( UnityAction action,UIInfo info, Remove remove)
         {
-            Initialize(cooldown, action, sprite);
+            Initialize(action, info);
             currentCountText.text = _currentCount.ToString();
             button.onClick.AddListener((() =>
             {

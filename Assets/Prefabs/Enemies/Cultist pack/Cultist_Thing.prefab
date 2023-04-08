@@ -1155,8 +1155,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1624707866990765011}
-  - component: {fileID: 3189334031217452003}
-  - component: {fileID: 4133993382929872891}
   - component: {fileID: 1149071864757575715}
   - component: {fileID: 1758678281854379935}
   - component: {fileID: 5095391249741296030}
@@ -1186,87 +1184,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3189334031217452003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145912029028039017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcf0e210ee34954920b3d7de2ecb9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStatesInfo:
-  - state:
-      rid: 7345367214937079829
-    stateInfo:
-      clip: {fileID: -1365260621038550678, guid: 7a40c151b71061d46a1d08b269d57b58, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367214937079830
-    stateInfo:
-      clip: {fileID: -1316467855248386355, guid: e1e00ebad4c30ef48acef65ba5cfd57c, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367214937079831
-    stateInfo:
-      clip: {fileID: 3048450698666175738, guid: d1666e79b7cbaf54994c38277e8bf435, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367214937079832
-    stateInfo:
-      clip: {fileID: 3430126467884209024, guid: d334ca30608f07e4dbaf1399e893d22c, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367214937079833
-    stateInfo:
-      clip: {fileID: 1827226128182048838, guid: 38ca1223c95d5cb498e4b0789a6fdea0, type: 3}
-      vfxEffect: {fileID: 0}
-  - state:
-      rid: 7345367214937079834
-    stateInfo:
-      clip: {fileID: 0}
-      vfxEffect: {fileID: 4184047776470760376, guid: b8a501041f88c48449a59ba5b87424cd, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 7345367214937079829
-      type: {class: Idle, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367214937079830
-      type: {class: RunToPoint, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367214937079831
-      type: {class: Attack, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367214937079832
-      type: {class: DieEnemy, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367214937079833
-      type: {class: Shield, ns: Characters.Player.States, asm: Assembly-CSharp}
-    - rid: 7345367214937079834
-      type: {class: Damaged, ns: Characters.Player.States, asm: Assembly-CSharp}
---- !u!114 &4133993382929872891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2145912029028039017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b1d88a70ea4944981090dd1e3e3bd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStatesInfo:
-  - state:
-      rid: 7345367210705289271
-    stateInfo:
-      clip: {fileID: 1227957797849291019, guid: e533bb00cf1c31f42bce9d6779778aa6, type: 3}
-      vfxEffect: {fileID: 2888828727041324091, guid: b17eb36ad31529c4e87085416dcdda8b, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 7345367210705289271
-      type: {class: Stun, ns: Characters.AbilitiesSystem.States, asm: Assembly-CSharp}
 --- !u!114 &1149071864757575715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,9 +1197,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animatorOverrideController: {fileID: 22100000, guid: db0ffb874ce1e3d45aeaef734479d82e, type: 2}
-  statesInfo: {fileID: 3189334031217452003}
-  abilitiesInfo: {fileID: 4133993382929872891}
   vfxTransforms: {fileID: 7823826589812023269}
+  mapStates: {fileID: 0}
   runToPointData:
     CharacterController: {fileID: -2318705553518696307}
     Speed: 5
@@ -1298,6 +1214,7 @@ MonoBehaviour:
     weapon: {fileID: 0}
   linker: {fileID: 1758678281854379935}
   rotationSpeed: 10
+  iDCharacter: 6
   skinnedMeshRenderer: {fileID: 4721212047748091184}
   moneyPrefab: {fileID: 7457498980802563599, guid: 95aeb8308ea2e824fbc3876c9d0e9dcb, type: 3}
 --- !u!114 &1758678281854379935

@@ -1,5 +1,9 @@
-using Characters.BottlesSystem;
+using System.Collections.Generic;
+using Banks;
 using Characters.Player;
+using Characters.Player.States;
+using MapSystem;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace UI.CombatHUD
@@ -7,28 +11,33 @@ namespace UI.CombatHUD
     public class BottlesButtons : MonoBehaviour
     {
         [SerializeField] private ActionButton[] buttons;
-        [SerializeField] private BottleSO[] bottleSo;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private Placeholder placeholder;
+        private List<BaseBank> _banks;
 
         private void Awake()
         {
-            for (var i = 0; i < buttons.Length; i++)
-            {
-                bottleSo[i].Initialize();
-                var info = bottleSo[i].BottleInfo;
-                var effectData = bottleSo[i].EffectData;
-                var delegates = bottleSo[i].BankDelegates;
-                buttons[i].Initialize(info.Cooldown, (() => playerController.UseBottle(effectData)), info.Sprite,
-                    delegates.Remove);
-                delegates.InitGetValue.Subscribe(buttons[i].SetValue);
-            }
+            _banks = new List<BaseBank>();
+            if (placeholder.TryGetList(new StateCharacterKey(0, typeof(Bottle), null), out List<Item> bottles))
+                for (var i = 0; i < buttons.Length; i++)
+                {
+                    var bank = new Bank.Bottle();
+                    var info = bottles[i].UIInfo;
+                    bank.Initialize(info.Name);
+                    var effectData = bottles[i].Ability.EffectData;
+                    var delegates = bank.Delegates;
+                    buttons[i].Initialize((() => playerController.UseBottle(effectData)), info,
+                        delegates.Remove);
+                    delegates.InitGetValue.Subscribe(buttons[i].SetValue);
+                    _banks.Add(bank);
+                }
         }
 
         private void OnDestroy()
         {
-            for (var i = 0; i < buttons.Length; i++)
+            for (var i = 0; i < _banks.Count; i++)
             {
-                var delegates = bottleSo[i].BankDelegates;
+                var delegates = _banks[i].Delegates;
                 delegates.InitGetValue.Unsubscribe(buttons[i].SetValue);
             }
         }

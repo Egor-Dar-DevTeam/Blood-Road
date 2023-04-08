@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.47450984, g: 0.6666667, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -268,6 +268,7 @@ MonoBehaviour:
   button: {fileID: 5924362861578394868}
   image: {fileID: 1877965040091293504}
   cooldownMask: {fileID: 6017003989146563197}
+  currentCountText: {fileID: 0}
 --- !u!1 &5260991440409135559
 GameObject:
   m_ObjectHideFlags: 0
@@ -303,7 +304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.14666584, y: 0.148}
   m_AnchorMax: {x: 0.8535284, y: 0.859}
-  m_AnchoredPosition: {x: -0.044376373, y: -0.08942413}
+  m_AnchoredPosition: {x: -0.04437256, y: -0.08942413}
   m_SizeDelta: {x: -0.15145636, y: -0.523149}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1184670709558632345
@@ -379,7 +380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.17026581, y: 0.18400002}
   m_AnchorMax: {x: 0.83343565, y: 0.8091549}
-  m_AnchoredPosition: {x: -0.36780167, y: 0.50938827}
+  m_AnchoredPosition: {x: -0.36779785, y: 0.5093918}
   m_SizeDelta: {x: -0.13929313, y: -0.6389752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4671287486385277766

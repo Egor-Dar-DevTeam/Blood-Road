@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Characters.Animations;
-using Characters.Information.Structs;
 using DG.Tweening;
 using Interaction;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.Player.States
@@ -12,9 +12,9 @@ namespace Characters.Player.States
         private Money _moneyPrefab;
         private Transform _player;
 public DieEnemy(){}
-        public DieEnemy(IAnimationCommand animation, StateInfo stateInfo, CharacterController characterController,
+        public DieEnemy(IAnimationCommand animation, View view, CharacterController characterController,
              VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, characterController, vfxTransforms)
+            animation, view, characterController, vfxTransforms)
         {
             _animation = animation;
         }

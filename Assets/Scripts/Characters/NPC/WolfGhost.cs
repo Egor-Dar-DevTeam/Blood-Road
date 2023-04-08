@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Characters.Enemy;
@@ -28,6 +27,7 @@ namespace Characters.NPC
             base.Awake();
             SetCharacterData(characterData);
             InitializeTransition(_supporterTransitionAndStates = new SupporterTransition(MAX_DISTANCE), null);
+            SubscribeCharacterData();
             InitializeInteractionSystem(null);
             FollowEntity();
         }

@@ -1,5 +1,8 @@
-using Characters.AbilitiesSystem.Ability;
+using System.Collections.Generic;
+using Characters.AbilitiesSystem.Declaration;
 using Characters.InteractableSystems;
+using MapSystem;
+using MapSystem.Structs;
 using UI.CombatHUD;
 using UnityEngine;
 
@@ -9,7 +12,7 @@ namespace UI.AbilityChangedPanel
     {
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private AbilityInfo[] abilitiesInfo;
-        [SerializeField] private AbilitiesData abilitiesData;
+        [SerializeField] private Placeholder placeholder;
         private AbilitiesButtons _abilitiesButtons;
         private event GamePanel _gamePanel;
         public CanvasGroup CanvasGroup => canvasGroup;
@@ -21,28 +24,29 @@ namespace UI.AbilityChangedPanel
 
         public void SetPanelsInfo()
         {
-            var abilitiesSO = abilitiesData.GetCopy();
+            var abilities = placeholder.TryGetList(new StateCharacterKey(0, null, typeof(AllAbilities)),
+                out List<Item> allAbilities);
+            if (!abilities) return;
             var actualAbilities = _abilitiesButtons.GetCopy();
-            foreach (AbilitySO ability in actualAbilities)
+            foreach (var ability in actualAbilities)
             {
-                abilitiesSO.Remove(ability);
+                allAbilities.Remove(ability);
             }
 
             foreach (var abilityInfo in abilitiesInfo)
             {
-                var ability = abilitiesSO[Random.Range(1, abilitiesSO.Count)];
+                var ability = allAbilities[Random.Range(1, allAbilities.Count)];
 
-                abilitiesSO.Remove(ability);
-                ability.Initialize();
-                abilityInfo.SetInfo(ability.AbilityUIInfo);
+                allAbilities.Remove(ability);
+                abilityInfo.SetInfo(ability.UIInfo);
                 abilityInfo.Button.onClick.RemoveAllListeners();
                 abilityInfo.Button.onClick.AddListener(() => SetNewAbility(ability));
             }
         }
 
-        private void SetNewAbility(AbilitySO abilitySo)
+        private void SetNewAbility(Item ability)
         {
-            _abilitiesButtons.AddAbility(abilitySo);
+            _abilitiesButtons.AddAbility(ability);
             _gamePanel?.Invoke();
         }
 

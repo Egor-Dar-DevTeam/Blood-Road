@@ -1,5 +1,5 @@
-using Characters.AbilitiesSystem.Ability;
 using Characters.InteractableSystems;
+using MapSystem;
 using UI.CombatHUD;
 using UnityEngine;
 using UnityEngine.Events;
@@ -19,7 +19,7 @@ namespace UI.AbilityChangedPanel
             _abilitiesButtons = abilitiesButtons;
         }
 
-        private void RemoveAbility(AbilitySO abilitySo)
+        private void RemoveAbility(Item abilitySo)
         {
             _abilitiesButtons.RemoveAbility(abilitySo);
             _abilityVariants?.Invoke();
@@ -27,14 +27,14 @@ namespace UI.AbilityChangedPanel
         
         public void ViewActualAbilities()
         {
-            var abilitySOList = _abilitiesButtons.GetCopy();
+            var abilityList = _abilitiesButtons.GetCopy();
             for (int i = 0; i < abilitiesInfo.Length; i++)
             {
-                var info = abilitySOList[i].AbilityUIInfo;
-                var abilitySO = abilitySOList[i];
+                var info = abilityList[i].UIInfo;
+                var ability = abilityList[i];
                 abilitiesInfo[i].SetInfo(info);
                 abilitiesInfo[i].Button.onClick.RemoveAllListeners();
-                abilitiesInfo[i].Button.onClick.AddListener((() => RemoveAbility(abilitySO)));
+                abilitiesInfo[i].Button.onClick.AddListener((() => RemoveAbility(ability)));
             }
         }
         public void Subscribe(UnityAction subscriber)

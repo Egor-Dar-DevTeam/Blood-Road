@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Characters.Animations;
-using Characters.Information.Structs;
 using Characters.InteractableSystems;
 using Characters.Player;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -11,8 +11,8 @@ namespace Characters.AbilitiesSystem.States
     {
         private event Impenetrable _impenetrable;
         public ManaShield(){}
-        public ManaShield(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, vfxTransforms)
+        public ManaShield(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(
+            animation, view, vfxTransforms)
         {
         }
 

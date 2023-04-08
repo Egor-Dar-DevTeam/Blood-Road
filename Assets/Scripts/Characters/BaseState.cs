@@ -1,6 +1,6 @@
 using System;
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using UnityEngine;
 using baseState=Better.UnityPatterns.Runtime.StateMachine.States.BaseState;
 
@@ -17,12 +17,12 @@ namespace Characters
         protected string _parameterName;
 
         protected BaseState(){}
-        protected BaseState(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms)
+        protected BaseState(IAnimationCommand animation, View view, VFXTransforms vfxTransforms)
         {
             _animation = animation;
             _vfxTransforms = vfxTransforms;
-            _clip = stateInfo.Clip;
-            _vfxEffect = stateInfo.VFXEffect;
+            _clip = view.Animation;
+            _vfxEffect = view.Effect;
         }
 
         public override void Enter()

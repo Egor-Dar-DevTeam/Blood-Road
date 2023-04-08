@@ -1,5 +1,5 @@
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -8,8 +8,8 @@ namespace Characters.AbilitiesSystem.States
     public class DroneHammer : AbilityBase
     {
         public DroneHammer(){}
-        public DroneHammer(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, vfxTransforms)
+        public DroneHammer(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(
+            animation, view, vfxTransforms)
         {
         }
 

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Characters.AbilitiesSystem.Ability;
 using Characters.Player;
+using MapSystem;
 using UnityEngine;
 
 namespace UI.CombatHUD
@@ -8,21 +8,21 @@ namespace UI.CombatHUD
     public class AbilitiesButtons : MonoBehaviour
     {
         [SerializeField] private List<ActionButton> button;
-        [SerializeField] private List<AbilitySO> abilitiesSo;
+        [SerializeField] private List<Item> abilities;
         [SerializeField] private PlayerController playerController;
-        public void AddAbility(AbilitySO abilitySo)
+        public void AddAbility(Item ability)
         {
-            if (abilitiesSo.Contains(abilitySo)) return;
-                abilitiesSo.Add(abilitySo);
+            if (abilities.Contains(ability)) return;
+                abilities.Add(ability);
             RecheckAbilities();
         }
 
-        public List<AbilitySO> GetCopy() => new(abilitiesSo);
+        public List<Item> GetCopy() => new(abilities);
         
 
-        public void RemoveAbility(AbilitySO abilitySo)
+        public void RemoveAbility(Item ability)
         {
-            abilitiesSo.Remove(abilitySo);
+            abilities.Remove(ability);
         }
         
         private void Awake()
@@ -34,13 +34,9 @@ namespace UI.CombatHUD
         {
             for (var i = 0; i < button.Count; i++)
             {
-                if (abilitiesSo.Count == 0|| abilitiesSo.Count-1<i) continue;
-                abilitiesSo[i].Initialize();
-                abilitiesSo[i].Used(true);
-                var info = abilitiesSo[i].AbilityInfo;
-                button[i].Initialize(info.Cooldown,
-                    () => playerController.UseAbility(info.AbilityCommand, info.Price),
-                    info.Sprite);
+                if (abilities.Count == 0|| abilities.Count-1<i) continue;
+                var info = abilities[i];
+                button[i].Initialize(() => playerController.UseAbility(info.Ability.AbilityCommand, info.Ability.Cost), info.UIInfo);
             }
         }
     }

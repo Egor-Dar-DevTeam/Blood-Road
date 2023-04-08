@@ -1,13 +1,13 @@
 using System.Threading.Tasks;
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 
 namespace Characters.AbilitiesSystem.States
 {
     public class AttackStun : AbilityBase
     {
         public AttackStun(){}
-        public AttackStun(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(animation, stateInfo, vfxTransforms)
+        public AttackStun(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(animation, view, vfxTransforms)
         {
             _parameterName = "attackStun";
         }

@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.Animations;
-using Characters.Information.Structs;
 using JetBrains.Annotations;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -16,8 +16,8 @@ namespace Characters.AbilitiesSystem.States
         {
         }
 
-        public Stun([CanBeNull] IAnimationCommand animation, StateInfo stateInfo, [CanBeNull] VFXTransforms transform) :
-            base(animation, stateInfo, transform)
+        public Stun([CanBeNull] IAnimationCommand animation, View view, [CanBeNull] VFXTransforms transform) :
+            base(animation, view, transform)
         {
             _parameterName = "stun";
         }

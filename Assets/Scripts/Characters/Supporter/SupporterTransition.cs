@@ -9,6 +9,7 @@ namespace Characters.Facades
         {
             _maxDistanceValue = maxDistance;
         }
+
         protected readonly float _maxDistanceValue;
 
         protected Parameters _followPlayerParam;
@@ -30,21 +31,22 @@ namespace Characters.Facades
         {
             base.Initialize(data);
             StatesInit(data.Animator, data.RunToPointData, data.AnimatorOverrideController, data.VFXTransforms);
-            data.CreateAttack(new Attack(_animation, _statesInfo.GetState(typeof(Attack)), data.Damage, false, data, data.VFXTransforms));
-            data.CreateDie(new DieEnemy(_animation, _statesInfo.GetState(typeof(DieEnemy)), data.CharacterController, data.VFXTransforms));
+
+            _stateCharacterKey.SetState(typeof(Attack));
+            if (TryGetView(out var view))
+                data.CreateAttack(new Attack(_animation, view, false, data, data.VFXTransforms));
+
+            _stateCharacterKey.SetState(typeof(DieEnemy));
+            if (TryGetView(out view))
+                data.CreateDie(new DieEnemy(_animation, view, data.CharacterController, data.VFXTransforms));
+
             _attackState = data.Attack;
-            DieEnemy dieState = (DieEnemy)data.Die;
-            _dieState = data.Die;
+            _dieState = (DieEnemy)data.Die;
+            _attackState.SetThisCharacter(data.CharacterData.CurrentInteractable);
             TransitionInit(data.Transform, data.RunToPointData);
 
             _followPlayerParam = new Parameters { Speed = 5f, StoppingDistance = 3f };
             _followEnemyParam = new Parameters { Speed = 12f, StoppingDistance = 2.5f };
-        }
-
-        protected override void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
-        {
-            base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
-            _explosiveRecoilState = new ExplosiveRecoil(_animation, _statesInfo.GetState(typeof(DieEnemy)), vfxTransforms, runToPointData.CharacterController);
         }
 
         public void SetMode(FollowMode mode)
@@ -61,6 +63,7 @@ namespace Characters.Facades
                 default:
                     throw new System.InvalidOperationException();
             }
+
             _runToPointState.SetParams(parameters.Speed, parameters.StoppingDistance);
         }
 
@@ -69,28 +72,32 @@ namespace Characters.Facades
             base.TransitionInit(transform, runToPointData);
             _stateMachine.AddTransition(_idleState, _runToPointState, () =>
             {
-                var point = GetCurrentPoint();
+                var point = GetInteractable();
 
-                if (point == null) { return false; }
+                if (point == null)
+                {
+                    return false;
+                }
 
                 if (point.IsPlayer())
-                    return Vector3.Distance(transform.position, GetCurrentPoint().GetObject().position) >= _maxDistanceValue;
+                    return Vector3.Distance(transform.position, GetInteractable().GetObject().position) >=
+                           _maxDistanceValue;
 
                 var dieState = (DieEnemy)_dieState;
-                dieState.SetPlayerTransform(GetCurrentPoint().GetObject());
-                _runToPointState.SetPoint(GetCurrentPoint().GetObject());
-    
+                dieState.SetPlayerTransform(GetInteractable().GetObject());
+                _runToPointState.SetPoint(GetInteractable().GetObject());
+
                 return true;
             });
-            _stateMachine.AddTransition(_runToPointState, _idleState, () => GetCurrentPoint() == null || !IsRuning(transform, runToPointData) && GetCurrentPoint().IsPlayer());
-            _stateMachine.AddTransition(_runToPointState, _attackState, () => !IsRuning(transform, runToPointData) && GetCurrentPoint().IsPlayer() == false);
-            _stateMachine.AddTransition(_attackState, _runToPointState, () =>
-            {
-                return IsRuning(transform, runToPointData);
-            });
-            _stateMachine.AddTransition(_attackState, _idleState, (() => GetCurrentPoint() == null));
+            _stateMachine.AddTransition(_runToPointState, _idleState,
+                () => GetInteractable() == null ||
+                      !IsRuning(transform, runToPointData) && GetInteractable().IsPlayer());
+            _stateMachine.AddTransition(_runToPointState, _attackState,
+                () => !IsRuning(transform, runToPointData) && GetInteractable().IsPlayer() == false);
+            _stateMachine.AddTransition(_attackState, _runToPointState,
+                () => IsRuning(transform, runToPointData));
+            _stateMachine.AddTransition(_attackState, _idleState, (() => GetInteractable() == null));
             _stateMachine.ChangeState(_idleState);
         }
     }
 }
-

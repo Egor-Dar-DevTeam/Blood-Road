@@ -1,15 +1,15 @@
-using System;
 using System.Collections.Generic;
 using Characters.AbilitiesSystem;
 using Characters.EffectSystem;
 using Characters.Facades;
-using Characters.Information;
 using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
 using Dreamteck.Splines;
 using Interaction;
 using JetBrains.Annotations;
+using MapSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Characters
@@ -22,19 +22,18 @@ namespace Characters
 
     public delegate bool HasCharacter();
 
-    [RequireComponent(typeof(StatesInfo), typeof(AbilitiesInfo))]
     public abstract class BaseCharacter : MonoBehaviour, IInteractable, IInit<DieInteractable>
     {
         [SerializeField] private AnimatorOverrideController _animatorOverrideController;
-        [SerializeField] private StatesInfo statesInfo;
-        [SerializeField] protected AbilitiesInfo abilitiesInfo;
         [SerializeField] private VFXTransforms vfxTransforms;
+        [SerializeField] protected Placeholder mapStates;
         [SerializeField] protected RunToPointData runToPointData;
         [SerializeField] protected Animator animator;
         [SerializeField] protected Eyes eyesCharacters;
         [SerializeField] protected CharacterData characterData;
         [SerializeField] private Linker linker;
         [SerializeField] protected float rotationSpeed = 1f;
+        [SerializeField] protected int iDCharacter;
         [HideInInspector] [SerializeField] public Sender Sender;
         protected bool _hasCharacter = true;
 
@@ -42,16 +41,17 @@ namespace Characters
 
         private SetCurrentPoint _setCurrentPoint;
         private StartRechangeCurrentPoint _startRechangeCurrentPoint;
-        private GetCurrentPoint _getCurrentPoint;
+        private GetCurrentPoint getCurrentPoint;
         private DieInteractable _characterPointDie;
         private HasCharacter _hasCharacterDelegate;
 
         public event AttackedAbility AttackAbility;
+        public event AttackedWeapon AttackWeapon;
 
 
         private InteractionSystem _interactionSystem;
         protected TransitionAndStates _transitionAndStates;
-        private IInteractable GetCurrentPoint() => _currentPoint;
+        private IInteractable GetInteractable() => _currentPoint;
         public RemoveList GetRemoveList() => RemoveList;
         public bool HasCharacter() => _hasCharacter;
         public Receiver Receiver => linker.Receiver;
@@ -60,6 +60,7 @@ namespace Characters
 
         public VFXTransforms VFXTransforms => vfxTransforms;
 
+        public void SetPlaceholder(Placeholder placeholder) => mapStates = placeholder;
 
         public virtual void Finish()
         {
@@ -80,7 +81,7 @@ namespace Characters
             runToPointData.ThisCharacter = transform;
             _setCurrentPoint = SetCurrentPoint;
             _startRechangeCurrentPoint = StartRCP;
-            _getCurrentPoint = GetCurrentPoint;
+            getCurrentPoint = GetInteractable;
 
             _hasCharacterDelegate = HasCharacter;
 
@@ -97,7 +98,13 @@ namespace Characters
         {
             characterData = data.Copy();
             CharacterDataSubscriber = characterData;
+        }
+
+        public void SubscribeCharacterData()
+        {
+            CharacterDataSubscriber = characterData;
             CharacterDataSubscriber.DieEvent += () => _hasCharacter = false;
+            CharacterDataSubscriber.Damage += _transitionAndStates.Damage;
         }
 
         protected virtual void SubscribeDeath()
@@ -112,16 +119,17 @@ namespace Characters
             CharacterDataSubscriber.DieEvent -= _transitionAndStates.DieDelegate;
         }
 
+
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
             [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] SplineFollower splineFollower = null,
-            [CanBeNull] Money money = null, [CanBeNull] GetRecoil getRecoil = null
+            [CanBeNull] Money money = null
         )
         {
             _transitionAndStates = transitionAndStates;
             linker.Initialize(_transitionAndStates, characterData);
-            _transitionAndStates.Initialize(new TransitionAndStatesData(animator, _getCurrentPoint, transform,
-                runToPointData, getIsAttack, characterData, getRecoil,
-                statesInfo, characterData.Damage, _hasCharacterDelegate,
+            _transitionAndStates.Initialize(new TransitionAndStatesData(animator, getCurrentPoint, transform,
+                runToPointData, getIsAttack, characterData,
+                mapStates, iDCharacter, _hasCharacterDelegate,
                 _animatorOverrideController, vfxTransforms,
                 splineFollower, money));
         }
@@ -160,24 +168,18 @@ namespace Characters
             //            CharacterDataSubscriber.DieEvent += (() => _currentPoint.GetDieCharacterDelegate?.Invoke(this));
         }
 
-        public virtual void ReceiveDamage(int value)
+        public void TakeDamage(EffectData effectData)
         {
-            characterData.Damaged(value);
-            _transitionAndStates.Damaged();
-        }
+            AttackWeapon?.Invoke(Receiver, effectData);
 
-        public virtual void GetRecoil(Vector3 origin, ExplosionParameters parameters)
-        {
-            characterData.DoRecoil();
-            _transitionAndStates.SetRecoilData(origin, parameters);
         }
 
         public abstract void SetOutline(bool value);
 
 
-        protected void WeaponAttack()
+        public virtual void WeaponAttack(EffectData effectData)
         {
-            // AttackWeapon?.Invoke(_currentPoint.Receiver, characterData.);
+            AttackWeapon?.Invoke(_currentPoint.Receiver, effectData);
         }
 
         public virtual void UseAbility(IAbilityCommand abilityCommand, int value)
@@ -190,7 +192,7 @@ namespace Characters
         {
             _transitionAndStates.Destroy();
         }
-        
+
         public void Subscribe(DieInteractable subscriber)
         {
             characterData.DieInteractable += subscriber;

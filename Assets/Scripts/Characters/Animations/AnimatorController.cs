@@ -1,4 +1,4 @@
-using Characters.MapperSystem;
+using MapSystem;
 using UnityEngine;
 
 namespace Characters.Animations

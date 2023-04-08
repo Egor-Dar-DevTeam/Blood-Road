@@ -1,5 +1,5 @@
 using Characters.Animations;
-using Characters.Information.Structs;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.AbilitiesSystem.States
@@ -9,8 +9,8 @@ namespace Characters.AbilitiesSystem.States
         private GameObject _enemy;
         private bool _stopFollow;
 public SwordRain(){}
-        public SwordRain(IAnimationCommand animation, StateInfo stateInfo, VFXTransforms vfxTransforms) : base(
-            animation, stateInfo, vfxTransforms)
+        public SwordRain(IAnimationCommand animation, View view, VFXTransforms vfxTransforms) : base(
+            animation, view, vfxTransforms)
         {
         }
         

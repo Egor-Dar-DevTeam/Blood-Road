@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Characters.AbilitiesSystem.States;
-using Characters.MapperSystem;
+using MapSystem;
 
 namespace Characters.LibrarySystem
 {

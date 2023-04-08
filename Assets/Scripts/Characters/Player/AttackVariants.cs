@@ -1,66 +1,46 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Characters.Information.Structs;
 using Characters.InteractableSystems;
+using MapSystem;
+using MapSystem.Structs;
 using UnityEngine;
 
 namespace Characters.Player
 {
-    public delegate void Attack(StateInfo info);
+    public delegate void Attack(Item info);
 
     public delegate void SetAttackSpeed(float value);
-    public delegate void OverrideAttack(StateInfo stateInfo, bool state);
-    public class AttackVariants : MonoBehaviour,IInit<Attack>, IInit<SetAttackSpeed>
+
+    public delegate void OverrideAttack(View view, bool state);
+
+    public class AttackVariants : MonoBehaviour, IInit<Attack>, IInit<SetAttackSpeed>
     {
-        [SerializeField] private StateInfo[] attackVariants;
-        private int _clickCount;
+        [SerializeField] private Placeholder placeholder;
+        private List<Item> _attackVariants;
         private event Attack _attack;
         private event SetAttackSpeed _setAttackSpeed;
-        protected bool _canOverride;
-        protected StateInfo _overrided;
 
 
         private void Start()
         {
-            Wait();
-        }
+            var key = new StateCharacterKey(0, typeof(States.Attack), null);
 
-        public void StartOverridedStateInfo(StateInfo stateInfo, bool start)
-        {
-            _overrided = stateInfo;
-            _canOverride = start;
+            if (!placeholder.TryGetList(key, out List<Item> items)) return;
+            if (!placeholder.TryGetUIInfo(key, out UIInfo info)) return;
+            if (!placeholder.TryGetAbility(key, out Ability ability)) return;
+            if (!placeholder.TryGetView(key, out View view)) return;
+            items.Add(new Item(ability, info, view));
+            _attackVariants = items;
         }
 
         public void Attack(int index)
         {
-            _clickCount++;
-            switch (_clickCount)
-            {
-                case >= 2 and <= 4:
-                    TrySetAttackSpeed(2f);
-                    break;
-                case >= 5 and <= 8:
-                    TrySetAttackSpeed(3f);
-                    break;
-            }
-            if(attackVariants.Length<=index) return;
-            _attack?.Invoke(_canOverride ? _overrided : attackVariants[index]);
-            if (_canOverride) _setAttackSpeed?.Invoke(_overrided.AnimationSpeed);
+            _setAttackSpeed?.Invoke(3);
+            if (_attackVariants.Count <= index) return;
+            _attack?.Invoke(_attackVariants[index]);
         }
+        
 
-        private void TrySetAttackSpeed(float speed)
-        {
-            _setAttackSpeed?.Invoke(_canOverride ? _overrided.AnimationSpeed : speed);
-        }
-
-        private async void Wait()
-        {
-            for (;;)
-            {
-                await Task.Delay(1000);
-                _clickCount = 1;
-                TrySetAttackSpeed(_clickCount);
-            }
-        }
         public void Subscribe(Attack subscriber)
         {
             _attack += subscriber;

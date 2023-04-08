@@ -2,10 +2,10 @@
 using Better.UnityPatterns.Runtime.StateMachine;
 using Characters.AbilitiesSystem;
 using Characters.Animations;
-using Characters.Information;
-using Characters.Information.Structs;
 using Characters.Player;
 using Characters.Player.States;
+using MapSystem;
+using MapSystem.Structs;
 using UnityEngine;
 using Attack = Characters.Player.Attack;
 using Object = UnityEngine.Object;
@@ -14,10 +14,11 @@ namespace Characters.Facades
 {
     public abstract class TransitionAndStates : IAnimatableEffect
     {
-        protected StatesInfo _statesInfo;
-        protected Vector3 _origin;
+        protected Placeholder _mapStates;
+        protected int _idCharacter;
+        protected StateCharacterKey _stateCharacterKey;
         private IRunAbility _runAbility;
-        
+
         protected IAnimationCommand _animation;
         private VFXTransforms _vfxTransforms;
 
@@ -45,7 +46,6 @@ namespace Characters.Facades
         private Action _dieDelegate;
         protected Attack _attack;
         protected SetAttackSpeed _setAttackSpeed;
-        protected GetRecoil _getRecoil;
 
         #endregion
 
@@ -62,7 +62,6 @@ namespace Characters.Facades
 
         #endregion
 
-
         public virtual void Initialize(TransitionAndStatesData data)
         {
             _dieDelegate = Death;
@@ -71,40 +70,57 @@ namespace Characters.Facades
                 GetIsAttack += data.GetIsAttack;
             }
 
+            _idCharacter = data.ID;
+            _stateCharacterKey = new StateCharacterKey();
+            _stateCharacterKey.SetID(_idCharacter);
             CurrentPoint += data.GetCurrentPoint;
-            _statesInfo = data.StatesInfo;
-            _getRecoil = data.GetRecoil;
+            _mapStates = data.MapStates;
         }
 
-        protected virtual void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController,
+        protected virtual void StatesInit(Animator animator, RunToPointData runToPointData,
+            AnimatorOverrideController animatorOverrideController,
             VFXTransforms vfxTransforms)
         {
             _animation = new AnimatorController(animator);
             _animation.CreateAnimationChanger(animatorOverrideController);
             _vfxTransforms = vfxTransforms;
-            _runToPointState = new RunToPoint(_animation, runToPointData,_statesInfo.GetState(typeof(RunToPoint)), vfxTransforms);
-            _idleState = new Idle(_animation, _statesInfo.GetState(typeof(Idle)), vfxTransforms);
-            _shieldState = new Shield(_animation, _statesInfo.GetState(typeof(Shield)), vfxTransforms);
+
+
+            _stateCharacterKey.SetState(typeof(RunToPoint));
+            if (TryGetView(out var view))
+                _runToPointState = new RunToPoint(_animation, runToPointData, view, vfxTransforms);
+
+            _stateCharacterKey.SetState(typeof(Idle));
+            if (TryGetView(out view))
+                _idleState = new Idle(_animation, view, vfxTransforms);
+
+            _stateCharacterKey.SetID(0);
+            _stateCharacterKey.SetState(typeof(Shield));
+            if (TryGetView(out view))
+                _shieldState = new Shield(_animation, view, vfxTransforms);
+            _stateCharacterKey.SetID(_idCharacter);
             _stateMachine = new StateMachine<BaseState>();
         }
 
-        public void SetRecoilData(Vector3 origin, ExplosionParameters parameters)
+        protected bool TryGetView(out View view)
         {
-            _origin = origin;
-            _explosiveRecoilState.SetOrigin(origin);
-            _explosiveRecoilState.SetParameters(parameters);
+            if (_mapStates.TryGetView(_stateCharacterKey, out view))
+                return true;
+            return false;
         }
 
         public void SetPoint(IInteractable point)
         {
             _runToPointState.SetPoint(point.GetObject());
-            _attackState.SetPoint(point);
         }
 
-        public void Damaged()
+        public void Damage()
         {
-            var vfxEffect = _statesInfo.GetState(typeof(Damaged)).VFXEffect;
-            
+            _stateCharacterKey.SetID(0);
+            _stateCharacterKey.SetState(typeof(Damaged));
+            TryGetView(out var view);
+            var vfxEffect = view.Effect;
+
             var effect1 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
             var effect2 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
             var effect3 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
@@ -115,10 +131,9 @@ namespace Characters.Facades
             effect3.SetLifeTime(5f);
         }
 
-
         public void SetCurrentEffectID(Type type)
         {
-           if(_runAbility!=null) _runAbility.SetTypeAbility(type);
+            if (_runAbility != null) _runAbility.SetTypeAbility(type);
         }
 
         public void InitializeAbilities(Abilities abilities)
@@ -145,33 +160,20 @@ namespace Characters.Facades
 
         protected virtual bool IsRuning(Transform transform, RunToPointData runToPointData)
         {
-            if (CurrentPoint?.Invoke() != null)
-            {
-                _runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
-                var position = CurrentPoint?.Invoke().GetObject().position;
-                return position != null &&
-                       Vector3.Distance(transform.position, (Vector3)position) >= runToPointData.StopDistance;
+            if (CurrentPoint?.Invoke() == null) return false;
+            _runToPointState.SetPoint(CurrentPoint?.Invoke().GetObject());
+            var position = CurrentPoint?.Invoke().GetObject().position;
+            return position != null &&
+                   Vector3.Distance(transform.position, (Vector3)position) >= runToPointData.StopDistance;
 
-            }
-            else
-            {
-                return false;
-            }
         }
-
-        protected virtual bool IsStoodUp()
-        {
-            return _explosiveRecoilState.IsRecoiled;
-        }
-
-        protected bool CanRecoil() => _getRecoil.Invoke();
 
         public void Update()
         {
             _stateMachine.Tick(Time.deltaTime);
         }
 
-        protected IInteractable GetCurrentPoint()
+        protected IInteractable GetInteractable()
         {
             return CurrentPoint?.Invoke();
         }
