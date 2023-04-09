@@ -5,6 +5,7 @@ using Characters.Facades;
 using Characters.InteractableSystems;
 using Characters.Player;
 using Characters.Player.States;
+using Characters.States;
 using Dreamteck.Splines;
 using Interaction;
 using JetBrains.Annotations;
@@ -122,18 +123,22 @@ namespace Characters
 
         protected void InitializeTransition(TransitionAndStates transitionAndStates,
             [CanBeNull] GetIsAttack getIsAttack, [CanBeNull] SplineFollower splineFollower = null,
-            [CanBeNull] Money money = null
+            [CanBeNull] Money money = null, [CanBeNull] GetRecoil getRecoil = null
         )
         {
             _transitionAndStates = transitionAndStates;
             linker.Initialize(_transitionAndStates, characterData);
             _transitionAndStates.Initialize(new TransitionAndStatesData(animator, getCurrentPoint, transform,
-                runToPointData, getIsAttack, characterData,
+                runToPointData, getIsAttack, characterData,getRecoil,
                 mapStates, iDCharacter, _hasCharacterDelegate,
                 _animatorOverrideController, vfxTransforms,
                 splineFollower, money));
         }
-
+        public virtual void GetRecoil(Vector3 origin, ExplosionParameters parameters)
+        {
+            characterData.DoRecoil();
+            _transitionAndStates.SetRecoilData(origin, parameters);
+        }
         protected virtual void InitializeAbility(AbilityData abilityData)
         {
         }

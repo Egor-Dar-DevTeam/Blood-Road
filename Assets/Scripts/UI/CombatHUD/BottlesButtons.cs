@@ -29,6 +29,7 @@ namespace UI.CombatHUD
                     buttons[i].Initialize((() => playerController.UseBottle(effectData)), info,
                         delegates.Remove);
                     delegates.InitGetValue.Subscribe(buttons[i].SetValue);
+                    bank.Delegates.Add.Invoke(1000);
                     _banks.Add(bank);
                 }
         }

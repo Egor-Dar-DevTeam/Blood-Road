@@ -4,6 +4,7 @@ using Characters.AbilitiesSystem;
 using Characters.Animations;
 using Characters.Player;
 using Characters.Player.States;
+using Characters.States;
 using MapSystem;
 using MapSystem.Structs;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Characters.Facades
         protected int _idCharacter;
         protected StateCharacterKey _stateCharacterKey;
         private IRunAbility _runAbility;
+        protected Vector3 _origin;
 
         protected IAnimationCommand _animation;
         private VFXTransforms _vfxTransforms;
@@ -30,6 +32,7 @@ namespace Characters.Facades
         protected Shield _shieldState;
         protected Die _dieState;
         protected ExplosiveRecoil _explosiveRecoilState;
+
         protected StateMachine<BaseState> _stateMachine;
 
         #endregion
@@ -46,6 +49,7 @@ namespace Characters.Facades
         private Action _dieDelegate;
         protected Attack _attack;
         protected SetAttackSpeed _setAttackSpeed;
+        protected GetRecoil _getRecoil;
 
         #endregion
 
@@ -75,8 +79,14 @@ namespace Characters.Facades
             _stateCharacterKey.SetID(_idCharacter);
             CurrentPoint += data.GetCurrentPoint;
             _mapStates = data.MapStates;
+            _getRecoil = data.GetRecoil;
         }
-
+        public void SetRecoilData(Vector3 origin, ExplosionParameters parameters)
+        {
+            _origin = origin;
+            _explosiveRecoilState.SetOrigin(origin);
+            _explosiveRecoilState.SetParameters(parameters);
+        }
         protected virtual void StatesInit(Animator animator, RunToPointData runToPointData,
             AnimatorOverrideController animatorOverrideController,
             VFXTransforms vfxTransforms)
@@ -120,6 +130,7 @@ namespace Characters.Facades
             _stateCharacterKey.SetState(typeof(Damaged));
             TryGetView(out var view);
             var vfxEffect = view.Effect;
+            //_stateCharacterKey.SetID(_idCharacter);
 
             var effect1 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
             var effect2 = Object.Instantiate(vfxEffect, _vfxTransforms.Center);
@@ -168,6 +179,12 @@ namespace Characters.Facades
 
         }
 
+        protected virtual bool IsStoodUp()
+        {
+            return _explosiveRecoilState.IsRecoiled;
+        }
+
+        protected bool CanRecoil() => _getRecoil.Invoke();
         public void Update()
         {
             _stateMachine.Tick(Time.deltaTime);

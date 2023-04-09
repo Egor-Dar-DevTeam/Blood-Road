@@ -8,6 +8,8 @@ namespace Characters.Player
     public delegate void DieInteractable(IInteractable interactable);
 
     public delegate void Impenetrable(bool value);
+    public delegate bool GetRecoil();
+
 
     [Serializable]
     public class CharacterData : ICharacterDataSubscriber
@@ -21,6 +23,7 @@ namespace Characters.Player
         private float _energyMax;
         private float _manaMax;
         private float _additionalHealthWithDamage = 0;
+        private bool _recoil;
 
         private bool _isImpenetrable;
         private IInteractable _currentInteractable;
@@ -30,6 +33,7 @@ namespace Characters.Player
         public event Action<float, float> EnergyEvent;
         public event Action Damage;
         public event Action DieEvent;
+        public GetRecoil GetRecoilDelegate;
 
         public Impenetrable ImpenetrableDelegate;
 
@@ -45,6 +49,7 @@ namespace Characters.Player
             _energyMax = energy;
             _manaMax = mana;
             ImpenetrableDelegate = Impenetrable;
+            GetRecoilDelegate = GetRecoil;
             _currentInteractable = interactable;
             AddResource();
         }
@@ -93,7 +98,21 @@ namespace Characters.Player
         {
             damage = value == 1 ? _maxDamage : damage * value;
         }*/
+       public void DoRecoil()
+       {
+           _recoil = true;
+       }
 
+       private bool GetRecoil()
+       {
+           if (_recoil)
+           {
+               _recoil = false;
+               return true;
+           }
+
+           return false;
+       }
         public void UseEnergy()
         {
             if (energy <= 0) return;

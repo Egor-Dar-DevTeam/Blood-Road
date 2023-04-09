@@ -1,12 +1,14 @@
 ﻿using Characters.EffectSystem;
 using Characters.InteractableSystems;
 using Characters.Player;
+using Characters.States;
 using UnityEngine;
 
 namespace Characters
 {
     public interface IInteractable
     {
+        public void GetRecoil(Vector3 origin, ExplosionParameters parameters);
         public void WeaponAttack(EffectData effectData);
         public void TakeDamage(EffectData effectData);
         public void SetOutline(bool value);

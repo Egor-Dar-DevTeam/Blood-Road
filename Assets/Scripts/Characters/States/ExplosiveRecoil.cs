@@ -1,11 +1,10 @@
 using System;
 using System.Threading.Tasks;
 using Characters.Animations;
-using Characters.Information.Structs;
 using MapSystem.Structs;
 using UnityEngine;
 
-namespace Characters.Player.States
+namespace Characters.States
 {
     public class ExplosiveRecoil : BaseState
     {
@@ -19,8 +18,8 @@ namespace Characters.Player.States
 
         public bool IsRecoiled => _distance >= _radius && _stoodUp;
 
-        public ExplosiveRecoil(IAnimationCommand animation,  View view, VFXTransforms vfxTransforms,
-            CharacterController characterController) : base(animation, view, vfxTransforms)
+        public ExplosiveRecoil(IAnimationCommand animation, View stateInfo, VFXTransforms vfxTransforms,
+            CharacterController characterController) : base(animation, stateInfo, vfxTransforms)
         {
             _parameterName = "die";
             _controller = characterController;

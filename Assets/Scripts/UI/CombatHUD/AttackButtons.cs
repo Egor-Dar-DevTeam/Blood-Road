@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using Characters.Player;
 using MapSystem;
 using MapSystem.Structs;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 namespace UI.CombatHUD

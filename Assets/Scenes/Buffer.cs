@@ -5,7 +5,7 @@ public class Buffer : MonoBehaviour
 {
     void Awake()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
 

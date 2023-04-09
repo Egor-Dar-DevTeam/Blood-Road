@@ -26,7 +26,7 @@ namespace Banks
 
         private void Add(int count)
         {
-            _value = Mathf.Clamp(_value += count, 0, Int32.MaxValue);
+            _value = Mathf.Clamp(_value += count, 0, 100);
             _getValue?.Invoke(_value);
             PlayerPrefs.SetInt(NameBank, _value);
         }

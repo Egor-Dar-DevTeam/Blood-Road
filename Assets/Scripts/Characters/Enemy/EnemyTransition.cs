@@ -1,4 +1,5 @@
 using Characters.Player.States;
+using Characters.States;
 using UnityEngine;
 
 namespace Characters.Facades
@@ -25,11 +26,14 @@ namespace Characters.Facades
             TransitionInit(data.Transform, data.RunToPointData);
         }
 
-        protected override void StatesInit(Animator animator, RunToPointData runToPointData, AnimatorOverrideController animatorOverrideController,
-            VFXTransforms vfxTransforms)
+        protected override void StatesInit(Animator animator, RunToPointData runToPointData,
+            AnimatorOverrideController animatorOverrideController, VFXTransforms vfxTransforms)
         {
             base.StatesInit(animator, runToPointData, animatorOverrideController, vfxTransforms);
-            
+            _stateCharacterKey.SetState(typeof(DieEnemy));
+            if (TryGetView(out var view))
+                _explosiveRecoilState =
+                    new ExplosiveRecoil(_animation, view, vfxTransforms, runToPointData.CharacterController);
         }
 
         protected override void TransitionInit(Transform transform, RunToPointData runToPointData)
@@ -47,6 +51,11 @@ namespace Characters.Facades
             _stateMachine.AddTransition(_runToPointState, _attackState, () => !IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _runToPointState, () => IsRuning(transform, runToPointData));
             _stateMachine.AddTransition(_attackState, _idleState, (() => GetInteractable() == null));
+            _stateMachine.AddTransition(_attackState, _explosiveRecoilState, CanRecoil);
+            _stateMachine.AddTransition(_runToPointState, _explosiveRecoilState, CanRecoil);
+            _stateMachine.AddTransition(_idleState, _explosiveRecoilState, CanRecoil);
+            _stateMachine.AddTransition(_explosiveRecoilState, _runToPointState, IsStoodUp);
+
             _stateMachine.ChangeState(_idleState);
         }
     }
